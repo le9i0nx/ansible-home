@@ -49,3 +49,6 @@
 [submodule "roles/debops.nginx"]
 	path = roles/debops.nginx
 	url = https://github.com/le9i0nx/ansible-nginx.git
+[submodule "roles/debops.apt_preferences"]
+	path = roles/debops.apt_preferences
+	url = https://github.com/le9i0nx/ansible-apt_preferences.git
