@@ -1,0 +1,38 @@
+---
+ferm_ansible_controllers: ['0.0.0.0/0']
+tcpwrappers_ansible_controllers: ['ALL']
+console_issue: 'Org. le9i0nx.ru'
+#grub
+grub_cmd_elevator: 'noop'
+#tinc
+tinc_inventory_hosts: '{{ groups.homes }}'
+tinc_connection_type: 'static'
+tinc_interface: '{{ tinc_network }}'
+tinc_ifupdown_interface:
+  - iface: '{{ tinc_interface }}'
+    type: 'interface'
+    weight: '75'
+    inet: '{{ tinc_connection_type }}'
+    auto: '{{ tinc_interface_auto }}'
+    force: True
+    addresses: '{{ tinc_host_addr }}'
+    options: |
+      {% if ansible_local.init != 'systemd' %}
+      tinc-net {{ tinc_network }}
+      tinc-chroot yes
+      tinc-mlock yes
+      tinc-user {{ tinc_user }}
+      {% endif %}
+
+users_default:
+  - users_ansicon
+
+# syncthing
+role_syncthing_user: 'le9i0nx'
+role_syncthing:
+  inventory_hosts: '{{ groups.home }}'
+  folders:
+    path: '/home/le9i0nx/crypt/'
+    id: 'crypt'
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

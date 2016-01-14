@@ -1,0 +1,9 @@
+---
+
+role_syncthing:
+  inventory_hosts: '{{ groups.pve }}'
+  folders:
+    path: '/var/lib/vz/template/iso/'
+    id: 'vz_iso'
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

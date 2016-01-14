@@ -1,0 +1,38 @@
+# This is the default ansible 'hosts' file.
+#
+# It should live in /etc/ansible/hosts
+#
+#   - Comments begin with the '#' character
+#   - Blank lines are ignored
+#   - Groups of hosts are delimited by [header] elements
+#   - You can enter hostnames or ip addresses
+#   - A hostname/ip can be a member of multiple groups
+#ansible_ssh_user=ansicon
+#localhost ansible_connection=local
+
+[rabota_74ru]
+mail ansible_ssh_host=mail
+mail_test ansible_ssh_host=mail_test
+1c83 ansible_ssh_host=1c83
+otrs5
+#otrs5 ansible_ssh_host=otrs5
+
+[homes]
+74ru ansible_ssh_host=74ru
+en ansible_ssh_host=en
+lenovo ansible_ssh_host=lenovo
+#test ansible_ssh_host=test
+
+[all:children]
+homes
+rabota_74ru
+pve
+
+[pve]
+#74ru ansible_ssh_host=74ru
+test ansible_ssh_host=test
+
+[mail_srv]
+mail ansible_ssh_host=mail
+mail_test ansible_ssh_host=mail_test
+

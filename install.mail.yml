@@ -1,0 +1,110 @@
+---
+
+- hosts: mail_srv
+  remote_user: ansicon
+  sudo: yes
+
+  roles:
+    - le9i0nx.base
+    - debops.users
+    - debops.console
+    - debops.ntp
+    - debops.sshd
+    - debops.secret
+    - debops.mysql
+
+- include: app/exim.mail_srv.yml
+- include: app/dovecot.mail_srv.yml
+
+- hosts: mail_srv
+  remote_user: ansicon
+  sudo: yes
+
+  roles:
+    - le9i0nx.ssl_key
+    - le9i0nx.postfixadmin
+    - le9i0nx.mail
+    - le9i0nx.roundcube
+    - le9i0nx.mailweb
+    - le9i0nx.dovecot
+
+- hosts: mail
+  remote_user: ansicon
+  sudo: yes
+
+  roles:
+    - le9i0nx.hp.dl320
+    - le9i0nx.smartd
+
+- hosts: mail_srv
+  remote_user: ansicon
+  sudo: yes
+
+  roles:
+    #nrpe
+    - role: nbz4live.nagios-nrpe-server
+    - role: debops.rsyslog
+      rsyslog_pools: [ '{{ rsyslog_pool_nrpe }}' ]
+      rsyslog_pool_nrpe:
+        enabled: True
+        name: '05-nrpe'
+        options: |
+          $template DynFileNrpe,"/var/log/%HOSTNAME%/%programname%/%$YEAR%.%$MONTH%.%$DAY%.log"
+          $template NrpeLog,"%timegenerated% - %HOSTNAME% - %syslogtag%%msg:::drop-last-lf%\n"
+          if $programname == "nrpe" then ?DynFileNrpe;NrpeLog
+          & stop
+    - role: debops.ferm
+      ferm_input_list:
+      - type: 'dport_accept'
+        dport: [ 'nrpe' ]
+        saddr: '{{ nagios_nrpe_allow }}'
+        weight: '50'
+        filename: 'nrpe_dependency_accept'
+    - role: debops.tcpwrappers
+      tcpwrappers_allow:
+      - daemon: 'nrpe'
+        client: '{{ nagios_nrpe_allow }}'
+        weight: '50'
+        filename: 'nrpe_dependency_allow'
+        comment: 'Allow nrpe connections from these hosts (via nrpe role dependency)'
+
+    #bacula
+    - role: debops.ferm
+      ferm_input_list:
+      - type: 'dport_accept'
+        dport: [ 'bacula-fd' ]
+        saddr: [ '192.168.0.0/24' ]
+        weight: '50'
+        filename: 'bacula_dependency_accept'
+    - role: debops.tcpwrappers
+      tcpwrappers_allow:
+      - daemon: 'mail-fd'
+        client: [ '192.168.0.0/24' ]
+        weight: '50'
+        filename: 'bacula_dependency_allow'
+        comment: 'Allow bacula connections from these hosts (via bacula role dependency)'
+
+    - role: debops.ferm
+      ferm_input_list:
+      - type: 'dport_accept'
+        dport: [ '9995' ]
+        saddr: [ '195.226.222.1/32' ]
+        protocol: 'udp'
+        filename: '9995_dependency_accept_udp'
+        weight: '10'
+
+  tasks:
+    #rsyslog
+  - name: add cron job
+    cron:
+      name:   '{{ item.name }}'
+      minute: '{{ item.minute | default("*")}}'
+      hour:   '{{ item.hour | default("*")}}'
+      user:   '{{ item.user }}'
+      job:    '{{ item.job }}'
+    with_items:
+      - {name: 'rsyslog gz', minute: '10' ,hour: '0', user: 'root', job: "find /var/log/smtp/ \\( -name '*' -a ! -name '*.gz' \\) -type f -mtime +0 | xargs -r gzip -9" }
+      - {name: 'rsyslog rm', minute: '15' ,hour: '0', user: 'root', job: "find /var/log/smtp/ -name '*.gz' -mtime +360 | xargs -r rm" }
+
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

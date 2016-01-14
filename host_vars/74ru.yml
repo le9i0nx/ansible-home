@@ -1,0 +1,11 @@
+---
+freedns_afraid_dynamic_id: "azFqM1BBdVFkR0tWdUljc3BzZThFc2J4OjE0NTkwOTg0"
+#freedns_afraid_dynamic_interface: 'tun'
+#ip6_tunel_packages: [
+#      'gogoc',
+#      'wget',
+#      'gawk',
+#      'grep' ]
+tinc_host_addr: [ '172.16.35.10/24' ]
+
+#le9i0nx.grive_cron_install: True

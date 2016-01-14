@@ -1,0 +1,27 @@
+---
+
+- hosts: pve
+  become: False
+  become_method: sudo
+
+  roles:
+
+    - role: debops.core
+      become: True
+
+- hosts: pve
+  become: True
+  become_method: sudo
+
+  roles:
+
+    - role: debops.apt_preferences
+      tags: [ 'apt_preferences', 'role::apt_preferences' ]
+
+    - role: le9i0nx.base
+    - role: debops.console
+    - role: debops.secret
+
+- include: app/syncthing.pve.yml
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

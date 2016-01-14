@@ -1,0 +1,23 @@
+---
+- hosts: en #Указываем группу хостов
+  remote_user: ansicon
+#  user: root #пользователь под которым ansible будет логиниться
+  sudo: yes
+  vars_files:
+   - host_vars/all.yml #Файл, содержащий переменные которые нам потребуются, например расположения директорий
+
+  roles: # Блок ролей, у нас пока одна роль
+#    - debops.tcpwrappers
+#    - debops.sshd
+#    - install_ansible
+    - le9i0nx.base
+    - debops.console
+    - debops.secret
+#    - install_base
+    - install_it7
+    - le9i0nx.miredo
+    - le9i0nx.syncthing
+#    - mivok0.sshd
+
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
