@@ -28,3 +28,6 @@
 [submodule "roles/debops.secret"]
 	path = roles/debops.secret
 	url = https://github.com/le9i0nx/ansible-secret.git
+[submodule "roles/debops.ferm"]
+	path = roles/debops.ferm
+	url = https://github.com/le9i0nx/ansible-ferm.git
