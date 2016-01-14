@@ -19,3 +19,6 @@
 [submodule "roles/debops.console"]
 	path = roles/debops.console
 	url = https://github.com/le9i0nx/ansible-console.git
+[submodule "roles/debops.ntp"]
+	path = roles/debops.ntp
+	url = https://github.com/le9i0nx/ansible-ntp.git
