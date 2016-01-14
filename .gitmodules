@@ -22,3 +22,6 @@
 [submodule "roles/debops.ntp"]
 	path = roles/debops.ntp
 	url = https://github.com/le9i0nx/ansible-ntp.git
+[submodule "roles/debops.sshd"]
+	path = roles/debops.sshd
+	url = https://github.com/le9i0nx/ansible-sshd.git
