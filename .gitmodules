@@ -10,3 +10,6 @@
 [submodule "roles/nbz4live.nagios-nrpe-server"]
 	path = roles/nbz4live.nagios-nrpe-server
 	url = https://github.com/le9i0nx/ansible-nagios-nrpe-server.git
+[submodule "roles/debops.rsyslog"]
+	path = roles/debops.rsyslog
+	url = https://github.com/le9i0nx/ansible-rsyslog.git
