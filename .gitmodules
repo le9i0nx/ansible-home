@@ -25,3 +25,6 @@
 [submodule "roles/debops.sshd"]
 	path = roles/debops.sshd
 	url = https://github.com/le9i0nx/ansible-sshd.git
+[submodule "roles/debops.secret"]
+	path = roles/debops.secret
+	url = https://github.com/le9i0nx/ansible-secret.git
