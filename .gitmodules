@@ -52,3 +52,6 @@
 [submodule "roles/debops.apt_preferences"]
 	path = roles/debops.apt_preferences
 	url = https://github.com/le9i0nx/ansible-apt_preferences.git
+[submodule "roles/debops.core"]
+	path = roles/debops.core
+	url = https://github.com/le9i0nx/ansible-core.git
