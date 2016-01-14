@@ -1,0 +1,6 @@
+[submodule "roles/le9i0nx.syncthing"]
+	path = roles/le9i0nx.syncthing
+	url = https://github.com/le9i0nx/ansible-syncthing.git
+[submodule "roles/le9i0nx.dspam"]
+	path = roles/le9i0nx.dspam
+	url = https://github.com/le9i0nx/ansible-dspam.git
