@@ -16,3 +16,6 @@
 [submodule "roles/debops.users"]
 	path = roles/debops.users
 	url = https://github.com/le9i0nx/ansible-users.git
+[submodule "roles/debops.console"]
+	path = roles/debops.console
+	url = https://github.com/le9i0nx/ansible-console.git
