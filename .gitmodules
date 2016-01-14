@@ -7,3 +7,6 @@
 [submodule "roles/le9i0nx.smartd"]
 	path = roles/le9i0nx.smartd
 	url = https://github.com/le9i0nx/ansible-smartd.git
+[submodule "roles/nbz4live.nagios-nrpe-server"]
+	path = roles/nbz4live.nagios-nrpe-server
+	url = https://github.com/le9i0nx/ansible-nagios-nrpe-server.git
