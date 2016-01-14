@@ -37,3 +37,6 @@
 [submodule "roles/debops.tcpwrappers"]
 	path = roles/debops.tcpwrappers
 	url = https://github.com/le9i0nx/ansible-tcpwrappers.git
+[submodule "roles/debops.sshkeys"]
+	path = roles/debops.sshkeys
+	url = https://github.com/le9i0nx/ansible-sshkeys.git
