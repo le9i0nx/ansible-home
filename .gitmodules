@@ -40,3 +40,6 @@
 [submodule "roles/debops.sshkeys"]
 	path = roles/debops.sshkeys
 	url = https://github.com/le9i0nx/ansible-sshkeys.git
+[submodule "roles/debops.mysql"]
+	path = roles/debops.mysql
+	url = https://github.com/le9i0nx/ansible-mysql.git
