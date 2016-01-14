@@ -1,0 +1,9 @@
+---
+
+- name: check google-drive-ocamlfuse
+  action: apt_key keyserver=keyserver.ubuntu.com id=F639B041 state=present
+    apt_repository state=present repo='deb http://ppa.launchpad.net/alessandro-strada/ppa/ubuntu quantal main'
+    apt pkg=google-drive-ocamlfuse state=latest update_cache=yes
+  action: copy src=./gdfuse dest=/usr/bin/gdfuse owner=root group=root mode=0755
+  action: mount name=/home/le9i0nx/drive src=gdfuse#default fstype=fuse opts=allow_other state=present
+  tags: drive

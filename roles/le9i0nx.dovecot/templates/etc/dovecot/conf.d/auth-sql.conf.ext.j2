@@ -1,0 +1,32 @@
+## This file is managed by Ansible, all changes will be lost
+# Аутентификация для пользователей SQL. Файл подключается в 10-auth.conf.
+#
+# <doc/wiki/AuthDatabase.SQL.txt>
+
+passdb {
+  driver = sql
+
+  # Путь до конфигурационного файла SQL, смотрите example-config/dovecot-sql.conf.ext
+  args = /etc/dovecot/dovecot-sql.conf.ext
+}
+
+# БД пользователей "prefetch" используется для сохранения информации
+# полученной из passdb, то есть отпадает необходимость в повторном
+# просмотре userdb. Такое возможно сделать при работе с хранилищем
+# SQL и LDAP. <doc/wiki/UserDatabase.Prefetch.txt>
+#userdb {
+#  driver = prefetch
+#}
+
+#userdb {
+#  driver = sql 
+#  args = /usr/local/etc/dovecot/dovecot-sql.conf.ext
+#}
+
+# Если у вас нет каких-либо специфичных параметров пользователей, то вы
+# можете использовать вместо user_query (userdb sql) userdb static. Например:
+# <doc/wiki/UserDatabase.Static.txt>
+userdb {
+  driver = static
+  args = uid=mail gid=mail home=/var/mail/%d/%n
+}

@@ -1,0 +1,15 @@
+plugin {
+    antispam_debug_target = syslog
+#    antispam_verbose_debug = 1
+    antispam_backend = dspam
+    antispam_dspam_binary = /usr/bin/dspam
+    antispam_signature = X-DSPAM-Signature
+#    antispam_signature_missing = error
+    antispam_signature_missing = move
+    antispam_trash = Trash
+#    antispam_spam = Spam
+    antispam_spam = Junk
+    antispam_allow_append_to_spam = yes
+#    antispam_dspam_args = --deliver=;--user;%u;--source=error;--signature=%%s
+    antispam_dspam_args = --client;--source=error;--user;%u
+}

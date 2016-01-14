@@ -1,0 +1,10 @@
+---
+- name: check ecryptfs
+  action: apt pkg=ecryptfs-utils state=latest update_cache=yes
+  action: file path=/home/le9i0nx/.ecryptfs owner=le9i0nx group=le9i0nx  state=directory mode=0700
+  action: file path=/home/le9i0nx/.ecryptfs/auto-mount owner=le9i0nx group=le9i0nx  state=touch mode=0644
+  action: file path=/home/le9i0nx/.ecryptfs/auto-umount owner=le9i0nx group=le9i0nx  state=touch mode=0644
+  action: copy src=./Private.mnt dest=/home/le9i0nx/.ecryptfs/Private.mnt owner=le9i0nx group=le9i0nx mode=0600
+  action: copy src=./wrapped-passphrase dest=/home/le9i0nx/.ecryptfs/wrapped-passphrase owner=le9i0nx group=le9i0nx mode=0400
+  action: copy src=./Private.sig dest=/home/le9i0nx/.ecryptfs/Private.sig owner=le9i0nx group=le9i0nx mode=0600
+  tags: ecryptfs

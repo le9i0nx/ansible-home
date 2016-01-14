@@ -1,0 +1,57 @@
+---
+
+- name: Install dovecot packages
+  apt:
+    name: '{{ item }}'
+    state: 'present'
+    install_recommends: False
+  with_items: dovecot_packages
+  when: (dovecot_packages is defined and dovecot_packages)
+
+
+- name: Create database for dovecot
+  mysql_db: name={{ dovecot_db_name | default('dovecot') }} state=present
+  register: dovecot_database
+
+- name: Create dovecot control user
+  mysql_user: name={{ dovecot_db_user | default('dovecot') }} state=present
+              password={{ dovecot_db_password }} priv='{{ dovecot_db_name | default('dovecot') }}.*:ALL'
+
+- name: Create directories
+  file:
+    path:   '{{ item.path }}'
+    state:  '{{ item.state  | default("directory") }}'
+    owner:  '{{ item.owner  | default("root") }}'
+    group:  '{{ item.group  | default("root") }}'
+    mode:   '{{ item.mode   | default("0755") }}'
+  with_items:
+    - { path: '/var/mail/expunged' , owner: 'mail' , group: 'mail' }
+  when: (item.path is defined and item.path)
+
+- name: configure dovecot
+  template:
+    src:    'etc/dovecot/{{ item.src }}'
+    dest:   '/etc/dovecot/{{ item.dest }}'
+    owner:  '{{ item.owner | default("root") }}'
+    group:  '{{ item.group | default("root") }}'
+    mode:   '{{ item.mode | default("0444") }}'
+    backup: 'yes'
+  with_items:
+    - { src: 'dovecot.conf.j2', dest: 'dovecot.conf' }
+    - { src: 'dovecot-sql.conf.ext.j2', dest: 'dovecot-sql.conf.ext', group: 'dovecot' , mode: '0440' }
+    - { src: 'conf.d/10-auth.conf.j2', dest: 'conf.d/10-auth.conf' }
+    - { src: 'conf.d/auth-sql.conf.ext.j2', dest: 'conf.d/auth-sql.conf.ext' }
+    - { src: 'conf.d/10-logging.conf.j2', dest: 'conf.d/10-logging.conf' }
+    - { src: 'conf.d/10-mail.conf.j2', dest: 'conf.d/10-mail.conf' }
+    - { src: 'conf.d/10-master.conf.j2', dest: 'conf.d/10-master.conf' }
+    - { src: 'conf.d/10-ssl.conf.j2', dest: 'conf.d/10-ssl.conf' }
+    - { src: 'conf.d/15-lda.conf.j2', dest: 'conf.d/15-lda.conf' }
+    - { src: 'conf.d/15-mailboxes.conf.j2', dest: 'conf.d/15-mailboxes.conf' }
+    - { src: 'conf.d/20-imap.conf.j2', dest: 'conf.d/20-imap.conf' }
+    - { src: 'conf.d/20-managesieve.conf.j2', dest: 'conf.d/20-managesieve.conf' }
+    - { src: 'conf.d/20-pop3.conf.j2', dest: 'conf.d/20-pop3.conf' }
+    - { src: 'conf.d/90-sieve.conf.j2', dest: 'conf.d/90-sieve.conf' }
+    - { src: 'conf.d/90-antispam.conf.j2', dest: 'conf.d/90-antispam.conf' }
+  notify: [ 'Reload dovecot' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

@@ -1,0 +1,151 @@
+{#
+## This file is managed by Ansible, all changes will be lost
+##
+## Процесс авторизации
+##
+ 
+# Отключить метод аутентификации LOGIN и другие методы с открытым текстом,
+# если клиент подключен не через защищенное соединение SSL/TLS. Только
+# учтите, что для локальных подключений это ограничение не применяется.
+#}
+disable_plaintext_auth = yes
+{#
+# Размер кэша в килобайтах. 0 значит, что кэш выключен. Учтите, что bsdauth,
+# PAM и vpopmail требуют, чтобы параметр cache_key был задан, чтобы
+# использовать кэширование.
+#}
+auth_cache_size = 0
+{#
+# Время жизни кэша в секундах. После истечения времени кэшированные
+# данные не используются, но если БД отвалилась, то остается использовать
+# только их. Dovecot также пытается автоматически узнать об изменении
+# пароля у пользователя: если предыдущая аутентификация была успешной,
+# но текущая потерпела неудачу, то кэш не будет использован. Сейчас это
+# работает только для аутентификации с открытым текстом.
+#auth_cache_ttl = 1 hour
+ 
+# Время жизни для неудачных попыток (пользователь не найден,
+# неверный пароль). 0 значит выключить кэширование.
+#auth_cache_negative_ttl = 1 hour
+ 
+# Space separated list of realms for SASL authentication mechanisms that need
+# them. You can leave it empty if you don't want to support multiple realms.
+# Many clients simply use the first one listed here, so keep the default realm
+# first.
+#auth_realms =
+ 
+# realm/domain по умолчанию, если тот явно не задан. Это используется
+# и для SASL realms, и для добавления @domain к имени пользователя
+# при авторизации открытым текстом.
+#auth_default_realm = 
+ 
+# Список разрешенных символов в имене пользователя. Если полученное
+# имя пользователя имеет символы не из списка, то пользователь
+# автоматом получает отлуп. Это простая проверка позволяет слать
+# лесом ботов, ну и чтобы не получить проблем с экранированием данных
+# при запросах к SQL/LDAP. Если вы хотите разрешить любые символы, то
+# оставьте это поле пустым.
+#}
+auth_username_chars = abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890.-_@
+{#
+# Преобразование имени пользователя перед поиском в БД. Значение
+# содержит серию замен (исходный -> нужный). Например, "#@/@"
+# значит, что символы '#' и '/' будут преобразованы в '@'.
+#auth_username_translation =
+ 
+# Формат имени пользователя перед просмотром в БД. Вы можете
+# использовать здесь стандартные значения, например, %Lu
+# преобразует символы в нижний регистр, %n - отбросить домен, если
+# он задан, или "%n-AT-%d" - заменить символ '@' на '-AT-'. Это
+# преобразование выполняется после auth_username_translation.
+#}
+auth_username_format = %Lu
+{#
+# If you want to allow master users to log in by specifying the master
+# username within the normal username string (ie. not using SASL mechanism's
+# support for it), you can specify the separator character here. The format
+# is then <username><separator><master username>. UW-IMAP uses "*" as the
+# separator, so that could be a good choice.
+#auth_master_user_separator =
+ 
+# Имя анонимного пользователя, используемое с механизмом
+# ANONYMOUS SASL.
+#auth_anonymous_username = anonymous
+ 
+# Максимальное количество работающих процессов аутентификации.
+# Эти процессы создаются и уничтожаются автоматически.
+#auth_worker_max_count = 30
+#}
+auth_worker_max_count = 1024
+{#
+# Имя хоста используемое в GSSAPI. По умолчанию берется из системы.
+# Значение "$ALL" разрешает использовать любые записи keytab.
+# Host name to use in GSSAPI principal names. The default is to use the
+# name returned by gethostname(). Use "$ALL" to allow all keytab entries.
+#auth_gssapi_hostname =
+ 
+# Kerberos keytab для работы с GSSAPI. Если не указан, то
+# используется системное значение (обычно /etc/krb5.keytab).
+#auth_krb5_keytab = 
+ 
+# Авторизация NTLM и GSS-SPNEGO через демона winbind и ntlm_auth
+# из пакета Samba. <doc/wiki/Authentication/Mechanisms/Winbind.txt>
+#}
+auth_use_winbind = no
+{#
+# Путь до тулзы ntlm_auth из пакета Samba.
+#auth_winbind_helper_path = /usr/bin/ntlm_auth
+ 
+# Количество секунд выжидаемое перед повторной попыткой аутентификации.
+#}
+auth_failure_delay = 2 secs
+{#
+# Отказать в аутентификации, если у клиента неверный SSL сертификат.
+#}
+auth_ssl_require_client_cert = no
+{#
+# Взять имя пользователя из SSL сертификата (который предоставил клиент).
+# Будет использована функция X509_NAME_get_text_by_NID(), которая
+# возвращает значение поля CommonName. 
+#}
+auth_ssl_username_from_cert = no
+{# 
+# Список, разделенный пробелами, разрешенных методов аутентификации:
+#   plain login digest-md5 cram-md5 ntlm rpa apop anonymous gssapi otp skey
+#   gss-spnego
+# Учитывайте значение параметра disable_plaintext_auth.
+#auth_mechanisms = plain login
+#}
+auth_mechanisms = plain login cram-md5
+{#
+##
+## Параметры базы данных пользователей
+##
+ 
+#
+# БД паролей, используемая для проверки пользователей (и ничего более).
+# Вы можете настроить несколько БД паролей (passdbs) и
+# пользователей (userdbs). Это полезно, если вы хотите сделать доступ
+# системным пользователям и виртуальным одновременно, чтобы
+# не пришлось дублировать системных в базе виртуальных.
+# <doc/wiki/PasswordDatabase.txt>
+#
+# БД пользователей определяет, где хранится почта и какому
+# пользователю/группе она принадлежит. При конфигурации
+# single-UID используйте "static".
+#
+# <doc/wiki/UserDatabase.txt>
+ 
+#!include auth-deny.conf.ext
+#!include auth-master.conf.ext
+ 
+#!include auth-system.conf.ext
+#}
+!include auth-sql.conf.ext
+{#
+#!include auth-ldap.conf.ext
+#!include auth-passwdfile.conf.ext
+#!include auth-checkpassword.conf.ext
+#!include auth-vpopmail.conf.ext
+#!include auth-static.conf.ext
+#}

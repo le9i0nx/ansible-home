@@ -1,0 +1,40 @@
+<?php
+  $sql_host="127.0.0.1";     /// Хост
+  $sql_id="{{postfixadmin_control_user}}";         /// Логин
+  $sql_pass="{{postfixadmin_control_password}}";      /// Пароль
+  $sql_db="{{postfixadmin_control_database}}";     /// База
+
+  $domain = "@info74.ru";
+  $listname = "mpautina";
+  $add_list = "mpautina.external";
+  $additional_query = " AND `username`!='backup@info74.ru' AND `username`!='corrector@info74.ru' AND `username`!='prog@info74.ru' AND `username`!='news@info74.ru' AND `username`!='news74@info74.ru' AND `username`!='pressa74_otrs@info74.ru' AND `username`!='pressa_otrs@info74.ru' AND `username`!='help@info74.ru' AND `username`!='pressa_otrs@info74.ru' AND `username`!='ham@info74.ru' AND `username`!='spamer@info74.ru' AND `username`!='feedback@info74.ru' AND `username`!='spam@info74.ru' AND `username`!='feedback.mobile@info74.ru' AND `username`!='afisha@info74.ru' AND `username`!='banner@info74.ru'";
+
+  $sql_link = @mysql_connect ("$sql_host", "$sql_id", "$sql_pass") or die ("NO CONNECT");
+  $sql_link2 = @mysql_select_db("$sql_db") or die ("ERROR SELECT DB");
+
+  $query = "SELECT username FROM mailbox WHERE `active`=1".$additional_query." ORDER BY `username`";
+  $dbres = @mysql_query($query) or die ("$query");
+  $s_num = @mysql_num_rows($dbres);  //определяем количество строк в результате запроса
+
+  $all_str = "".$add_list.$domain;
+  if ($s_num)
+  {
+    while ($row = @mysql_fetch_row($dbres))
+    {
+  $all_str .=  ",".$row[0];
+    }
+
+  }
+
+//  before it SHOW CREATE TABLE alias;
+//  and OUTPUT use for CREATE TABLE alias_mpautina
+//  $query = "INSERT INTO alias_mpautina VALUES ('".$listname.$domain."', '".$all_str."', '', '', '', '')";
+//  active must to be 1!
+
+  $query = "UPDATE alias SET goto='".$all_str."' WHERE address='".$listname.$domain."'";
+
+  $dbres = @mysql_query($query) or die ("$query");
+
+  @mysql_close($sql_link);
+?>
+/* vim: set expandtab filetype=php softtabstop=4 tabstop=4 shiftwidth=4: */

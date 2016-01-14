@@ -1,0 +1,40 @@
+---
+
+- name: Create nginx pki directories
+  file:
+    path:   '{{ item.path }}'
+    state:  '{{ item.state | default("directory") }}'
+    owner:  '{{ item.owner | default("root") }}'
+    group:  '{{ item.group | default("root") }}'
+    mode:   '{{ item.mode | default("0755") }}'
+  with_items:
+    - { path: '{{nginx_pki_path}}/', mode: '0755' }
+    - { path: '{{nginx_pki_path}}/private/', mode: '0755' }
+    - { path: '{{nginx_pki_path}}/certs' }
+  when: (item.path is defined and item.path)
+
+- name: copy key ssl
+  copy:
+    src:    '{{item.src}}'
+    dest:   '{{item.dest}}'
+    owner:  '{{ item.owner | default("root") }}'
+    group:  '{{ item.group | default("root") }}'
+    mode:   '{{ item.mode | default("0400") }}'
+    backup: 'yes'
+  with_items:
+    - { src: '{{secret}}/credentials/{{ ansible_fqdn }}/ssl/crt/', dest: '{{nginx_pki_path}}/certs/', mode: '0444' }
+    - { src: '{{secret}}/credentials/{{ ansible_fqdn }}/ssl/private/', dest: '{{nginx_pki_path}}/private/' }
+    - { src: '{{secret}}/credentials/{{ ansible_fqdn }}/ssl/exim/', dest: '{{nginx_pki_path}}/private/' , mode: '0440', group: 'Debian-exim' }
+
+#    - { src: '{{secret}}/credentials/{{ ansible_fqdn }}/ssl/imap.info74.ru.key', dest: '{{nginx_pki}}/private/' }
+#    - { src: '{{secret}}/credentials/{{ ansible_fqdn }}/ssl/mail.info74.ru.key', dest: '{{nginx_pki}}/private/' }
+#    - { src: '{{secret}}/credentials/{{ ansible_fqdn }}/ssl/pop3.info74.ru.key', dest: '{{nginx_pki}}/private/' }
+#    - { src: '{{secret}}/credentials/{{ ansible_fqdn }}/ssl/smtp.info74.ru.key', dest: '{{nginx_pki}}/private/' , mode: '0440', group: 'Debian-exim' }
+
+#    - { src: '{{secret}}/credentials/{{ ansible_fqdn }}/ssl/imap.corp.116.ru.key', dest: '{{nginx_pki}}/private/' }
+#    - { src: '{{secret}}/credentials/{{ ansible_fqdn }}/ssl/mail.corp.116.ru.key', dest: '{{nginx_pki}}/private/' }
+#    - { src: '{{secret}}/credentials/{{ ansible_fqdn }}/ssl/pop3.corp.116.ru.key', dest: '{{nginx_pki}}/private/' }
+#    - { src: '{{secret}}/credentials/{{ ansible_fqdn }}/ssl/smtp.corp.116.ru.key', dest: '{{nginx_pki}}/private/' , mode: '0440', group: 'Debian-exim' }
+  notify: [ 'Reload dovecot', 'Reload exim', 'Reload nginx' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

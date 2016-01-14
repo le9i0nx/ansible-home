@@ -1,0 +1,158 @@
+---
+mail_dependencies: True
+
+# Default length of generated passwords
+password_length: '20'
+
+
+# List of IP addresses or network ranges in CIDR format, allowed to access
+# postfixadmin. Leave empty to allow access from all IP addresses/networks
+#mail_allow: []
+
+mailweb_domain_www: []
+mailweb_domain_autoconfig: []
+web_admin_allow: []
+web_filials_allow: []
+
+# Max upload size for nginx and php5
+mail_upload_size: '64M'
+
+# Maximum number of PHP5 processes for postfixadmin
+mail_php5_max_children: '50'
+mail_php5_min_children: '5'
+
+nginx_ssl: True
+
+cap_nginx_server:
+  by_role: 'le90nx.mailweb cap'
+  enabled: False
+  default: True
+  listen: ['80 default','[::]:80 default']
+  ssl: False
+#  type: 'static'
+  type: 'default'
+  name: [ 'cap','_:)' ]
+  options: |
+    return      444;
+
+
+  location:
+
+    # Required for location_allow to work
+    '/': |
+      return 444;
+
+mail_location_allow:
+    '/postfixadmin': '{{ web_admin_allow }}'
+    '/userlogos': '{{ web_filials_allow }}'
+    '/protected/userlogos': '{{ web_filials_allow }}'
+
+mail_location_php: |
+  location ~ ^(?<script_name>.+\.php)$ {
+      limit_except GET HEAD POST { deny all; }
+      try_files $script_name =404;
+      include fastcgi_params;
+      fastcgi_index index.php;
+      fastcgi_pass php5_mail;
+  }
+  index index.php;
+  location ~ ^(?<script_name>.+\.php)(?<path_info>/.*)$ {
+      limit_except GET HEAD POST { deny all; }
+      try_files $script_name =404;
+      include fastcgi_params;
+      fastcgi_param SCRIPT_FILENAME $document_root$script_name;
+      fastcgi_param PATH_INFO $path_info;
+      fastcgi_index index.php;
+      fastcgi_pass php5_mail;
+  }
+
+mail_location:
+    '/': 'return 307 https://$host/roundcube;'
+    '~* \.(gif|jpg|jpeg|png)$': |
+      expires 1h;
+      access_log off;
+      log_not_found off;
+#      error_page 404 /userlogos_data/avatars/null.jpg;
+
+    '/postfixadmin': |
+      try_files $uri/ /index.php =404;
+      {{mail_location_php}}
+
+    '/roundcube': |
+      try_files $uri/ /index.php =404;
+      {{mail_location_php}}
+
+    '~ /roundcube/(logs|config|temp)': 'deny all;'
+    '/logo': ' '
+#    '/protected/userlogos': |
+#      {{mail_location_php}}
+#
+#    '/userlogos_data': |
+#      error_page 404 /userlogos_data/avatars/null.jpg;
+#      access_log off;
+#      log_not_found off;
+#
+#    '/userlogos': |
+#      include fastcgi_params;
+#      fastcgi_pass php5_mail;
+#      fastcgi_param SCRIPT_FILENAME $document_root/protected/userlogos/ldap-auth.php;
+#      fastcgi_param PHP_AUTH_USER $remote_user;
+#      fastcgi_param PHP_AUTH_PW $http_authorization;
+
+mail_options: |
+  client_max_body_size {{ mail_upload_size }};
+  ssl_trusted_certificate {{pki_path}}/private/startssl.pem;
+
+mail_info74_ru_nginx_server:
+  by_role: 'le90nx.mailweb'
+  enabled: True
+  default: False
+  listen: ['80','[::]:80']
+  listen_ssl: ['443','[::]:443']
+  ssl: True
+  name: "{{ mailweb_domain_www }}"
+  pki_crt: 'certs/mail.info74.ru.crt'
+  pki_key: 'private/mail.info74.ru.key'
+  pki_dhparam: 'private/dhparam.pem'
+  #type: 'php5'
+  root: '/srv/www/sites/mail/public'
+  options: "{{mail_options}}"
+  location: "{{mail_location}}"
+  location_allow: "{{mail_location_allow}}"
+  php5: 'php5_mail'
+
+mail_nginx_upstream_php5:
+  enabled: True
+  name: 'php5_mail'
+  type: 'php5'
+  php5: 'mail'
+
+mail_php5_pool:
+  enabled: True
+  name: 'mail'
+  user: 'www-data'
+  group: 'www-data'
+  pm: 'dynamic'
+  pm_max_children: '{{ mail_php5_max_children }}'
+  pm_min_children: '{{ mail_php5_min_children }}'
+  pm_min_spare_servers: 2
+  pm_max_spare_servers: 10
+  pm_start_servers: 2
+  php_value:
+    post_max_size: '{{ mail_upload_size }}'
+    upload_max_filesize: '{{ mail_upload_size }}'
+
+autoconfig_nginx_server:
+  by_role: 'le90nx.mailweb autoconfig'
+  enabled: True
+  default: False
+  listen: ['80','[::]:80']
+  ssl: False
+#  type: 'static'
+  type: 'default'
+  name: "{{ mailweb_domain_autoconfig }}"
+  root: '/srv/www/sites/autoconfig/public'
+
+
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

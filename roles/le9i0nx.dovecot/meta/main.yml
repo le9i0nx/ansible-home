@@ -1,0 +1,34 @@
+---
+
+dependencies:
+
+  - role: debops.secret
+
+  - role: debops.rsyslog
+    rsyslog_pools: [ '{{ rsyslog_pool_dovecot }}' ]
+    rsyslog_pool_dovecot:
+        enabled: True
+        name: '01-dovecot'
+        options: |
+            $template DynFileErr,"/var/log/%HOSTNAME%/dovecot/%$YEAR%.%$MONTH%.%$DAY%.err"
+            if $programname == "dovecot" and $syslogfacility-text == "mail" and $syslogseverity-text == "err" then ?DynFileErr
+            & stop
+
+            $template DynFileDovecot,"/var/log/%HOSTNAME%/dovecot/%$YEAR%.%$MONTH%.%$DAY%.log"
+            if $programname == "dovecot" then ?DynFileDovecot
+            & stop
+
+            $template DynFileImap,"/var/log/%HOSTNAME%/dovecot/%$YEAR%.%$MONTH%.%$DAY%.imap"
+            if $programname == "imap" then ?DynFileImap
+            & stop
+
+
+  - role: debops.ferm
+    ferm_input_list:
+
+      - type: 'dport_accept'
+        dport: [ 'pop3', 'pop3s','imap2','imaps','sieve' ]
+        accept_any: True
+        filename: 'dovecot_dependency_accept'
+        weight: '20'
+

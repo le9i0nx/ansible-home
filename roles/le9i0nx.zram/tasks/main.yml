@@ -1,0 +1,22 @@
+---
+
+- name: install zram-config ubuntu pkg
+  apt: pkg={{ item.name }} state=present
+  with_items:
+    - name: zram-config
+  when: ansible_distribution == 'Ubuntu'
+
+- name: install zram-config debain pkg
+  copy:
+    src=./zram
+    dest=/etc/init.d/zram
+    owner=root
+    group=root
+    mode=0555
+  when: ansible_distribution == 'Debian'
+
+- name: install zram-config debain pkg
+  action: command  insserv zram
+  when: ansible_distribution == 'Debian'
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

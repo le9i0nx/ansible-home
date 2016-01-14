@@ -1,0 +1,79 @@
+---
+
+roundcube_domain: [ '{{ ansible_fqdn }}' ]
+roundcube_packages:
+  - 'roundcube-mysql'
+  - 'roundcube-plugins-extra' # веб интерфейс 80 443
+  - 'roundcube-plugins'
+  - 'python3-mysql.connector'
+
+# Default length of generated passwords
+password_length: '20'
+
+# Default roundcube db password
+roundcube_db_pass: "{{ lookup('password', secret + '/credentials/' + ansible_fqdn + '/mysql/roundcube/password length=' + password_length) }}"
+roundcube_db_user: 'roundcube'
+roundcube_db_name: 'roundcube'
+roundcube_db_type: 'mysql'
+roundcube_db_server: 'unix(/run/mysqld/mysqld.sock)'
+
+roundcube_ldap_server: 'localhost'
+# List of IP addresses or network ranges in CIDR format, allowed to access
+# postfixadmin. Leave empty to allow access from all IP addresses/networks
+roundcube_allow: []
+
+# Max upload size for nginx and php5
+roundcube_upload_size: '64M'
+
+# Maximum number of PHP5 processes for postfixadmin
+roundcube_php5_max_children: '50'
+roundcube_php5_min_children: '5'
+
+roundcube_nginx_server:
+  by_role: 'le90nx.roundcube'
+  enabled: True
+  default: False
+#  listen: ['80','[::]:80']
+  type: 'php5'
+  name: '{{ roundcube_domain }}'
+  root: '/var/lib/roundcube'
+
+  options: |
+    client_max_body_size  {{ roundcube_upload_size }};
+
+  location:
+
+    # Required for location_allow to work
+    '/': 'try_files $uri $uri/ =404;'
+
+  location_allow:
+    '/': '{{ roundcube_allow }}'
+
+  php5: 'php5_roundcube'
+
+  php5_options: |
+    {% if roundcube_allow is defined and roundcube_allow %}
+    {% for address in roundcube_allow %}
+    allow {{ address }};
+    {% endfor %}
+    deny all;
+    {% endif %}
+
+roundcube_nginx_upstream_php5:
+  enabled: True
+  name: 'php5_roundcube'
+  type: 'php5'
+  php5: 'roundcube'
+
+roundcube_php5_pool:
+  enabled: True
+  name: 'roundcube'
+  user: 'www-data'
+  group: 'www-data'
+  pm_max_children: '{{ roundcube_php5_max_children }}'
+  php_value:
+    post_max_size: '{{ roundcube_upload_size }}'
+    upload_max_filesize: '{{ roundcube_upload_size }}'
+
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

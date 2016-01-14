@@ -1,0 +1,15 @@
+# настройка aptitude (удобства)
+aptitude::UI::Menubar-Autohide "true";
+aptitude::UI::HelpBar "false";
+aptitude::Forget-New-On-Install "true";
+aptitude::Forget-New-On-Update "true";
+aptitude::UI::Minibuf-Prompts "false";
+aptitude::UI::Prompt-On-Exit "false";
+
+#не ставим рекомендуемые пакеты
+Apt::Install-Recommends "false";
+
+# переодически(роботом) обновляем списки пакетов
+APT::Periodic::Enable "1";
+APT::Periodic::Update-Package-Lists "1";
+

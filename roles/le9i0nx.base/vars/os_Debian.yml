@@ -1,0 +1,26 @@
+---
+
+default_mirror:
+# debian_security
+  - { repo: 'deb http://security.debian.org/ stable/updates main'}
+  - { repo: 'deb-src http://security.debian.org/ stable/updates main'}
+# debian_stable
+  - { repo: 'deb http://ftp.ru.debian.org/debian/ stable main contrib non-free'}
+  - { repo: 'deb-src http://ftp.ru.debian.org/debian/ stable main contrib non-free'}
+# debian_stable_updates
+  - { repo: 'deb http://ftp.ru.debian.org/debian/ stable-updates main contrib non-free'}
+  - { repo: 'deb-src http://ftp.ru.debian.org/debian/ stable-updates main contrib non-free'}
+# debian_testing
+  - { repo: 'deb http://ftp.ru.debian.org/debian/ testing main contrib non-free'}
+  - { repo: 'deb-src http://ftp.ru.debian.org/debian/ testing main contrib non-free'}
+# debian_unstable
+  - { repo: 'deb http://ftp.ru.debian.org/debian/ unstable main contrib non-free'}
+  - { repo: 'deb-src http://ftp.ru.debian.org/debian/ unstable main contrib non-free'}
+# debian_wheezy_backports
+#  - { repo: 'deb http://ftp.ru.debian.org/debian/ wheezy-backports main contrib non-free'}
+#  - { repo: 'deb-src http://ftp.ru.debian.org/debian/ wheezy-backports main contrib non-free'}
+# experimental
+  - { repo: 'deb http://ftp.ru.debian.org/debian/ experimental main contrib non-free'}
+  - { repo: 'deb-src http://ftp.ru.debian.org/debian/ experimental main contrib non-free'}
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

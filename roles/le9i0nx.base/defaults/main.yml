@@ -1,0 +1,2 @@
+---
+grub_cmd_elevator: 'deadline'

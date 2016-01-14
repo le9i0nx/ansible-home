@@ -1,0 +1,29 @@
+---
+
+dependencies:
+
+  - role: debops.secret
+
+  - role: debops.rsyslog
+    rsyslog_pools: [ '{{ rsyslog_pool_exim }}' ]
+    rsyslog_pool_exim:
+        enabled: True
+        name: '03-exim'
+        options: |
+            $template DynFileEximPanic,"/var/log/%HOSTNAME%/%programname%/panic.%$YEAR%.%$MONTH%.%$DAY%.log"
+            if $programname == "exim" and $syslogfacility-text == "mail" and $syslogseverity-text == "alert" then		?DynFileEximPanic
+            & stop
+
+            $template DynFileExim,"/var/log/%HOSTNAME%/%programname%/mail.%$YEAR%.%$MONTH%.%$DAY%.log"
+            if $programname == "exim" and $syslogfacility-text == "mail" then		?DynFileExim
+            & stop
+
+  - role: debops.ferm
+    ferm_input_list:
+
+      - type: 'dport_accept'
+        dport: [ 'smtp', 'ssmtp', 'submission' ]
+        accept_any: True
+        filename: 'exim_dependency_accept'
+        weight: '20'
+

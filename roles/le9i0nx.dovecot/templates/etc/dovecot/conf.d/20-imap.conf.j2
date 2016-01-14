@@ -1,0 +1,76 @@
+## This file is managed by Ansible, all changes will be lost
+{#
+##
+## Параметры IMAP
+##
+#}
+protocol imap {
+{#
+  # Максимальная длина команды IMAP в байтах. Некоторые клиенты посылают
+  # слишком длинные команды при работе с очень большими ящиками, поэтому
+  # вам может понадобиться отказывать таким клиентам с сообщением
+  # "Too long argument" или "IMAP command line too large" в таком случае.
+  #imap_max_line_length = 64k
+ 
+  # Максимальное кол-во подключений для пользователя с одного IP адреса.
+  # Учтите, что в имени пользователя учитывается регистр букв.
+#}
+  mail_max_userip_connections = 15
+{#
+  # Список подключаемых плагинов, разделенный запятыми
+  # (по умолчанию значение глобальной переменной mail_plugins).
+#}
+  mail_plugins = $mail_plugins mail_log notify antispam
+{#
+ 
+  # Формат логов:
+  #  %i - общее кол-во байт полученных от клиента
+  #  %o - общее кол-во байт отправленных клиенту
+#}
+  imap_logout_format = bytes=%i/%o
+{#
+  # Заменить ответ IMAP CAPABILITY на указанный здесь.
+  # If the value begins with '+', add the given capabilities on top
+  # of the defaults (e.g. +XFOO XBAR).
+  #imap_capability = 
+ 
+  # Сколько секунд ждать ответа от клиента "OK Still here",
+  # когда тот ничего не делает.
+#}
+  imap_idle_notify_interval = 2 mins
+{#
+  # Идентификационные данные, отправляемые клиенту. Используйте *,
+  # чтобы Dovecot использовал значение по умолчанию. Следующие
+  # данные имеют значение по умолчанию: name, version, os, os-version, 
+  # support-url, support-email.
+  #imap_id_send = 
+ 
+  # Какие идентификационные данные писать в лог. * -  значит все.
+  #imap_id_log =
+ 
+  # Хаки для некоторых быжных клиентов:
+  #   delay-newmail:
+  #     Отправлять (EXISTS/RECENT) уведомления о новых сообщениях,
+  #     только когда получены команды NOOP и CHECK. В противном
+  #     случае некоторые клиенты игнорируют эту инфу, например 
+  #     OSX Mail (<v2.1). Outlook Express еще корявее, без этого хака
+  #     может показывать пользователю сообщение об ошибке
+  #     "Message no longer in server". Учтите, что OE6 может так же
+  #     криво работать, если синхронизация установлена в "Headers Only".
+  #     
+  #   tb-extra-mailbox-sep:
+  #     В mbox ящик может содержать или письма, или папки, что-то одно
+  #     из них. Thunderbird разделяет их, вынуждая сервер принимать
+  #     суффикс '/' в именах ящиков при работе в списках рассылки.
+  #
+  #   tb-lsub-flags:
+  #     Show \Noselect flags for LSUB replies with LAYOUT=fs (e.g. mbox).
+  #     This makes Thunderbird realize they aren't selectable and show them
+  #     greyed out, instead of only later giving "not selectable" popup error.
+  # Элементы списка разделяются пробелами.
+  #imap_client_workarounds = 
+  #imap_client_workarounds = delay-newmail netscape-eoh tb-extra-mailbox-sep
+#}
+  imap_client_workarounds = delay-newmail tb-extra-mailbox-sep
+}
+## vim: syntax=sh:expandtab:foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

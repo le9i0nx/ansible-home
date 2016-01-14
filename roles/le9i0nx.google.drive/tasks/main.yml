@@ -1,0 +1,24 @@
+---
+
+- name: check grive
+  action: apt pkg=grive state=latest update_cache=yes
+  action: apt pkg=rsync state=latest
+  action: apt pkg=screen state=latest
+
+- name: add grive dir
+  file: path=/home/le9i0nx/crypt owner=le9i0nx group=le9i0nx  state=directory mode=0700
+  file: path=/home/le9i0nx/backup_grive owner=le9i0nx group=le9i0nx  state=directory mode=0700
+
+- name: add grive sh
+  copy: src=./grive.sh dest=/usr/local/bin/grive.sh owner=root group=root mode=0555
+
+- name: add grive coron job
+  cron: name="grive sync" minute="*/10" user="le9i0nx" job="/bin/sh /usr/local/bin/grive.sh"
+  when: le9i0nx.grive_cron_install
+
+- name: add backup sh
+  copy: src=./backup_grive.sh dest=/usr/local/bin/backup_grive.sh owner=root group=root mode=0555
+
+- name: add backup_grive coron job
+  cron: name="backup_grive sync" minute="*/30" user="le9i0nx" job="/bin/sh /usr/local/bin/backup_grive.sh"
+

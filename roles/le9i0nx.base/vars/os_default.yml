@@ -1,0 +1,7 @@
+---
+
+- debug: 
+    msg: '{{ansible_distribution}} distribution is not supported'
+
+- debug: 
+    msg: '{{ansible_os_family}} family is not supported'

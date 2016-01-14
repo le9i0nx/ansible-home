@@ -1,0 +1,71 @@
+---
+
+# List of additional packages to install
+exim_packages:
+  - 'mailutils'
+  - 'p7zip-full'
+  - 'p7zip-rar'
+
+#exim_packages: [  'eximon4',
+#                  'exim4-daemon-heavy' ]  # отправка и взаимодействие с другими серверами 25 465 587
+password_length: '20'
+exim_db_password: "{{ lookup('password', secret + '/credentials/' + ansible_fqdn + '/mysql/exim/db_password length=' + password_length) }}"
+
+exim_db_type: 'mysql'
+exim_db_name: 'exim'
+exim_db_user: 'exim'
+exim_db_priv:
+#  - '{{ exim_db_name | default("exim") }}.whitelist_tb:INSERT,DELETE,SELECT,UPDATE'
+#  - '{{ exim_db_name | default("exim") }}.greylist_tb:INSERT,DELETE,SELECT,UPDATE'
+  - '{{ exim_db_name | default("exim") }}.blacklist_tb:INSERT,DELETE,SELECT,UPDATE'
+  - '{{ exim_db_name | default("exim") }}.exim_whitelist:INSERT,DELETE,SELECT,UPDATE'
+  - '{{ exim_db_name | default("exim") }}.*:SELECT'
+
+exim_ssl_cert: '/etc/exim/exim.crt'
+exim_ssl_key: '/etc/exim/exim.pem'
+exim_pki: '/srv/pki/'
+
+exim_domain: 'your.domain.example'
+
+exim_white_list_local_hosts: []
+
+exim_list_dnsbl: []
+
+exim_relay_from_hosts: []
+exim_ldap_server: "localhost"
+exim_ldap_server_port: "389"
+exim_ldap_aliases:
+  - {domain: "your.domain.example",ou: "your.domain"}
+
+
+exim_bad_extension_arxive:
+  - 'zip'
+  - 'rar'
+  - '7z'
+
+exim_bad_extension:
+  - 'bat'
+  - 'btm'
+  - 'chm'
+  - 'cmd'
+  - 'com'
+  - 'cpl'
+  - 'dll'
+  - 'exe'
+  - 'hta'
+  - 'js'
+  - 'jsp'
+  - 'lnk'
+  - 'msi'
+  - 'pif'
+  - 'prf'
+  - 'reg'
+  - 'scr'
+  - 'sys'
+  - 'url'
+  - 'vb'
+  - 'vbe'
+  - 'vbs'
+
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

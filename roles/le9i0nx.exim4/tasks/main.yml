@@ -1,0 +1,115 @@
+---
+# это костыль нужен свой репозитарий
+
+- name: copy deb
+  copy:
+    src:    '{{item.src}}'
+    dest:   '{{item.dest}}'
+    owner:  '{{ item.owner | default("root") }}'
+    group:  '{{ item.group | default("root") }}'
+    mode:   '{{ item.mode | default("0755") }}'
+  with_items:
+    - { src: 'exim4-daemon-custom_4.82-3ubuntu2_amd64.deb', dest: '/root/exim4-daemon-custom_4.82-3ubuntu2_amd64.deb' , mode: '0400' }
+
+- name: install packages
+  apt:
+    deb: '/root/exim4-daemon-custom_4.82-3ubuntu2_amd64.deb'
+
+- name: Create database for exim
+  mysql_db:
+    name:   '{{ exim_db_name | default("exim") }}'
+    state:  'present'
+  register: exim_database
+
+- name: copy  exim schema
+  copy:
+    src:    '{{item.src}}'
+    dest:   '{{item.dest}}'
+    owner:  '{{ item.owner | default("root") }}'
+    group:  '{{ item.group | default("root") }}'
+    mode:   '{{ item.mode | default("0755") }}'
+  with_items:
+    - { src: 'exim.sql', dest: '/etc/exim4/exim.sql' , mode: '0400' }
+  register: exim_database
+
+- name: Create db schema exim
+  mysql_db:
+    name:     '{{ exim_db_name | default("exim") }}'
+    state:    'import'
+    target:   '/etc/exim4/exim.sql'
+  when: exim_database is defined and exim_database.changed == True
+
+- name: Install exim packages
+  apt:
+    name: '{{ item }}'
+    state: 'present'
+    install_recommends: False
+  with_items: exim_packages
+  when: (exim_packages is defined and exim_packages)
+
+- name: Create exim control user
+  mysql_user:
+    name:     '{{ exim_db_user | default("exim") }}'
+    state:    'present'
+    password: '{{ exim_db_password }}'
+    priv:     '{{exim_db_priv|join("/") }}'
+
+- name: Create exim directories
+  file:
+    path:   '{{ item.path }}'
+    state:  '{{ item.state | default("directory") }}'
+    owner:  '{{ item.owner | default("root") }}'
+    group:  '{{ item.group | default("root") }}'
+    mode:   '{{ item.mode | default("0755") }}'
+  with_items:
+#  with_flattened:
+    - { path: '/etc/exim4/dkim/', mode: '0550' , group: 'Debian-exim'}
+    - { path: '/etc/exim4/list/', mode: '0770' , group: 'Debian-exim'}
+  when: (item.path is defined and item.path)
+
+- name: copy key exim
+  copy:
+    src:    '{{item.src}}'
+    dest:   '{{item.dest}}'
+    owner:  '{{ item.owner | default("root") }}'
+    group:  '{{ item.group | default("root") }}'
+    mode:   '{{ item.mode | default("0755") }}'
+    backup: 'yes'
+  with_items:
+    - { src: '{{secret}}/credentials/{{ ansible_fqdn }}/dkim/', dest: '/etc/exim4/dkim/' , mode: '0440', group: 'Debian-exim' }
+
+- name: configure exim
+  template:
+    src:    '{{item.src}}'
+    dest:   '{{item.dest}}'
+    owner:  '{{ item.owner | default("root") }}'
+    group:  '{{ item.group | default("root") }}'
+    mode:   '{{ item.mode | default("0400") }}'
+    backup: 'yes'
+  with_items:
+    - { src: 'etc/exim4/exim4.conf.j2', dest: '/etc/exim4/exim4.conf' }
+    - { src: 'etc/exim4/list/dynamic_pools.j2', dest: '/etc/exim4/list/dynamic_pools', mode: '0444' }
+    - { src: 'etc/exim4/list/banned_zones.j2', dest: '/etc/exim4/list/banned_zones', mode: '0444' }
+    - { src: 'etc/exim4/list/spamtraps.j2', dest: '/etc/exim4/list/spamtraps', mode: '0444' }
+    - { src: 'etc/exim4/bounce_message_file.j2', dest: '/etc/exim4/bounce_message_file', mode: '0444' }
+    - { src: 'etc/exim4/warn_message_file.j2', dest: '/etc/exim4/warn_message_file', mode: '0444' }
+  notify: [ 'Reload exim' ]
+
+- name: add cron job
+  cron:
+    name:   '{{ item.name }}'
+    minute: '{{ item.minute | default("*")}}'
+    hour:   '{{ item.hour | default("*")}}'
+    user:   '{{ item.user }}'
+    job:    '{{ item.job }}'
+  with_items:
+    - { name: 'exim delete old db item blacklist_tb', minute: '40', hour: '23', user: 'root', job: 'mysql -s -D {{exim_db_name}} -e "DELETE FROM blacklist_tb WHERE ctime <= DATE_SUB(NOW(), INTERVAL 14 DAY);"' }
+    - { name: 'exim delete old db item exim_whitelist', minute: '50', hour: '23', user: 'root', job: 'mysql -s -D {{exim_db_name}} -e "DELETE FROM exim_whitelist WHERE ctime <= DATE_SUB(NOW(), INTERVAL 180 DAY);"' }
+    - { name: 'exim stats', minute: '59', hour: '02', user: 'root', job: 'find /var/log/smtp/exim/ -type f -mmin -1440 ! -mmin -60 | xargs cat | /usr/sbin/eximstats | mail -s "EXIM STATS" postmaster@info74.ru' }
+
+
+
+
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
+
