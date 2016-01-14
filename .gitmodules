@@ -13,3 +13,6 @@
 [submodule "roles/debops.rsyslog"]
 	path = roles/debops.rsyslog
 	url = https://github.com/le9i0nx/ansible-rsyslog.git
+[submodule "roles/debops.users"]
+	path = roles/debops.users
+	url = https://github.com/le9i0nx/ansible-users.git
