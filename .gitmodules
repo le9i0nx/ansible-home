@@ -31,3 +31,6 @@
 [submodule "roles/debops.ferm"]
 	path = roles/debops.ferm
 	url = https://github.com/le9i0nx/ansible-ferm.git
+[submodule "roles/debops.auth"]
+	path = roles/debops.auth
+	url = https://github.com/le9i0nx/ansible-auth.git
