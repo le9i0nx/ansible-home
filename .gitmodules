@@ -43,3 +43,6 @@
 [submodule "roles/debops.mysql"]
 	path = roles/debops.mysql
 	url = https://github.com/le9i0nx/ansible-mysql.git
+[submodule "roles/debops.php5"]
+	path = roles/debops.php5
+	url = https://github.com/le9i0nx/ansible-php5.git
