@@ -23,16 +23,29 @@ auth_admin_accounts: [ 'ansicon' ]
 users_default:
   - users_ansicon
 
+users_admins:
+  - users_ansicon
+  - users_le9i0nx
+
 users_ansicon:
   - name:   'ansicon'
     state:  'present'
     group:  'ansicon'
     groups: ['admins']
-#    systemgroup: True
-#    systemuser: True
     shell: '/bin/bash'
     sshkeys:
       - 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACaAX/B2S7v0GmCEreG8PBCWG8rQoFksezsI+obIyiSEIvxU39Qncv2sItLB3L9u+FuGwZQLLTgb5R746SNN/24ScM9Zj3fGnxT8lYQ30IwOYkgRuOsnqTyXpXRPXn2J3Dua/oj29B0UqX5In5g17aWlGWEFcVDsVXEDZ8iFazwO5PFAsRa8dhZDCtuVLuU44Ttj9eDXgowydY2i7N79Zl34khqOTaZfnQ5i7C6E7sF7rW6l8jRB11xXCO1WK7jZZkWe3Qas5+0kkKc4mhMyFJbaw+2JVClB2T28W1s8uBjjMvkdVnl1a6yrS10zfTG2N0JzV2JR9i6AqpTDzqec0m9418OIhd/Vap+nqLEmjW19ioV+/U9/QWE1PLEtSVPLntu5WcD6zcG/gUjzgT4nipyfDBOjBoVVeBb3gJd3+fixJVHCuEIu+r1QYApPWEBoqfv2hk+TjnAjvm8Q5tN+e4f5Ww6YpVOvBKiJmBNfjq0QpqFuz3A2UFieLfdw+OHZJTT6NwvYDgYDowk4UlwqnyELyNVgvhVCmC0GZix3VxMKrZz2tYFgNOB3wEmSSQ3lLm12B6sdjH/VMUMAXL7LAhwwaDxxtJ0wR6ZUYd9Ry3cV1czhq0WwsgihWqAMm2bra/FPBvUX50Bvu4RCrKbQTlDmEoCGwMdyAaB2q+18jGpKcemel9CbYQ4SIi7PT29ekuLV6V78s9u7/D51Cs9yRoCP7NPbiZcFvv9uLMCN9OHBF7eFSgwoCN6d6FlkAZKMXMi2VbC1qaCjA6vtfZKqOS+kY7GVwyZjCnMBo+ieJmcMOVNRPIQ/rK9Xs= ansicon'
+
+users_le9i0nx:
+  - name:   'le9i0nx'
+    state:  'present'
+    group:  'le9i0nx'
+    groups: ['sudo','sshusers']
+    shell: '/bin/bash'
+    update_password: 'always'
+    password: "{{ lookup('file', secret + '/credentials/user/le9i0nx') }}"
+    sshkeys:
+      - 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDEGIVZyX1Z24A2eUcKvgsGsPRjwlkjayJ1bKKX2Duc8oVi9v/5aeqgKqHmEzHuErAxGo7Gdfh7yh86hSnfEgS3GrmWzNxPzkxucO25+whPNmBXXRTz+R4SqLgli24MIttx/RHulkFvCwDevpCatrX8uT9/68hwoOFbC/qfR3P5glU1cX9vUqSlXuzUICfCvwZsJNPCMEXsmbCuv+8/S9OKS6AQXlDANyPiCBRgpyA0TBB6HXGvDqXRZdIIrvHUq9ayme0NCULTQuf0X7Kv0IZNOa2LPQz/7v/3k2P8eooGcahWuV3Ke65NQ+gzL70zN1PKwSVT0+eW3Z7IJkfIdrHLXxrHaaFh+OOfX4hA650Chek0Ny+uYdSim6jSGF4nd+LaxAE59pGU7ey43KuJJZBRBj/4zH3eVunGWf6hWUjS72/qy0/mo4m5KSxyPMbfYBUDkuEKplYqpweSWnrXKpywiyiwN70nDUIqWPDJWJyGS3toTtL4c6t7w/xmJ3kgII8M37Y13juINtxYeINoK2HGr4k9/S8OjgWKz4ioaMFh6O6spO9ZBZJL1QE46hsUmkDD+yvqQ8XH9A0EFi7wa6D+ZOONB3IrbMKb0Gb9MLXjzmd+tqnlWxHwA82GsIFo9vO0+MAYEWL8tOiG15AfDCE+v4oBDw25Jq+/SKBWbQwY7Q== le9i0nx@itregion-gavrilov'
 
 apt_preferences_list:
   - package: '*'

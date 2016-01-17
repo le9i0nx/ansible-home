@@ -25,8 +25,6 @@ users_ansicon:
     state:  'present'
     group:  'ansicon'
     groups: ['admins']
-#    systemgroup: True
-#    systemuser: True
     shell: '/bin/bash'
     sshkeys:
       - 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACaAX/B2S7v0GmCEreG8PBCWG8rQoFksezsI+obIyiSEIvxU39Qncv2sItLB3L9u+FuGwZQLLTgb5R746SNN/24ScM9Zj3fGnxT8lYQ30IwOYkgRuOsnqTyXpXRPXn2J3Dua/oj29B0UqX5In5g17aWlGWEFcVDsVXEDZ8iFazwO5PFAsRa8dhZDCtuVLuU44Ttj9eDXgowydY2i7N79Zl34khqOTaZfnQ5i7C6E7sF7rW6l8jRB11xXCO1WK7jZZkWe3Qas5+0kkKc4mhMyFJbaw+2JVClB2T28W1s8uBjjMvkdVnl1a6yrS10zfTG2N0JzV2JR9i6AqpTDzqec0m9418OIhd/Vap+nqLEmjW19ioV+/U9/QWE1PLEtSVPLntu5WcD6zcG/gUjzgT4nipyfDBOjBoVVeBb3gJd3+fixJVHCuEIu+r1QYApPWEBoqfv2hk+TjnAjvm8Q5tN+e4f5Ww6YpVOvBKiJmBNfjq0QpqFuz3A2UFieLfdw+OHZJTT6NwvYDgYDowk4UlwqnyELyNVgvhVCmC0GZix3VxMKrZz2tYFgNOB3wEmSSQ3lLm12B6sdjH/VMUMAXL7LAhwwaDxxtJ0wR6ZUYd9Ry3cV1czhq0WwsgihWqAMm2bra/FPBvUX50Bvu4RCrKbQTlDmEoCGwMdyAaB2q+18jGpKcemel9CbYQ4SIi7PT29ekuLV6V78s9u7/D51Cs9yRoCP7NPbiZcFvv9uLMCN9OHBF7eFSgwoCN6d6FlkAZKMXMi2VbC1qaCjA6vtfZKqOS+kY7GVwyZjCnMBo+ieJmcMOVNRPIQ/rK9Xs= ansicon'

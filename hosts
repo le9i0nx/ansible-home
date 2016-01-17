@@ -21,6 +21,7 @@ otrs5
 74ru ansible_ssh_host=74ru
 en ansible_ssh_host=en
 lenovo ansible_ssh_host=lenovo
+korkino ansible_ssh_host=korkino
 #test ansible_ssh_host=test
 
 [all:children]

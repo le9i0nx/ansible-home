@@ -11,6 +11,13 @@
   become_method: sudo
   roles:
     - role: le9i0nx.base
+
+- include: app/tinc.yml
+
+- hosts: homes
+  become: True
+  become_method: sudo
+  roles:
     - role: debops.console
     - role: debops.secret
     - role: le9i0nx.syncthing
@@ -18,6 +25,7 @@
     - role: le9i0nx.install.it7
     - role: debops.ifupdown
 
+- include: app/tinc.yml
 - include: app/syncthing.homes.yml
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
