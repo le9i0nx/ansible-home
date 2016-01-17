@@ -12,7 +12,7 @@
   roles:
     - role: le9i0nx.base
 
-- include: app/tinc.yml
+- include: app/users.yml
 
 - hosts: homes
   become: True
