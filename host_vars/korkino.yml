@@ -1,5 +1,4 @@
 ---
 
 tinc_host_addr: [ '172.16.35.4/24' ]
-console_root_password: '{{ lookup("password", secret + "/credentials/" + ansible_fqdn + "/console/root/password length=" + console_root_password_length) }}'
 freedns_afraid_dynamic_id: "azFqM1BBdVFkR0tWdUljc3BzZThFc2J4OjE1NTU5MDU5"

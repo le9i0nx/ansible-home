@@ -1,0 +1,9 @@
+---
+
+tinc_host_addr: [ '172.16.35.5/24' ]
+freedns_afraid_dynamic_id: "azFqM1BBdVFkR0tWdUljc3BzZThFc2J4OjE1NTcyNDU3"
+freedns_afraid_dynamic_interface: 'eth0'
+ip6_tunel_packages: [
+      'wget',
+      'gawk',
+      'grep' ]

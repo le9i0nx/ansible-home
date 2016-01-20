@@ -1,16 +1,11 @@
 ---
+
 - hosts: all
-  remote_user: root
-  sudo: no
+  become_user: root
+  become: False
 
   roles: # Блок ролей, у нас пока одна роль
-#    - debops.tcpwrappers
-#    - debops.sshd
     - debops.auth
     - debops.users
-#    - debops.sshd
-      #    - install_ansible
-      #    - mivok0.sshd
-
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

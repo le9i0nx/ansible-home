@@ -1,5 +1,6 @@
 ---
 console_locales: [ 'ru_RU.UTF-8' ]
+console_root_password: '{{ lookup("password", secret + "/credentials/" + ansible_fqdn + "/console/root/password length=" + console_root_password_length) }}'
 console_packages: [ 'mc',
                     'htop',
                     'iotop',
