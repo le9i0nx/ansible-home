@@ -61,3 +61,6 @@
 [submodule "roles/debops.tinc"]
 	path = roles/debops.tinc
 	url = https://github.com/le9i0nx/ansible-tinc.git
+[submodule "roles/le9i0nx.networkd"]
+	path = roles/le9i0nx.networkd
+	url = https://github.com/le9i0nx/ansible-networkd.git
