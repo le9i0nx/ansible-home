@@ -1,21 +1,5 @@
 ---
 
-- name: celear sources.list
-  template: src=etc/apt/sources.list.j2
-            dest=/etc/apt/sources.list
-            owner=root group=root mode=0444
-
-#- name: mirror linux distribution
-- include_vars: "os_{{ ansible_distribution }}.yml"
-#  debug: var=asdf
-
-- name: default mirror
-  apt_repository:
-    repo: '{{item.repo}}'
-    state: 'present'
-    update_cache: False
-  with_items: default_mirror
-
 - name: copy conf apt
   copy: src=./99base dest=/etc/apt/apt.conf.d/99base owner=root group=root mode=0444
 
