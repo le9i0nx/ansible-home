@@ -13,6 +13,7 @@
     - role: le9i0nx.base
 
 - include: app/users.yml
+- include: service/apt.yml
 
 - hosts: homes
   become: True

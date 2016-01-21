@@ -3,6 +3,8 @@ ferm_ansible_controllers:  "{{admin_allow_pool}}"
 tcpwrappers_ansible_controllers: "{{admin_allow_pool}}"
 console_issue: 'Org. 74.ru'
 
+#apt
+apt_unattended_upgrades: False
 #grub
 grub_cmd_elevator: 'noop'
 

@@ -48,6 +48,16 @@ users_le9i0nx:
     sshkeys:
       - 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDEGIVZyX1Z24A2eUcKvgsGsPRjwlkjayJ1bKKX2Duc8oVi9v/5aeqgKqHmEzHuErAxGo7Gdfh7yh86hSnfEgS3GrmWzNxPzkxucO25+whPNmBXXRTz+R4SqLgli24MIttx/RHulkFvCwDevpCatrX8uT9/68hwoOFbC/qfR3P5glU1cX9vUqSlXuzUICfCvwZsJNPCMEXsmbCuv+8/S9OKS6AQXlDANyPiCBRgpyA0TBB6HXGvDqXRZdIIrvHUq9ayme0NCULTQuf0X7Kv0IZNOa2LPQz/7v/3k2P8eooGcahWuV3Ke65NQ+gzL70zN1PKwSVT0+eW3Z7IJkfIdrHLXxrHaaFh+OOfX4hA650Chek0Ny+uYdSim6jSGF4nd+LaxAE59pGU7ey43KuJJZBRBj/4zH3eVunGWf6hWUjS72/qy0/mo4m5KSxyPMbfYBUDkuEKplYqpweSWnrXKpywiyiwN70nDUIqWPDJWJyGS3toTtL4c6t7w/xmJ3kgII8M37Y13juINtxYeINoK2HGr4k9/S8OjgWKz4ioaMFh6O6spO9ZBZJL1QE46hsUmkDD+yvqQ8XH9A0EFi7wa6D+ZOONB3IrbMKb0Gb9MLXjzmd+tqnlWxHwA82GsIFo9vO0+MAYEWL8tOiG15AfDCE+v4oBDw25Jq+/SKBWbQwY7Q== le9i0nx@itregion-gavrilov'
 
+
+apt_sources_release: 'stable'
+apt_unattended_upgrades: True
+apt_sources_release_list:
+  - '{{ apt_sources_release }}'
+  - '{{ apt_sources_release_updates }}'
+  - 'testing'
+  - 'unstable'
+  - 'experimental'
+
 apt_preferences_list:
   - package: '*'
     pin: 'release unstable'
@@ -57,5 +67,9 @@ apt_preferences_list:
     pin: 'release testing'
     priority: '60'
     filename: "testing"
+  - package: '*'
+    pin: 'release experimental'
+    priority: '40'
+    filename: "experimental"
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
