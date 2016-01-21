@@ -38,3 +38,10 @@ test ansible_ssh_host=test
 mail ansible_ssh_host=mail
 mail_test ansible_ssh_host=mail_test
 
+
+
+
+[debops_all_hosts:children]
+homes
+rabota_74ru
+pve

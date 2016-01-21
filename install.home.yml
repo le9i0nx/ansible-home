@@ -19,7 +19,13 @@
   become_method: sudo
   roles:
     - role: debops.console
-    - role: debops.secret
+
+- include: service/sshd.yml
+
+- hosts: homes
+  become: True
+  become_method: sudo
+  roles:
     - role: le9i0nx.syncthing
     - role: le9i0nx.miredo
     - role: le9i0nx.install.it7

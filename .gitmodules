@@ -64,3 +64,6 @@
 [submodule "roles/le9i0nx.networkd"]
 	path = roles/le9i0nx.networkd
 	url = https://github.com/le9i0nx/ansible-networkd.git
+[submodule "roles/debops.apt"]
+	path = roles/debops.apt
+	url = https://github.com/le9i0nx/ansible-apt.git
