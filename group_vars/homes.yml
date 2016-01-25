@@ -5,6 +5,7 @@ console_issue: 'Org. le9i0nx.ru'
 #grub
 grub_cmd_elevator: 'noop'
 #tinc
+tinc_network: 'mesh0'
 tinc_inventory_hosts: '{{ groups.homes }}'
 tinc_connection_type: 'static'
 tinc_interface: '{{ tinc_network }}'
@@ -34,5 +35,9 @@ role_syncthing:
   folders:
     path: '/home/le9i0nx/crypt/'
     id: 'crypt'
+
+# avahi
+avachi_ferm_interface:
+  - '{{tinc_interface}}'
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
