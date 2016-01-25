@@ -1,0 +1,15 @@
+---
+
+- name: Manage avachi
+  hosts: [ 'debops_all_hosts', 'debops_service_avachi' ]
+  become: True
+
+  roles:
+
+    - role: debops.ferm
+      tags: [ 'role::ferm' ]
+      ferm_dependent_rules:
+        - '{{ avachi_ferm_dependent_rules }}'
+
+    - role: le9i0nx.avachi
+      tags: [ 'role::avachi' ]

@@ -30,7 +30,7 @@ users_default:
 # syncthing
 role_syncthing_user: 'le9i0nx'
 role_syncthing:
-  inventory_hosts: '{{ groups.home }}'
+  inventory_hosts: '{{ groups.homes }}'
   folders:
     path: '/home/le9i0nx/crypt/'
     id: 'crypt'

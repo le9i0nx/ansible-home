@@ -3,9 +3,6 @@
 - name: copy conf apt
   copy: src=./99base dest=/etc/apt/apt.conf.d/99base owner=root group=root mode=0444
 
-- name: updating the system
-  apt: update_cache=yes cache_valid_time=3600
-
 - name: copy conf vim
   copy: src=./vimrc.local dest=/etc/vim/vimrc.local owner=root group=root mode=0444
 
