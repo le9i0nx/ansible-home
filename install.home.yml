@@ -14,6 +14,7 @@
 
 - include: app/users.yml
 - include: service/apt.yml
+- include: service/avachi.yml
 
 - hosts: homes
   become: True

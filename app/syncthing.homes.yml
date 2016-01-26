@@ -8,22 +8,9 @@
   roles:
 
     - role: debops.ferm
-      tags: [ 'role::syncthing', 'syncthing' ]
-      ferm_input_list:
-
-        - type: 'dport_accept'
-          dport: [ '22000' ]
-          protocol: 'tcp'
-          accept_any: True
-          filename: 'syncthing_dependency_accept_tcp'
-          weight: '20'
-
-        - type: 'dport_accept'
-          dport: [ '21027' ]
-          protocol: 'udp'
-          accept_any: True
-          filename: 'syncthing_dependency_accept_udp'
-          weight: '20'
+      tags: [ 'role::ferm' ]
+      ferm_dependent_rules:
+        - '{{ syncthing_ferm_dependent_rules }}'
 
     - role: le9i0nx.syncthing
       tags: [ 'role::syncthing', 'syncthing' ]

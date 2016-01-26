@@ -40,4 +40,13 @@ role_syncthing:
 avachi_ferm_interface:
   - '{{tinc_interface}}'
 
+# debops.apt
+apt_unattended_upgrades_repositories:
+  - "origin=Debian,codename={{ apt_sources_release }},label=Debian-Security"
+  - "o=Debian,a={{ apt_sources_release }}"
+  - "o=Debian,a={{ apt_sources_release_updates }}"
+  - "o=Syncthing"
+
+
+
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
