@@ -1,13 +1,1 @@
----
-
-- name: tinc install home group
-  hosts: homes
-  become: True
-  become_method: sudo
-
-  roles:
-
-    - role: debops.tinc
-      tags: [ 'role::tinc', 'tinc' ]
-
-## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
+/home/le9i0nx/crypt/ansible/service/tinc.yml

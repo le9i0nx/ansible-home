@@ -1,0 +1,23 @@
+---
+
+- name: Configure tinc VPN
+  hosts: homes
+  become: True
+  become_method: sudo
+
+  roles:
+
+    - role: debops.ferm
+      tags: [ 'role::ferm' ]
+      ferm_dependent_rules:
+        - '{{ tinc_ferm_dependent_rules }}'
+
+    - role: debops.ifupdown
+      tags: [ 'role::ifupdown' ]
+      ifupdown_dependent_interfaces:
+        - '{{ tinc_ifupdown_interface }}'
+
+    - role: debops.tinc
+      tags: [ 'role::tinc' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
