@@ -12,9 +12,9 @@
       ferm_dependent_rules:
         - '{{ tinc_ferm_dependent_rules }}'
 
-    - role: debops.ifupdown
-      tags: [ 'role::ifupdown' ]
-      ifupdown_dependent_interfaces:
+    - role: le9i0nx.networkd
+      tags: [ 'role::networkd' ]
+      networkd_dependent_interfaces:
         - '{{ tinc_ifupdown_interface }}'
 
     - role: debops.tinc

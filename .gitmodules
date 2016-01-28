@@ -55,9 +55,6 @@
 [submodule "roles/debops.core"]
 	path = roles/debops.core
 	url = https://github.com/le9i0nx/ansible-core.git
-[submodule "roles/debops.ifupdown"]
-	path = roles/debops.ifupdown
-	url = https://github.com/le9i0nx/ansible-ifupdown.git
 [submodule "roles/debops.tinc"]
 	path = roles/debops.tinc
 	url = https://github.com/le9i0nx/ansible-tinc.git
