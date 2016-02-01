@@ -5,5 +5,33 @@ role_syncthing:
   folders:
     path: '/var/lib/vz/template/iso/'
     id: 'vz_iso'
+#tinc
+tinc_host_configuration:
+  Address: '{{ ansible_eth0.ipv4.address }}'
+
+tinc_connect_to: '[ {% for item in tinc_inventory_hosts %} "{{ hostvars[item].ansible_hostname }}", {% endfor %} ]'
+tinc_hostname: '{{ ansible_hostname }}'
+tinc_network: 'mesh0'
+tinc_inventory_hosts: '{{ groups.pve }}'
+tinc_interface: '{{ tinc_network }}'
+tinc_connection_type: 'static'
+tinc_ifupdown_interface:
+  - iface: '{{ tinc_interface }}'
+    type: 'interface'
+    inet: '{{ tinc_connection_type }}'
+    auto: '{{ tinc_interface_auto }}'
+    addresses: '{{ tinc_host_addr }}'
+
+#ssh
+sshd_permit_root_login: 'yes'
+sshd_password_authentication: 'yes'
+tcpwrappers: False
+tcpwrappers_deny_all: False
+ferm_enabled: False
+#hostname
+hostname_hosts_add:
+    - { regexp: "^{{ ansible_mesh0.ipv4.address }}", line: "{{ ansible_mesh0.ipv4.address }}\t{{hostname}}{% if inventory_hostname != hostname_short %}\t{{hostname_short}}{% endif %}" }
+    - { regexp: "^127.0.1.1", line: "127.0.1.1 test", state: "absent" }
+
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

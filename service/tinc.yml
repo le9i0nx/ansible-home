@@ -1,7 +1,7 @@
 ---
 
 - name: Configure tinc VPN
-  hosts: homes
+  hosts: all
   become: True
   become_method: sudo
 

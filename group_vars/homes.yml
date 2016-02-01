@@ -7,23 +7,14 @@ grub_cmd_elevator: 'noop'
 #tinc
 tinc_network: 'mesh0'
 tinc_inventory_hosts: '{{ groups.homes }}'
-tinc_connection_type: 'static'
 tinc_interface: '{{ tinc_network }}'
+tinc_connection_type: 'ipv4ll'
 tinc_ifupdown_interface:
   - iface: '{{ tinc_interface }}'
     type: 'interface'
-    weight: '75'
     inet: '{{ tinc_connection_type }}'
     auto: '{{ tinc_interface_auto }}'
     force: True
-    addresses: '{{ tinc_host_addr }}'
-    options: |
-      {% if ansible_local.init != 'systemd' %}
-      tinc-net {{ tinc_network }}
-      tinc-chroot yes
-      tinc-mlock yes
-      tinc-user {{ tinc_user }}
-      {% endif %}
 
 users_default:
   - users_ansicon

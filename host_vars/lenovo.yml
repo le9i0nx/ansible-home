@@ -7,6 +7,5 @@ ip6_tunel_packages: [
       'wget',
       'gawk',
       'grep' ]
-tinc_host_addr: [ '172.16.35.2/24' ]
 #ifupdown_ignore_static: True
 
