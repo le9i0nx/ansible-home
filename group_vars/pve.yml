@@ -29,9 +29,13 @@ tcpwrappers: False
 tcpwrappers_deny_all: False
 ferm_enabled: False
 #hostname
-hostname_hosts_add:
-    - { regexp: "^{{ ansible_mesh0.ipv4.address }}", line: "{{ ansible_mesh0.ipv4.address }}\t{{hostname}}{% if inventory_hostname != hostname_short %}\t{{hostname_short}}{% endif %}" }
+hostname_hosts:
+    - { regexp: "^127.0.0.1", line: "127.0.0.1\tlocalhost" }
+    - { regexp: "^::1",       line: "::1\tlocalhost\tip6-localhost\tip6-loopback" }
+hostname_hosts_static:
+    - { regexp: "^{{ ansible_mesh0.ipv4.address }}", line: "{{ ansible_mesh0.ipv4.address }}\t{{ ansible_hostname}}{% if ansible_hostname != ansible_fqdn %}\t{{ansible_fqdn}}{% endif %}" }
     - { regexp: "^127.0.1.1", line: "127.0.1.1 test", state: "absent" }
-
+hostname_hosts_pve: "[ {% for item in tinc_inventory_hosts %} { u'regexp': '^{{ hostvars[item].ansible_mesh0.ipv4.address }}', u'line': '{{ hostvars[item].ansible_mesh0.ipv4.address }}\t{{ hostvars[item].ansible_hostname }}{%if hostvars[item].ansible_hostname != hostvars[item].ansible_fqdn %}\t{{ hostvars[item].ansible_fqdn }}{% endif %}'}, {% endfor %} ]"
+hostname_hosts_add: "{{ hostname_hosts_static + hostname_hosts_pve  }}"
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
