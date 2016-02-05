@@ -9,10 +9,8 @@ apt_unattended_upgrades: False
 grub_cmd_elevator: 'noop'
 
 #ssh
-#sshd_PermitRootLogin: 'no'
-#sshd_AllowGroups: 'edi ansicon admins sshusers sftponly'
 sshd_ferm_limit: 'true'
-sshd_PasswordAuthentication: 'no'
+sshd_password_authentication: 'yes'
 #ntp
 ntp_timezone: 'Asia/Yekaterinburg'
 ntp_servers: [  '0.europe.pool.ntp.org',

@@ -1,16 +1,17 @@
 ---
 
+- include: service/init.yml
+- include: service/core.yml
+- include: service/base.yml
+- include: service/console.yml
+- include: service/sshd.yml
+
 - hosts: mail_srv
   remote_user: ansicon
   sudo: yes
 
   roles:
-    - le9i0nx.base
-    - debops.users
-    - debops.console
     - debops.ntp
-    - debops.sshd
-    - debops.secret
     - debops.mysql
 
 - include: app/exim.mail_srv.yml
@@ -21,12 +22,10 @@
   sudo: yes
 
   roles:
-    - le9i0nx.ssl_key
     - le9i0nx.postfixadmin
     - le9i0nx.mail
     - le9i0nx.roundcube
     - le9i0nx.mailweb
-    - le9i0nx.dovecot
 
 - hosts: mail
   remote_user: ansicon
