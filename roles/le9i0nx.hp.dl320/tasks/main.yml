@@ -10,7 +10,7 @@
 
 - name: Add hp repo
   apt_repository:
-    repo: 'deb http://downloads.linux.hp.com/SDR/repo/mcp trusty/current non-free'
+    repo: 'deb http://downloads.linux.hpe.com/SDR/repo/mcp trusty/current non-free'
     state: 'present'
   when: ansible_distribution == 'Ubuntu'
 
