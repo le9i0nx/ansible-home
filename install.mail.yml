@@ -5,6 +5,8 @@
 - include: service/base.yml
 - include: service/console.yml
 - include: service/sshd.yml
+- include: service/apt.yml
+- include: service/apt_preferences.yml
 
 - hosts: mail_srv
   remote_user: ansicon

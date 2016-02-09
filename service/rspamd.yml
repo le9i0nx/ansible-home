@@ -1,0 +1,28 @@
+---
+
+- name: Manage rspamd
+  hosts: [ 'debops_all_hosts', 'debops_service_rspamd' ]
+  become: True
+
+  roles:
+
+    - role: debops.ferm
+      tags: [ 'role::ferm' ]
+      ferm_dependent_rules:
+          - '{{ rspamd_ferm_dependent_rules }}'
+
+    - role: debops.apt_preferences
+      tags: [ 'role::apt_preferences' ]
+      apt_preferences_dependent_list:
+        - '{{ rspamd_apt_preferences_dependent_list }}'
+
+    - role: debops.apt
+      tags: [ 'role::apt' ]
+      apt_host_keys:
+        - '{{ rspamd_repositories_key }}'
+      apt_host_repositories:
+        - '{{ rspamd_repositories }}'
+
+    - role: le9i0nx.rspamd
+      tags: [ 'role::rspamd' ]
+

@@ -12,10 +12,9 @@
 
 [rabota_74ru]
 mail ansible_ssh_host=mail
-mail_test ansible_ssh_host=mail_test
+mail_test
 1c83 ansible_ssh_host=1c83
 otrs5
-#otrs5 ansible_ssh_host=otrs5
 
 [homes]
 74ru ansible_ssh_host=74ru
@@ -23,7 +22,6 @@ en ansible_ssh_host=en
 lenovo ansible_ssh_host=lenovo
 korkino ansible_ssh_host=korkino
 kv74 ansible_ssh_host=kv74
-#test ansible_ssh_host=test
 
 [all:children]
 homes
@@ -37,9 +35,7 @@ pve225.74ru.mpautina.ru ansible_ssh_host=pve225
 
 [mail_srv]
 mail ansible_ssh_host=mail
-mail_test ansible_ssh_host=mail_test
-
-
+mail_test
 
 
 [debops_all_hosts:children]
