@@ -67,5 +67,16 @@ exim_bad_extension:
   - 'vbe'
   - 'vbs'
 
+# .. envvar:: exim_ferm_dependent_rules:
+#
+# Configuration for ``iptables`` firewall managed by ``ferm``.
+exim_ferm_dependent_rules:
+
+  - type: 'accept'
+    dport: [ 'smtp', 'ssmtp', 'submission' ]
+    protocol: [ 'tcp' ]
+    role: 'le9i0nx.exim'
+    name: 'smtp'
+    accept_any: True
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

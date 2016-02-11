@@ -25,7 +25,6 @@
 
   roles:
     - le9i0nx.postfixadmin
-    - le9i0nx.mail
     - le9i0nx.roundcube
     - le9i0nx.mailweb
 
