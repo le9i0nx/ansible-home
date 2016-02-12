@@ -1,4 +1,5 @@
 ---
 freedns_afraid_dynamic_id: "azFqM1BBdVFkR0tWdUljc3BzZThFc2J4OjE0NTkwOTg0"
+tinc_host_addr: [ '172.16.35.5/24' ]
 
 ## vim: ft=yaml:foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

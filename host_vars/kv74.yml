@@ -6,3 +6,4 @@ ip6_tunel_packages: [
       'wget',
       'gawk',
       'grep' ]
+tinc_host_addr: [ '172.16.35.3/24' ]

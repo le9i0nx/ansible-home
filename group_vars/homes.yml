@@ -8,12 +8,13 @@ grub_cmd_elevator: 'noop'
 tinc_network: 'mesh0'
 tinc_inventory_hosts: '{{ groups.homes }}'
 tinc_interface: '{{ tinc_network }}'
-tinc_connection_type: 'ipv4ll'
+tinc_connection_type: 'static'
 tinc_ifupdown_interface:
   - iface: '{{ tinc_interface }}'
     type: 'interface'
     inet: '{{ tinc_connection_type }}'
     auto: '{{ tinc_interface_auto }}'
+    addresses: '{{ tinc_host_addr }}'
     force: True
 
 users_default:

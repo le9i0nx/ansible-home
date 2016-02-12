@@ -1,3 +1,4 @@
 ---
 freedns_afraid_dynamic_id: "azFqM1BBdVFkR0tWdUljc3BzZThFc2J4OjExOTA3ODk5"
 le9i0nx.install.it7_hosting: True
+tinc_host_addr: [ '172.16.35.1/24' ]
