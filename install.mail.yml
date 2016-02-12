@@ -16,15 +16,15 @@
     - debops.ntp
     - debops.mysql
 
-- include: app/exim.mail_srv.yml
+- include: service/exim.yml
 - include: app/dovecot.mail_srv.yml
+- include: service/postfixadmin.yml
 
 - hosts: mail_srv
   remote_user: ansicon
   sudo: yes
 
   roles:
-    - le9i0nx.postfixadmin
     - le9i0nx.roundcube
     - le9i0nx.mailweb
 

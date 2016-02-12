@@ -1,0 +1,12 @@
+---
+
+- name: postfixadmin install
+  hosts: [ 'debops_all_hosts', 'debops_service_postfixadmin' ]
+  become: True
+
+  roles:
+
+    - role: le9i0nx.postfixadmin
+      tags: [ 'role::postfixadmin' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
