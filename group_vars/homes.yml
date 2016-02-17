@@ -39,6 +39,29 @@ apt_unattended_upgrades_repositories:
   - "o=Debian,a={{ apt_sources_release_updates }}"
   - "o=Syncthing"
 
+apt_sources_release: 'stable'
+apt_unattended_upgrades: True
+apt_sources_release_list:
+  - '{{ apt_sources_release }}'
+  - '{{ apt_sources_release_updates }}'
+  - 'testing'
+  - 'unstable'
+  - 'experimental'
+
+apt_preferences_list:
+  - package: '*'
+    pin: 'release unstable'
+    priority: '50'
+    filename: "unstable"
+  - package: '*'
+    pin: 'release testing'
+    priority: '60'
+    filename: "testing"
+  - package: '*'
+    pin: 'release experimental'
+    priority: '40'
+    filename: "experimental"
+
 
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

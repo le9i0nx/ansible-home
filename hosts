@@ -29,9 +29,7 @@ rabota_74ru
 pve
 
 [pve]
-pve152.74ru.mpautina.ru ansible_ssh_host=pve152
-pve146.74ru.mpautina.ru ansible_ssh_host=pve146
-pve225.74ru.mpautina.ru ansible_ssh_host=pve225
+pve32.0.pve.mpautina.ru
 
 [mail_srv]
 mail ansible_ssh_host=mail

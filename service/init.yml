@@ -2,7 +2,7 @@
 
 - hosts: all
   become_user: root
-  become: False
+  become: True
   gather_facts: no
 
   tasks:
