@@ -8,6 +8,6 @@
 - include: service/console.yml
 - include: service/sshd.yml
 - include: service/tinc.yml
-- include: app/syncthing.pve.yml
+- include: service/syncthing.yml
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
