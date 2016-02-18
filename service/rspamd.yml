@@ -9,7 +9,7 @@
     - role: debops.ferm
       tags: [ 'role::ferm' ]
       ferm_dependent_rules:
-          - '{{ rspamd_ferm_dependent_rules }}'
+        - '{{ rspamd_ferm_dependent_rules }}'
 
     - role: debops.apt_preferences
       tags: [ 'role::apt_preferences' ]
