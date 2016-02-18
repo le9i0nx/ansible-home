@@ -67,3 +67,6 @@
 [submodule "roles/le9i0nx.rspamd"]
 	path = roles/le9i0nx.rspamd
 	url = https://github.com/le9i0nx/ansible-rspamd.git
+[submodule "roles/le9i0nx.proxmox"]
+	path = roles/le9i0nx.proxmox
+	url = https://github.com/le9i0nx/ansible-proxmox.git
