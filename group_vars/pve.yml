@@ -1,5 +1,6 @@
 ---
 
+#syncthing
 role_syncthing:
   inventory_hosts: '{{ groups.pve }}'
   folders:
