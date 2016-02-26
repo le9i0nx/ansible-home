@@ -1,5 +1,14 @@
 ---
-- include: core.yml
+
+- name: Prepare core environment
+  hosts: 'debops_all_hosts'
+  become: False
+
+  roles:
+
+    - role: debops.core
+      tags: [ 'role::core' ]
+      become: True
 
 - name: Manage rspamd
   hosts: [ 'debops_all_hosts', 'debops_service_rspamd' ]
