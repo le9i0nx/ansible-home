@@ -1,4 +1,6 @@
 ---
+# ansible
+ansible_user: root
 
 console_locales: [ 'en_US.UTF-8' ]
 console_root_password: '{{ lookup("password", secret + "/credentials/" + ansible_fqdn + "/console/root/password length=" + console_root_password_length) }}'

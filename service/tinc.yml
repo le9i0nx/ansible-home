@@ -1,7 +1,7 @@
 ---
 
 - name: Configure tinc VPN
-  hosts: all
+  hosts: [ 'debops_all_hosts', 'debops_service_tinc' ]
   become: True
   become_method: sudo
 
