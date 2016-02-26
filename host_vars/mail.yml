@@ -85,6 +85,8 @@ exim_white_list_local_hosts_add:
   - '176.9.151.116' # sfa.w.rugion.ru
   - '178.161.173.194' # permrc.magnit.ru # убрать после переписки конфига
   - '195.93.186.211' # noreply@ngs.ru
+  - '89.237.54.190' # 222-2-222.ru
+  - '77.41.165.78'  # 222-2-222.ru
 
 exim_list_dkim:
   - { domain: {'yahoo.com','rambler.ru'} }

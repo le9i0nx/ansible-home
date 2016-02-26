@@ -6,17 +6,3 @@ dependencies:
 
   - role: le9i0nx.ssl_key
 
-  - role: debops.php5
-    php5_packages: [ 'php5-mysql','php5', 'php5-ldap','php5-mcrypt' ]
-    php5_pools: [ '{{ mail_php5_pool }}' ]
-    when: mail_dependencies is defined and mail_dependencies
-    tags: [ 'mysql', 'mail' ]
-
-  - role: debops.nginx
-    nginx_servers: [ '{{mail_info74_ru_nginx_server}}', '{{cap_nginx_server}}' , '{{autoconfig_nginx_server}}' ]
-#    nginx_servers: [ '{{mail_corp_161_ru_nginx_server}}', '{{mail_info74_ru_nginx_server}}','{{mail_info63_ru_nginx_server}}', '{{cap_nginx_server}}' , '{{autoconfig_nginx_server}}' ]
-    nginx_upstreams: [ '{{ mail_nginx_upstream_php5 }}' ]
-    when: mail_dependencies is defined and mail_dependencies
-    tags: [ 'mysql', 'mail', 'nginx' ]
-
-#  - role: le9i0nx.roundcube

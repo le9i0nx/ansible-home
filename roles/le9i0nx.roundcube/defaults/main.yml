@@ -27,7 +27,7 @@ roundcube_upload_size: '64M'
 
 # Maximum number of PHP5 processes for postfixadmin
 roundcube_php5_max_children: '50'
-roundcube_php5_min_children: '5'
+roundcube_php5_min_children: '2'
 
 roundcube_nginx_server:
   by_role: 'le90nx.roundcube'

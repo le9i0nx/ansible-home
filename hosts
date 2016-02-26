@@ -10,9 +10,7 @@
 #ansible_ssh_user=ansicon
 #localhost ansible_connection=local
 
-[rabota_74ru]
-mail ansible_ssh_host=mail
-mail_test
+[rabota_74ru_old]
 1c83 ansible_ssh_host=1c83
 otrs5
 
@@ -29,12 +27,17 @@ rabota_74ru
 pve
 
 [pve]
-pve32.0.pve.mpautina.ru
+pve32.pve.mpautina.ru
+pve6.pve.mpautina.ru
 
 [mail_srv]
 mail ansible_ssh_host=mail
 mail_test
 
+[rabota_74ru:children]
+pve
+rabota_74ru_old
+mail_srv
 
 [debops_all_hosts:children]
 homes

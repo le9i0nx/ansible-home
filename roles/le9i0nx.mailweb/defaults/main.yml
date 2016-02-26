@@ -46,6 +46,7 @@ mail_location_allow:
     '/postfixadmin': '{{ web_admin_allow }}'
     '/userlogos': '{{ web_filials_allow }}'
     '/protected/userlogos': '{{ web_filials_allow }}'
+    '/rspamd/': '{{ web_admin_allow }}'
 
 mail_location_php: |
   location ~ ^(?<script_name>.+\.php)$ {
@@ -68,10 +69,10 @@ mail_location_php: |
 
 mail_location:
     '/': 'return 307 https://$host/roundcube;'
-    '~* \.(gif|jpg|jpeg|png)$': |
-      expires 1h;
-      access_log off;
-      log_not_found off;
+#    '~* \.(gif|jpg|jpeg|png)$': |
+#      expires 1h;
+#      access_log off;
+#      log_not_found off;
 #      error_page 404 /userlogos_data/avatars/null.jpg;
 
     '/postfixadmin': |
@@ -84,6 +85,15 @@ mail_location:
 
     '~ /roundcube/(logs|config|temp)': 'deny all;'
     '/logo': ' '
+    '/rspamd/': |
+      proxy_set_header X-Real-IP  $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Host $host;
+      proxy_pass       http://localhost:11334/;
+      proxy_redirect   http://localhost:11334/ /rspamd/;
+
+
+
 #    '/protected/userlogos': |
 #      {{mail_location_php}}
 #

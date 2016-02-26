@@ -8,7 +8,9 @@
 - include: service/console.yml
 - include: service/sshd.yml
 - include: service/tinc.yml
-- include: service/syncthing.yml
+- include: service/hostname.yml
+- include: service/ntp.yml
 - include: service/proxmox.yml
+- include: service/syncthing.yml
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

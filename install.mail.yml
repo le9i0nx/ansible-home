@@ -19,14 +19,7 @@
 - include: service/exim.yml
 - include: app/dovecot.mail_srv.yml
 - include: service/postfixadmin.yml
-
-- hosts: mail_srv
-  remote_user: ansicon
-  sudo: yes
-
-  roles:
-    - le9i0nx.roundcube
-    - le9i0nx.mailweb
+- include: service/roundcube.yml
 
 - hosts: mail
   remote_user: ansicon
