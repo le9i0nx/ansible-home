@@ -6,21 +6,43 @@ role_syncthing:
   folders:
     path: '/var/lib/vz/template/iso/'
     id: 'vz_iso'
-#tinc
-tinc_host_configuration:
-  Address: '{{ ansible_eth0.ipv4.address }}'
 
-tinc_connect_to: '[ {% for item in tinc_inventory_hosts %} "{{ hostvars[item].ansible_hostname }}", {% endfor %} ]'
-tinc_hostname: '{{ ansible_hostname }}'
-tinc_network: 'mesh0'
-tinc_inventory_hosts: '{{ groups.pve }}'
-tinc_interface: '{{ tinc_network }}'
-tinc_connection_type: 'static'
-tinc_ifupdown_interface:
-  - iface: '{{ tinc_interface }}'
+#tinc
+tinc__connect_to_mesh_pve: '{{ tinc__inventory_hosts_mesh_pve }}'
+tinc__inventory_hosts_mesh_pve: '{{ (groups.pve if groups.pve|d() else []) | difference([ tinc__hostname ]) }}'
+tinc__default_networks: []
+tinc__inventory_groups: ['pve']
+tinc__inventory_hosts: '{{ groups.pve if groups.pve|d() else [] }}'
+tinc__networks: [ '{{ tinc__network_mesh_pve }}' ]
+tinc__host_addresses: '{{ tinc__host_addresses_ip }}'
+tinc__interface_mesh_pve: 'mesh_pve'
+tinc__interface_mesh0: '{{ tinc__interface_mesh_pve }}'
+tinc__exclude_bridge_mesh0: []
+tinc__network_mesh_pve:
+  name: '{{ tinc__interface_mesh_pve }}'
+  interface: '{{ tinc__interface_mesh_pve }}'
+  hwaddr: ''
+  bridge: ''
+  link_type: 'static'
+  boot: True
+  port: '655'
+  mlock: True
+  chroot: True
+  allow: ''
+  user: '{{ tinc__user }}'
+  tinc_exclude_addresses: '{{ tinc__exclude_addresses_mesh0 }}'
+  tinc_options:
+    Mode: 'switch'
+    DeviceType: 'tap'
+    Cipher: 'aes-256-cbc'
+    Digest: 'SHA512'
+    ConnectTo: '{{ tinc__connect_to_mesh_pve }}'
+
+tinc__ifupdown_interface:
+  - iface: '{{ tinc__interface_mesh_pve }}'
     type: 'interface'
-    inet: '{{ tinc_connection_type }}'
-    auto: '{{ tinc_interface_auto }}'
+    inet: 'static'
+    auto: True
     addresses: '{{ tinc_host_addr }}'
 
 #ssh
@@ -29,18 +51,16 @@ sshd_password_authentication: 'yes'
 tcpwrappers: False
 tcpwrappers_deny_all: False
 ferm_enabled: False
+
 #hostname
 hostname_hosts:
-    - { regexp: "^127.0.0.1", line: "127.0.0.1\tlocalhost" }
-    - { regexp: "^::1",       line: "::1\tlocalhost\tip6-localhost\tip6-loopback" }
-    - { regexp: "^127.0.1.1", line: "127.0.1.1 test", state: "absent"}
+    - { ip: "127.0.0.1", name: "localhost" }
 
-hostname_hosts_static: "[{% if ansible_mesh0 is defined %}{ u'regexp': '^{{ ansible_mesh0.ipv4.address }}', u'line': '{{ ansible_mesh0.ipv4.address }}\t{{ ansible_hostname}}{% if ansible_hostname != ansible_fqdn %}\t{{ansible_fqdn}}{% endif %}' }{% endif %} ]"
-
-hostname_hosts_pve: "[ {% for item in tinc_inventory_hosts %}{% if ansible_hostname != hostvars[item].ansible_hostname %} { u'regexp': '^{{ hostvars[item].ansible_mesh0.ipv4.address }}', u'line': '{{ hostvars[item].ansible_mesh0.ipv4.address }}\t{{ hostvars[item].ansible_hostname }}{%if hostvars[item].ansible_hostname != hostvars[item].ansible_fqdn %}\t{{ hostvars[item].ansible_fqdn }}{% endif %}'}, {% endif %}{% endfor %} ]"
-
-hostname_hosts_add: "{{ hostname_hosts_static + hostname_hosts_pve }}"
-
+#hostname_hosts_static: "[{% if ansible_mesh_pve is defined %}{ u'ip': '{{ ansible_mesh_pve.ipv4.address }}', u'name': '{{ inventory_hostname }}' }{% endif %} ]"
+hostname_hosts_static: "[{% if ansible_mesh_pve is defined %}{ u'ip': '{{ ansible_mesh_pve.ipv4.address }}', u'name': '{{ ansible_hostname}}{% if ansible_hostname != inventory_hostname %}\t{{inventory_hostname}}{% endif %}' }{% endif %} ]"
+#hostname_hosts_pve: "[ {% for item in tinc__inventory_hosts %}{% if ansible_hostname != hostvars[item].ansible_hostname %} { u'ip': '{{ hostvars[item].ansible_mesh_pve.ipv4.address }}', u'name': '{{ hostvars[item].ansible_hostname }}{%if hostvars[item].ansible_hostname != hostvars[item].ansible_fqdn %}\t{{ hostvars[item].ansible_fqdn }}{% endif %}'}, {% endif %}{% endfor %} ]"
+#hostname_hosts_add: "{{ hostname_hosts_static + hostname_hosts_pve }}"
+hostname_hosts_add: "{{ hostname_hosts_static }}"
 
 #apt
 apt_base_packages: [ 'ed', 'python', 'python-apt', 'lsb-release', 'make', 'sudo', 'gnupg-curl',
@@ -49,5 +69,28 @@ apt_base_packages: [ 'ed', 'python', 'python-apt', 'lsb-release', 'make', 'sudo'
                      'apt-transport-https', 'acl', 'python-pip' ]
 apt: "aptproxy.dev.rugion.ru"
 apt_acng_port: "9999"
+
+#nrpe
+nagios_nrpe_server_apt_packages:
+  - nagios-nrpe-server
+  - nagios-plugins-standard
+  - nagios-plugins-contrib
+  - libnagios-plugin-perl
+icinga_pool: ['192.168.0.8']
+nagios_nrpe_server_pool: "{{icinga_pool + ['127.0.0.1']}}"
+nagios_nrpe_allow: "{{nagios_nrpe_server_pool}}"
+nagios_nrpe_server_config:
+  server_port: 5666
+  allowed_hosts: "{{ nagios_nrpe_server_pool | join(',')}}"
+  dont_blame_nrpe: 1
+nagios_nrpe_server_commands:
+  - {name: "check_disk", plugin: "check_disk", args: "-w $ARG1$ -c $ARG2$", sudo: true }
+  - {name: "check_total_procs", plugin: "check_procs", args: "-w 1600 -c 1800", sudo: true }
+  - {name: "check_apt", plugin: "check_apt", args: "-c trusty-updates"}
+  - {name: "check_ntp", plugin: "check_ntp", args: "-H localhost -w -1:1 -c -2:2"}
+  - {name: "check_service", plugin: "check_procs", args: "-w $ARG2$ -c $ARG3$ -a \"$ARG1$\"", sudo: true }
+  - {name: "check_raid", plugin: "check_raid", sudo: true }
+  - {name: "check_mem", plugin: "check_mem.pl", args: "-w 10 -c 5 -f -C"}
+  - {name: "check_iftraffic", plugin: "check_iftraffic_nrpe.py", args: "-i" }
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

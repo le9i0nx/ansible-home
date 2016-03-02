@@ -7,15 +7,25 @@
 
   roles:
 
-    - role: debops.ferm
-      tags: [ 'role::ferm' ]
-      ferm_dependent_rules:
-        - '{{ tinc_ferm_dependent_rules }}'
-
     - role: le9i0nx.networkd
       tags: [ 'role::networkd' ]
       networkd_dependent_interfaces:
-        - '{{ tinc_ifupdown_interface }}'
+        - '{{ tinc__ifupdown_interface }}'
+
+    - role: debops.tinc/env
+      tags: [ 'role::tinc', 'role::tinc:secret', 'role::secret', 'role::ferm', 'role::ifupdown' ]
+
+    - role: debops.secret
+      tags: [ 'role::secret', 'role::tinc:secret' ]
+      secret_directories: '{{ tinc__env_secret__directories }}'
+
+    - role: debops.apt_preferences
+      tags: [ 'role::apt_preferences' ]
+      apt_preferences_dependent_list: '{{ tinc__apt_preferences__dependent_list }}'
+
+    - role: debops.ferm
+      tags: [ 'role::ferm' ]
+      ferm_dependent_rules: '{{ tinc__env_ferm__dependent_rules }}'
 
     - role: debops.tinc
       tags: [ 'role::tinc' ]
