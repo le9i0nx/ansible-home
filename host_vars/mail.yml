@@ -58,7 +58,7 @@ dovecot_ssl_sni: |
 #exim
 exim_list_dnsbl:
   - 'zen.spamhaus.org'
-  - 'dbl.spamhaus.org/$sender_address_domain'
+#  - 'dbl.spamhaus.org/$sender_address_domain'
 #  - 'xbl.spamhaus.org'
   - 'relay.mail-abuse.org'
   - 'bl.spamcop.net'
@@ -301,5 +301,13 @@ fail2ban_ignoreip: "{{
 }}"
 fail2ban_destemail: 'root@info74.ru'
 fail2ban_logtarget: 'SYSLOG'
+
+#rspamd
+rspamd__password: "q2"
+rspamd__conf_d:
+
+  - name: "rbl_exim"
+    type: "rbl"
+    data: '{{ exim_list_dnsbl }}'
 
 ## vim: ft=yaml:foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
