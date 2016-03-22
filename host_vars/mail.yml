@@ -283,7 +283,7 @@ nagios_nrpe_server_config:
 nagios_nrpe_server_commands:
   - {name: "check_disk", plugin: "check_disk", args: "-w $ARG1$ -c $ARG2$"}
   - {name: "check_total_procs", plugin: "check_procs", args: "-w 1600 -c 1800", sudo: true }
-  - {name: "check_apt", plugin: "check_apt", args: "-c trusty-updates"}
+  - {name: "check_apt", plugin: "check_apt" }
   - {name: "check_ntp", plugin: "check_ntp", args: "-H localhost -w -1:1 -c -2:2"}
   - {name: "check_service", plugin: "check_procs", args: "-w $ARG2$ -c $ARG3$ -a \"$ARG1$\"", sudo: true }
   - {name: "check_ssl_cert", plugin: "check_ssl_cert", args: "-H $ARG1$ -w $ARG2$ -c $ARG3$ -r $ARG4$"}

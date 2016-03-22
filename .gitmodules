@@ -70,3 +70,6 @@
 [submodule "roles/le9i0nx.proxmox"]
 	path = roles/le9i0nx.proxmox
 	url = https://github.com/le9i0nx/ansible-proxmox.git
+[submodule "roles/debops.dovecot"]
+	path = roles/debops.dovecot
+	url = https://github.com/le9i0nx/ansible-dovecot.git
