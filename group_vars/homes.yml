@@ -17,8 +17,20 @@ tinc_ifupdown_interface:
     addresses: '{{ tinc_host_addr }}'
     force: True
 
-users_default:
+users_root:
+  - name:   'root'
+    state:  'present'
+    group:  'root'
+    password: "{{ lookup('file', secret + '/users/root/password_home') }}"
+    sshkeys:
+      - "{{ lookup('file', secret + '/users/root/sshkeys') }}"
+      - "{{ lookup('file', secret + '/users/root/sshkeys2') }}"
+
+console_root_password: "{{ lookup('file', secret + '/users/root/password_home') }}"
+
+users_admins:
   - users_ansicon
+  - users_le9i0nx
 
 # syncthing
 role_syncthing_user: 'le9i0nx'
@@ -61,7 +73,5 @@ apt_preferences_list:
     pin: 'release experimental'
     priority: '40'
     filename: "experimental"
-
-
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

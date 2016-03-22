@@ -29,6 +29,7 @@ pve
 [pve]
 pve32.pve.mpautina.ru
 pve6.pve.mpautina.ru
+pve63.pve.mpautina.ru
 
 [mail_srv]
 mail ansible_ssh_host=mail
