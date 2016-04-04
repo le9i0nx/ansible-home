@@ -73,3 +73,6 @@
 [submodule "roles/debops.dovecot"]
 	path = roles/debops.dovecot
 	url = https://github.com/le9i0nx/ansible-dovecot.git
+[submodule "roles/le9i0nx.bind"]
+	path = roles/le9i0nx.bind
+	url = https://github.com/le9i0nx/ansible-bind.git
