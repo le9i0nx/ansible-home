@@ -1,6 +1,8 @@
 ---
+
+# ferm
 ferm_ansible_controllers:  "{{admin_allow_pool}}"
-tcpwrappers_ansible_controllers: "{{admin_allow_pool}}"
+#tcpwrappers_ansible_controllers: "{{admin_allow_pool}}"
 console_issue: 'Org. 74.ru'
 
 #apt
