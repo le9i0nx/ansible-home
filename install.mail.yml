@@ -53,13 +53,6 @@
         saddr: '{{ nagios_nrpe_allow }}'
         weight: '50'
         filename: 'nrpe_dependency_accept'
-    - role: debops.tcpwrappers
-      tcpwrappers_allow:
-      - daemon: 'nrpe'
-        client: '{{ nagios_nrpe_allow }}'
-        weight: '50'
-        filename: 'nrpe_dependency_allow'
-        comment: 'Allow nrpe connections from these hosts (via nrpe role dependency)'
 
     #bacula
     - role: debops.ferm
@@ -69,13 +62,6 @@
         saddr: [ '192.168.0.0/24' ]
         weight: '50'
         filename: 'bacula_dependency_accept'
-    - role: debops.tcpwrappers
-      tcpwrappers_allow:
-      - daemon: 'mail-fd'
-        client: [ '192.168.0.0/24' ]
-        weight: '50'
-        filename: 'bacula_dependency_allow'
-        comment: 'Allow bacula connections from these hosts (via bacula role dependency)'
 
     - role: debops.ferm
       ferm_input_list:

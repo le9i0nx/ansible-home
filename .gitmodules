@@ -31,9 +31,6 @@
 [submodule "roles/debops.auth"]
 	path = roles/debops.auth
 	url = https://github.com/le9i0nx/ansible-auth.git
-[submodule "roles/debops.tcpwrappers"]
-	path = roles/debops.tcpwrappers
-	url = https://github.com/le9i0nx/ansible-tcpwrappers.git
 [submodule "roles/debops.mysql"]
 	path = roles/debops.mysql
 	url = https://github.com/le9i0nx/ansible-mysql.git
