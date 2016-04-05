@@ -50,6 +50,8 @@ sshd_permit_root_login: 'yes'
 sshd_password_authentication: 'yes'
 tcpwrappers: False
 tcpwrappers_deny_all: False
+
+# ferm
 ferm_enabled: False
 
 #hostname
@@ -67,8 +69,8 @@ apt_base_packages: [ 'ed', 'python', 'python-apt', 'lsb-release', 'make', 'sudo'
                      'git', 'wget', 'curl', 'rsync', 'bridge-utils',
                      'openssh-server', 'bsdutils', 'python-pycurl', 'python-httplib2',
                      'apt-transport-https', 'acl', 'python-pip' ]
-apt: "aptproxy.dev.rugion.ru"
-apt_acng_port: "9999"
+#apt: "aptproxy.dev.rugion.ru"
+#apt_acng_port: "9999"
 
 #nrpe
 nagios_nrpe_server_apt_packages:

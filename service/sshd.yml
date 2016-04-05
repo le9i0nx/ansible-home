@@ -11,11 +11,6 @@
       ferm_dependent_rules:
         - '{{ sshd_ferm_dependent_rules }}'
 
-    - role: debops.tcpwrappers
-      tags: [ 'role::tcpwrappers' ]
-      tcpwrappers_dependent_allow:
-        - '{{ sshd_tcpwrappers_dependent_allow }}'
-
     - role: debops.sshd
       tags: [ 'role::sshd' ]
 

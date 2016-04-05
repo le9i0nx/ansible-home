@@ -1,28 +1,9 @@
 ---
 
-- name: copy conf apt
-  copy: src=./99base dest=/etc/apt/apt.conf.d/99base owner=root group=root mode=0444
-
 - name: copy conf vim
   copy: src=./vimrc.local dest=/etc/vim/vimrc.local owner=root group=root mode=0444
 
 - name: set vim default editor
   alternatives: name=editor path=/usr/bin/vim.basic
-
-- name: configure grub
-  template:
-    src:    '{{item.src}}'
-    dest:   '{{item.dest}}'
-    owner:  '{{ item.owner | default("root") }}'
-    group:  '{{ item.group | default("root") }}'
-    mode:   '{{ item.mode | default("0444") }}'
-    backup: 'yes'
-  with_items:
-    - { src: 'etc/default/grub.j2', dest: '/etc/default/grub' }
-  register: grub_update
-
-- name: update grub
-  command: update-grub
-  when: grub_update is defined and grub_update.changed == True
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

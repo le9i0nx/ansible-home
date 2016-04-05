@@ -7,7 +7,7 @@
 
   tasks:
   - name: install pkg
-    shell: apt-get -y install {{item}}
+    raw: apt-get -y install {{item}}
     with_items:
       - python
       - sudo

@@ -1,0 +1,12 @@
+---
+
+- include: service/init.yml
+- include: service/hostname.yml
+- include: service/core.yml
+- include: service/base.yml
+- include: service/sshd.yml
+- include: service/apt.yml
+- include: service/apt_preferences.yml
+- include: service/bind.yml
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

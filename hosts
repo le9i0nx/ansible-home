@@ -26,6 +26,10 @@ homes
 rabota_74ru
 pve
 
+[dns]
+dns.samara.mpautina.ru
+
+
 [pve]
 pve32.pve.mpautina.ru
 pve6.pve.mpautina.ru
@@ -39,6 +43,7 @@ mail_test
 pve
 rabota_74ru_old
 mail_srv
+dns
 
 [debops_all_hosts:children]
 homes
