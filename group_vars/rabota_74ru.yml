@@ -24,12 +24,12 @@ users_root:
   - name:   'root'
     state:  'present'
     group:  'root'
-    password: "{{ lookup('file', secret + '/users/root/password') }}"
+    password: "{{ lookup('file', secret + '/users/root/'+ ansible_default_ipv4.network + '/password') }}"
     sshkeys:
       - "{{ lookup('file', secret + '/users/root/sshkeys') }}"
       - "{{ lookup('file', secret + '/users/root/sshkeys2') }}"
 
-console_root_password: "{{ lookup('file', secret + '/users/root/password') }}"
+console_root_password: "{{ lookup('file', secret + '/users/root/' + ansible_default_ipv4.network + '/password') }}"
 
 users_ansicon:
   - name:   'ansicon'
