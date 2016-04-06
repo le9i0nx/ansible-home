@@ -29,6 +29,8 @@ pve
 [dns]
 dns.samara.mpautina.ru
 
+[63]
+dns.samara.mpautina.ru
 
 [pve]
 pve32.pve.mpautina.ru
@@ -49,3 +51,4 @@ dns
 homes
 rabota_74ru
 pve
+

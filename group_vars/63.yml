@@ -1,0 +1,30 @@
+---
+
+bind__conf_d:
+
+  - name: "samara.mpautina.ru"
+    type: "zone"
+    zone_slave: false
+    allow_update: [ "key dhcp_key", "127.0.0.1"]
+    allow_transfer:
+      - "192.168.0.1"
+      - "192.168.204.14"
+
+
+  - name: "63.168.192.in-addr.arpa"
+    type: "zone"
+    zone_slave: false
+    allow_update: [ "key dhcp_key", "127.0.0.1"]
+    allow_transfer:
+      - "192.168.0.1"
+      - "192.168.204.14"
+
+  - name: "info63.ru"
+    type: "zone"
+    zone_slave: true
+    masters: [ "192.168.0.1" ]
+
+
+
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
