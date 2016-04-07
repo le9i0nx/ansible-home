@@ -7,5 +7,6 @@
   roles:
 
     - role: le9i0nx.base
+    - role: le9i0nx.lxc_fix
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
