@@ -1,8 +1,5 @@
 ---
 
-# ferm
-ferm_enabled: False
-
 #nagios_nrpe_server_config
 nagios_nrpe_server_apt_packages:
   - nagios-nrpe-server

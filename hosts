@@ -34,6 +34,7 @@ dns.samara.mpautina.ru
 
 [63]
 dns.samara.mpautina.ru
+dhcp.samara.mpautina.ru
 
 [pve]
 pve32.pve.mpautina.ru
@@ -56,3 +57,5 @@ homes
 rabota_74ru
 pve
 
+[debops_service_dhcpd:children]
+dhcp
