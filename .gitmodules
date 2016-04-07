@@ -73,3 +73,6 @@
 [submodule "roles/le9i0nx.bind"]
 	path = roles/le9i0nx.bind
 	url = https://github.com/le9i0nx/ansible-bind.git
+[submodule "roles/debops.dhcpd"]
+	path = roles/debops.dhcpd
+	url = https://github.com/le9i0nx/ansible-dhcpd.git

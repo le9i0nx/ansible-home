@@ -10,7 +10,6 @@ bind__conf_d:
       - "192.168.0.1"
       - "192.168.204.14"
 
-
   - name: "63.168.192.in-addr.arpa"
     type: "zone"
     zone_slave: false
@@ -23,8 +22,5 @@ bind__conf_d:
     type: "zone"
     zone_slave: true
     masters: [ "192.168.0.1" ]
-
-
-
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

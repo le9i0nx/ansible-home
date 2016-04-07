@@ -8,5 +8,6 @@
 - include: service/apt.yml
 - include: service/apt_preferences.yml
 - include: service/bind.yml
+- include: service/nrpe.yml
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
