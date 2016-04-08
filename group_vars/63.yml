@@ -9,7 +9,9 @@ bind__conf_d:
   - name: "samara.mpautina.ru"
     type: "zone"
     zone_slave: false
-    allow_update: [ "key dhcp_mpautina_ru", "127.0.0.1"]
+    allow_update:
+      - "key dhcp_samara_mpautina_ru"
+      - "127.0.0.1"
     allow_transfer:
       - "192.168.0.1"
       - "192.168.204.14"
@@ -17,7 +19,9 @@ bind__conf_d:
   - name: "63.168.192.in-addr.arpa"
     type: "zone"
     zone_slave: false
-    allow_update: [ "key dhcp_mpautina_ru", "127.0.0.1"]
+    allow_update:
+      - "key dhcp_samara_mpautina_ru"
+      - "127.0.0.1"
     allow_transfer:
       - "192.168.0.1"
       - "192.168.204.14"
@@ -30,9 +34,10 @@ bind__conf_d:
   - name: "dhcp_samara_mpautina_ru"
     type: "key"
     key: '{{ dhcpd_secret_secure_key }}'
-    ip: "192.168.63.8"
+#    ip: "192.168.63.8"
 
 #dhcp
+dhcpd_authoritative: True
 dhcpd_secret_secure_key: '{{ lookup("password",
   secret + "/" + ansible_domain +
   "/shared/ddns/keys/secure-key") }}'
@@ -96,5 +101,11 @@ dhcpd_zones:
   - zone: "63.168.192.in-addr.arpa."
     primary: "192.168.63.1"
     key: "dhcp_samara_mpautina_ru"
+
+dhcpd_options: |
+  ddns-update-style interim;
+  allow client-updates;
+  ddns-domainname "samara.mpautina.ru.";
+  ddns-rev-domainname "63.168.192.in-addr.arpa.";
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
