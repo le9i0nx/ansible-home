@@ -1122,6 +1122,7 @@ acl_check_mime:
 #}
 
   deny  message     = Запрещенное содержимое архива. Blacklisted file extension detected $mime_filename
+        !authenticated  = *
         condition   = ${if match{$mime_filename}{\N(?i)\.({% if exim_bad_extension_arxive is defined and exim_bad_extension_arxive %}{{ exim_bad_extension_arxive | join('|')}}{% endif %})$\N}}
         decode      = default
         condition   = ${if match{${run{/usr/bin/7z l $mime_decoded_filename}}}{\N(?i)\.({% if exim_bad_extension is defined and exim_bad_extension %}{{ exim_bad_extension | join('|')}}{% endif %})\n\N}}
