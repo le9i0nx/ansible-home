@@ -1,0 +1,11 @@
+---
+
+- name: ubunty
+  include: ubuntu.yml
+  when: ((ansible_virtualization_type is defined ) and
+         (ansible_virtualization_type == "lxc" ) and
+         (ansible_distribution is defined ) and
+         (ansible_distribution == "Ubuntu" ) and
+         (ansible_distribution_major_version == "14" ))
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

@@ -89,7 +89,8 @@ office_76_pool:
   - '176.214.79.10'  # 76 corp.76.ru
 
 admin_allow_pool: "{{office_74_pool}}"
-#icinga_pool: "{{office_chelyabinsk_lesopark_pool}}"
+
+#nagios_nrpe_server_config
 icinga_pool:
   - '192.168.0.8'
 

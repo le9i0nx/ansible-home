@@ -23,4 +23,13 @@ nagios_nrpe_server_commands:
   - {name: "check_iftraffic", plugin: "check_iftraffic_nrpe.py", args: "-i" }
   - {name: "check_mio", plugin: "check_mio", args: "-d $ARG1$\\!$ARG2$ -w 1000,60000,52428800,52428800 -c 1100,100000,104857600,104857600"}
 
+
+
+#dhcp
+dhcpd_base_packages_map:
+  'server': [ 'isc-dhcp-server','bind9utils' ]
+  'relay':  [ 'isc-dhcp-relay' ]
+  'probe':  []
+
+
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

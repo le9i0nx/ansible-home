@@ -7,6 +7,9 @@
 
   roles:
 
+    - role: debops.secret
+      tags: [ 'role::secret' ]
+
     - role: debops.ferm
       tags: [ 'role::ferm' ]
       ferm_dependent_rules:

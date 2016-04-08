@@ -1,0 +1,111 @@
+---
+
+# ferm
+ferm_enabled: False
+
+#dns
+bind__conf_d:
+
+  - name: "samara.mpautina.ru"
+    type: "zone"
+    zone_slave: false
+    allow_update:
+      - "key dhcp_samara_mpautina_ru"
+      - "127.0.0.1"
+    allow_transfer:
+      - "192.168.0.1"
+      - "192.168.204.14"
+
+  - name: "63.168.192.in-addr.arpa"
+    type: "zone"
+    zone_slave: false
+    allow_update:
+      - "key dhcp_samara_mpautina_ru"
+      - "127.0.0.1"
+    allow_transfer:
+      - "192.168.0.1"
+      - "192.168.204.14"
+
+  - name: "info63.ru"
+    type: "zone"
+    zone_slave: true
+    masters: [ "192.168.0.1" ]
+
+  - name: "dhcp_samara_mpautina_ru"
+    type: "key"
+    key: '{{ dhcpd_secret_secure_key }}'
+#    ip: "192.168.63.8"
+
+#dhcp
+dhcpd_authoritative: True
+dhcpd_secret_secure_key: '{{ lookup("password",
+  secret + "/" + ansible_domain +
+  "/shared/ddns/keys/secure-key") }}'
+
+dhcpd_keys:
+  - key: "dhcp_samara_mpautina_ru"
+    algorithm: "hmac-md5"
+    secret: "{{ dhcpd_secret_secure_key }}"
+
+dhcpd_subnets:
+  - subnet: '192.168.63.0'
+    netmask: '255.255.255.0'
+    routers: '192.168.63.4'
+    options: |
+      default-lease-time 21600;
+      max-lease-time 43200;
+    pools:
+      - comment: "static"
+        range: '192.168.63.1 192.168.63.127'
+        options: |
+          deny unknown-clients;
+
+      - comment: "dynamic"
+        range: '192.168.63.128 192.168.63.254'
+        options: |
+          allow unknown-clients;
+
+dhcpd_hosts:
+  - hostname: 'BR'
+    address: '192.168.63.6'
+    ethernet: '00:50:C2:60:B8:6D'
+  - hostname: 'storage-video'
+    address: '192.168.63.3'
+    ethernet: '90:E6:BA:CD:E9:7C'
+  - hostname: 'WI-FI'
+    address: '192.168.63.7'
+    ethernet: '90:94:E4:36:F4:25'
+  - hostname: 'OFFICE'
+    address: '192.168.63.26'
+    ethernet: '08:00:27:01:AE:C9'
+  - hostname: 'VIDEO_63HONDA'
+    address: '192.168.63.30'
+    ethernet: '00:25:22:78:DC:75'
+  - hostname: 'VIDEO_63FIAT'
+    address: '192.168.63.31'
+    ethernet: '54:04:A6:09:4E:70'
+  - hostname: 'VIDEO_63ALFA'
+    address: '192.168.63.32'
+    ethernet: '00:19:66:FC:62:16'
+  - hostname: 'VIDEO_63SUPERB'
+    address: '192.168.63.33'
+    ethernet: '54:04:A6:B2:72:36'
+  - hostname: 'KYOCERA'
+    address: '192.168.63.209'
+    ethernet: '14:DA:E9:94:19:7A'
+
+dhcpd_zones:
+  - zone: "samara.mpautina.ru."
+    primary: "192.168.63.1"
+    key: "dhcp_samara_mpautina_ru"
+  - zone: "63.168.192.in-addr.arpa."
+    primary: "192.168.63.1"
+    key: "dhcp_samara_mpautina_ru"
+
+dhcpd_options: |
+  ddns-update-style interim;
+  allow client-updates;
+  ddns-domainname "samara.mpautina.ru.";
+  ddns-rev-domainname "63.168.192.in-addr.arpa.";
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
