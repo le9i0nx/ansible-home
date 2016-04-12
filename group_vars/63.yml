@@ -1,5 +1,11 @@
 ---
 
+#ntp
+ntp_timezone: 'Europe/Moscow'
+ntp_servers: ['192.168.63.2']
+ntp_listen: ['localhost']
+ntp_daemon: False
+
 # ferm
 ferm_enabled: False
 
@@ -75,6 +81,9 @@ dhcpd_hosts:
   - hostname: 'WI-FI'
     address: '192.168.63.7'
     ethernet: '90:94:E4:36:F4:25'
+  - hostname: 'dns'
+    address: '192.168.63.11'
+    ethernet: '32:37:32:38:37:36'
   - hostname: 'OFFICE'
     address: '192.168.63.26'
     ethernet: '08:00:27:01:AE:C9'
@@ -90,16 +99,24 @@ dhcpd_hosts:
   - hostname: 'VIDEO_63SUPERB'
     address: '192.168.63.33'
     ethernet: '54:04:A6:B2:72:36'
-  - hostname: 'KYOCERA'
+
+# printer
+  - hostname: 'HP_LaseJet_P2015'
+    address: '192.168.63.199'
+    ethernet: '14:DA:E9:DC:57:54'
+  - hostname: 'FS-1120D_RED'
+    address: '192.168.63.234'
+    ethernet: '00:1F:C6:A7:5C:7E'
+  - hostname: 'Kyocera_P2035d'
     address: '192.168.63.209'
     ethernet: '14:DA:E9:94:19:7A'
 
 dhcpd_zones:
   - zone: "samara.mpautina.ru."
-    primary: "192.168.63.1"
+    primary: "192.168.63.11"
     key: "dhcp_samara_mpautina_ru"
   - zone: "63.168.192.in-addr.arpa."
-    primary: "192.168.63.1"
+    primary: "192.168.63.11"
     key: "dhcp_samara_mpautina_ru"
 
 dhcpd_options: |

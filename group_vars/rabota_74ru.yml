@@ -14,13 +14,6 @@ grub_cmd_elevator: 'noop'
 #ssh
 sshd_ferm_limit: 'true'
 sshd_password_authentication: 'yes'
-#ntp
-ntp_timezone: 'Asia/Yekaterinburg'
-ntp_servers: [  '0.europe.pool.ntp.org',
-                '0.asia.pool.ntp.org',
-                '1.europe.pool.ntp.org',
-                '1.debian.pool.ntp.org' ]
-ntp_listen: ['localhost']
 
 users_root:
   - name:   'root'
@@ -54,6 +47,15 @@ users_edi:
     password: "{{ lookup('file', secret + '/users/edi/password') }}"
     update_password: 'on_create'
 
+users_pavlov:
+  - name:   'pavlov'
+    state:  'present'
+    group:  'edi'
+    groups: ['sudo','sshusers']
+    shell: '/bin/bash'
+    password: "{{ lookup('file', secret + '/users/pavlov/password') }}"
+    update_password: 'on_create'
+
 users_default:
   - users_ansicon
 
@@ -62,6 +64,7 @@ users_admins:
   - users_le9i0nx
   - users_edi
   - users_root
+  - users_pavlov
 
 office_chelyabinsk_rodnik_pool:
   - '195.206.240.34'

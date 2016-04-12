@@ -1,5 +1,9 @@
 ---
 
+#ntp
+ntp_listen: ['localhost']
+ntp_daemon: 'openntpd'
+
 #syncthing
 role_syncthing:
   inventory_hosts: '{{ groups.pve }}'

@@ -35,6 +35,12 @@ dns.samara.mpautina.ru
 [63]
 dns.samara.mpautina.ru
 dhcp.samara.mpautina.ru
+pve63.pve.mpautina.ru
+
+[74]
+mail ansible_ssh_host=mail
+pve32.pve.mpautina.ru
+pve6.pve.mpautina.ru
 
 [pve]
 pve32.pve.mpautina.ru
@@ -59,3 +65,6 @@ pve
 
 [debops_service_dhcpd:children]
 dhcp
+
+[debops_service_bind:children]
+dns

@@ -1,7 +1,7 @@
 ---
 
 - name: bind9 install
-  hosts: [ 'debops_all_hosts', 'debops_service_bind' ]
+  hosts: [ 'debops_service_bind', 'debops_bind' ]
   become: True
   become_method: sudo
 
