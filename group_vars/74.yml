@@ -1,0 +1,11 @@
+---
+
+#ntp
+ntp_timezone: 'Asia/Yekaterinburg'
+ntp_servers: [  '0.europe.pool.ntp.org',
+                '0.asia.pool.ntp.org',
+                '1.europe.pool.ntp.org',
+                '1.debian.pool.ntp.org' ]
+ntp_listen: ['localhost']
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

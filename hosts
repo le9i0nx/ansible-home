@@ -32,9 +32,19 @@ dhcp.samara.mpautina.ru
 [dns]
 dns.samara.mpautina.ru
 
+[proxy]
+proxy.samara.mpautina.ru
+
 [63]
 dns.samara.mpautina.ru
 dhcp.samara.mpautina.ru
+pve63.pve.mpautina.ru
+proxy.samara.mpautina.ru
+
+[74]
+mail ansible_ssh_host=mail
+pve32.pve.mpautina.ru
+pve6.pve.mpautina.ru
 
 [pve]
 pve32.pve.mpautina.ru
@@ -51,11 +61,17 @@ rabota_74ru_old
 mail_srv
 dns
 dhcp
+proxy
 
 [debops_all_hosts:children]
 homes
 rabota_74ru
-pve
 
 [debops_service_dhcpd:children]
 dhcp
+
+[debops_service_bind:children]
+dns
+
+[debops_service_sqid:children]
+proxy

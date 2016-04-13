@@ -76,3 +76,6 @@
 [submodule "roles/debops.dhcpd"]
 	path = roles/debops.dhcpd
 	url = https://github.com/le9i0nx/ansible-dhcpd.git
+[submodule "roles/le9i0nx.squid"]
+	path = roles/le9i0nx.squid
+	url = https://github.com/le9i0nx/ansible-squid.git
