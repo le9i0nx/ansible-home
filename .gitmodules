@@ -79,3 +79,6 @@
 [submodule "roles/le9i0nx.squid"]
 	path = roles/le9i0nx.squid
 	url = https://github.com/le9i0nx/ansible-squid.git
+[submodule "roles/debops.fcgiwrap"]
+	path = roles/debops.fcgiwrap
+	url = https://github.com/le9i0nx/ansible-fcgiwrap.git
