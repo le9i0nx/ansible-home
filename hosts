@@ -26,6 +26,9 @@ homes
 rabota_74ru
 pve
 
+[samba]
+samba-economists.74ru.mpautina.ru
+
 [dhcp]
 dhcp.samara.mpautina.ru
 
@@ -62,6 +65,7 @@ mail_srv
 dns
 dhcp
 proxy
+samba
 
 [debops_all_hosts:children]
 homes
@@ -75,3 +79,6 @@ dns
 
 [debops_service_sqid:children]
 proxy
+
+[debops_service_samba:children]
+samba

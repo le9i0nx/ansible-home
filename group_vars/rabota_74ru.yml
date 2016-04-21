@@ -97,4 +97,9 @@ admin_allow_pool: "{{office_74_pool}}"
 icinga_pool:
   - '192.168.0.8'
 
+# nginx
+nginx_server_default:
+  enabled: False
+  name: [ ]
+
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
