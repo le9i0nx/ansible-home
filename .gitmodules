@@ -82,3 +82,6 @@
 [submodule "roles/debops.fcgiwrap"]
 	path = roles/debops.fcgiwrap
 	url = https://github.com/le9i0nx/ansible-fcgiwrap.git
+[submodule "roles/debops.samba"]
+	path = roles/debops.samba
+	url = https://github.com/le9i0nx/ansible-samba.git
