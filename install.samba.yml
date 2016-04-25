@@ -10,4 +10,6 @@
 - include: service/ntp.yml
 - include: service/nrpe.yml
 
+- include: service/samba.yml
+
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

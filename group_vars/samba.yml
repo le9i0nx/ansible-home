@@ -3,4 +3,93 @@
 # ferm
 ferm__enabled: False
 
+# samba
+samba_service_name: 'smbd'
+samba_default_homes: []
+samba_default_shares:
+  'economists':
+    path: '{{ samba_path }}/economists'
+    comment: 'economists share'
+    guest_ok: 'no'
+    writable: 'yes'
+    write_list: '@nt_admin, @nt_economists'
+    read_list: '@nt_admin, @nt_economists'
+    create_mode: '666'
+    directory_mode: '777'
+
+
+samba_workgroup: '74RU'
+samba_default_global:
+
+  # hacing nt4
+  client_ntlmv2_auth: 'no'
+  require_strong_key: 'no'
+  allow_nt4_crypto: 'yes'
+  smb2_leases: 'yes'
+
+  wins_server: '192.168.0.7'
+  dns_proxy: 'no'
+  panic_action: '/usr/share/samba/panic-action %d'
+
+  # ldap
+  passdb_backend: 'ldapsam:ldap://127.0.0.1/'
+  ldap_suffix: 'ou=chelyabinsk,dc=rugion,dc=ru'
+  ldap_user_suffix: 'ou=users'
+  ldap_group_suffix: 'ou=groups'
+  ldap_machine_suffix: 'ou=computers'
+  ldap_admin_dn: '"cn=admin,dc=rugion,dc=ru"'
+  ldap_delete_dn: 'no'
+  ldap_ssl: 'off'
+  ldap_passwd_sync: 'yes'
+  idmap_gid: '10000-30000'
+  idmap_uid: '10000-30000'
+
+
+  obey_pam_restrictions: 'yes'
+  unix_password_sync: 'yes'
+
+  passwd_program: '/usr/bin/passwd %u'
+  passwd_chat: '*Enter\snew\s*\spassword:* %n\n *Retype\snew\s*\spassword:* %n\n *password\supdated\ssuccessfully* .'
+
+  pam_password_change: 'yes'
+  logon_script: 'logon.bat'
+  template_shell: '/bin/bash'
+  usershare_allow_guests: 'yes'
+
+  # Browsing / Identification
+  workgroup: '{{ samba_workgroup | default("WORKGROUP") }}'
+#  netbios_name: '{{ samba_netbios_name | default(ansible_hostname) }}'
+  server_string: '{{ samba_server_string | default("%h file server") }}'
+  server_role: 'classic backup domain controller'
+
+  # Logs / Accounting
+  log_file: '/var/log/samba/log.%m'
+  max_log_size: '1000'
+  syslog: '0'
+
+
+  invalid_users: 'root bin daemon adm sync shutdown halt mail news uucp proxy www-data backup sshd'
+  map_to_guest: 'Bad User'
+  guest_account: 'nobody'
+
+  # File system / Directories
+  unix_charset: 'UTF8'
+  locking: 'yes'
+#  wide_links: 'no'
+#  browseable: 'yes'
+#  create_mask: '0660'
+#  directory_mask: '0770'
+  dont_descend: './lost+found'
+  use_sendfile: 'yes'
+  hide_unreadable: 'yes'
+  hide_files: '/.*/lost+found/'
+
+
+  # Disable printing by default
+  printing: 'bsd'
+  load_printers: 'no'
+  printcap_name: '/dev/null'
+  show_add_printer_wizard: 'no'
+  disable_spoolss: 'yes'
+
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

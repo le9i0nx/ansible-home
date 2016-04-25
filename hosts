@@ -27,7 +27,7 @@ rabota_74ru
 pve
 
 [samba]
-samba-economists.74ru.mpautina.ru
+74economists.74ru.mpautina.ru
 
 [dhcp]
 dhcp.samara.mpautina.ru
@@ -48,6 +48,7 @@ proxy.samara.mpautina.ru
 mail ansible_ssh_host=mail
 pve32.pve.mpautina.ru
 pve6.pve.mpautina.ru
+74economists.74ru.mpautina.ru
 
 [pve]
 pve32.pve.mpautina.ru
