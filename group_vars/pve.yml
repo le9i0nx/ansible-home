@@ -57,6 +57,7 @@ tcpwrappers_deny_all: False
 
 # ferm
 ferm_enabled: False
+ferm__enabled: False
 
 #hostname
 hostname_hosts:

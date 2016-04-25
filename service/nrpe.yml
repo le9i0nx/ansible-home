@@ -20,7 +20,7 @@
     - role: debops.ferm
       tags: [ 'role::ferm' ]
       ferm_dependent_rules:
-        - "{{ nrpe_ferm_dependent_rules }}"
+        - '{{ nrpe_ferm_dependent_rules }}'
 
     - role: nbz4live.nagios-nrpe-server
       tags: [ 'role::nrpe' ]

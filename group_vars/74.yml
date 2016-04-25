@@ -2,7 +2,8 @@
 
 #ntp
 ntp_timezone: 'Asia/Yekaterinburg'
-ntp_servers: [  '0.europe.pool.ntp.org',
+ntp_servers: [  '192.168.0.7',
+                '0.europe.pool.ntp.org',
                 '0.asia.pool.ntp.org',
                 '1.europe.pool.ntp.org',
                 '1.debian.pool.ntp.org' ]

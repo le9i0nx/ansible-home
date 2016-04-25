@@ -18,13 +18,13 @@
     - role: debops.ferm
       tags: [ 'role::ferm' ]
       ferm_dependent_rules:
-        - '{{ squid_ferm_dependent_rules }}'
+        - '{{ squid__ferm_dependent_rules }}'
         - '{{ nginx_ferm_dependent_rules }}'
 
     - role: debops.nginx
       tags: [ 'role::nginx' ]
       nginx_servers:
-        - '{{ squid__nginx__servers }}'
+        - '{{ wpad__nginx__servers }}'
 
     - role: le9i0nx.squid
       tags: [ 'role::squid' ]

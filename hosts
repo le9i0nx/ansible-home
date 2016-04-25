@@ -26,6 +26,12 @@ homes
 rabota_74ru
 pve
 
+[ldap]
+ldap-test.74ru.mpautina.ru
+
+[samba]
+74economists.74ru.mpautina.ru
+
 [dhcp]
 dhcp.samara.mpautina.ru
 
@@ -45,6 +51,8 @@ proxy.samara.mpautina.ru
 mail ansible_ssh_host=mail
 pve32.pve.mpautina.ru
 pve6.pve.mpautina.ru
+74economists.74ru.mpautina.ru
+ldap-test.74ru.mpautina.ru
 
 [pve]
 pve32.pve.mpautina.ru
@@ -62,6 +70,8 @@ mail_srv
 dns
 dhcp
 proxy
+samba
+ldap
 
 [debops_all_hosts:children]
 homes
@@ -75,3 +85,9 @@ dns
 
 [debops_service_sqid:children]
 proxy
+
+[debops_service_samba:children]
+samba
+
+[debops_service_slapd:children]
+ldap
