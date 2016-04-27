@@ -4,9 +4,9 @@
 ferm__enabled: False
 
 # samba
-samba_service_name: 'smbd'
-samba_default_homes: []
-samba_default_shares:
+samba__service_name: 'smbd'
+samba__default_homes: []
+samba__default_shares:
   'economists':
     path: '{{ samba_path }}/economists'
     comment: 'economists share'
@@ -18,8 +18,8 @@ samba_default_shares:
     directory_mode: '777'
 
 
-samba_workgroup: '74RU'
-samba_default_global:
+samba__workgroup: '74RU'
+samba__default_global:
 
   # hacing nt4
   client_ntlmv2_auth: 'no'
@@ -57,9 +57,8 @@ samba_default_global:
   usershare_allow_guests: 'yes'
 
   # Browsing / Identification
-  workgroup: '{{ samba_workgroup | default("WORKGROUP") }}'
-#  netbios_name: '{{ samba_netbios_name | default(ansible_hostname) }}'
-  server_string: '{{ samba_server_string | default("%h file server") }}'
+  workgroup: '{{ samba__workgroup | default("WORKGROUP") }}'
+  server_string: '{{ samba__server_string | default("%h file server") }}'
   server_role: 'classic backup domain controller'
 
   # Logs / Accounting
@@ -75,10 +74,6 @@ samba_default_global:
   # File system / Directories
   unix_charset: 'UTF8'
   locking: 'yes'
-#  wide_links: 'no'
-#  browseable: 'yes'
-#  create_mask: '0660'
-#  directory_mask: '0770'
   dont_descend: './lost+found'
   use_sendfile: 'yes'
   hide_unreadable: 'yes'
