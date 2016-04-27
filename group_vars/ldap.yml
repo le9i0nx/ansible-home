@@ -9,7 +9,6 @@ slapd_ldap_schema_directories:
   - '../../../files/debops.slapd/usr/local/etc/ldap/schema/'
   - 'usr/local/etc/ldap/schema/'
 
-slapd_ldap_server_id: [ '1' ]
 slapd_ldap_mirrormode:
   rid: '0'
   provider: 'ldap://192.168.0.7'
@@ -45,7 +44,6 @@ slapd_ldap_index:
   - 'sn eq,pres'
   - 'uidNumber eq'
   - 'memberUid eq'
-  - 'authorizedService eq'
   - 'host eq'
   - 'entryCSN eq'
   - 'entryUUID eq'
