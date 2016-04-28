@@ -36,3 +36,4 @@
     - role: le9i0nx.rspamd
       tags: [ 'role::rspamd' ]
 
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

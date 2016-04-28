@@ -9,7 +9,10 @@
 - include: service/apt_preferences.yml
 - include: service/ntp.yml
 - include: service/nrpe.yml
+- include: service/console.yml
 
 - include: service/samba.yml
+- include: service/slapd.yml
+- include: service/nss-pam-ldap.yml
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
