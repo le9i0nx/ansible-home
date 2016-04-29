@@ -8,7 +8,7 @@ samba__service_name: 'smbd'
 samba__default_homes: []
 samba__default_shares:
   'economists':
-    path: '{{ samba_path }}/economists'
+    path: '{{ samba__path }}/economists'
     comment: 'economists share'
     guest_ok: 'no'
     writable: 'yes'
@@ -55,6 +55,9 @@ samba__default_global:
   logon_script: 'logon.bat'
   template_shell: '/bin/bash'
   usershare_allow_guests: 'yes'
+  logon_path: ''
+  logon_home: ''
+
 
   # Browsing / Identification
   workgroup: '{{ samba__workgroup | default("WORKGROUP") }}'

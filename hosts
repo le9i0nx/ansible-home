@@ -27,7 +27,7 @@ rabota_74ru
 pve
 
 [ldap]
-ldap-test.74ru.mpautina.ru
+74economists.74ru.mpautina.ru
 
 [samba]
 74economists.74ru.mpautina.ru
@@ -52,7 +52,6 @@ mail ansible_ssh_host=mail
 pve32.pve.mpautina.ru
 pve6.pve.mpautina.ru
 74economists.74ru.mpautina.ru
-ldap-test.74ru.mpautina.ru
 
 [pve]
 pve32.pve.mpautina.ru
@@ -91,3 +90,6 @@ samba
 
 [debops_service_slapd:children]
 ldap
+
+[debops_service_pam_ldap]
+74economists.74ru.mpautina.ru

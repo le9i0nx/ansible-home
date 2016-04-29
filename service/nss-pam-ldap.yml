@@ -1,7 +1,7 @@
 ---
 
 - name: Manage nss-pam-ldap service
-  hosts: [ 'debops_service_slapd', 'debops_slapd' ]
+  hosts: [ 'debops_service_pam_ldap' ]
   become: True
 
   roles:
