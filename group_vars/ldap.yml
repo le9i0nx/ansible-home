@@ -1,0 +1,98 @@
+---
+nsswitch_config:
+  passwd:
+    - compat
+    - ldap
+    - winbind
+  group:
+    - compat
+    - ldap
+    - winbind
+  shadow:
+    - compat
+  hosts:
+    - files
+    - dns
+  networks:
+    - files
+  protocols:
+    - db
+    - files
+  services:
+    - db
+    - files
+  ethers:
+    - db
+    - files
+  rpc:
+    - db
+    - files
+  netgroup:
+    - nis
+
+role__nss_pam_ldap:
+  host: "127.0.0.1"
+  base: "ou=chelyabinsk,{{ slapd_basedn }}"
+
+slapd_default_services: [ 'ldap:///', 'ldapi:///' ]
+slapd_basedn: '{{ "dc=" + slapd_domain.split(".") | join(",dc=") }}'
+slapd_append_groups: []
+slapd_anonymous_bind: True
+slapd_pki: False
+slapd_domain: 'rugion.ru'
+slapd_ldap_schema_directories:
+  - '../../../files/debops.slapd/usr/local/etc/ldap/schema/'
+  - 'usr/local/etc/ldap/schema/'
+
+slapd_ldap_mirrormode:
+  rid: '0'
+  provider: 'ldap://192.168.0.7'
+  binddn: '{{ slapd_basedn_admin }}'
+  credentials: '{{ lookup("password", slapd_basedn_admin_password + " length=" + slapd_password_length) }}'
+  searchbase: '{{ slapd_basedn }}'
+  schemachecking: 'off'
+
+slapd_ldap_access_control_list_default:
+
+  - |
+    to attrs=userPassword,shadowLastChange
+    by self write
+    by anonymous auth
+    by dn="{{ slapd_basedn_admin }}" write
+    by * none
+
+  - |
+    to dn.base=""
+    by * read
+
+  - |
+    to *
+    by self write
+    by dn="{{ slapd_basedn_admin }}" write
+    by * read
+
+slapd_ldap_index:
+
+  - 'objectClass eq'
+  - 'cn pres,sub,eq'
+  - 'gn eq,pres'
+  - 'sn eq,pres'
+  - 'uidNumber eq'
+  - 'uniqueMember eq'
+  - 'gidNumber eq'
+  - 'memberUid eq'
+  - 'sambaSID eq'
+  - 'sambaGroupType eq'
+  - 'sambaSIDList eq'
+  - 'host eq'
+  - 'entryCSN eq'
+  - 'entryUUID eq'
+  - 'telephoneNumber pres,sub,eq'
+#  - 'mail,givenName eq,subinitial'
+  - 'mail eq,subinitial'
+  - 'uid pres,sub,eq'
+  - 'displayName pres,sub,eq'
+
+slapd_ldap_schema:
+  - '/etc/ldap/schema/misc.ldif'
+  - '/usr/local/etc/ldap/schema/samba.ldif'

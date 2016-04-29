@@ -88,3 +88,9 @@
 [submodule "roles/debops.slapd"]
 	path = roles/debops.slapd
 	url = https://github.com/le9i0nx/ansible-slapd.git
+[submodule "roles/le9i0nx.nss-pam-ldap"]
+	path = roles/le9i0nx.nss-pam-ldap
+	url = git@github.com:le9i0nx/ansible-nss-pam-ldap.git
+[submodule "roles/jtyr.nsswitch"]
+	path = roles/jtyr.nsswitch
+	url = git@github.com:le9i0nx/ansible-nsswitch.git
