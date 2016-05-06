@@ -94,3 +94,6 @@
 [submodule "roles/jtyr.nsswitch"]
 	path = roles/jtyr.nsswitch
 	url = https://github.com/le9i0nx/ansible-nsswitch.git
+[submodule "roles/le9i0nx.bacula"]
+	path = roles/le9i0nx.bacula
+	url = https://github.com/le9i0nx/ansible-bacula.git

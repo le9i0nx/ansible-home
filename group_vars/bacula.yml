@@ -1,0 +1,10 @@
+---
+
+bacula__conf_dir:
+  name: 'm4s'
+  ip:
+    - "192.168.0.99"
+
+bacula__conf_client:
+  name: '{{ ansible_fqdn }}'
+  passwd: '{{ bacula__gen_client_password }}'

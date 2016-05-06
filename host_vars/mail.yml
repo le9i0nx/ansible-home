@@ -310,4 +310,10 @@ rspamd__conf_d:
     type: "rbl"
     data: '{{ exim_list_dnsbl }}'
 
+# bacula
+bacula__conf_client:
+  name: 'mail'
+  passwd: '{{ bacula__gen_client_password }}'
+  ip: "{{ ansible_tun0.ipv4.address }}"
+
 ## vim: ft=yaml:foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

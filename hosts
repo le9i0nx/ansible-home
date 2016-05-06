@@ -41,6 +41,11 @@ dns.samara.mpautina.ru
 [proxy]
 proxy.samara.mpautina.ru
 
+[bacula]
+74economists.74ru.mpautina.ru
+mail
+
+
 [63]
 dns.samara.mpautina.ru
 dhcp.samara.mpautina.ru
@@ -93,3 +98,6 @@ ldap
 
 [debops_service_pam_ldap]
 74economists.74ru.mpautina.ru
+
+[debops_service_bacula:children]
+bacula
