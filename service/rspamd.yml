@@ -28,9 +28,9 @@
 
     - role: debops.apt
       tags: [ 'role::apt' ]
-      apt_host_keys:
+      apt__host_keys:
         - '{{ rspamd_repositories_key }}'
-      apt_host_repositories:
+      apt__host_repositories:
         - '{{ rspamd_repositories }}'
 
     - role: le9i0nx.rspamd
