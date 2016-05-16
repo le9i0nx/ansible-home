@@ -1,0 +1,28 @@
+---
+
+- name: Manage bacula
+  hosts: [ 'debops_service_bacula' ]
+  become: True
+  become_method: sudo
+
+  roles:
+
+    - role: debops.apt_preferences
+      tags: [ 'role::apt_preferences' ]
+      apt_preferences__group_list:
+        - '{{ bacula__apt_preferences__dependent_list }}'
+
+    - role: debops.apt
+      tags: [ 'role::apt' ]
+      apt__host_repositories:
+        - '{{ bacula__apt__repositories }}'
+
+    - role: debops.ferm
+      tags: [ 'role::ferm' ]
+      ferm_dependent_rules:
+        - '{{ bacula__ferm__dependent_rules }}'
+
+    - role: le9i0nx.bacula
+      tags: [ 'role::bacula' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

@@ -5,17 +5,42 @@ console_issue: 'Org. le9i0nx.ru'
 #grub
 grub_cmd_elevator: 'noop'
 #tinc
-tinc_network: 'mesh0'
-tinc_inventory_hosts: '{{ groups.homes }}'
-tinc_interface: '{{ tinc_network }}'
-tinc_connection_type: 'static'
-tinc_ifupdown_interface:
-  - iface: '{{ tinc_interface }}'
+tinc__connect_to_mesh_homes: '{{ tinc__inventory_hosts_mesh_homes }}'
+tinc__inventory_hosts_mesh_homes: '{{ (groups.homes if groups.homes|d() else []) | difference([ tinc__hostname ]) }}'
+tinc__default_networks: []
+tinc__inventory_groups: ['homes']
+tinc__inventory_hosts: '{{ groups.homes if groups.homes|d() else [] }}'
+tinc__networks: [ '{{ tinc__network_mesh_homes }}' ]
+tinc__host_addresses: '{{ tinc__host_addresses_ip }}'
+tinc__interface_mesh_homes: 'mesh_homes'
+tinc__interface_mesh0: '{{ tinc__interface_mesh_homes }}'
+tinc__exclude_bridge_mesh0: []
+tinc__network_mesh_homes:
+  name: '{{ tinc__interface_mesh_homes }}'
+  interface: '{{ tinc__interface_mesh_homes }}'
+  hwaddr: ''
+  bridge: ''
+  link_type: 'static'
+  boot: True
+  port: '655'
+  mlock: True
+  chroot: True
+  allow: ''
+  user: '{{ tinc__user }}'
+  tinc_exclude_addresses: '{{ tinc__exclude_addresses_mesh0 }}'
+  tinc_options:
+    Mode: 'switch'
+    DeviceType: 'tap'
+    Cipher: 'aes-256-cbc'
+    Digest: 'SHA512'
+    ConnectTo: '{{ tinc__connect_to_mesh_homes }}'
+
+tinc__ifupdown_interface:
+  - iface: '{{ tinc__interface_mesh_homes }}'
     type: 'interface'
-    inet: '{{ tinc_connection_type }}'
-    auto: '{{ tinc_interface_auto }}'
+    inet: 'static'
+    auto: True
     addresses: '{{ tinc_host_addr }}'
-    force: True
 
 users_root:
   - name:   'root'
@@ -70,33 +95,35 @@ role_syncthing_data:
       devices_add:
         - "{{ device_moto }}"
 
-#role_syncthing:
-#  inventory_hosts: '{{ groups.homes }}'
-#  folders:
-#    path: '/home/le9i0nx/crypt/'
-#    id: 'crypt'
-
 # avahi
 avachi_ferm_interface:
   - '{{ tinc_interface }}'
 
-# debops.apt
-apt_unattended_upgrades_repositories:
-  - "origin=Debian,codename={{ apt_sources_release }},label=Debian-Security"
-  - "o=Debian,a={{ apt_sources_release }}"
-  - "o=Debian,a={{ apt_sources_release_updates }}"
-  - "o=Syncthing"
+# debops.unattended_upgrades
+unattended_upgrades__enabled: True
+unattended_upgrades__security_origins:
 
-apt_sources_release: 'stable'
-apt_unattended_upgrades: True
-apt_sources_release_list:
-  - '{{ apt_sources_release }}'
-  - '{{ apt_sources_release_updates }}'
+  'Debian':
+    - "origin=Debian,codename={{ apt__sources_release }},label=Debian-Security"
+
+unattended_upgrades__release_origins:
+
+  'Debian':
+    - "o=Debian,a={{ apt__sources_release }}"
+    - "o=Debian,a={{ apt__sources_release_updates }}"
+    - "o=Syncthing"
+
+# debops.apt
+apt__sources_release_updates: '{{ apt__sources_release }}-updates'
+apt__sources_release: 'stable'
+apt__sources_release_list:
+  - '{{ apt__sources_release }}'
+  - '{{ apt__sources_release_updates }}'
   - 'testing'
   - 'unstable'
   - 'experimental'
 
-apt_preferences_list:
+apt_preferences__list:
   - package: '*'
     pin: 'release unstable'
     priority: '50'

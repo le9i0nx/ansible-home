@@ -51,6 +51,6 @@ users_le9i0nx:
     sshkeys:
       - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys') }}"
 
-apt_unattended_upgrades: True
+unattended_upgrades__enabled: True
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

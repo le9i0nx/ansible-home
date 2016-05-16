@@ -20,6 +20,7 @@
 - include: app/dovecot.mail_srv.yml
 - include: service/postfixadmin.yml
 - include: service/roundcube.yml
+- include: service/bacula.yml
 
 - hosts: mail
   remote_user: ansicon
@@ -53,15 +54,6 @@
         saddr: '{{ nagios_nrpe_allow }}'
         weight: '50'
         filename: 'nrpe_dependency_accept'
-
-    #bacula
-    - role: debops.ferm
-      ferm_input_list:
-      - type: 'dport_accept'
-        dport: [ 'bacula-fd' ]
-        saddr: [ '192.168.0.0/24' ]
-        weight: '50'
-        filename: 'bacula_dependency_accept'
 
     - role: debops.ferm
       ferm_input_list:
