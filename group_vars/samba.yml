@@ -7,7 +7,7 @@ ferm__enabled: False
 samba__service_name: 'smbd'
 samba__default_homes: []
 samba__default_shares:
-  'economists':
+  'tosha':
     path: '{{ samba__path }}/economists'
     comment: 'economists share'
     guest_ok: 'no'

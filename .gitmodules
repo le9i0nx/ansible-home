@@ -97,3 +97,9 @@
 [submodule "roles/le9i0nx.bacula"]
 	path = roles/le9i0nx.bacula
 	url = https://github.com/le9i0nx/ansible-bacula.git
+[submodule "roles/le9i0nx.root_password"]
+	path = roles/le9i0nx.root_password
+	url = https://github.com/le9i0nx/ansible-root_password.git
+[submodule "roles/debops.unattended_upgrades"]
+	path = roles/debops.unattended_upgrades
+	url = https://github.com/le9i0nx/ansible-unattended_upgrades.git

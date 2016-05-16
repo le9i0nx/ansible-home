@@ -1,9 +1,9 @@
 ---
 
 bacula__conf_dir:
-  name: 'm4s'
+  name: 'backup'
   ip:
-    - "192.168.0.99"
+    - "192.168.0.19"
 
 bacula__conf_client:
   name: '{{ ansible_fqdn }}'

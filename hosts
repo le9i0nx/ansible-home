@@ -101,3 +101,6 @@ ldap
 
 [debops_service_bacula:children]
 bacula
+
+[debops_unattended_upgrades:children]
+homes
