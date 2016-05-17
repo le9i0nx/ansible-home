@@ -17,18 +17,6 @@
 
   roles:
 
-    - role: debops.ferm
-      tags: [ 'role::ferm' ]
-      ferm_dependent_rules:
-        - '{{ syncthing_ferm_dependent_rules }}'
-
-    - role: debops.apt
-      tags: [ 'role::apt' ]
-      apt__host_keys:
-        - '{{ syncthing_repositories_key }}'
-      apt__host_repositories:
-        - '{{ syncthing_repositories }}'
-
     - role: le9i0nx.syncthing
       tags: [ 'role::syncthing' ]
 

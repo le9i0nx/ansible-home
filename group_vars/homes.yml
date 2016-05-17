@@ -58,6 +58,7 @@ users_admins:
   - '{{ users_le9i0nx }}'
 
 # syncthing
+syncthing__dependencies_ferm: True
 device_moto:
   - id: "H5K4NYU-P64UC3B-ZY6DIU5-RKE4MJS-AMOW2TK-75API3M-7W5FO5Z-QX3LAAR"
     name: "tapik"
