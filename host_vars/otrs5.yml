@@ -24,7 +24,7 @@ nagios_nrpe_server_config:
   allowed_hosts: "{{ nagios_nrpe_server_pool | join(',')}}"
   dont_blame_nrpe: 1
 nagios_nrpe_server_commands:
-  - {name: "check_disk", plugin: "check_disk", args: "-w $ARG1$ -c $ARG2$"}
+  - {name: "check_disk", plugin: "check_disk", args: "-w 20% -c 5%"}
   - {name: "check_total_procs", plugin: "check_procs", args: "-w 1600 -c 1800"}
   - {name: "check_apt", plugin: "check_apt", args: "-c trusty-updates"}
   - {name: "check_ntp", plugin: "check_ntp", args: "-H localhost -w -1:1 -c -2:2"}

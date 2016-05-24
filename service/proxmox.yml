@@ -6,13 +6,6 @@
 
   roles:
 
-    - role: debops.apt
-      tags: [ 'role::apt' ]
-      apt__host_keys:
-        - '{{ proxmox_repositories_key }}'
-      apt__host_repositories:
-        - '{{ proxmox_repositories }}'
-
     - role: le9i0nx.proxmox
       tags: [ 'role::proxmox' ]
 
