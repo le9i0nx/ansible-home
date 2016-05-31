@@ -22,6 +22,7 @@
       tags: [ 'role::php5' ]
 
     - role: debops.nginx
+      nginx_default_servers: []
       nginx_servers:
         - '{{mail_info74_ru_nginx_server}}'
         - '{{cap_nginx_server}}'
@@ -30,7 +31,6 @@
         - '{{ mail_nginx_upstream_php5 }}'
       when: mail_dependencies is defined and mail_dependencies
       tags: [ 'role::nginx' ]
-
 
     - role: le9i0nx.mailweb
       tags: [ 'role::mailweb' ]

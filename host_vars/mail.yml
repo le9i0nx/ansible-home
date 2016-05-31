@@ -41,6 +41,7 @@ pki_path: '/srv/pki'
 
 #nginx
 #nginx_status_localhost: [ "193.138.129.118", "95.78.171.64" ]
+nginx_acme: False
 nginx_pki_path: '{{pki_path}}'
 nginx_pki_realm: '.'
 nginx_server_default:
