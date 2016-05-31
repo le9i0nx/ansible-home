@@ -1,0 +1,31 @@
+---
+
+samba__default_shares:
+  'tosha':
+    path: '{{ samba__path }}/economists'
+    comment: 'economists share'
+    guest_ok: 'no'
+#    writable: 'yes'
+    write_list: '@nt_admin, @nt_economists'
+    read_list: '@nt_admin, @nt_economists'
+#    create_mode: '660'
+#    directory_mode: '770'
+
+    read_only: 'No'
+  # маска для создаваемых файлов
+    create_mask: '0660'
+  # маска для создаваемых директорий
+    directory_mask: '0770'
+  # наследовать владельца (вышестоящей директории)
+    inherit_owner: 'yes'
+  # наследовать ACL 
+    inherit_acls: 'yes'
+  # наследовать права
+    inherit_permissions: 'yes'
+  # позвоялет редактору прав из винды корректно обрабатывать
+  # наследуемые права
+    map_acl_inherit: 'yes'
+  # блокировки - иногда бывают грабли без этого пункта
+    locking: 'no'
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

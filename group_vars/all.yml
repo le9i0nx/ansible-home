@@ -4,21 +4,44 @@ ansible_user: root
 
 console_locales: [ 'en_US.UTF-8' ]
 console_root_password: '{{ lookup("password", secret + "/credentials/" + ansible_fqdn + "/console/root/password length=" + console_root_password_length) }}'
-console_packages: [ 'mc',
-                    'htop',
-                    'iotop',
-                    'sysstat',
-                    'screen',
-                    'vim',
-                    'nload',
-                    'aptitude',
-                    'tasksel',
-                    'p7zip',
-                    'lsof',
-                    'iftop',
-                    'dstat',
-                    'iozone3' ]
+console_packages:
+  - 'mc'
+  - 'htop'
+  - 'iotop'
+  - 'sysstat'
+  - 'screen'
+  - 'vim'
+  - 'nload'
+  - 'aptitude'
+  - 'tasksel'
+  - 'p7zip'
+  - 'lsof'
+  - 'iftop'
+  - 'dstat'
+  - 'iozone3'
+  - 'ed'
+  - 'python'
+  - 'python-apt'
+  - 'lsb-release'
+  - 'make'
+  - 'sudo'
+  - 'gnupg-curl'
+  - 'git'
+  - 'wget'
+  - 'curl'
+  - 'rsync'
+  - 'bridge-utils'
+  - 'openssh-server'
+  - 'bsdutils'
+  - 'python-pycurl'
+  - 'python-httplib2'
+  - 'apt-transport-https'
+  - 'acl'
+  - 'python-pip'
+  - 'ca-certificates'
+
 core_packages: "{{console_packages}}"
+apt__base_packages: "{{console_packages}}"
 #debobs.auth
 auth_ldap_conf: False
 auth_admin_accounts: [ 'ansicon' ]

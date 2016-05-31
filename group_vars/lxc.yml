@@ -1,0 +1,9 @@
+---
+
+# debops.console
+console_proc_hidepid: False
+
+# debops.samba
+samba__kernel_modules_load: False
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

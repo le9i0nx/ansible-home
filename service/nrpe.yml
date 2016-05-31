@@ -13,8 +13,6 @@
           saddr: '{{ nagios_nrpe_allow }}'
           accept_any: False
 
-
-
   roles:
 
     - role: debops.ferm

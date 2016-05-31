@@ -4,12 +4,19 @@
 ntp_listen: ['localhost']
 ntp_daemon: 'openntpd'
 
-#syncthing
-role_syncthing:
-  inventory_hosts: '{{ groups.pve }}'
+# syncthing
+syncthing__dependencies_ferm: True
+device_x:
+  - id: "6BZW7ME-VSKBWJX-OCALJTF-W73GAZB-YHS4VWB-PKMQHNB-GFDQYJY-4HZDMA4"
+    name: "x"
+
+role_syncthing_data:
   folders:
-    path: '/var/lib/vz/template/iso/'
-    id: 'vz_iso'
+    - inventory_hosts: '{{ groups.pve }}'
+      path: '/var/lib/vz/template/iso/'
+      id: 'vz_iso'
+      devices_del:
+        - "{{ device_x }}"
 
 #tinc
 tinc__connect_to_mesh_pve: '{{ tinc__inventory_hosts_mesh_pve }}'
@@ -91,7 +98,7 @@ nagios_nrpe_server_config:
   allowed_hosts: "{{ nagios_nrpe_server_pool | join(',')}}"
   dont_blame_nrpe: 1
 nagios_nrpe_server_commands:
-  - {name: "check_disk", plugin: "check_disk", args: "-w $ARG1$ -c $ARG2$", sudo: true }
+  - {name: "check_disk", plugin: "check_disk", args: "-w 20% -c 5%",sudo: true }
   - {name: "check_total_procs", plugin: "check_procs", args: "-w 1600 -c 1800", sudo: true }
   - {name: "check_apt", plugin: "check_apt", args: "-c trusty-updates"}
   - {name: "check_ntp", plugin: "check_ntp", args: "-H localhost -w -1:1 -c -2:2"}
