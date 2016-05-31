@@ -6,36 +6,8 @@ ferm__enabled: False
 # samba
 samba__service_name: 'smbd'
 samba__default_homes: []
-samba__default_shares:
-  'tosha':
-    path: '{{ samba__path }}/economists'
-    comment: 'economists share'
-    guest_ok: 'no'
-#    writable: 'yes'
-    write_list: '@nt_admin, @nt_economists'
-    read_list: '@nt_admin, @nt_economists'
-#    create_mode: '660'
-#    directory_mode: '770'
+samba__default_shares: []
 
-    read_only: 'No'
-  # маска для создаваемых файлов
-    create_mask: '0660'
-  # маска для создаваемых директорий
-    directory_mask: '0770'
-  # наследовать владельца (вышестоящей директории)
-    inherit_owner: 'yes'
-  # наследовать ACL 
-    inherit_acls: 'yes'
-  # наследовать права
-    inherit_permissions: 'yes'
-  # позвоялет редактору прав из винды корректно обрабатывать
-  # наследуемые права
-    map_acl_inherit: 'yes'
-  # блокировки - иногда бывают грабли без этого пункта
-    locking: 'no'
-
-
-samba__workgroup: '74RU'
 samba__default_global:
 
   # hacing nt4
@@ -44,13 +16,13 @@ samba__default_global:
   allow_nt4_crypto: 'yes'
   smb2_leases: 'yes'
 
-  wins_server: '192.168.0.7'
+  wins_server: '{{ samba__wins_server }}'
   dns_proxy: 'no'
   panic_action: '/usr/share/samba/panic-action %d'
 
   # ldap
   passdb_backend: 'ldapsam:ldap://127.0.0.1/'
-  ldap_suffix: 'ou=chelyabinsk,dc=rugion,dc=ru'
+  ldap_suffix: '{{ samba__ldap_suffix }}'
   ldap_user_suffix: 'ou=users'
   ldap_group_suffix: 'ou=groups'
   ldap_machine_suffix: 'ou=computers'
@@ -69,7 +41,7 @@ samba__default_global:
   passwd_chat: '*Enter\snew\s*\spassword:* %n\n *Retype\snew\s*\spassword:* %n\n *password\supdated\ssuccessfully* .'
 
   pam_password_change: 'yes'
-  logon_script: 'logon.bat'
+  logon_script: '\\PDC\netlogon\logon.bat'
   template_shell: '/bin/bash'
   usershare_allow_guests: 'yes'
   logon_path: ''
@@ -106,5 +78,28 @@ samba__default_global:
   printcap_name: '/dev/null'
   show_add_printer_wizard: 'no'
   disable_spoolss: 'yes'
+
+#nrpe
+nagios_nrpe_server_apt_packages:
+  - nagios-nrpe-server
+  - nagios-plugins-standard
+  - nagios-plugins-contrib
+  - libnagios-plugin-perl
+icinga_pool: ['192.168.0.8']
+nagios_nrpe_server_pool: "{{icinga_pool + ['127.0.0.1']}}"
+nagios_nrpe_allow: "{{nagios_nrpe_server_pool}}"
+nagios_nrpe_server_config:
+  server_port: 5666
+  allowed_hosts: "{{ nagios_nrpe_server_pool | join(',')}}"
+  dont_blame_nrpe: 1
+nagios_nrpe_server_commands:
+  - {name: "check_disk", plugin: "check_disk", args: "-w 20% -c 5%",sudo: true }
+  - {name: "check_total_procs", plugin: "check_procs", args: "-w 1600 -c 1800", sudo: true }
+  - {name: "check_apt", plugin: "check_apt" }
+  - {name: "check_ntp", plugin: "check_ntp", args: "-H localhost -w -1:1 -c -2:2"}
+  - {name: "check_service", plugin: "check_procs", args: "-w $ARG2$ -c $ARG3$ -a \"$ARG1$\"", sudo: true }
+  - {name: "check_raid", plugin: "check_raid", sudo: true }
+  - {name: "check_mem", plugin: "check_mem.pl", args: "-w 10 -c 5 -f -C"}
+  - {name: "check_iftraffic", plugin: "check_iftraffic_nrpe.py", args: "-i" }
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

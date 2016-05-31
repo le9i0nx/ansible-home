@@ -125,4 +125,10 @@ dhcpd_options: |
   ddns-domainname "samara.mpautina.ru.";
   ddns-rev-domainname "63.168.192.in-addr.arpa.";
 
+
+# samba
+samba__workgroup: 'SAMARA'
+samba__ldap_suffix: 'ou=samara,dc=rugion,dc=ru'
+samba__wins_server: '192.168.63.2'
+
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
