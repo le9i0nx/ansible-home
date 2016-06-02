@@ -5,7 +5,7 @@
     name: '{{ item }}'
     state: 'latest'
     install_recommends: False
-  with_items: roundcube_packages
+  with_items: '{{ roundcube_packages }}'
   when: (roundcube_packages is defined and roundcube_packages)
 
 - name: Create database for roundcube

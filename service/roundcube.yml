@@ -7,11 +7,12 @@
 
   roles:
 
-    - role: le9i0nx.roundcube
-      tags: [ 'role::roundcube' ]
-
     - role: debops.php5
       php5_packages:
+        - 'php-auth'
+        - 'php-mail-mime'
+        - 'php-net-smtp'
+        - 'php5-intl'
         - 'php5-mysql'
         - 'php5'
         - 'php5-ldap'
@@ -31,6 +32,9 @@
         - '{{ mail_nginx_upstream_php5 }}'
       when: mail_dependencies is defined and mail_dependencies
       tags: [ 'role::nginx' ]
+
+    - role: le9i0nx.roundcube
+      tags: [ 'role::roundcube' ]
 
     - role: le9i0nx.mailweb
       tags: [ 'role::mailweb' ]
