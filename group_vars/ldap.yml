@@ -32,7 +32,7 @@ nsswitch_config:
 
 role__nss_pam_ldap:
   host: "127.0.0.1"
-  base: "ou=chelyabinsk,{{ slapd_basedn }}"
+  base: "{{ samba__ldap_suffix }}"
 
 slapd_default_services: [ 'ldap:///', 'ldapi:///' ]
 slapd_basedn: '{{ "dc=" + slapd_domain.split(".") | join(",dc=") }}'

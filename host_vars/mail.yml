@@ -28,8 +28,9 @@ ntp_servers: ['gw.dc-ekat.w.rugion.ru']
 #snmp_firewall_access: True
 
 #ssh
-sshd_ferm_limit: 'false'
-sshd_PasswordAuthentication: 'yes'
+sshd__ferm_limit: 'false'
+sshd__PasswordAuthentication: 'yes'
+sshd__permit_root_login: 'yes'
 
 #postfixadmin
 postfixadmin_postfix_admin_url: 'https://mail.info74.ru/postfixadmin'

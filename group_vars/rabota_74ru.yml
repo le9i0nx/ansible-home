@@ -14,6 +14,7 @@ grub_cmd_elevator: 'noop'
 #ssh
 sshd__ferm_limit: True
 sshd__password_authentication: 'yes'
+sshd__permit_root_login: 'yes'
 
 users_root:
   - name:   'root'

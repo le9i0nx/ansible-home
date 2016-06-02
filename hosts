@@ -26,14 +26,19 @@ homes
 rabota_74ru
 pve
 
+[cups]
+cups.samara.mpautina.ru
+
 [lxc]
 proxy.samara.mpautina.ru
 dhcp.samara.mpautina.ru
 dns.samara.mpautina.ru
+cups.samara.mpautina.ru
 
 [ldap]
 74economists.74ru.mpautina.ru
 proxy.samara.mpautina.ru
+cups.samara.mpautina.ru
 
 [samba]
 74economists.74ru.mpautina.ru
@@ -58,6 +63,7 @@ dns.samara.mpautina.ru
 dhcp.samara.mpautina.ru
 pve63.pve.mpautina.ru
 proxy.samara.mpautina.ru
+cups.samara.mpautina.ru
 
 [74]
 mail ansible_ssh_host=mail
