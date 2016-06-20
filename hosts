@@ -28,18 +28,16 @@ pve
 
 [cups]
 cups.samara.mpautina.ru
-cups-u14.74ru.mpautina.ru
-cups-u16.74ru.mpautina.ru
-cups-d8.74ru.mpautina.ru
+cups-l.74ru.mpautina.ru
+cups-r.74ru.mpautina.ru
 
 [lxc]
 proxy.samara.mpautina.ru
 dhcp.samara.mpautina.ru
 dns.samara.mpautina.ru
 cups.samara.mpautina.ru
-cups-u14.74ru.mpautina.ru
-cups-u16.74ru.mpautina.ru
-cups-d8.74ru.mpautina.ru
+cups-l.74ru.mpautina.ru
+cups-r.74ru.mpautina.ru
 
 [ldap]
 74economists.74ru.mpautina.ru
@@ -62,6 +60,8 @@ proxy.samara.mpautina.ru
 74economists.74ru.mpautina.ru
 mail
 jabber.info74.ru
+cups-l.74ru.mpautina.ru
+cups-r.74ru.mpautina.ru
 
 [jabber]
 jabber.info74.ru
@@ -79,9 +79,8 @@ pve32.pve.mpautina.ru
 pve6.pve.mpautina.ru
 74economists.74ru.mpautina.ru
 jabber.info74.ru
-cups-u16.74ru.mpautina.ru
-cups-d8.74ru.mpautina.ru
-cups-u14.74ru.mpautina.ru
+cups-l.74ru.mpautina.ru
+cups-r.74ru.mpautina.ru
 
 [pve]
 pve32.pve.mpautina.ru
