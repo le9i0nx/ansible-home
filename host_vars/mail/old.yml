@@ -41,9 +41,8 @@ ldap_server_pool: "localhost"
 pki_path: '/srv/pki'
 
 #nginx
-#nginx_status_localhost: [ "193.138.129.118", "95.78.171.64" ]
-#nginx_acme: False
-nginx_pki_path: '{{pki_path}}'
+nginx_acme_domain: 'mail.info74.ru'
+nginx_pki_path: '/etc/nginx/ssl'
 nginx_pki_realm: '.'
 nginx_server_default:
   enabled: False

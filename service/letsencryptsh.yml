@@ -1,0 +1,13 @@
+---
+
+- name: Configure letsencryptsh
+  hosts: [ 'le9i0nx_service_letsencryptsh' ]
+  become: True
+  become_method: sudo
+
+  roles:
+
+    - role: martin-v.letsencryptsh
+      tags: [ 'role::letsencryptsh' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
