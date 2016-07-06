@@ -19,6 +19,7 @@
 - include: service/exim.yml
 - include: app/dovecot.mail_srv.yml
 - include: service/postfixadmin.yml
+- include: service/letsencryptsh.yml
 - include: service/roundcube.yml
 - include: service/bacula.yml
 

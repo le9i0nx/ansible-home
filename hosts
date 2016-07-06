@@ -138,3 +138,6 @@ cups
 
 [debops_service_openfire:children]
 jabber
+
+[le9i0nx_service_letsencryptsh:children]
+mail_srv
