@@ -26,10 +26,18 @@ homes
 rabota_74ru
 pve
 
+[cups]
+cups.samara.mpautina.ru
+cups-l.74ru.mpautina.ru
+cups-r.74ru.mpautina.ru
+
 [lxc]
 proxy.samara.mpautina.ru
 dhcp.samara.mpautina.ru
 dns.samara.mpautina.ru
+cups.samara.mpautina.ru
+cups-l.74ru.mpautina.ru
+cups-r.74ru.mpautina.ru
 
 [ldap]
 74economists.74ru.mpautina.ru
@@ -51,19 +59,28 @@ proxy.samara.mpautina.ru
 [bacula]
 74economists.74ru.mpautina.ru
 mail
+jabber.info74.ru
+cups-l.74ru.mpautina.ru
+cups-r.74ru.mpautina.ru
 
+[jabber]
+jabber.info74.ru
 
 [63]
 dns.samara.mpautina.ru
 dhcp.samara.mpautina.ru
 pve63.pve.mpautina.ru
 proxy.samara.mpautina.ru
+cups.samara.mpautina.ru
 
 [74]
 mail ansible_ssh_host=mail
 pve32.pve.mpautina.ru
 pve6.pve.mpautina.ru
 74economists.74ru.mpautina.ru
+jabber.info74.ru
+cups-l.74ru.mpautina.ru
+cups-r.74ru.mpautina.ru
 
 [pve]
 pve32.pve.mpautina.ru
@@ -83,6 +100,9 @@ dhcp
 proxy
 samba
 ldap
+74
+63
+jabber
 
 [debops_all_hosts:children]
 homes
@@ -103,11 +123,18 @@ samba
 [debops_service_slapd:children]
 ldap
 
-[debops_service_pam_ldap]
-74economists.74ru.mpautina.ru
+[debops_service_pam_ldap:children]
+ldap
+samba
 
 [debops_service_bacula:children]
 bacula
 
 [debops_unattended_upgrades:children]
 homes
+
+[debops_service_cups:children]
+cups
+
+[debops_service_openfire:children]
+jabber

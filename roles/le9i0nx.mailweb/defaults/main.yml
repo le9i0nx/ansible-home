@@ -111,7 +111,6 @@ mail_location:
 
 mail_options: |
   client_max_body_size {{ mail_upload_size }};
-  ssl_trusted_certificate {{pki_path}}/private/startssl.pem;
 
 mail_info74_ru_nginx_server:
   by_role: 'le90nx.mailweb'

@@ -103,3 +103,9 @@
 [submodule "roles/debops.unattended_upgrades"]
 	path = roles/debops.unattended_upgrades
 	url = https://github.com/le9i0nx/ansible-unattended_upgrades.git
+[submodule "roles/le9i0nx.cups"]
+	path = roles/le9i0nx.cups
+	url = https://github.com/le9i0nx/ansible-cups.git
+[submodule "roles/martin-v.letsencryptsh"]
+	path = roles/martin-v.letsencryptsh
+	url = https://github.com/le9i0nx/ansible-letsencryptsh.git

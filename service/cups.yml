@@ -1,0 +1,14 @@
+---
+
+- name: Install cups
+  hosts: [ 'debops_cups', 'debops_service_cups' ]
+  become: True
+
+  roles:
+
+    - role: debops.apt
+      tags: [ 'role::apt' ]
+
+    - role: le9i0nx.cups
+      tags: [ 'role::cups' ]
+

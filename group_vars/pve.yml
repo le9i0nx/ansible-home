@@ -57,8 +57,8 @@ tinc__ifupdown_interface:
     addresses: '{{ tinc_host_addr }}'
 
 #ssh
-sshd_permit_root_login: 'yes'
-sshd_password_authentication: 'yes'
+sshd__permit_root_login: 'yes'
+sshd__password_authentication: 'yes'
 tcpwrappers: False
 tcpwrappers_deny_all: False
 

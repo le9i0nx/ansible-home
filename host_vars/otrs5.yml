@@ -6,8 +6,9 @@ tcpwrappers_ansible_controllers: "{{admin_allow_pool + ['ALL']}}"
 tcpwrappers: False
 
 #ssh
-sshd_ferm_limit: 'false'
-sshd_PasswordAuthentication: 'yes'
+sshd__ferm_limit: 'false'
+sshd__PasswordAuthentication: 'yes'
+sshd__permit_root_login: 'yes'
 
 #nagios_nrpe_server_config
 nagios_nrpe_server_apt_packages:

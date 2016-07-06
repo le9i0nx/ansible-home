@@ -2,8 +2,6 @@
 
 - include: install.base_system.yml
 
-- include: service/samba.yml
-- include: service/slapd.yml
-- include: service/nss-pam-ldap.yml
+- include: service/cups.yml
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
