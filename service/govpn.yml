@@ -1,0 +1,12 @@
+---
+
+- name: configure govpn
+  hosts: [ 'le9i0nx_service_govpn' ]
+  become: True
+
+  roles:
+
+    - role: le9i0nx.govpn
+      tags: [ 'role::govpn' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

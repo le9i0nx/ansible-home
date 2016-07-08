@@ -141,3 +141,6 @@ jabber
 
 [le9i0nx_service_letsencryptsh:children]
 mail_srv
+
+[le9i0nx_service_govpn:children]
+homes
