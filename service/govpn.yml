@@ -1,7 +1,7 @@
 ---
 
 - name: configure govpn
-  hosts: [ 'le9i0nx_service_govpn' ]
+  hosts: [ 'le9i0nx_service_govpn', 'test_hosts' ]
   become: True
 
   roles:

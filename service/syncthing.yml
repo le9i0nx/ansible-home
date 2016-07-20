@@ -1,7 +1,7 @@
 ---
 
 - name: Prepare core environment
-  hosts: 'debops_all_hosts'
+  hosts: [ 'debops_all_hosts', 'debops_service_syncthing', 'test_hosts' ]
   become: False
 
   roles:
@@ -11,7 +11,7 @@
       become: True
 
 - name: syncthing install
-  hosts: [ 'debops_all_hosts', 'debops_service_syncthing' ]
+  hosts: [ 'debops_all_hosts', 'debops_service_syncthing', 'test_hosts' ]
   become: True
   become_method: sudo
 

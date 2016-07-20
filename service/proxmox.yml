@@ -1,7 +1,7 @@
 ---
 
 - name: install proxmox
-  hosts: [ 'debops_all_hosts', 'debops_service_proxmox' ]
+  hosts: [ 'debops_all_hosts', 'debops_service_proxmox', 'test_hosts' ]
   become: True
 
   roles:
@@ -9,3 +9,4 @@
     - role: le9i0nx.proxmox
       tags: [ 'role::proxmox' ]
 
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
