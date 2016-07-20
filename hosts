@@ -103,6 +103,7 @@ ldap
 74
 63
 jabber
+cups
 
 [debops_all_hosts:children]
 homes
