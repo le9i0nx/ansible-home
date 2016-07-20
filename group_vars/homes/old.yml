@@ -4,43 +4,6 @@ tcpwrappers_ansible_controllers: ['ALL']
 console_issue: 'Org. le9i0nx.ru'
 #grub
 grub_cmd_elevator: 'noop'
-#tinc
-tinc__connect_to_mesh_homes: '{{ tinc__inventory_hosts_mesh_homes }}'
-tinc__inventory_hosts_mesh_homes: '{{ (groups.homes if groups.homes|d() else []) | difference([ tinc__hostname ]) }}'
-tinc__default_networks: []
-tinc__inventory_groups: ['homes']
-tinc__inventory_hosts: '{{ groups.homes if groups.homes|d() else [] }}'
-tinc__networks: [ '{{ tinc__network_mesh_homes }}' ]
-tinc__host_addresses: '{{ tinc__host_addresses_ip }}'
-tinc__interface_mesh_homes: 'mesh_homes'
-tinc__interface_mesh0: '{{ tinc__interface_mesh_homes }}'
-tinc__exclude_bridge_mesh0: []
-tinc__network_mesh_homes:
-  name: '{{ tinc__interface_mesh_homes }}'
-  interface: '{{ tinc__interface_mesh_homes }}'
-  hwaddr: ''
-  bridge: ''
-  link_type: 'static'
-  boot: True
-  port: '655'
-  mlock: True
-  chroot: True
-  allow: ''
-  user: '{{ tinc__user }}'
-  tinc_exclude_addresses: '{{ tinc__exclude_addresses_mesh0 }}'
-  tinc_options:
-    Mode: 'switch'
-    DeviceType: 'tap'
-    Cipher: 'aes-256-cbc'
-    Digest: 'SHA512'
-    ConnectTo: '{{ tinc__connect_to_mesh_homes }}'
-
-tinc__ifupdown_interface:
-  - iface: '{{ tinc__interface_mesh_homes }}'
-    type: 'interface'
-    inet: 'static'
-    auto: True
-    addresses: '{{ tinc_host_addr }}'
 
 users_root:
   - name:   'root'
