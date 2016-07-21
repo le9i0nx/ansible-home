@@ -1,0 +1,50 @@
+---
+
+# debops.unattended_upgrades
+unattended_upgrades__enabled: True
+unattended_upgrades__security_origins:
+
+  'Debian':
+    - "origin=Debian,codename={{ apt__sources_release }},label=Debian-Security"
+
+unattended_upgrades__release_origins:
+
+  'Debian':
+    - "o=Debian,a={{ apt__sources_release }}"
+    - "o=Debian,a={{ apt__sources_release_updates }}"
+    - "o=Syncthing"
+
+# debops.apt
+apt__sources_release_updates: '{{ apt__sources_release }}-updates'
+apt__sources_release: 'stable'
+apt__sources_release_list:
+  - '{{ apt__sources_release }}'
+  - '{{ apt__sources_release_updates }}'
+  - 'jessie-backports'
+  - 'testing'
+  - 'unstable'
+  - 'experimental'
+
+apt_preferences__list:
+  - package: '*'
+    pin: 'release jessie-backports'
+    priority: '70'
+    filename: "jessie-backports"
+  - package: '*'
+    pin: 'release sid'
+    priority: '50'
+    filename: "sid"
+  - package: '*'
+    pin: 'release unstable'
+    priority: '50'
+    filename: "unstable"
+  - package: '*'
+    pin: 'release testing'
+    priority: '60'
+    filename: "testing"
+  - package: '*'
+    pin: 'release experimental'
+    priority: '40'
+    filename: "experimental"
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
