@@ -39,7 +39,7 @@ tinc__ifupdown_interface:
     addresses: '{{ tinc_host_addr }}'
 
 #govpn
-#govnp__dependencies_apt_preferences: True
+govnp__dependencies_apt_preferences: True
 #govnp__dependencies_ferm: True
 govpn__interface: 'star_homes'
 
