@@ -21,6 +21,6 @@ nagios_nrpe_server_commands:
   - {name: "check_service", plugin: "check_procs", args: "-w $ARG2$ -c $ARG3$ -a \"$ARG1$\"", sudo: true }
   - {name: "check_mem", plugin: "check_mem.pl", args: "-w 10 -c 5 -f -C"}
   - {name: "check_iftraffic", plugin: "check_iftraffic_nrpe.py", args: "-i" }
-  - {name: "check_cups_queue", plugin: "check_cups_queue", args: "-H localhost -T b -w 2 -c 10 -a 0" }
+  - {name: "check_cups_queue", plugin: "check_cups_queue", args: "-H localhost -T b -w 10 -c 50 -a 1" }
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
