@@ -1607,7 +1607,7 @@ PLAIN:
   public_name                 = PLAIN
   server_set_id               = $auth1
   server_socket               = /var/run/dovecot/auth-client
-  server_advertise_condition  = ${if def:tls_cipher }
+  server_advertise_condition  = ${if eq{$tls_in_cipher}{}{no}{yes}}
 
 {# LOGIN метод. Здесь нет идентификатора сессии, поэтому логин
 # и пароль доступны через переменные $auth1 и $auth2.
@@ -1621,14 +1621,14 @@ LOGIN:
   public_name                 = LOGIN
   server_set_id               = $auth1
   server_socket               = /var/run/dovecot/auth-client
-  server_advertise_condition  = ${if def:tls_cipher }
+  server_advertise_condition  = ${if eq{$tls_in_cipher}{}{no}{yes}}
 
 auth_cram_md5:
   driver                      = dovecot
   public_name                 = CRAM-MD5
   server_set_id               = $auth1
   server_socket               = /var/run/dovecot/auth-client
-  server_advertise_condition  = ${if def:tls_cipher }
+  server_advertise_condition  = ${if eq{$tls_in_cipher}{}{no}{yes}}
 
 {#
 ######################################################################
