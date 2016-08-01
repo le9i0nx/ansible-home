@@ -743,7 +743,7 @@ acl_check_rcpt:
   warn  authenticated = *
         domains = !+local_domains
         condition = SET_WHITELIST
-        #logwrite = set_whitelist_local: [$sender_host_address] $sender_address $local_part@$domain;
+        logwrite = set_whitelist_local: [$sender_host_address] $sender_address $local_part@$domain;
 
 {#  # Принять, если отправитель - локальный хост (т.е. не через TCP/IP).
 #}
