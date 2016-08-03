@@ -1,11 +1,11 @@
 ---
 
+- include: service/init.yml
 - include: service/core.yml
 - include: service/base.yml
 - include: app/users.yml
 - include: service/apt.yml
 - include: service/apt_preferences.yml
-- include: service/avachi.yml
 - include: service/console.yml
 - include: service/sshd.yml
 
@@ -16,6 +16,6 @@
     - role: le9i0nx.miredo
 
 - include: service/tinc.yml
-- include: app/syncthing.homes.yml
+- include: service/syncthing.yml
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
