@@ -1,0 +1,56 @@
+---
+freedns_afraid_dynamic_id: "azFqM1BBdVFkR0tWdUljc3BzZThFc2J4OjE2MTM5MDkx"
+id_addr: "6"
+govpn__host_addr: [ '172.17.35.{{ id_addr }}/24' ]
+tinc_host_addr:   [ '172.16.35.{{ id_addr }}/24' ]
+tinc__host_addresses: '{{ ["awz.le9i0nx.strangled.net"]+ tinc__host_addresses_ip }}'
+
+govpn__start_client: False
+govpn__start_server: True
+
+# debops.unattended_upgrades
+unattended_upgrades__enabled: True
+unattended_upgrades__security_origins:
+
+  'Ubuntu':
+    - 'o=Ubuntu,n=${distro_codename},l=${distro_codename}-security'
+
+unattended_upgrades__release_origins:
+
+  'default':
+    - 'o=${distro_id},n=${distro_codename}'
+    - 'o=${distro_id},n=${distro_codename}-updates'
+    - "o=Syncthing"
+
+# debops.apt
+apt__default_mirrors: [ 'http://us-east-1.ec2.archive.ubuntu.com/ubuntu' ]
+apt__sources_release_updates: '{{ apt__sources_release }}-updates'
+apt__sources_release: '{{ ansible_distribution_release.split("/")[0] }}'
+apt__sources_release_list:
+  - '{{ apt__sources_release }}'
+  - '{{ apt__sources_release_updates }}'
+  - '{{ apt__sources_release_backports }}'
+
+apt_preferences__list:
+  - package: '*'
+    pin: 'release jessie-backports'
+    priority: '70'
+    filename: "jessie-backports"
+  - package: '*'
+    pin: 'release sid'
+    priority: '50'
+    filename: "sid"
+  - package: '*'
+    pin: 'release unstable'
+    priority: '50'
+    filename: "unstable"
+  - package: '*'
+    pin: 'release testing'
+    priority: '60'
+    filename: "testing"
+  - package: '*'
+    pin: 'release experimental'
+    priority: '40'
+    filename: "experimental"
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
