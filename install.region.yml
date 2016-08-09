@@ -11,6 +11,5 @@
 - include: service/nrpe.yml
 
 - include: service/bind.yml
-- include: service/dhcpd.yml
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

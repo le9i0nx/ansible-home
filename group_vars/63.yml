@@ -37,6 +37,11 @@ bind__conf_d:
     zone_slave: true
     masters: [ "192.168.0.1" ]
 
+  - name: "hfm.ru"
+    type: "zone"
+    zone_slave: true
+    masters: [ "192.168.0.1" ]
+
   - name: "dhcp_samara_mpautina_ru"
     type: "key"
     key: '{{ dhcpd_secret_secure_key }}'

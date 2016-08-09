@@ -34,7 +34,6 @@ cups-r.74ru.mpautina.ru
 
 [lxc]
 proxy.samara.mpautina.ru
-dhcp.samara.mpautina.ru
 dns.samara.mpautina.ru
 cups.samara.mpautina.ru
 cups-l.74ru.mpautina.ru
@@ -47,9 +46,6 @@ proxy.samara.mpautina.ru
 [samba]
 74economists.74ru.mpautina.ru
 proxy.samara.mpautina.ru
-
-[dhcp]
-dhcp.samara.mpautina.ru
 
 [dns]
 dns.samara.mpautina.ru
@@ -67,9 +63,11 @@ cups-r.74ru.mpautina.ru
 [jabber]
 jabber.info74.ru
 
+[34]
+pve34.pve.mpautina.ru
+
 [63]
 dns.samara.mpautina.ru
-dhcp.samara.mpautina.ru
 pve63.pve.mpautina.ru
 proxy.samara.mpautina.ru
 cups.samara.mpautina.ru
@@ -87,6 +85,7 @@ cups-r.74ru.mpautina.ru
 pve32.pve.mpautina.ru
 pve6.pve.mpautina.ru
 pve63.pve.mpautina.ru
+pve34.pve.mpautina.ru
 
 [mail_srv]
 mail ansible_ssh_host=mail
@@ -97,21 +96,18 @@ pve
 rabota_74ru_old
 mail_srv
 dns
-dhcp
 proxy
 samba
 ldap
 74
 63
+34
 jabber
 cups
 
 [debops_all_hosts:children]
 homes
 rabota_74ru
-
-[debops_service_dhcpd:children]
-dhcp
 
 [debops_service_bind:children]
 dns
