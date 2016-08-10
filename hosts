@@ -35,6 +35,7 @@ cups-r.74ru.mpautina.ru
 [lxc]
 proxy.samara.mpautina.ru
 dns.samara.mpautina.ru
+dns.volgograd.mpautina.ru
 cups.samara.mpautina.ru
 cups-l.74ru.mpautina.ru
 cups-r.74ru.mpautina.ru
@@ -49,6 +50,7 @@ proxy.samara.mpautina.ru
 
 [dns]
 dns.samara.mpautina.ru
+dns.volgograd.mpautina.ru
 
 [proxy]
 proxy.samara.mpautina.ru
@@ -65,6 +67,7 @@ jabber.info74.ru
 
 [34]
 pve34.pve.mpautina.ru
+dns.volgograd.mpautina.ru
 
 [63]
 dns.samara.mpautina.ru
