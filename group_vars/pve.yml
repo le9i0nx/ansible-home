@@ -17,6 +17,11 @@ role_syncthing_data:
       id: 'vz_iso'
       devices_del:
         - "{{ device_x }}"
+    - inventory_hosts: '{{ groups.pve }}'
+      path: '/var/lib/vz/template/cache/'
+      id: 'vz_template'
+      devices_del:
+        - "{{ device_x }}"
 
 #tinc
 tinc__connect_to_mesh_pve: '{{ tinc__inventory_hosts_mesh_pve }}'
