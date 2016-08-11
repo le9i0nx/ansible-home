@@ -2,7 +2,7 @@
 
 #ntp
 ntp_timezone: 'Europe/Moscow'
-ntp_servers: ['192.168.34.200']
+ntp_servers: ['192.168.3.2']
 ntp_listen: ['localhost']
 ntp_daemon: False
 
@@ -12,27 +12,27 @@ ferm_enabled: False
 #dns
 bind__conf_d:
 
-  - name: "volgograd.mpautina.ru"
+  - name: "perm.mpautina.ru"
     type: "zone"
     zone_slave: false
     allow_update:
-      - "key dhcp_volgograd_mpautina_ru"
+      - "key dhcp_perm_mpautina_ru"
       - "127.0.0.1"
     allow_transfer:
       - "192.168.0.1"
       - "192.168.204.14"
 
-  - name: "34.168.192.in-addr.arpa"
+  - name: "3.168.192.in-addr.arpa"
     type: "zone"
     zone_slave: false
     allow_update:
-      - "key dhcp_volgograd_mpautina_ru"
+      - "key dhcp_perm_mpautina_ru"
       - "127.0.0.1"
     allow_transfer:
       - "192.168.0.1"
       - "192.168.204.14"
 
-  - name: "corp.v1.ru"
+  - name: "info59.ru"
     type: "zone"
     zone_slave: true
     masters: [ "192.168.0.1" ]
@@ -45,7 +45,6 @@ bind__conf_d:
   - name: "dhcp_volgograd_mpautina_ru"
     type: "key"
     key: '{{ dhcpd_secret_secure_key }}'
-#    ip: "192.168.34.8"
 
 dhcpd_secret_secure_key: '{{ lookup("password",
   secret + "/" + ansible_domain +
