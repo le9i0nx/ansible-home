@@ -2,6 +2,14 @@
 
 bacula__conf_dir:
   name: 'backup'
+  name_ansible: 'backup.74ru.mpautina.ru'
+  ip:
+    - "192.168.0.19"
+
+bacula__conf_sd:
+  name: 'backup'
+  name_ansible: 'backup.74ru.mpautina.ru'
+  device_path: "/mnt/storage/bacula"
   ip:
     - "192.168.0.19"
 

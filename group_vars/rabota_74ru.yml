@@ -1,7 +1,7 @@
 ---
 
 # ferm
-ferm_ansible_controllers:  "{{admin_allow_pool}}"
+ferm__ansible_controllers:  "{{admin_allow_pool}}"
 #tcpwrappers_ansible_controllers: "{{admin_allow_pool}}"
 console_issue: 'Org. 74.ru'
 
@@ -92,7 +92,7 @@ office_74_pool: "{{office_chelyabinsk_rodnik_pool + office_chelyabinsk_lesopark_
 office_76_pool:
   - '176.214.79.10'  # 76 corp.76.ru
 
-admin_allow_pool: "{{office_74_pool}}"
+admin_allow_pool: "{{office_74_pool + [ '192.168.0.0/23' ]}}"
 
 #nagios_nrpe_server_config
 icinga_pool:
