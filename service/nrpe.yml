@@ -4,21 +4,12 @@
   hosts: [ 'debops_all_hosts', 'debops_service_nrpe' ]
   become: True
   become_method: sudo
-  vars:
-    nrpe_ferm_dependent_rules:
-
-        - type: 'accept'
-          dport: [ 'nrpe' ]
-          role: 'nbz4live.nrpe'
-          saddr: '{{ nagios_nrpe_allow }}'
-          accept_any: False
-
   roles:
 
     - role: debops.ferm
       tags: [ 'role::ferm' ]
-      ferm_dependent_rules:
-        - '{{ nrpe_ferm_dependent_rules }}'
+      ferm__dependent_rules:
+        - '{{ nrpe__ferm__dependent_rules }}'
 
     - role: nbz4live.nagios-nrpe-server
       tags: [ 'role::nrpe' ]

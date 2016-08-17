@@ -8,6 +8,7 @@ nagios_nrpe_server_apt_packages:
   - nagios-plugins-contrib
   - libnagios-plugin-perl
 
+#nagios_nrpe_server_pool: "{{ icinga_pool + ['127.0.0.1']}}"
 nagios_nrpe_server_pool: "{{icinga_pool + ['127.0.0.1']}}"
 nagios_nrpe_allow: "{{nagios_nrpe_server_pool}}"
 nagios_nrpe_server_config:
@@ -27,5 +28,14 @@ nagios_nrpe_server_commands:
 bacula__conf_client_job:
 
   - {name: "etc", JobDefs: "GateBackup", Schedule: "Daily_0" }
+
+icinga__client:
+  group: "{{ ansible_domain.split('.')[0] }}"
+  name: '{{ ansible_hostname }}'
+  ip: '{{ ansible_fqdn }}'
+  parents: "{{ parents_rugion }}"
+  hostgroups:
+    - "ssh"
+    - "nrpe"
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

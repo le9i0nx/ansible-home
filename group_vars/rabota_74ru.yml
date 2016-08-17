@@ -97,10 +97,14 @@ admin_allow_pool: "{{office_74_pool + [ '192.168.0.0/23' ]}}"
 #nagios_nrpe_server_config
 icinga_pool:
   - '192.168.0.8'
+icinga__server:
+  name_ansible: "icinga.74ru.mpautina.ru"
+  ip: "{{ icinga_pool }}"
 
 # nginx
 nginx_server_default:
   enabled: False
   name: [ ]
+
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
