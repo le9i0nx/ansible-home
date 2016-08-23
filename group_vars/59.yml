@@ -50,5 +50,8 @@ dhcpd_secret_secure_key: '{{ lookup("password",
   secret + "/" + ansible_domain +
   "/shared/ddns/keys/secure-key") }}'
 
-parents_rugion:
+#icinga
+icinga__client_parents_rugion:
   - "mikrotik.perm"
+icinga__client_hostgroups_rugion:
+    - "perm"

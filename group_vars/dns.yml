@@ -16,7 +16,7 @@ nagios_nrpe_server_config:
   allowed_hosts: "{{ nagios_nrpe_server_pool | join(',')}}"
   dont_blame_nrpe: 1
 nagios_nrpe_server_commands:
-  - {name: "check_disk", plugin: "check_disk", args: "-w $ARG1$ -c $ARG2$"}
+  - {name: "check_disk", plugin: "check_disk", args: "-w 20% -c 5%"}
   - {name: "check_total_procs", plugin: "check_procs", args: "-w 1600 -c 1800", sudo: true }
   - {name: "check_apt", plugin: "check_apt" }
   - {name: "check_service", plugin: "check_procs", args: "-w $ARG2$ -c $ARG3$ -a \"$ARG1$\"", sudo: true }
@@ -33,13 +33,15 @@ icinga__client:
   group: "{{ ansible_domain.split('.')[0] }}"
   name: '{{ ansible_hostname }}'
   ip: '{{ ansible_fqdn }}'
-  parents: "{{ parents_rugion }}"
-  hostgroups:
+  parents: "{{ icinga__client_parents_rugion }}"
+  hostgroups: "{{icinga__client_hostgroups_dns + icinga__client_hostgroups_rugion }}"
+
+icinga__client_hostgroups_dns:
     - "ssh"
     - "nrpe"
     - "nrpe_apt"
     - "nrpe_space"
     - "nrpe_mem"
-    - "perm"
+
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
