@@ -1,13 +1,13 @@
 ---
 
 #ntp
-ntp_timezone: 'Europe/Moscow'
-ntp_servers: ['192.168.3.2']
-ntp_listen: ['localhost']
-ntp_daemon: False
+ntp__timezone: 'Europe/Moscow'
+#ntp_servers: ['192.168.3.2']
+#ntp_listen: ['localhost']
+#ntp_daemon: False
 
 # ferm
-ferm_enabled: False
+#ferm_enabled: False
 
 #dns
 bind__conf_d:
@@ -49,3 +49,9 @@ bind__conf_d:
 dhcpd_secret_secure_key: '{{ lookup("password",
   secret + "/" + ansible_domain +
   "/shared/ddns/keys/secure-key") }}'
+
+#icinga
+icinga__client_parents_rugion:
+  - "mikrotik.perm"
+icinga__client_hostgroups_rugion:
+    - "perm"

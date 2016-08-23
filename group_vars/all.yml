@@ -41,7 +41,7 @@ console_packages:
   - 'ca-certificates'
 
 core_packages: "{{console_packages}}"
-apt__base_packages: "{{console_packages}}"
+#apt__base_packages: "{{console_packages}}"
 #debobs.auth
 auth_ldap_conf: False
 auth_admin_accounts: [ 'ansicon' ]
