@@ -37,5 +37,9 @@ icinga__client:
   hostgroups:
     - "ssh"
     - "nrpe"
+    - "nrpe_apt"
+    - "nrpe_space"
+    - "nrpe_mem"
+    - "perm"
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
