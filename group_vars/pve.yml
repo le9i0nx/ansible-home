@@ -90,11 +90,8 @@ apt_base_packages: [ 'ed', 'python', 'python-apt', 'lsb-release', 'make', 'sudo'
 #apt_acng_port: "9999"
 
 #nrpe
-nagios_nrpe_server_apt_packages:
-  - nagios-nrpe-server
-  - nagios-plugins-standard
-  - nagios-plugins-contrib
-  - libnagios-plugin-perl
+nagios_nrpe_server_apt_packages: "{{ nagios_nrpe_server_apt_packages_default }}"
+
 icinga_pool: ['192.168.0.8']
 nagios_nrpe_server_pool: "{{icinga_pool + ['127.0.0.1']}}"
 nagios_nrpe_allow: "{{nagios_nrpe_server_pool}}"
