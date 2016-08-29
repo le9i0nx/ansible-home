@@ -42,6 +42,11 @@ bind__conf_d:
     zone_slave: true
     masters: [ "192.168.0.1" ]
 
+  - name: "rn"
+    type: "zone"
+    zone_slave: true
+    masters: [ "192.168.0.1" ]
+
   - name: "dhcp_perm_mpautina_ru"
     type: "key"
     key: '{{ dhcpd_secret_secure_key }}'

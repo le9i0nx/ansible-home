@@ -102,6 +102,21 @@ icinga__server:
   name_ansible: "icinga.74ru.mpautina.ru"
   ip: "{{ icinga_pool }}"
 
+nagios_nrpe_server_apt_packages: "{{ nagios_nrpe_server_apt_packages_default + nagios_nrpe_server_apt_packages_group }}"
+nagios_nrpe_server_apt_packages_default:
+  - nagios-nrpe-server
+  - nagios-plugins-extra
+  - nagios-plugins-standard
+  - nagios-plugins-contrib
+  - libnagios-plugin-perl
+  - ntpdate
+nagios_nrpe_server_pool: "{{icinga_pool + ['127.0.0.1']}}"
+nagios_nrpe_allow: "{{nagios_nrpe_server_pool}}"
+nagios_nrpe_server_config:
+  server_port: 5666
+  allowed_hosts: "{{ nagios_nrpe_server_pool | join(',')}}"
+  dont_blame_nrpe: 1
+nagios_nrpe_server_commands: "{{ nagios_nrpe_server_commands_default + nagios_nrpe_server_commands_group }}"
 nagios_nrpe_server_commands_default:
   - {name: "check_disk", plugin: "check_disk", args: "-w 20% -c 5%"}
   - {name: "check_total_procs", plugin: "check_procs", args: "-w 1600 -c 1800", sudo: true }
@@ -112,6 +127,17 @@ nagios_nrpe_server_commands_default:
   - {name: "check_mem", plugin: "check_mem.pl", args: "-w 10 -c 5 -f -C"}
   - {name: "check_iftraffic", plugin: "check_iftraffic_nrpe.py", args: "-i" }
 
+#bacula
+bacula__conf_client_job:
+
+  - {name: "etc", JobDefs: "GateBackup", Schedule: "Daily_0" }
+
+icinga__client:
+  group: "{{ ansible_domain.split('.')[0] }}"
+  name: '{{ ansible_hostname }}'
+  ip: '{{ ansible_fqdn }}'
+  parents: "{{ icinga__client_parents_rugion }}"
+  hostgroups: "{{ icinga__client_hostgroups_default + icinga__client_hostgroups_group + icinga__client_hostgroups_rugion }}"
 icinga__client_hostgroups_default:
     - "ssh"
     - "nrpe"
@@ -121,14 +147,6 @@ icinga__client_hostgroups_default:
     - "nrpe_traffic"
     - "nrpe_ntpdate"
     - "nrpe_traffic"
-
-nagios_nrpe_server_apt_packages_default:
-  - nagios-nrpe-server
-  - nagios-plugins-extra
-  - nagios-plugins-standard
-  - nagios-plugins-contrib
-  - libnagios-plugin-perl
-  - ntpdate
 
 # nginx
 nginx_server_default:
