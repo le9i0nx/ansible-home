@@ -131,6 +131,7 @@ nagios_nrpe_server_commands_default:
   - {name: "check_service", plugin: "check_procs", args: "-w $ARG2$ -c $ARG3$ -a \"$ARG1$\"", sudo: true }
   - {name: "check_mem", plugin: "check_mem.pl", args: "-w 10 -c 5 -f -C"}
   - {name: "check_iftraffic", plugin: "check_iftraffic_nrpe.py", args: "-i" }
+  - {name: "check_uptime", plugin: "check_uptime" }
 
 icinga__client:
   group: "{{ ansible_domain.split('.')[0] }}"
@@ -147,7 +148,6 @@ icinga__client_hostgroups_default:
     - "nrpe_mem"
     - "nrpe_traffic"
     - "nrpe_ntpdate"
-    - "nrpe_traffic"
 
 #bacula
 bacula__conf_client_job:

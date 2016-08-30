@@ -11,28 +11,36 @@ sshd__PasswordAuthentication: 'yes'
 sshd__permit_root_login: 'yes'
 
 #nagios_nrpe_server_config
-nagios_nrpe_server_apt_packages:
-  - nagios-nrpe-server
-  - nagios-plugins-extra
-  - nagios-plugins-standard
-  - nagios-plugins-contrib
-  - libnagios-plugin-perl
+icinga__client_hostgroups_group:
+  - "nrpe_mio_sda"
+  - "otrs"
 
-nagios_nrpe_server_pool: "{{icinga_pool + ['127.0.0.1']}}"
-nagios_nrpe_allow: "{{nagios_nrpe_server_pool}}"
-nagios_nrpe_server_config:
-  server_port: 5666
-  allowed_hosts: "{{ nagios_nrpe_server_pool | join(',')}}"
-  dont_blame_nrpe: 1
-nagios_nrpe_server_commands:
-  - {name: "check_disk", plugin: "check_disk", args: "-w 20% -c 5%"}
-  - {name: "check_total_procs", plugin: "check_procs", args: "-w 1600 -c 1800"}
-  - {name: "check_apt", plugin: "check_apt", args: "-c trusty-updates"}
-  - {name: "check_ntp", plugin: "check_ntp", args: "-H localhost -w -1:1 -c -2:2"}
-  - {name: "check_service", plugin: "check_procs", args: "-w $ARG2$ -c $ARG3$ -a \"$ARG1$\""}
-  - {name: "check_mem", plugin: "check_mem.pl", args: "-w 10 -c 5 -f -C"}
-  - {name: "check_iftraffic", plugin: "check_iftraffic_nrpe.py", args: "-i" }
+nagios_nrpe_server_apt_packages_group: []
+nagios_nrpe_server_commands_group:
   - {name: "check_mio", plugin: "check_mio", args: "-d $ARG1$ -w 1000,60000,52428800,52428800 -c 1100,100000,104857600,104857600"}
+
+#nagios_nrpe_server_apt_packages:
+#  - nagios-nrpe-server
+#  - nagios-plugins-extra
+#  - nagios-plugins-standard
+#  - nagios-plugins-contrib
+#  - libnagios-plugin-perl
+
+#nagios_nrpe_server_pool: "{{icinga_pool + ['127.0.0.1']}}"
+#nagios_nrpe_allow: "{{nagios_nrpe_server_pool}}"
+#nagios_nrpe_server_config:
+#  server_port: 5666
+#  allowed_hosts: "{{ nagios_nrpe_server_pool | join(',')}}"
+#  dont_blame_nrpe: 1
+#nagios_nrpe_server_commands:
+#  - {name: "check_disk", plugin: "check_disk", args: "-w 20% -c 5%"}
+#  - {name: "check_total_procs", plugin: "check_procs", args: "-w 1600 -c 1800"}
+#  - {name: "check_apt", plugin: "check_apt", args: "-c trusty-updates"}
+#  - {name: "check_ntp", plugin: "check_ntp", args: "-H localhost -w -1:1 -c -2:2"}
+#  - {name: "check_service", plugin: "check_procs", args: "-w $ARG2$ -c $ARG3$ -a \"$ARG1$\""}
+#  - {name: "check_mem", plugin: "check_mem.pl", args: "-w 10 -c 5 -f -C"}
+#  - {name: "check_iftraffic", plugin: "check_iftraffic_nrpe.py", args: "-i" }
+#  - {name: "check_mio", plugin: "check_mio", args: "-d $ARG1$ -w 1000,60000,52428800,52428800 -c 1100,100000,104857600,104857600"}
 
 users_host_list:
   - users_otrs

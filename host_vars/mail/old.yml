@@ -18,7 +18,7 @@ mail_domain:
 #ntp
 ntp_timezone: 'Asia/Yekaterinburg'
 #ntp_servers: ['host65.dc-ttk.w.rugion.ru']
-ntp_servers: ['gw.dc-ekat.w.rugion.ru']
+#ntp_servers: ['gw.dc-ekat.w.rugion.ru']
 
 #snmpd
 #snmpd_opts: '-Lsd -Lf /dev/null -u snmp -g snmp -I -smux,mteTrigger,mteTriggerConf -p /var/run/snmpd.pid'
@@ -266,34 +266,6 @@ smartd_disks:
   - {disk: '/dev/cciss/c0d0', sub: 'cciss,10', s_hour: '01', l_dow: '6', l_hour: '02'  }
   - {disk: '/dev/cciss/c0d0', sub: 'cciss,11', s_hour: '01', l_dow: '6', l_hour: '02'  }
 
-#nagios_nrpe_server_config
-nagios_nrpe_server_apt_packages:
-  - nagios-nrpe-server
-  - nagios-plugins-extra
-  - nagios-plugins-standard
-  - nagios-plugins-contrib
-  - libnagios-plugin-perl
-
-icinga_pool: "{{office_chelyabinsk_lesopark_pool}}"
-nagios_nrpe_server_pool: "{{icinga_pool + ['127.0.0.1']}}"
-nagios_nrpe_allow: "{{nagios_nrpe_server_pool}}"
-nagios_nrpe_server_config:
-  server_port: 5666
-  allowed_hosts: "{{ nagios_nrpe_server_pool | join(',')}}"
-  dont_blame_nrpe: 1
-nagios_nrpe_server_commands:
-  - {name: "check_disk", plugin: "check_disk", args: "-w 20% -c 5%"}
-  - {name: "check_total_procs", plugin: "check_procs", args: "-w 1600 -c 1800", sudo: true }
-  - {name: "check_apt", plugin: "check_apt" }
-  - {name: "check_ntp", plugin: "check_ntp", args: "-H localhost -w -1:1 -c -2:2"}
-  - {name: "check_service", plugin: "check_procs", args: "-w $ARG2$ -c $ARG3$ -a \"$ARG1$\"", sudo: true }
-  - {name: "check_ssl_cert", plugin: "check_ssl_cert", args: "-H $ARG1$ -w $ARG2$ -c $ARG3$ -r $ARG4$"}
-  - {name: "check_raid", plugin: "check_raid", sudo: true }
-  - {name: "check_mem", plugin: "check_mem.pl", args: "-w 10 -c 5 -f -C"}
-  - {name: "check_hpasm", plugin: "check_hpasm", sudo: true }
-  - {name: "check_iftraffic", plugin: "check_iftraffic_nrpe.py", args: "-i" }
-  - {name: "check_mio", plugin: "check_mio", args: "-d $ARG1$\\!$ARG2$ -w 1000,60000,52428800,52428800 -c 1100,100000,104857600,104857600"}
-  - {name: "check_mailq", plugin: "check_mailq", sudo: true, args: "-w 100 -c 2000 -M exim" }
 
 #fail2ban
 fail2ban_ignoreip: "{{

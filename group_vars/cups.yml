@@ -5,7 +5,6 @@ nagios_nrpe_server_apt_packages_group: []
 nagios_nrpe_server_commands_group:
   - {name: "check_cups_queue", plugin: "check_cups_queue", args: "-H localhost -T b -w 10 -c 50 -a 1" }
 
-#bacula
 icinga__client_hostgroups_group:
   - "nrpe_cups_queue"
   - "cups_port"
