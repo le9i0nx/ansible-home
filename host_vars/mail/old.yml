@@ -63,7 +63,7 @@ exim_list_dnsbl:
 #  - 'xbl.spamhaus.org'
   - 'relay.mail-abuse.org'
   - 'bl.spamcop.net'
-  - 'relays.ordb.org'
+#  - 'relays.ordb.org'
   - 'smtp.dnsbl.sorbs.net'
   - 'recent.dnsbl.sorbs.net'
   - 'recent.spam.dnsbl.sorbs.net'

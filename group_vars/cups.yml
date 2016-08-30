@@ -8,5 +8,6 @@ nagios_nrpe_server_commands_group:
 #bacula
 icinga__client_hostgroups_group:
   - "nrpe_cups_queue"
+  - "cups_port"
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
