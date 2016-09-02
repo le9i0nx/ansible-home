@@ -102,17 +102,17 @@ icinga__server:
   name_ansible: "icinga.74ru.mpautina.ru"
   ip: "{{ icinga_pool }}"
 
-nagios_nrpe_server_apt_packages: "{{ nagios_nrpe_server_apt_packages_default + nagios_nrpe_server_apt_packages_group }}"
-nagios_nrpe_server_apt_packages_default_ubuntu: '[ {% if ansible_distribution == "Ubuntu" %}"nagios-plugins-extra",{% endif %} ]'
-nagios_nrpe_server_apt_packages_default: "{{ nagios_nrpe_server_apt_packages_default_ubuntu + nagios_nrpe_server_apt_packages_default_def}}"
-nagios_nrpe_server_apt_packages_default_def: [
-  #with_flattened: /crypt/ansible/roles/debops.ntp/tasks/install.yml
-  "nagios-nrpe-server",
-  "nagios-plugins-standard",
-  "nagios-plugins-contrib",
-  "libnagios-plugin-perl",
-  "ntpdate",
-  ]
+nagios_nrpe_server_apt_packages:
+  - '{{ nagios_nrpe_server_apt_packages_default if nagios_nrpe_server_apt_packages_default|d() else [] }}'
+  - '{{ nagios_nrpe_server_apt_packages_group if nagios_nrpe_server_apt_packages_group|d() else [] }}'
+
+nagios_nrpe_server_apt_packages_default:
+  - '{{ "nagios-plugins-extra" if ( ansible_distribution == "Ubuntu" ) else [] }}'
+  - "nagios-nrpe-server"
+  - "nagios-plugins-standard"
+  - "nagios-plugins-contrib"
+  - "libnagios-plugin-perl"
+  - "ntpdate"
 
 nagios_nrpe_server_pool: "{{icinga_pool + ['127.0.0.1']}}"
 nagios_nrpe_allow: "{{nagios_nrpe_server_pool}}"
@@ -123,7 +123,7 @@ nagios_nrpe_server_config:
 nagios_nrpe_server_commands: "{{ nagios_nrpe_server_commands_group + nagios_nrpe_server_commands_default }}"
 
 nagios_nrpe_server_commands_default:
-  - {name: "check_disk", plugin: "check_disk", args: "-w 20% -c 5%"}
+  - {name: "check_disk", plugin: "check_disk", args: "-w 20% -c 5%", sudo: true }
   - {name: "check_total_procs", plugin: "check_procs", args: "-w 1600 -c 1800", sudo: true }
   - {name: "check_apt", plugin: "check_apt" }
   - {name: "check_ntp", plugin: "check_ntp", args: "-H localhost -w -1:1 -c -2:2"}
@@ -132,26 +132,24 @@ nagios_nrpe_server_commands_default:
   - {name: "check_mem", plugin: "check_mem.pl", args: "-w 10 -c 5 -f -C"}
   - {name: "check_iftraffic", plugin: "check_iftraffic_nrpe.py", args: "-i" }
   - {name: "check_uptime", plugin: "check_uptime" }
+  - {name: "check_mio_sda", plugin: "check_mio", args: "-d sda -w 500,30000,52428800,52428800 -c 600,40000,104857600,104857600"}
+  - {name: "check_mio_sdb", plugin: "check_mio", args: "-d sdb -w 500,30000,52428800,52428800 -c 600,40000,104857600,104857600"}
 
-icinga__client:
-  group: "{{ ansible_domain.split('.')[0] }}"
-  name: '{{ ansible_hostname }}'
-  ip: '{{ ansible_fqdn }}'
-  parents: "{{ icinga__client_parents_rugion }}"
-  hostgroups: "{{ icinga__client_hostgroups_default + icinga__client_hostgroups_group + icinga__client_hostgroups_rugion }}"
+icinga__client_parents: "{{ icinga__client_parents_rugion }}"
+icinga__client_hostgroups: "{{ icinga__client_hostgroups_default + icinga__client_hostgroups_group + icinga__client_hostgroups_rugion }}"
 
 icinga__client_hostgroups_default:
-    - "ssh"
-    - "nrpe"
-    - "nrpe_apt"
-    - "nrpe_space"
-    - "nrpe_mem"
-    - "nrpe_traffic"
-    - "nrpe_ntpdate"
+  - "ssh"
+  - "nrpe"
+  - "nrpe_apt"
+  - "nrpe_space"
+  - "nrpe_mem"
+  - "nrpe_traffic"
+  - "nrpe_ntpdate"
+  - "nrpe_mio_sda"
 
 #bacula
-bacula__conf_client_job:
-
+bacula__conf_client_job_default:
   - {name: "etc", JobDefs: "GateBackup", Schedule: "Daily_0" }
 
 # nginx

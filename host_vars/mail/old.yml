@@ -17,15 +17,6 @@ mail_domain:
 
 #ntp
 ntp_timezone: 'Asia/Yekaterinburg'
-#ntp_servers: ['host65.dc-ttk.w.rugion.ru']
-#ntp_servers: ['gw.dc-ekat.w.rugion.ru']
-
-#snmpd
-#snmpd_opts: '-Lsd -Lf /dev/null -u snmp -g snmp -I -smux,mteTrigger,mteTriggerConf -p /var/run/snmpd.pid'
-#snmpd_allow: "{{ icinga_pool }}"
-#snmpd_sys_location: 'rugion'
-#snmpd_sys_contact: edi <edi@info74.ru>
-#snmp_firewall_access: True
 
 #ssh
 sshd__ferm_limit: 'false'
@@ -204,7 +195,7 @@ exim_ldap_server_port: "389"
 exim_ldap_aliases: "{{ mail_domain }}"
 
 #roundcube
-roundcube_db_name: 'roundcube_105'
+roundcube_db_name: 'roundcube_121'
 roundcube_ldap_server: '{{ldap_server_pool}}'
 
 mysql_mysqld_max_connections: 200
@@ -282,11 +273,5 @@ rspamd__conf_d:
   - name: "rbl_exim"
     type: "rbl"
     data: '{{ exim_list_dnsbl }}'
-
-# bacula
-bacula__conf_client:
-  name: 'mail'
-  passwd: '{{ bacula__gen_client_password }}'
-  ip: "{{ ansible_tun0.ipv4.address }}"
 
 ## vim: ft=yaml:foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

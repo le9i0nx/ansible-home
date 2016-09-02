@@ -1,0 +1,15 @@
+---
+#bacula
+bacula__conf_client:
+  name: 'mail'
+  passwd: '{{ bacula__gen_client_password }}'
+  ip: "{{ ansible_tun0.ipv4.address }}"
+
+bacula__conf_client_job_default:
+  - {name: "etc", JobDefs: "mail", Schedule: "Daily_0" }
+bacula__conf_client_jobDefs_default:
+  - {name: "mail", Schedule: "Daily_0", FileSet: "mail-set" }
+bacula__conf_client_FileSet_default:
+  - {name: "mail-set", File: [ "/etc", "/srv","/var/spool/cron/crontabs","/var/lib/automysqlbackup/daily","/usr/lib/nagios/plugins","/usr/local/bin","/home/letsencrypt.sh" ] }
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

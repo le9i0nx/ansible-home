@@ -3,8 +3,6 @@
 #nagios_nrpe_server_config
 nagios_nrpe_server_apt_packages_group: []
 nagios_nrpe_server_commands_group: []
-
-#bacula
 icinga__client_hostgroups_group: []
 
 

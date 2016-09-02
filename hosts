@@ -11,7 +11,6 @@
 #localhost ansible_connection=local
 
 [rabota_74ru_old]
-1c83 ansible_ssh_host=1c83
 otrs5
 
 [homes]
@@ -92,6 +91,7 @@ proxy.samara.mpautina.ru
 cups.samara.mpautina.ru
 
 [74l]
+1c83 ansible_ssh_host=1c83
 pve32.pve.mpautina.ru
 jabber.info74.ru
 cups-l.74ru.mpautina.ru
@@ -111,7 +111,6 @@ pve59.pve.mpautina.ru
 
 [mail_srv]
 mail ansible_ssh_host=mail
-mail_test
 
 [rabota_74ru:children]
 pve
@@ -131,6 +130,9 @@ cups
 
 [debops_all_hosts:children]
 homes
+rabota_74ru
+
+[debops_service_nrpe:children]
 rabota_74ru
 
 [debops_service_bind:children]

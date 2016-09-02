@@ -28,4 +28,11 @@ samba__default_shares:
   # блокировки - иногда бывают грабли без этого пункта
     locking: 'no'
 
+icinga__client_name: "tosha"
+#bacula
+bacula__conf_client:
+  name: '{{ icinga__client_name }}'
+  passwd: '{{ bacula__gen_client_password }}'
+  ip: "{{ ansible_tun0.ipv4.address }}"
+
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

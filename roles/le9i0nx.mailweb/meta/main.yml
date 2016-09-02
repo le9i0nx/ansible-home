@@ -4,5 +4,3 @@ dependencies:
 
   - role: debops.secret
 
-  - role: le9i0nx.ssl_key
-

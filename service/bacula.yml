@@ -11,11 +11,15 @@
       tags: [ 'role::apt_preferences' ]
       apt_preferences__group_list:
         - '{{ bacula__apt_preferences__dependent_list }}'
+      when: ((ansible_distribution == 'Ubuntu') and
+             (ansible_distribution_major_version == '16' ))
 
     - role: debops.apt
       tags: [ 'role::apt' ]
       apt__host_repositories:
         - '{{ bacula__apt__repositories }}'
+      when: ((ansible_distribution == 'Ubuntu') and
+             (ansible_distribution_major_version == '16' ))
 
     - role: debops.ferm
       tags: [ 'role::ferm' ]

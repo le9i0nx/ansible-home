@@ -2,13 +2,6 @@
 
 #ntp
 ntp__timezone: 'Europe/Moscow'
-ntp__daemon: 'systemd-timesyncd'
-#ntp_servers: ['192.168.3.2']
-#ntp_listen: ['localhost']
-#ntp_daemon: False
-
-# ferm
-#ferm_enabled: False
 
 #dns
 bind__conf_d:
@@ -57,6 +50,7 @@ dhcpd_secret_secure_key: '{{ lookup("password",
   "/shared/ddns/keys/secure-key") }}'
 
 #icinga
+icinga__client_group: "perm"
 icinga__client_parents_rugion:
   - "mikrotik.perm"
 icinga__client_hostgroups_rugion:

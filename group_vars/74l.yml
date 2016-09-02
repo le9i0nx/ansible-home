@@ -1,6 +1,7 @@
 ---
 
 #icinga
+icinga__client_group: "chel.lesopark"
 icinga__client_parents_rugion:
   - "point4"
 icinga__client_hostgroups_rugion:

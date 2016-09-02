@@ -1,6 +1,7 @@
 ---
 
 #icinga
+icinga__client_group: "chel.rodnik"
 icinga__client_parents_rugion:
   - "mikrotik.rugion"
 icinga__client_hostgroups_rugion:
