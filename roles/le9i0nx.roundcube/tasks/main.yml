@@ -53,5 +53,6 @@
     - {name: 'subscription_mail', minute: '1', user: 'root', job: '/usr/local/bin/subscription_mail.py' }
     - {name: 'roundcube tmp rm', minute: '20' ,hour: '0', user: 'root', job: "find /var/tmp/roundcube/ -name '*' -mtime +2 | xargs -r rm" }
     - {name: 'roundcube old login user rm', minute: '20' ,hour: '0', user: 'root', job: 'mysql -s -D {{roundcube_db_name}} -e "DELETE FROM users WHERE last_login <= DATE_SUB(NOW(), INTERVAL 360 DAY);"' }
+    - {name: 'roundcube old session rm', minute: '21' ,hour: '0', user: 'root', job: 'mysql -s -D {{roundcube_db_name}} -e "DELETE FROM session WHERE changed <= DATE_SUB(NOW(), INTERVAL 40 DAY);"' }
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

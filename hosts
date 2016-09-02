@@ -11,7 +11,6 @@
 #localhost ansible_connection=local
 
 [rabota_74ru_old]
-1c83 ansible_ssh_host=1c83
 otrs5
 
 [homes]
@@ -28,6 +27,7 @@ rabota_74ru
 pve
 
 [cups]
+cups.perm.mpautina.ru
 cups.samara.mpautina.ru
 cups-l.74ru.mpautina.ru
 cups-r.74ru.mpautina.ru
@@ -38,6 +38,7 @@ dns.samara.mpautina.ru
 cups.samara.mpautina.ru
 dns.volgograd.mpautina.ru
 dns.perm.mpautina.ru
+cups.perm.mpautina.ru
 cups-l.74ru.mpautina.ru
 cups-r.74ru.mpautina.ru
 
@@ -76,6 +77,7 @@ jabber.info74.ru
 [59]
 dns.perm.mpautina.ru
 pve59.pve.mpautina.ru
+cups.perm.mpautina.ru
 
 
 [34]
@@ -88,14 +90,17 @@ pve63.pve.mpautina.ru
 proxy.samara.mpautina.ru
 cups.samara.mpautina.ru
 
-[74]
-mail ansible_ssh_host=mail
+[74l]
+1c83 ansible_ssh_host=1c83
 pve32.pve.mpautina.ru
-pve6.pve.mpautina.ru
-74economists.74ru.mpautina.ru
 jabber.info74.ru
 cups-l.74ru.mpautina.ru
+otrs5
+
+[74r]
 cups-r.74ru.mpautina.ru
+pve6.pve.mpautina.ru
+74economists.74ru.mpautina.ru
 
 [pve]
 pve32.pve.mpautina.ru
@@ -106,7 +111,6 @@ pve59.pve.mpautina.ru
 
 [mail_srv]
 mail ansible_ssh_host=mail
-mail_test
 
 [rabota_74ru:children]
 pve
@@ -116,7 +120,8 @@ dns
 proxy
 samba
 ldap
-74
+74r
+74l
 63
 59
 34
@@ -125,6 +130,9 @@ cups
 
 [debops_all_hosts:children]
 homes
+rabota_74ru
+
+[debops_service_nrpe:children]
 rabota_74ru
 
 [debops_service_bind:children]

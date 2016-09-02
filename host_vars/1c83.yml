@@ -1,9 +1,6 @@
 ---
 ferm_ansible_controllers:  "{{admin_allow_pool +
   ['0.0.0.0/0']}}"
-tcpwrappers_ansible_controllers: "{{admin_allow_pool + ['ALL']}}"
-tcpwrappers: False
-tcpwrappers_deny_all: False
 
 #ntp
 ntp_timezone: 'Asia/Yekaterinburg'
@@ -22,28 +19,22 @@ smartd_disks:
   - {disk: '/dev/sdb', sub: '', s_hour: '01', l_dow: '6', l_hour: '02'  }
 
 #nagios_nrpe_server_config
-nagios_nrpe_server_apt_packages:
-  - nagios-nrpe-server
-  - nagios-plugins-extra
-  - nagios-plugins-standard
-  - nagios-plugins-contrib
-  - libnagios-plugin-perl
+nagios_nrpe_server_apt_packages_group: []
+icinga__client_hostgroups_group:
+  - "nrpe_raid"
+  - "nrpe_mio_sda"
+  - "nrpe_mio_sdb"
+  - "1c"
 
-nagios_nrpe_server_pool: "{{icinga_pool + ['127.0.0.1']}}"
-nagios_nrpe_allow: "{{nagios_nrpe_server_pool}}"
-nagios_nrpe_server_config:
-  server_port: 5666
-  allowed_hosts: "{{ nagios_nrpe_server_pool | join(',')}}"
-  dont_blame_nrpe: 1
-nagios_nrpe_server_commands:
-  - {name: "check_disk", plugin: "check_disk", args: "-w $ARG1$ -c $ARG2$"}
-  - {name: "check_total_procs", plugin: "check_procs", args: "-w 1600 -c 1800"}
-  - {name: "check_apt", plugin: "check_apt", args: "-c trusty-updates"}
-  - {name: "check_ntp", plugin: "check_ntp", args: "-H localhost -w -1:1 -c -2:2"}
-  - {name: "check_service", plugin: "check_procs", args: "-w $ARG2$ -c $ARG3$ -a \"$ARG1$\""}
+icinga__client_hostgroups_default:
+  - "ssh"
+  - "nrpe"
+  - "nrpe_space"
+  - "nrpe_mem"
+  - "nrpe_traffic"
+  - "nrpe_ntpdate"
+
+nagios_nrpe_server_commands_group:
   - {name: "check_raid", plugin: "check_raid", sudo: true }
-  - {name: "check_mem", plugin: "check_mem.pl", args: "-w 10 -c 5 -f -C"}
-  - {name: "check_iftraffic", plugin: "check_iftraffic_nrpe.py", args: "-i" }
-  - {name: "check_mio", plugin: "check_mio", args: "-d $ARG1$ -w 500,30000,52428800,52428800 -c 600,40000,104857600,104857600"}
 
 ## vim: ft=yaml:foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

@@ -1,0 +1,19 @@
+---
+
+#icinga
+icinga__client_group: "chel.lesopark"
+icinga__client_parents_rugion:
+  - "point4"
+icinga__client_hostgroups_rugion:
+  - "chel"
+
+#ntp
+ntp__timezone: 'Asia/Yekaterinburg'
+ntp__daemon: 'systemd-timesyncd'
+
+# samba
+samba__workgroup: '74RU'
+samba__ldap_suffix: 'ou=chelyabinsk,dc=rugion,dc=ru'
+samba__wins_server: '192.168.0.7'
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

@@ -24,7 +24,7 @@
     - { src: '../../mods-available/mcrypt.ini' , dest: '/etc/php5/fpm/conf.d/90-mcrypt.ini' }
     - { src: '/usr/share/postfixadmin', dest: '/srv/www/sites/mail/public/postfixadmin' }
     - { src: '/srv/www/roundcube', dest: '/srv/www/sites/mail/public/roundcube', force: "yes" }
-    - { src: '/srv/pki/private/cina_root.pem', dest: '/srv/pki/trusted.crt' }
+#    - { src: '/srv/pki/private/cina_root.pem', dest: '/srv/pki/trusted.crt' }
   notify: [ 'Reload php5-fpm' ]
 
 - name: copy files

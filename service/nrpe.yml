@@ -1,7 +1,7 @@
 ---
 
 - name: nrpe
-  hosts: [ 'debops_all_hosts', 'debops_service_nrpe' ]
+  hosts: [ 'debops_service_nrpe' ]
   become: True
   become_method: sudo
   roles:

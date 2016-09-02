@@ -2,12 +2,6 @@
 
 #ntp
 ntp__timezone: 'Europe/Moscow'
-#ntp_servers: ['192.168.3.2']
-#ntp_listen: ['localhost']
-#ntp_daemon: False
-
-# ferm
-#ferm_enabled: False
 
 #dns
 bind__conf_d:
@@ -42,6 +36,11 @@ bind__conf_d:
     zone_slave: true
     masters: [ "192.168.0.1" ]
 
+  - name: "rn"
+    type: "zone"
+    zone_slave: true
+    masters: [ "192.168.0.1" ]
+
   - name: "dhcp_perm_mpautina_ru"
     type: "key"
     key: '{{ dhcpd_secret_secure_key }}'
@@ -51,6 +50,7 @@ dhcpd_secret_secure_key: '{{ lookup("password",
   "/shared/ddns/keys/secure-key") }}'
 
 #icinga
+icinga__client_group: "perm"
 icinga__client_parents_rugion:
   - "mikrotik.perm"
 icinga__client_hostgroups_rugion:
