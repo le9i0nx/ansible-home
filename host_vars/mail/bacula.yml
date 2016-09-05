@@ -3,7 +3,8 @@
 bacula__conf_client:
   name: 'mail'
   passwd: '{{ bacula__gen_client_password }}'
-  ip: "{{ ansible_tun0.ipv4.address }}"
+
+bacula__conf_client_ip: "{{ ansible_tun0.ipv4.address }}"
 
 bacula__conf_client_job_default:
   - {name: "etc", JobDefs: "mail", Schedule: "Daily_0" }
