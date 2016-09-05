@@ -3,14 +3,21 @@
 lcsh_challengesdir: /srv/www/sites/acme/public/.well-known/acme-challenge/
 #lcsh_acme_api: https://acme-staging.api.letsencrypt.org/directory
 lcsh_contactemail: hostmaster@info74.ru
+lcsh_domains_info74_ru: "{{ mail_domain }} + {{ lcsh_domains_mpautina_ru }}"
+lcsh_domains_mpautina_ru:
+  - {domain: 'mpautina.ru',ou: 'mpautina'}
+
 lcsh_domains: |
-  mail.info74.ru mail.info63.ru mail.info59.ru mail.corp.161.ru mail.corp.ufa1.ru mail.corp.76.ru mail.ig72.ru mail.corp.v1.ru mail.corp.29.ru pop3.info74.ru pop3.info63.ru pop3.info59.ru pop3.corp.161.ru pop3.corp.ufa1.ru pop3.corp.76.ru pop3.ig72.ru pop3.corp.v1.ru pop3.corp.29.ru imap.info74.ru imap.info63.ru imap.info59.ru imap.corp.161.ru imap.corp.ufa1.ru imap.corp.76.ru imap.ig72.ru imap.corp.v1.ru imap.corp.29.ru smtp.info74.ru smtp.info63.ru smtp.info59.ru smtp.corp.161.ru smtp.corp.ufa1.ru smtp.corp.76.ru smtp.ig72.ru smtp.corp.v1.ru smtp.corp.29.ru
+  {% for item in lcsh_domains_info74_ru %}mail.{{ item.domain }} smtp.{{ item.domain }} imap.{{ item.domain }} pop3.{{ item.domain }} {% endfor %}
 
 lcsh_deploy_cert: |
   mkdir -p /etc/nginx/ssl/${DOMAIN}
   cp "${KEYFILE}" "${CERTFILE}" "${FULLCHAINFILE}" "${CHAINFILE}" /etc/nginx/ssl/${DOMAIN}
   chown root:root /etc/nginx/ssl/${DOMAIN}/*
-  chmod 600 /etc/nginx/ssl/${DOMAIN}/*
+  chmod 600 /etc/nginx/ssl/${DOMAIN}/privkey.pem
+  chmod 644 /etc/nginx/ssl/${DOMAIN}/cert.pem
+  chmod 644 /etc/nginx/ssl/${DOMAIN}/chain.pem
+  chmod 644 /etc/nginx/ssl/${DOMAIN}/fullchain.pem
   /etc/init.d/nginx reload
 
 ## vim: ft=yaml:foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
