@@ -9,8 +9,8 @@
 - include: service/apt_preferences.yml
 
 - hosts: mail_srv
-  remote_user: ansicon
-  sudo: yes
+  become: True
+  become_method: sudo
 
   roles:
     - debops.ntp
@@ -24,16 +24,16 @@
 - include: service/bacula.yml
 
 - hosts: mail
-  remote_user: ansicon
-  sudo: yes
+  become: True
+  become_method: sudo
 
   roles:
     - le9i0nx.hp.dl320
     - le9i0nx.smartd
 
 - hosts: mail_srv
-  remote_user: ansicon
-  sudo: yes
+  become: True
+  become_method: sudo
 
   roles:
     #nrpe

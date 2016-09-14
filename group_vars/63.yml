@@ -1,10 +1,10 @@
 ---
 
 #ntp
-ntp_timezone: 'Europe/Moscow'
-ntp_servers: ['192.168.63.2']
-ntp_listen: ['localhost']
-ntp_daemon: False
+ntp__timezone: 'Europe/Moscow'
+#ntp_servers: ['192.168.63.2']
+#ntp_listen: ['localhost']
+#ntp_daemon: False
 
 # ferm
 ferm_enabled: False
@@ -38,6 +38,11 @@ bind__conf_d:
     masters: [ "192.168.0.1" ]
 
   - name: "hfm.ru"
+    type: "zone"
+    zone_slave: true
+    masters: [ "192.168.0.1" ]
+
+  - name: "rn"
     type: "zone"
     zone_slave: true
     masters: [ "192.168.0.1" ]
@@ -135,5 +140,12 @@ dhcpd_options: |
 samba__workgroup: 'SAMARA'
 samba__ldap_suffix: 'ou=samara,dc=rugion,dc=ru'
 samba__wins_server: '192.168.63.2'
+
+#icinga
+icinga__client_group: "samara"
+icinga__client_parents_rugion:
+  - "mikrotik.{{ icinga__client_group }}"
+icinga__client_hostgroups_rugion:
+    - "{{ icinga__client_group }}"
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

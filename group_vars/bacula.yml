@@ -13,6 +13,4 @@ bacula__conf_sd:
   ip:
     - "192.168.0.19"
 
-bacula__conf_client:
-  name: '{{ ansible_fqdn }}'
-  passwd: '{{ bacula__gen_client_password }}'
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

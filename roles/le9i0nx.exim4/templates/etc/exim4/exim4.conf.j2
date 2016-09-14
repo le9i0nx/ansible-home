@@ -43,6 +43,8 @@
 EXTRA_PREFIX = /etc/exim4/
 DKIM_DIRECTORY = /etc/exim4/dkim
 
+spamd_address = 127.0.0.1 11333 variant=rspamd
+
 # Запрос, возвращающий синонимы для почтового адреса, если они есть
 CHECK_VIRTUAL_ALIASES = \
   ${lookup mysql{SELECT DISTINCT alias.goto \
@@ -214,6 +216,12 @@ primary_hostname = smtp.mpautina.ru
 # +local_domains, +relay_to_domains, и +relay_from_hosts.
 # Во всех списках элементы разделены двоеточием:
 #}
+domainlist active_domains = ${lookup mysql{ \
+        SELECT GROUP_CONCAT(`domain` SEPARATOR ' : ') \
+        FROM  `domain` \
+        WHERE `domain`!='ALL' \
+        AND   `active`='1';}}
+
 domainlist local_domains =\
   ${lookup mysql{\
     SELECT domain \
@@ -610,6 +618,12 @@ acl_check_mail:
         message = Your IP address in local blacklist. Please contact with postmaster or call 8(351)729-94-90(345).
         hosts = !+relay_from_hosts : !+white_list_local_hosts : +blacklist : +badhosts
         condition = GET_NOT_WHITELIST
+
+  # Не принимаем письма с нашими доменами со внешки без авторизации
+  deny  !authenticated = *
+        hosts          = !+relay_from_hosts
+        sender_domains = +active_domains
+        message = Warning! Authentication required!
 
 {#
   # Различные проверки HELO/EHLO
@@ -1201,19 +1215,6 @@ dnslookup:
 #  transport = esets_transport
 #  verify = false
 #}
-dspam:
-  driver = accept
-  domains = +local_domains
-  no_verify
-  condition = "${if and { \
-      {!eq {$received_protocol}{spam-scanned}} \
-      {!eq {$received_protocol}{local}} \
-    } {1}{0}}"
-  condition = ${lookup {$local_part@$domain}lsearch{EXTRA_PREFIX/list/no_dspam}{no}{yes}}
-  condition = ${if !match_domain{$sender_address_domain}{+local_domains}}
-  condition = CHECK_VIRTUAL_ALIASES
-  condition = GET_NOT_WHITELIST
-  transport = dspam_transport
 
 {#
 # автоответчик
@@ -1351,6 +1352,19 @@ system_aliases:
 
 #}
 
+virtual_user_spam:
+  driver = accept
+  transport = dovecot_delivery
+  domains = +local_domains
+  condition = CHECK_VIRTUAL_USER
+  local_parts = gavrilov
+  headers_remove = Subject
+  headers_add = ${if eq{$h_X-Spam-Flag:}{YES} \
+                    {Subject: [SPAM][$h_X-RSpamD-Action:] $rh_subject:} \
+                    {Subject: $rh_subject:} \
+               }
+  no_more
+
 virtual_user:
   driver = accept
   transport = dovecot_delivery
@@ -1381,14 +1395,6 @@ autoreply_postfixadmin:
 # Транспорт используется только после обработки письма роутером.
 
 begin transports
-
-dspam_transport:
-  driver = pipe
-  command = /usr/bin/dspam --deliver=innocent --user "$local_part@$domain" -- %u
-  return_path_add = false
-  log_output = true
-  return_fail_output = true
-  headers_remove = X-DSPAM-Result
 
 {# esets_transport:
 #  driver = pipe

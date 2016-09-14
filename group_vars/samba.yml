@@ -1,4 +1,6 @@
 ---
+# debops.auth
+auth_nsswitch: [ 'compat', 'ldap', 'winbind' ]
 
 # ferm
 ferm__enabled: False

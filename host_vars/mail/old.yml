@@ -16,12 +16,12 @@ mail_domain:
 
 
 #ntp
-ntp_timezone: 'Asia/Yekaterinburg'
+ntp__timezone: 'Asia/Yekaterinburg'
 
 #ssh
 sshd__ferm_limit: 'false'
 sshd__PasswordAuthentication: 'yes'
-sshd__permit_root_login: 'yes'
+sshd__permit_root_login: 'without-password'
 
 #postfixadmin
 postfixadmin_postfix_admin_url: 'https://mail.info74.ru/postfixadmin'
@@ -41,11 +41,8 @@ nginx_server_default:
 
 #dovecot
 dovecot_db_name: '{{postfixadmin_control_database}}'
-dovecot_ssl_cert: '{{pki_path}}/certs/imap.info74.ru.crt'
-dovecot_ssl_key: '{{pki_path}}/private/imap.info74.ru.key'
-dovecot_pki: '{{pki_path}}'
-dovecot_ssl_sni: |
-      [{% for item in mail_domain %}'pop3.{{ item.domain }}','imap.{{ item.domain }}',{% endfor %}]
+dovecot_ssl_cert: '/etc/dovecot/ssl/mail.info74.ru/fullchain.pem'
+dovecot_ssl_key: '/etc/dovecot/ssl/mail.info74.ru/privkey.pem'
 
 #exim
 exim_list_dnsbl:

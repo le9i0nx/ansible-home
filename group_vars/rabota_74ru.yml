@@ -57,6 +57,14 @@ users_pavlov:
     password: "{{ lookup('file', secret + '/users/pavlov/password') }}"
     update_password: 'on_create'
 
+users_ngs:
+  - name:   'ngs'
+    state:  'present'
+    group:  'ngs'
+    groups: ['admins']
+    shell: '/bin/bash'
+    password: "{{ lookup('file', secret + '/users/ngs/password') }}"
+
 users_default:
   - '{{ users_ansicon }}'
 
@@ -66,6 +74,7 @@ users_admins:
   - '{{ users_edi }}'
   - '{{ users_root }}'
   - '{{ users_pavlov }}'
+  - '{{ users_ngs }}'
 
 office_chelyabinsk_rodnik_pool:
   - '195.206.240.34'

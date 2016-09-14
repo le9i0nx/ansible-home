@@ -1,6 +1,6 @@
 ## This file is managed by Ansible, all changes will be lost
-default_process_limit = 100
-default_client_limit = 1000
+default_process_limit = 1000
+default_client_limit = 10000
 {#
 # Лимит VSZ (virtual memory size) для процессов по умолчанию. Такая
 # плюшка предназначена, чтобы отловить и прибить процессы, которые
@@ -37,11 +37,11 @@ service imap-login {
 {#
   # Количество процессов, ждущих подключений.
 #}
-  process_min_avail = 15
+  process_min_avail = 30
 {#
   # Если вы установили service_count=0, то памяти процессу нужно выделить больше.
 #}
-  vsz_limit = 96M
+  vsz_limit = 128M
 }
 
 service pop3-login {
@@ -74,11 +74,11 @@ service imap {
 {#  # Большая часть памяти уходит для mmap()ing файлов. Для очень больших вложений
   # памяти нужно выделить больше.
 #}
-  vsz_limit = 256M
+  vsz_limit = 512M
 {#
   # Максимальное количество процессов обрабатывающих IMAP подключения.
 #}
-  process_limit = 2048
+  process_limit = 4096
 }
 
 service pop3 {

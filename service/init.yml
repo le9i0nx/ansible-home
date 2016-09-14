@@ -6,12 +6,12 @@
   gather_facts: no
 
   tasks:
-  - name: install pkg
-    raw: apt-get -y install {{item}}
-    with_items:
-      - python
-      - sudo
-    changed_when: False
+    - name: install pkg
+      raw: apt-get -y install {{item}}
+      with_items:
+        - python
+        - sudo
+      changed_when: False
 
 - hosts: all
   become_user: root

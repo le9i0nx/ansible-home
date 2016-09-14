@@ -17,7 +17,7 @@ nagios_nrpe_server_apt_packages_group: []
 nagios_nrpe_server_commands_group: []
 
 users_host_list:
-  - users_otrs
+  - '{{ users_otrs }}'
 
 users_otrs:
   - name:   'otrs'

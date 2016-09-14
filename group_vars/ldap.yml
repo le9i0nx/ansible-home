@@ -34,6 +34,9 @@ role__nss_pam_ldap:
   host: "127.0.0.1"
   base: "{{ samba__ldap_suffix }}"
 
+auth_ldap_conf: False
+auth_nslcd_conf: False
+
 slapd_default_services: [ 'ldap:///', 'ldapi:///' ]
 slapd_basedn: '{{ "dc=" + slapd_domain.split(".") | join(",dc=") }}'
 slapd_append_groups: []
