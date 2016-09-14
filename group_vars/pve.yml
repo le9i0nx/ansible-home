@@ -1,10 +1,15 @@
 ---
 
+ntp__daemon: 'systemd-timesyncd'
 # syncthing
 syncthing__dependencies_ferm: True
 device_x:
   - id: "6BZW7ME-VSKBWJX-OCALJTF-W73GAZB-YHS4VWB-PKMQHNB-GFDQYJY-4HZDMA4"
     name: "x"
+
+device_y:
+  - id: "5JEVGUF-5YSMIKQ-3D5MK3W-WRO3RFW-SFN2ZGS-4CUKZ3P-CVLDUBH-KRGIWQP"
+    name: "y"
 
 role_syncthing_data:
   folders:
@@ -13,11 +18,13 @@ role_syncthing_data:
       id: 'vz_iso'
       devices_del:
         - "{{ device_x }}"
+        - "{{ device_y }}"
     - inventory_hosts: '{{ groups.pve }}'
       path: '/var/lib/vz/template/cache/'
       id: 'vz_template'
       devices_del:
         - "{{ device_x }}"
+        - "{{ device_y }}"
 
 #tinc
 tinc__connect_to_mesh_pve: '{{ tinc__inventory_hosts_mesh_pve }}'

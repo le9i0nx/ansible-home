@@ -52,6 +52,7 @@ dhcpd_secret_secure_key: '{{ lookup("password",
 #icinga
 icinga__client_group: "perm"
 icinga__client_parents_rugion:
-  - "mikrotik.perm"
+  - "mikrotik.{{ icinga__client_group }}"
 icinga__client_hostgroups_rugion:
-    - "perm"
+    - "{{ icinga__client_group }}"
+

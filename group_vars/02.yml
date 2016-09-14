@@ -1,0 +1,12 @@
+---
+
+#ntp
+ntp__timezone: 'Asia/Yekaterinburg'
+
+#icinga
+icinga__client_group: "ufa"
+icinga__client_parents_rugion:
+  - "mikrotik.{{ icinga__client_group }}"
+icinga__client_hostgroups_rugion:
+    - "{{ icinga__client_group }}"
+

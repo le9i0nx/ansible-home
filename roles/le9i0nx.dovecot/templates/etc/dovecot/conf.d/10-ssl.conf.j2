@@ -15,16 +15,6 @@ ssl = yes
 ssl_cert = <{{dovecot_ssl_cert}}
 ssl_key = <{{dovecot_ssl_key}}
 
-{% if dovecot_ssl_sni is defined and dovecot_ssl_sni %}
-# SSL SNI http://wiki2.dovecot.org/SSL/DovecotConfiguration
-{% for local_name in dovecot_ssl_sni %}
-local_name {{ local_name }} {
-  ssl_cert = <{{dovecot_pki}}/certs/{{ local_name }}.crt
-  ssl_key  = <{{dovecot_pki}}/private/{{ local_name }}.key
-}
-
-{% endfor %}
-{% endif %}
 {#
 # Если файл-ключ защищен паролем, то укажите этот пароль здесь.
 # Так же пароль можно задать с помощью ключа -p. Since this file is often
@@ -62,8 +52,8 @@ ssl_verify_client_cert = no
 ssl_protocols = !SSLv2
 
 # Доступные шифры SSL
-ssl_cipher_list = ALL:!LOW:!SSLv3:!SSLv2:!ADH:!RC4:!MD5:!EXP:!aNULL:!eNULL:!NULL
-#ssl_cipher_list = ALL:!LOW:!SSLv2:!ADH:!RC4:!MD5:!EXP:!aNULL:!eNULL:!NULL
+ssl_cipher_list = ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:!aNULL:!MD5:!DSS:!LOW:!SSLv2:!ADH:!RC4:!MD5:!EXP:!aNULL:!eNULL:!NULL:!RSA
+
 # надо проверить безопастный список
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

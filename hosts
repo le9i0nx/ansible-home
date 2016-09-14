@@ -74,6 +74,9 @@ backup.74ru.mpautina.ru
 [jabber]
 jabber.info74.ru
 
+[02]
+pve02.pve.mpautina.ru
+
 [59]
 dns.perm.mpautina.ru
 pve59.pve.mpautina.ru
@@ -103,11 +106,12 @@ pve6.pve.mpautina.ru
 74economists.74ru.mpautina.ru
 
 [pve]
-pve32.pve.mpautina.ru
+pve02.pve.mpautina.ru
 pve6.pve.mpautina.ru
-pve63.pve.mpautina.ru
+pve32.pve.mpautina.ru
 pve34.pve.mpautina.ru
 pve59.pve.mpautina.ru
+pve63.pve.mpautina.ru
 
 [mail_srv]
 mail ansible_ssh_host=mail
@@ -125,6 +129,7 @@ ldap
 63
 59
 34
+02
 jabber
 cups
 
