@@ -5,7 +5,7 @@
     name: '{{ item }}'
     state: 'present'
     install_recommends: False
-  with_items: dovecot_packages
+  with_items: '{{ dovecot_packages }}'
   when: (dovecot_packages is defined and dovecot_packages)
 
 

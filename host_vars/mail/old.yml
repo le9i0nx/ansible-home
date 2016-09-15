@@ -31,14 +31,6 @@ postfixadmin_control_database: 'postfixadmin'
 ldap_server_pool: "localhost"
 pki_path: '/srv/pki'
 
-#nginx
-nginx_acme_domain: 'mail.info74.ru'
-nginx_pki_path: '/etc/nginx/ssl'
-nginx_pki_realm: '.'
-nginx_server_default:
-  enabled: False
-  name: [ ]
-
 #dovecot
 dovecot_db_name: '{{postfixadmin_control_database}}'
 dovecot_ssl_cert: '/etc/dovecot/ssl/mail.info74.ru/fullchain.pem'

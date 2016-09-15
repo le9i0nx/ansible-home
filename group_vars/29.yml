@@ -1,0 +1,12 @@
+---
+
+#ntp
+ntp__timezone: 'Europe/Moscow'
+
+#icinga
+icinga__client_group: "arkhangelsk"
+icinga__client_parents_rugion:
+  - "mikrotik.{{ icinga__client_group }}"
+icinga__client_hostgroups_rugion:
+    - "{{ icinga__client_group }}"
+

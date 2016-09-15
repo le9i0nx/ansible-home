@@ -1,7 +1,7 @@
 ---
 
 #ntp
-ntp_timezone: 'Europe/Moscow'
+ntp__timezone: 'Europe/Moscow'
 ntp_servers: ['192.168.34.200']
 ntp_listen: ['localhost']
 ntp_daemon: False

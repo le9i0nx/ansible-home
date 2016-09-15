@@ -44,7 +44,7 @@
     name: '{{ item }}'
     state: 'present'
     install_recommends: False
-  with_items: exim_packages
+  with_items: '{{ exim_packages }}'
   when: (exim_packages is defined and exim_packages)
 
 - name: Create exim control user

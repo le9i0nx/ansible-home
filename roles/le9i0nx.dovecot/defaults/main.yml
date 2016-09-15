@@ -31,4 +31,16 @@ dovecot_ssl_sni: [  'mail.test.info74.ru',
 #dovecot_ssl_sni: [  'mail.example.org',
 #                    'pop3.example.org' ]
 
+dovecot__ferm_dependent_rules:
+
+  - type: 'accept'
+    dport: [ 'pop3', 'pop3s','imap2','imaps','sieve' ]
+    accept_any: True
+
+
+# Name of the php5 fpm status page location
+nginx_php5_status: False
+nginx_php5_status_name: 'php5_status'
+nginx_php5_ping_name: 'php5_ping'
+
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
