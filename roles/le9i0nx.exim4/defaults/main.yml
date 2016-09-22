@@ -5,6 +5,7 @@ exim_packages:
   - 'mailutils'
   - 'p7zip-full'
   - 'p7zip-rar'
+  - 'bsd-mailx'
 
 #exim_packages: [  'eximon4',
 #                  'exim4-daemon-heavy' ]  # отправка и взаимодействие с другими серверами 25 465 587

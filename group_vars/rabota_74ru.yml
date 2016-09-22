@@ -159,7 +159,15 @@ icinga__client_hostgroups_default:
 
 #bacula
 bacula__conf_client_job_default:
-  - {name: "etc", JobDefs: "GateBackup", Schedule: "Daily_0" }
+  - {name: "etc", JobDefs: "etc", Schedule: "Daily_0" }
+bacula__conf_client_jobDefs_default:
+  - {name: "etc", Schedule: "Daily_0", FileSet: "etc-set" }
+bacula__conf_client_FileSet_default:
+  - {name: "etc-set", File: [
+      "/etc",
+      "/var/spool/cron",
+      "/usr/local/bin",
+      ] }
 
 # nginx
 nginx_server_default:
