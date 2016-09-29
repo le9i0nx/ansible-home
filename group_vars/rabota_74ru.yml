@@ -129,7 +129,6 @@ nagios_nrpe_server_config:
   server_port: 5666
   allowed_hosts: "{{ nagios_nrpe_server_pool | join(',')}}"
   dont_blame_nrpe: 1
-nagios_nrpe_server_commands: "{{ nagios_nrpe_server_commands_group + nagios_nrpe_server_commands_default }}"
 
 nagios_nrpe_server_commands_default:
   - {name: "check_disk", plugin: "check_disk", args: "-w 20% -c 5%", sudo: true }
@@ -145,7 +144,6 @@ nagios_nrpe_server_commands_default:
   - {name: "check_mio_sdb", plugin: "check_mio", args: "-d sdb -w 500,30000,52428800,52428800 -c 600,40000,104857600,104857600"}
 
 icinga__client_parents: "{{ icinga__client_parents_rugion }}"
-icinga__client_hostgroups: "{{ icinga__client_hostgroups_default + icinga__client_hostgroups_group + icinga__client_hostgroups_rugion }}"
 
 icinga__client_hostgroups_default:
   - "ssh"

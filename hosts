@@ -44,11 +44,11 @@ cups-r.74ru.mpautina.ru
 
 [ldap]
 74economists.74ru.mpautina.ru
-proxy.samara.mpautina.ru
+#proxy.samara.mpautina.ru
 
 [samba]
 74economists.74ru.mpautina.ru
-proxy.samara.mpautina.ru
+#proxy.samara.mpautina.ru
 
 [dns]
 dns.samara.mpautina.ru
@@ -62,8 +62,9 @@ proxy.samara.mpautina.ru
 74economists.74ru.mpautina.ru
 mail
 jabber.info74.ru
-cups-l.74ru.mpautina.ru
-cups-r.74ru.mpautina.ru
+#cups-l.74ru.mpautina.ru
+#cups-r.74ru.mpautina.ru
+otrs5
 
 [icinga_server]
 icinga.74ru.mpautina.ru
@@ -165,6 +166,7 @@ bacula
 pve
 cups
 dns
+samba
 
 [debops_unattended_upgrades:children]
 homes
