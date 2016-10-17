@@ -1,12 +1,49 @@
 ---
 
+filial__name: "arkhangelsk"
+filial__id: "29"
+filial__ip: "{{ filial__id }}"
+
 #ntp
 ntp__timezone: 'Europe/Moscow'
 
 #icinga
-icinga__client_group: "arkhangelsk"
+icinga__client_group: "{{ filial__name }}"
 icinga__client_parents_rugion:
   - "mikrotik.{{ icinga__client_group }}"
 icinga__client_hostgroups_rugion:
     - "{{ icinga__client_group }}"
+
+# samba
+samba__workgroup: 'corp.29.ru'
+samba__ldap_suffix: 'ou=arkhangelsk,dc=rugion,dc=ru'
+samba__wins_server: '192.168.29.17'
+
+#dns
+bind__conf_d_group:
+
+  - name: "{{ filial__name }}.mpautina.ru"
+    type: "zone"
+    zone_slave: false
+    allow_update:
+      - "127.0.0.1"
+    allow_transfer:
+      - "192.168.0.1"
+      - "192.168.204.14"
+
+  - name: "{{ filial__ip }}.168.192.in-addr.arpa"
+    type: "zone"
+    zone_slave: false
+    allow_update:
+      - "127.0.0.1"
+    allow_transfer:
+      - "192.168.0.1"
+      - "192.168.204.14"
+
+  - name: "corp.29.ru"
+    type: "zone"
+    zone_slave: true
+    masters: [ "192.168.0.1" ]
+
+
 

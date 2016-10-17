@@ -15,13 +15,20 @@ otrs5
 
 [homes]
 74ru ansible_ssh_host=74ru
-en ansible_ssh_host=en
+#en ansible_ssh_host=en
 lenovo ansible_ssh_host=lenovo
 korkino ansible_ssh_host=korkino
 kv74 ansible_ssh_host=kv74
 awz.le9i0nx.strangled.net
+awz2.le9i0nx.strangled.net
+
+[awz]
+awz.le9i0nx.strangled.net
+awz2.le9i0nx.strangled.net
+
 
 [all:children]
+awz
 homes
 rabota_74ru
 pve
@@ -31,29 +38,39 @@ cups.perm.mpautina.ru
 cups.samara.mpautina.ru
 cups-l.74ru.mpautina.ru
 cups-r.74ru.mpautina.ru
+cups.arkhangelsk.mpautina.ru
 
 [lxc]
 proxy.samara.mpautina.ru
 dns.samara.mpautina.ru
+dns.arkhangelsk.mpautina.ru
 cups.samara.mpautina.ru
 dns.volgograd.mpautina.ru
 dns.perm.mpautina.ru
 cups.perm.mpautina.ru
 cups-l.74ru.mpautina.ru
 cups-r.74ru.mpautina.ru
+cups.arkhangelsk.mpautina.ru
+pdc.arkhangelsk.mpautina.ru
+storage.arkhangelsk.mpautina.ru
 
 [ldap]
 74economists.74ru.mpautina.ru
+pdc.arkhangelsk.mpautina.ru
+storage.arkhangelsk.mpautina.ru
 #proxy.samara.mpautina.ru
 
 [samba]
 74economists.74ru.mpautina.ru
+pdc.arkhangelsk.mpautina.ru
+storage.arkhangelsk.mpautina.ru
 #proxy.samara.mpautina.ru
 
 [dns]
 dns.samara.mpautina.ru
 dns.volgograd.mpautina.ru
 dns.perm.mpautina.ru
+dns.arkhangelsk.mpautina.ru
 
 [proxy]
 proxy.samara.mpautina.ru
@@ -62,8 +79,6 @@ proxy.samara.mpautina.ru
 74economists.74ru.mpautina.ru
 mail
 jabber.info74.ru
-#cups-l.74ru.mpautina.ru
-#cups-r.74ru.mpautina.ru
 otrs5
 
 [icinga_server]
@@ -80,6 +95,10 @@ pve02.pve.mpautina.ru
 
 [29]
 pve29.pve.mpautina.ru
+dns.arkhangelsk.mpautina.ru
+cups.arkhangelsk.mpautina.ru
+pdc.arkhangelsk.mpautina.ru
+storage.arkhangelsk.mpautina.ru
 
 [59]
 dns.perm.mpautina.ru
@@ -102,6 +121,7 @@ pve32.pve.mpautina.ru
 jabber.info74.ru
 cups-l.74ru.mpautina.ru
 otrs5
+backup.74ru.mpautina.ru
 
 [74r]
 cups-r.74ru.mpautina.ru
@@ -139,6 +159,7 @@ jabber
 cups
 
 [debops_all_hosts:children]
+awz
 homes
 rabota_74ru
 
@@ -182,3 +203,6 @@ mail_srv
 
 [le9i0nx_service_govpn:children]
 homes
+
+[le9i0nx_service_proxmox:children]
+pve

@@ -1,10 +1,13 @@
 ---
 
 - name: install proxmox
-  hosts: [ 'debops_all_hosts', 'debops_service_proxmox', 'test_hosts' ]
+  hosts: [ 'le9i0nx_service_proxmox', 'test_hosts' ]
   become: True
 
   roles:
+
+    - role: debops.secret
+      tags: [ 'role::secret' ]
 
     - role: le9i0nx.proxmox
       tags: [ 'role::proxmox' ]

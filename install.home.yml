@@ -3,11 +3,12 @@
 - include: service/init.yml
 - include: service/core.yml
 - include: service/base.yml
-- include: app/users.yml
 - include: service/apt.yml
 - include: service/apt_preferences.yml
+- include: service/unattended_upgrades.yml
 - include: service/console.yml
 - include: service/sshd.yml
+- include: service/bloc_awz.yml
 
 - hosts: homes
   become: True

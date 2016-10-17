@@ -144,6 +144,9 @@ nagios_nrpe_server_commands_default:
   - {name: "check_mio_sdb", plugin: "check_mio", args: "-d sdb -w 500,30000,52428800,52428800 -c 600,40000,104857600,104857600"}
 
 icinga__client_parents: "{{ icinga__client_parents_rugion }}"
+#icinga__client_hostgroups_group: "{{ icinga__client_hostgroups_ldap + icinga__client_hostgroups_samba }}"
+#icinga__client_hostgroups_samba: []
+#icinga__client_hostgroups_ldap: []
 
 icinga__client_hostgroups_default:
   - "ssh"
@@ -164,7 +167,9 @@ bacula__conf_client_FileSet_default:
   - {name: "etc-set", File: [
       "/etc",
       "/var/spool/cron",
-      "/usr/local/bin",
+      "/usr/local",
+      "/var/backups",
+      "/var/log",
       ] }
 
 # nginx
