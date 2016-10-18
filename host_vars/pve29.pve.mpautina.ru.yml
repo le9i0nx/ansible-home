@@ -80,5 +80,19 @@ proxmox__vm_host:
     api_password: "{{ node__password }}"
     password: "{{ node__password }}"
 
+  - vmid: "{{ filial__ip }}019"
+    node: "{{ node__name }}"
+    hostname: 'jabber'
+    netif: '{"net0":"name=eth0,gw=192.168.{{ filial__ip }}.4,ip=192.168.{{ filial__ip }}.19/24,bridge=vmbr0"}'
+    memory: "1024"
+    swap: "512"
+    disk: "3"
+    nameserver: '192.168.{{ filial__ip }}.14'
+    searchdomain: 'corp.29.ru'
+    onboot: True
+    ostemplate: "{{ node__ostemplate }}"
+    api_password: "{{ node__password }}"
+    password: "{{ node__password }}"
+
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

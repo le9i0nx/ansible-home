@@ -1,0 +1,17 @@
+---
+
+- name: Manage openfire
+  hosts: [ 'debops_service_openfire' ]
+  become: True
+  become_method: sudo
+  roles:
+
+    - role: debops.ferm
+      tags: [ 'role::ferm' ]
+      ferm_dependent_rules:
+        - '{{ openfire__ferm__dependent_rules }}'
+
+    - role: le9i0nx.openfire
+      tags: [ 'role::openfire' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
