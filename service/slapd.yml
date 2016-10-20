@@ -9,9 +9,9 @@
     - role: debops.ferm
       tags: [ 'role::ferm' ]
       ferm__dependent_rules:
-        - '{{ slapd_ferm_dependent_rules }}'
+        - '{{ slapd__ferm_dependent_rules }}'
 
-    - role: debops.slapd
+    - role: le9i0nx.slapd
       tags: [ 'role::slapd' ]
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

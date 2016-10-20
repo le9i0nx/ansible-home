@@ -87,7 +87,7 @@
 	url = https://github.com/le9i0nx/ansible-samba.git
 [submodule "roles/debops.slapd"]
 	path = roles/debops.slapd
-	url = https://github.com/le9i0nx/ansible-slapd.git
+	url = https://github.com/le9i0nx/ansible-slapd-conf.d.git
 [submodule "roles/le9i0nx.nss-pam-ldap"]
 	path = roles/le9i0nx.nss-pam-ldap
 	url = https://github.com/le9i0nx/ansible-nss-pam-ldap.git
@@ -121,3 +121,6 @@
 [submodule "roles/debops.mariadb"]
 	path = roles/debops.mariadb
 	url = https://github.com/le9i0nx/ansible-mariadb.git
+[submodule "roles/le9i0nx.slapd"]
+	path = roles/le9i0nx.slapd
+	url = https://github.com/le9i0nx/ansible-slapd.git
