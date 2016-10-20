@@ -118,3 +118,6 @@
 [submodule "roles/debops.mariadb_server"]
 	path = roles/debops.mariadb_server
 	url = https://github.com/le9i0nx/ansible-mariadb_server.git
+[submodule "roles/debops.mariadb"]
+	path = roles/debops.mariadb
+	url = https://github.com/le9i0nx/ansible-mariadb.git

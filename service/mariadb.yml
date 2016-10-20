@@ -18,7 +18,5 @@
     - role: debops.mariadb_server
       tags: [ 'role::mariadb_server' ]
 
-    - role: debops.mariadb
-      tags: [ 'role::mariadb' ]
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

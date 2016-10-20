@@ -3,13 +3,35 @@
 - name: Manage openfire
   hosts: [ 'debops_service_openfire' ]
   become: True
-  become_method: sudo
+
+  environment: '{{ inventory__environment | d({})
+                   | combine(inventory__group_environment | d({}))
+                   | combine(inventory__host_environment  | d({})) }}'
+
   roles:
 
     - role: debops.ferm
       tags: [ 'role::ferm' ]
       ferm_dependent_rules:
         - '{{ openfire__ferm__dependent_rules }}'
+
+    - role: debops.mariadb
+      tags: [ 'role::mariadb' ]
+      mariadb__dependent_databases:
+        - '{{ openfire__mariadb__dependent_databases }}'
+      mariadb__dependent_users:
+        - '{{ openfire__mariadb__dependent_users }}'
+
+    - role: debops.apt
+      tags:
+        - 'depend::apt'
+        - 'depend::apt:syncthing'
+        - 'depend-of::syncthing'
+        - 'type::dependency'
+      apt__host_keys:
+        - '{{ openfire__repositories_key }}'
+      apt__host_repositories:
+        - '{{ openfire__repositories }}'
 
     - role: le9i0nx.openfire
       tags: [ 'role::openfire' ]

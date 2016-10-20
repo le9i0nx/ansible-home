@@ -166,6 +166,7 @@ bacula__conf_client_jobDefs_default:
 bacula__conf_client_FileSet_default:
   - {name: "etc-set", File: [
       "/etc",
+      "/root",
       "/var/spool/cron",
       "/usr/local",
       "/var/backups",
