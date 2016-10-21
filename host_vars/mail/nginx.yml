@@ -1,0 +1,12 @@
+---
+
+#nginx
+nginx_default_servers: []
+nginx_acme_domain: 'mail.info74.ru'
+nginx_pki_path: '/etc/nginx/ssl'
+nginx_pki_realm: '.'
+#nginx_server_default:
+#  enabled: False
+#  name: [ ]
+
+## vim: ft=yaml:foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

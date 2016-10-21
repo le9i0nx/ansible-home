@@ -1,16 +1,16 @@
 ---
 
 #ntp
-ntp_timezone: 'Europe/Moscow'
-ntp_servers: ['192.168.34.200']
-ntp_listen: ['localhost']
-ntp_daemon: False
+ntp__timezone: 'Europe/Moscow'
+#ntp_servers: ['192.168.34.200']
+#ntp_listen: ['localhost']
+#ntp_daemon: False
 
 # ferm
 ferm_enabled: False
 
 #dns
-bind__conf_d:
+bind__conf_d_group:
 
   - name: "volgograd.mpautina.ru"
     type: "zone"
@@ -37,11 +37,6 @@ bind__conf_d:
     zone_slave: true
     masters: [ "192.168.0.1" ]
 
-  - name: "hfm.ru"
-    type: "zone"
-    zone_slave: true
-    masters: [ "192.168.0.1" ]
-
   - name: "dhcp_volgograd_mpautina_ru"
     type: "key"
     key: '{{ dhcpd_secret_secure_key }}'
@@ -50,3 +45,10 @@ bind__conf_d:
 dhcpd_secret_secure_key: '{{ lookup("password",
   secret + "/" + ansible_domain +
   "/shared/ddns/keys/secure-key") }}'
+
+#icinga
+icinga__client_group: "volgograd"
+icinga__client_parents_rugion:
+  - "mikrotik.{{ icinga__client_group }}"
+icinga__client_hostgroups_rugion:
+  - "{{ icinga__client_group }}"

@@ -1,9 +1,0 @@
----
-
-- hosts: all
-  become: True
-  become_method: sudo
-  roles:
-    - role: debops.users
-
-## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

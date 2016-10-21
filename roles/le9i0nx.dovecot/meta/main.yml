@@ -24,11 +24,6 @@ dependencies:
 
 
   - role: debops.ferm
-    ferm_input_list:
-
-      - type: 'dport_accept'
-        dport: [ 'pop3', 'pop3s','imap2','imaps','sieve' ]
-        accept_any: True
-        filename: 'dovecot_dependency_accept'
-        weight: '20'
+    tags: [ 'depend::ferm', 'depend::ferm:dovecot', 'depend-of::dovecot', 'type::dependency' ]
+    ferm_dependent_rules: '{{ dovecot__ferm_dependent_rules }}'
 

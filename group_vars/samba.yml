@@ -18,7 +18,7 @@ samba__default_global:
   allow_nt4_crypto: 'yes'
   smb2_leases: 'yes'
 
-  wins_server: '{{ samba__wins_server }}'
+#  wins_server: '{{ samba__wins_server }}'
   dns_proxy: 'no'
   panic_action: '/usr/share/samba/panic-action %d'
 
@@ -26,6 +26,7 @@ samba__default_global:
   passdb_backend: 'ldapsam:ldap://127.0.0.1/'
   ldap_suffix: '{{ samba__ldap_suffix }}'
   ldap_user_suffix: 'ou=users'
+  ldap_idmap_suffix: 'ou=idmap'
   ldap_group_suffix: 'ou=groups'
   ldap_machine_suffix: 'ou=computers'
   ldap_admin_dn: '"cn=admin,dc=rugion,dc=ru"'
@@ -34,6 +35,7 @@ samba__default_global:
   ldap_passwd_sync: 'yes'
   idmap_gid: '10000-30000'
   idmap_uid: '10000-30000'
+  admin_users: '@nt_admins'
 
 
   obey_pam_restrictions: 'yes'
@@ -42,8 +44,9 @@ samba__default_global:
   passwd_program: '/usr/bin/passwd %u'
   passwd_chat: '*Enter\snew\s*\spassword:* %n\n *Retype\snew\s*\spassword:* %n\n *password\supdated\ssuccessfully* .'
 
+
   pam_password_change: 'yes'
-  logon_script: '\\PDC\netlogon\logon.bat'
+  logon_script: 'logon.bat'
   template_shell: '/bin/bash'
   usershare_allow_guests: 'yes'
   logon_path: ''
@@ -53,12 +56,12 @@ samba__default_global:
   # Browsing / Identification
   workgroup: '{{ samba__workgroup | default("WORKGROUP") }}'
   server_string: '{{ samba__server_string | default("%h file server") }}'
-  server_role: 'classic backup domain controller'
+  server_role: '{{ samba__server_role|default("classic backup domain controller") }}'
 
   # Logs / Accounting
   log_file: '/var/log/samba/log.%m'
   max_log_size: '1000'
-  syslog: '0'
+#  syslog: '0'
 
 
   invalid_users: 'root bin daemon adm sync shutdown halt mail news uucp proxy www-data backup sshd'
@@ -84,6 +87,7 @@ samba__default_global:
 #nrpe
 nagios_nrpe_server_apt_packages_group: []
 nagios_nrpe_server_commands_group: []
-icinga__client_hostgroups_group: []
+icinga__client_hostgroups_group: "{{  icinga__client_hostgroups_ldap + icinga__client_hostgroups_samba }}"
+icinga__client_hostgroups_samba: []
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

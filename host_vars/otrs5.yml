@@ -1,5 +1,6 @@
 ---
 
+ferm__enabled: False
 ferm_ansible_controllers:  "{{admin_allow_pool +
   ['0.0.0.0/0']}}"
 
@@ -25,5 +26,20 @@ users_otrs:
     group:  'otrs'
     groups: ['www-data']
     shell: '/bin/bash'
+#bacula
+bacula__conf_client_job_default: []
+bacula__conf_client_jobDefs_default: []
+bacula__conf_client_FileSet_default: []
+bacula__conf_client_job_host:
+  - {name: "otrs", JobDefs: "otrs", Schedule: "Daily_0" }
+bacula__conf_client_jobDefs_host:
+  - {name: "otrs", Schedule: "Daily_0", FileSet: "otrs-set" }
+bacula__conf_client_FileSet_host:
+  - {name: "otrs-set", File: [
+      "/etc",
+      "/var/spool/cron",
+      "/usr/local/bin",
+      "/opt",
+      ] }
 
 ## vim: ft=yaml:foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

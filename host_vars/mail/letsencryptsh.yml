@@ -18,6 +18,14 @@ lcsh_deploy_cert: |
   chmod 644 /etc/nginx/ssl/${DOMAIN}/cert.pem
   chmod 644 /etc/nginx/ssl/${DOMAIN}/chain.pem
   chmod 644 /etc/nginx/ssl/${DOMAIN}/fullchain.pem
+  mkdir -p /etc/dovecot/ssl/${DOMAIN}
+  cp "${KEYFILE}" "${CERTFILE}" "${FULLCHAINFILE}" "${CHAINFILE}" /etc/dovecot/ssl/${DOMAIN}
+  chown root:root /etc/dovecot/ssl/${DOMAIN}/*
+  chmod 600 /etc/dovecot/ssl/${DOMAIN}/privkey.pem
+  chmod 644 /etc/dovecot/ssl/${DOMAIN}/cert.pem
+  chmod 644 /etc/dovecot/ssl/${DOMAIN}/chain.pem
+  chmod 644 /etc/dovecot/ssl/${DOMAIN}/fullchain.pem
   /etc/init.d/nginx reload
+  service dovecot restart
 
 ## vim: ft=yaml:foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

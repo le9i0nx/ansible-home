@@ -1,0 +1,42 @@
+---
+#ldap
+slapd_ldap_mirrormode_write: "TRUE"
+
+#samba
+samba__server_role: 'classic primary domain controller'
+
+samba__global_custom:
+  wins_support: 'yes'
+  netbios_name: 'pdc'
+  os_level: '255'
+  domain_master: 'yes'
+  domain_logons: 'yes'
+  preferred_master: 'auto'
+  local_master: 'yes'
+  add_user_script: "/usr/sbin/smbldap-useradd -m '%u' -t 1"
+  rename_user_script: "/usr/sbin/smbldap-usermod -r '%unew' '%uold'"
+  delete_user_script: "/usr/sbin/smbldap-userdel '%u'"
+  set_primary_group_script: "/usr/sbin/smbldap-usermod -g '%g' '%u'"
+  add_group_script: "/usr/sbin/smbldap-groupadd -p '%g'"
+  delete_group_script: "/usr/sbin/smbldap-groupdel '%g'"
+  add_user_to_group_script: "/usr/sbin/smbldap-groupmod -m '%u' '%g'"
+  delete_user_from_group_script: "/usr/sbin/smbldap-groupmod -x '%u' '%g'"
+  add_machine_script: "/usr/sbin/smbldap-useradd -w '%u' -t 1"
+  time_service: 'yes'
+
+samba__default_shares:
+  'netlogon':
+    path: '{{ samba__path }}/netlogon'
+    comment: 'netlogon share'
+    guest_ok: 'no'
+    write_list: '@nt_admin'
+    read_list: '@nt_users'
+
+    read_only: 'No'
+    create_mask: '0660'
+    directory_mask: '0770'
+    inherit_owner: 'yes'
+    inherit_acls: 'yes'
+    inherit_permissions: 'yes'
+    map_acl_inherit: 'yes'
+    locking: 'no'

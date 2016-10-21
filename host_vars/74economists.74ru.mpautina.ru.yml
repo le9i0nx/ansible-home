@@ -34,4 +34,15 @@ bacula__conf_client:
   name: '{{ icinga__client_name }}'
   passwd: '{{ bacula__gen_client_password }}'
 
+#bacula
+bacula__conf_client_job_host:
+  - {name: "samba", JobDefs: "samba", Schedule: "Daily_0" }
+bacula__conf_client_jobDefs_host:
+  - {name: "samba", Schedule: "Daily_0", FileSet: "samba-set" }
+bacula__conf_client_FileSet_host:
+  - {name: "samba-set", File: [
+      "/srv/samba",
+      ] }
+
+
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

@@ -1,9 +1,19 @@
 ---
 
 #nagios_nrpe_server_config
-nagios_nrpe_server_apt_packages_group: []
-nagios_nrpe_server_commands_group: []
-icinga__client_hostgroups_group: []
+#nagios_nrpe_server_apt_packages_group: []
+#nagios_nrpe_server_commands_group: []
+#icinga__client_hostgroups_group: []
 
+bind__conf_d_default:
+
+  - name: "hfm.ru"
+    type: "zone"
+    zone_slave: true
+    masters: [ "192.168.0.1" ]
+
+  - name: "rn"
+    type: "forward"
+    forward: [ "192.168.80.1" ]
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

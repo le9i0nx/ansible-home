@@ -6,4 +6,16 @@ nagios_nrpe_server_commands_group: []
 icinga__client_hostgroups_group:
   - "jabber"
 
+#bacula
+bacula__conf_client_job_group:
+  - {name: "jabber", JobDefs: "jabber", Schedule: "Daily_0" }
+bacula__conf_client_jobDefs_group:
+  - {name: "jabber", Schedule: "Daily_0", FileSet: "jabber-set" }
+bacula__conf_client_FileSet_group:
+  - {name: "jabber-set", File: [
+        "/var/lib/automysqlbackup/daily",
+         ] }
+
+
+
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

@@ -99,3 +99,6 @@ slapd_ldap_index:
 slapd_ldap_schema:
   - '/etc/ldap/schema/misc.ldif'
   - '/usr/local/etc/ldap/schema/samba.ldif'
+
+icinga__client_hostgroups_ldap:
+    - 'ldap-rugion-ru'

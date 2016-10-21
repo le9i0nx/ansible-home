@@ -37,9 +37,8 @@ bind__conf_d:
     masters: [ "192.168.0.1" ]
 
   - name: "rn"
-    type: "zone"
-    zone_slave: true
-    masters: [ "192.168.0.1" ]
+    type: "forward"
+    forward: [ "192.168.80.1" ]
 
   - name: "dhcp_perm_mpautina_ru"
     type: "key"
@@ -54,5 +53,5 @@ icinga__client_group: "perm"
 icinga__client_parents_rugion:
   - "mikrotik.{{ icinga__client_group }}"
 icinga__client_hostgroups_rugion:
-    - "{{ icinga__client_group }}"
+  - "{{ icinga__client_group }}"
 
