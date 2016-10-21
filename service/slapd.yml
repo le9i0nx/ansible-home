@@ -1,7 +1,7 @@
 ---
 
 - name: Manage OpenLDAP service
-  hosts: [ 'debops_service_slapd', 'debops_slapd' ]
+  hosts: [ 'le9i0nx_service_slapd', 'le9i0nx_slapd' ]
   become: True
 
   roles:

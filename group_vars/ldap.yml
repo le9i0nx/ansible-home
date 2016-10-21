@@ -37,44 +37,30 @@ role__nss_pam_ldap:
 auth_ldap_conf: False
 auth_nslcd_conf: False
 
-slapd_default_services: [ 'ldap:///', 'ldapi:///' ]
-slapd_basedn: '{{ "dc=" + slapd_domain.split(".") | join(",dc=") }}'
-slapd_append_groups: []
-slapd_anonymous_bind: True
-slapd_pki: False
-slapd_domain: 'rugion.ru'
-slapd_ldap_schema_directories:
-  - '../../../files/debops.slapd/usr/local/etc/ldap/schema/'
-  - 'usr/local/etc/ldap/schema/'
+slapd__domain: 'rugion.ru'
 
-slapd_ldap_mirrormode:
-  rid: '0'
-  provider: 'ldap://192.168.0.7'
-  binddn: '{{ slapd_basedn_admin }}'
-  credentials: '{{ lookup("password", slapd_basedn_admin_password + " length=" + slapd_password_length) }}'
-  searchbase: '{{ slapd_basedn }}'
-  schemachecking: 'off'
+slapd__syncrepl:
+  - rid: '000'
+    provider: '{{ slapd__default_syncprov_provider }}'
+    binddn: '{{ slapd__basedn_admin }}'
+    credentials: '{{ lookup("password", slapd__basedn_admin_password + " length=" + slapd__password_length) }}'
+    searchbase: '{{ slapd__basedn }}'
 
-slapd_ldap_access_control_list_default:
+slapd__ldap_access_control_list_default:
 
   - |
-    to attrs=userPassword,shadowLastChange
-    by self write
-    by anonymous auth
-    by dn="{{ slapd_basedn_admin }}" write
-    by * none
-
-  - |
-    to dn.base=""
-    by * read
+    to attrs=userPassword,shadowLastChange,sambaNTPassword,sambaLMPassword
+      by self write
+      by anonymous auth
+      by * none
 
   - |
     to *
-    by self write
-    by dn="{{ slapd_basedn_admin }}" write
-    by * read
+      by self write
+      by anonymous read
+      by * read
 
-slapd_ldap_index:
+slapd__ldap_index:
 
   - 'objectClass eq'
   - 'cn pres,sub,eq'
@@ -91,14 +77,17 @@ slapd_ldap_index:
   - 'entryCSN eq'
   - 'entryUUID eq'
   - 'telephoneNumber pres,sub,eq'
-#  - 'mail,givenName eq,subinitial'
   - 'mail eq,subinitial'
   - 'uid pres,sub,eq'
   - 'displayName pres,sub,eq'
 
-slapd_ldap_schema:
-  - '/etc/ldap/schema/misc.ldif'
-  - '/usr/local/etc/ldap/schema/samba.ldif'
+slapd__ldap_schema:
+  - 'core'
+  - 'cosine'
+  - 'inetorgperson'
+  - 'nis'
+  - 'misc'
+  - 'samba3'
 
 icinga__client_hostgroups_ldap:
     - 'ldap-rugion-ru'

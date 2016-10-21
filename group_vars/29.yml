@@ -4,6 +4,9 @@ filial__name: "arkhangelsk"
 filial__id: "29"
 filial__ip: "{{ filial__id }}"
 
+#ldap
+slapd__default_syncprov_provider: 'ldap://192.168.{{ filial__ip }}.17'
+
 #ntp
 ntp__timezone: 'Europe/Moscow'
 

@@ -2,6 +2,7 @@
 
 - include: install.base_system.yml
 
+- include: service/slapd.yml
 - include: service/mariadb.yml
 - include: service/openfire.yml
 

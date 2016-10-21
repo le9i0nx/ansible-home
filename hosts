@@ -59,6 +59,7 @@ jabber.corp.29.ru
 74economists.74ru.mpautina.ru
 pdc.arkhangelsk.mpautina.ru
 storage.arkhangelsk.mpautina.ru
+jabber.corp.29.ru
 #proxy.samara.mpautina.ru
 
 [samba]
@@ -178,8 +179,9 @@ proxy
 [debops_service_samba:children]
 samba
 
-[debops_service_slapd:children]
+[le9i0nx_service_slapd:children]
 ldap
+jabber
 
 [debops_service_pam_ldap:children]
 ldap
