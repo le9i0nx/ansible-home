@@ -92,6 +92,7 @@ map <F2> <Esc>:call ChangeSpellLang()<CR>
 "nmap <F5> <Esc>:buffers<CR>
 "vmap <F5> <esc>:buffers<CR>
 "imap <F5> <esc><esc>:buffers<CR>
+set pastetoggle=<F5>
 " F6 - предыдущий буфер
 map <F6> :bp<cr>
 vmap <F6> <esc>:bp<cr>i

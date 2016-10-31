@@ -10,6 +10,8 @@
 #ansible_ssh_user=ansicon
 #localhost ansible_connection=local
 
+test ansible_ssh_host=172.17.0.1
+
 [rabota_74ru_old]
 otrs5
 
@@ -60,6 +62,7 @@ jabber.corp.29.ru
 pdc.arkhangelsk.mpautina.ru
 storage.arkhangelsk.mpautina.ru
 jabber.corp.29.ru
+jabber.info74.ru
 #proxy.samara.mpautina.ru
 
 [samba]
