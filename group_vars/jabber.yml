@@ -16,6 +16,8 @@ bacula__conf_client_FileSet_group:
         "/var/lib/automysqlbackup/daily",
          ] }
 
+#openfire
+openfire__ldap_bind_dn: '{{ "dc=" + slapd__domain.split(".") | join(",dc=") }}'
 
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
