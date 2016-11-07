@@ -2,3 +2,96 @@
 hostname_short: "pve02.pve.mpautina.ru"
 tinc_host_addr: [ '172.17.35.2/24' ]
 
+node__name: "pve02"
+node__ostemplate: 'local:vztmpl/ubuntu-16.04-add-root-key_16.04-1_amd64.tar.gz'
+node__password: "{{ lookup('file', secret + '/users/root/password_fils_raw') }}"
+
+proxmox__vm_host:
+
+  - vmid: "{{ filial__ip }}014"
+    node: "{{ node__name }}"
+    hostname: 'dns'
+    netif: '{"net0":"name=eth0,gw=192.168.{{ filial__ip }}.4,ip=192.168.{{ filial__ip }}.14/24,bridge=vmbr0"}'
+    memory: "512"
+    swap: "512"
+    disk: "3"
+    nameserver: '127.0.0.1 192.168.0.1'
+    searchdomain: '{{ filial__name }}.mpautina.ru'
+    onboot: True
+    ostemplate: "{{ node__ostemplate }}"
+    api_password: "{{ node__password }}"
+    password: "{{ node__password }}"
+
+  - vmid: "{{ filial__ip }}015"
+    node: "{{ node__name }}"
+    hostname: 'cups'
+    netif: '{"net0":"name=eth0,gw=192.168.{{ filial__ip }}.4,ip=192.168.{{ filial__ip }}.15/24,bridge=vmbr0"}'
+    memory: "512"
+    swap: "512"
+    disk: "3"
+    nameserver: '192.168.{{ filial__ip }}.14'
+    searchdomain: '{{ filial__name }}.mpautina.ru'
+    onboot: True
+    ostemplate: "{{ node__ostemplate }}"
+    api_password: "{{ node__password }}"
+    password: "{{ node__password }}"
+
+  - vmid: "{{ filial__ip }}016"
+    node: "{{ node__name }}"
+    hostname: 'proxy'
+    netif: '{"net0":"name=eth0,gw=192.168.{{ filial__ip }}.4,ip=192.168.{{ filial__ip }}.16/24,bridge=vmbr0"}'
+    memory: "1024"
+    swap: "512"
+    disk: "3"
+    nameserver: '192.168.{{ filial__ip }}.14'
+    searchdomain: '{{ filial__name }}.mpautina.ru'
+    onboot: True
+    ostemplate: "{{ node__ostemplate }}"
+    api_password: "{{ node__password }}"
+    password: "{{ node__password }}"
+
+  - vmid: "{{ filial__ip }}017"
+    node: "{{ node__name }}"
+    hostname: 'pdc'
+    netif: '{"net0":"name=eth0,gw=192.168.{{ filial__ip }}.4,ip=192.168.{{ filial__ip }}.17/24,bridge=vmbr0"}'
+    mounts: '{"mp0":"local:2,acl=1,mp=/srv"}'
+    memory: "512"
+    swap: "512"
+    disk: "3"
+    nameserver: '192.168.{{ filial__ip }}.14'
+    searchdomain: '{{ filial__name }}.mpautina.ru'
+    onboot: True
+    ostemplate: "{{ node__ostemplate }}"
+    api_password: "{{ node__password }}"
+    password: "{{ node__password }}"
+
+  - vmid: "{{ filial__ip }}018"
+    node: "{{ node__name }}"
+    hostname: 'storage'
+    netif: '{"net0":"name=eth0,gw=192.168.{{ filial__ip }}.4,ip=192.168.{{ filial__ip }}.18/24,bridge=vmbr0"}'
+    mounts: '{"mp0":"local:250,acl=1,mp=/srv"}'
+    memory: "512"
+    swap: "512"
+    disk: "3"
+    nameserver: '192.168.{{ filial__ip }}.14'
+    searchdomain: '{{ filial__name }}.mpautina.ru'
+    onboot: True
+    ostemplate: "{{ node__ostemplate }}"
+    api_password: "{{ node__password }}"
+    password: "{{ node__password }}"
+
+  - vmid: "{{ filial__ip }}019"
+    node: "{{ node__name }}"
+    hostname: 'jabber'
+    netif: '{"net0":"name=eth0,gw=192.168.{{ filial__ip }}.4,ip=192.168.{{ filial__ip }}.19/24,bridge=vmbr0"}'
+    memory: "1024"
+    swap: "512"
+    disk: "3"
+    nameserver: '192.168.{{ filial__ip }}.14'
+    searchdomain: '{{ filial__dns }}'
+    onboot: True
+    ostemplate: "{{ node__ostemplate }}"
+    api_password: "{{ node__password }}"
+    password: "{{ node__password }}"
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

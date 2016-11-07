@@ -3,6 +3,7 @@
 filial__name: "arkhangelsk"
 filial__id: "29"
 filial__ip: "{{ filial__id }}"
+filial__dns: "corp.29.ru"
 
 #ldap
 slapd__default_syncprov_provider: 'ldap://192.168.{{ filial__ip }}.17'
@@ -23,7 +24,7 @@ icinga__client_hostgroups_rugion:
 # samba
 samba__workgroup: 'corp.29.ru'
 samba__ldap_suffix: 'ou=arkhangelsk,dc=rugion,dc=ru'
-samba__wins_server: '192.168.29.17'
+samba__wins_server: '192.168.{{ filial__ip }}.17'
 
 #dns
 bind__conf_d_group:
@@ -46,7 +47,7 @@ bind__conf_d_group:
       - "192.168.0.1"
       - "192.168.204.14"
 
-  - name: "corp.29.ru"
+  - name: "{{ filial__dns }}"
     type: "zone"
     zone_slave: true
     masters: [ "192.168.0.1" ]

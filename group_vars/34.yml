@@ -1,54 +1,55 @@
 ---
 
+filial__name: "volgograd"
+filial__id: "34"
+filial__ip: "{{ filial__id }}"
+filial__dns: "corp.v1.ru"
+
+#ldap
+slapd__default_syncprov_provider: 'ldap://192.168.{{ filial__ip }}.17'
+
+# openfire
+openfire__ldap_main_dn: "ou=users,ou=volgograd"
+
 #ntp
 ntp__timezone: 'Europe/Moscow'
-#ntp_servers: ['192.168.34.200']
-#ntp_listen: ['localhost']
-#ntp_daemon: False
 
-# ferm
-ferm_enabled: False
+#icinga
+icinga__client_group: "{{ filial__name }}"
+icinga__client_parents_rugion:
+  - "mikrotik.{{ icinga__client_group }}"
+icinga__client_hostgroups_rugion:
+    - "{{ icinga__client_group }}"
+
+# samba
+samba__workgroup: 'UFA'
+samba__ldap_suffix: 'ou=ufa,dc=rugion,dc=ru'
+samba__wins_server: '192.168.{{ filial__ip }}.17'
 
 #dns
 bind__conf_d_group:
 
-  - name: "volgograd.mpautina.ru"
+  - name: "{{ filial__name }}.mpautina.ru"
     type: "zone"
     zone_slave: false
     allow_update:
-      - "key dhcp_volgograd_mpautina_ru"
       - "127.0.0.1"
     allow_transfer:
       - "192.168.0.1"
       - "192.168.204.14"
 
-  - name: "34.168.192.in-addr.arpa"
+  - name: "{{ filial__ip }}.168.192.in-addr.arpa"
     type: "zone"
     zone_slave: false
     allow_update:
-      - "key dhcp_volgograd_mpautina_ru"
       - "127.0.0.1"
     allow_transfer:
       - "192.168.0.1"
       - "192.168.204.14"
 
-  - name: "corp.v1.ru"
+  - name: "{{ filial__dns }}"
     type: "zone"
     zone_slave: true
     masters: [ "192.168.0.1" ]
 
-  - name: "dhcp_volgograd_mpautina_ru"
-    type: "key"
-    key: '{{ dhcpd_secret_secure_key }}'
-#    ip: "192.168.34.8"
 
-dhcpd_secret_secure_key: '{{ lookup("password",
-  secret + "/" + ansible_domain +
-  "/shared/ddns/keys/secure-key") }}'
-
-#icinga
-icinga__client_group: "volgograd"
-icinga__client_parents_rugion:
-  - "mikrotik.{{ icinga__client_group }}"
-icinga__client_hostgroups_rugion:
-  - "{{ icinga__client_group }}"

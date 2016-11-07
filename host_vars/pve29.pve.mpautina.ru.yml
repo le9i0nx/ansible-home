@@ -88,7 +88,7 @@ proxmox__vm_host:
     swap: "512"
     disk: "3"
     nameserver: '192.168.{{ filial__ip }}.14'
-    searchdomain: 'corp.29.ru'
+    searchdomain: '{{ filial__dns }}'
     onboot: True
     ostemplate: "{{ node__ostemplate }}"
     api_password: "{{ node__password }}"
