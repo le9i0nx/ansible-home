@@ -19,7 +19,7 @@ icinga__client_group: "{{ filial__name }}"
 icinga__client_parents_rugion:
   - "mikrotik.{{ icinga__client_group }}"
 icinga__client_hostgroups_rugion:
-    - "{{ icinga__client_group }}"
+  - "{{ icinga__client_group }}"
 
 # samba
 samba__workgroup: 'UFA'

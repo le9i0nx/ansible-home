@@ -41,10 +41,12 @@ cups.samara.mpautina.ru
 cups-l.74ru.mpautina.ru
 cups-r.74ru.mpautina.ru
 cups.arkhangelsk.mpautina.ru
+cups.volgograd.mpautina.ru
 
 [lxc]
 proxy.samara.mpautina.ru
 dns.samara.mpautina.ru
+dns.ufa.mpautina.ru
 dns.arkhangelsk.mpautina.ru
 cups.samara.mpautina.ru
 dns.volgograd.mpautina.ru
@@ -55,6 +57,7 @@ cups-r.74ru.mpautina.ru
 cups.arkhangelsk.mpautina.ru
 pdc.arkhangelsk.mpautina.ru
 storage.arkhangelsk.mpautina.ru
+cups.volgograd.mpautina.ru
 jabber.corp.29.ru
 
 [ldap]
@@ -76,6 +79,7 @@ dns.samara.mpautina.ru
 dns.volgograd.mpautina.ru
 dns.perm.mpautina.ru
 dns.arkhangelsk.mpautina.ru
+dns.ufa.mpautina.ru
 
 [proxy]
 proxy.samara.mpautina.ru
@@ -98,6 +102,7 @@ jabber.corp.29.ru
 
 [02]
 pve02.pve.mpautina.ru
+dns.ufa.mpautina.ru
 
 [29]
 pve29.pve.mpautina.ru
@@ -115,6 +120,7 @@ cups.perm.mpautina.ru
 [34]
 pve34.pve.mpautina.ru
 dns.volgograd.mpautina.ru
+cups.volgograd.mpautina.ru
 
 [63]
 dns.samara.mpautina.ru
