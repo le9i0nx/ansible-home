@@ -1,6 +1,0 @@
----
-
-
-nagios_nrpe_server_apt_packages:
-  - nagios-nrpe-server
-

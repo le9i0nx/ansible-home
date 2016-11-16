@@ -7,6 +7,9 @@
   roles:
 
     - role: le9i0nx.base
+
     - role: le9i0nx.lxc_fix
+      when: ((ansible_virtualization_role == 'guest') and
+             (ansible_virtualization_type == 'lxc' ))
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
