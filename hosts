@@ -28,7 +28,6 @@ awz2.le9i0nx.strangled.net
 awz.le9i0nx.strangled.net
 awz2.le9i0nx.strangled.net
 
-
 [all:children]
 awz
 homes
@@ -43,23 +42,6 @@ cups-r.74ru.mpautina.ru
 cups.arkhangelsk.mpautina.ru
 cups.volgograd.mpautina.ru
 cups.ufa.mpautina.ru
-
-[lxc]
-proxy.samara.mpautina.ru
-dns.samara.mpautina.ru
-dns.ufa.mpautina.ru
-dns.arkhangelsk.mpautina.ru
-cups.samara.mpautina.ru
-dns.volgograd.mpautina.ru
-dns.perm.mpautina.ru
-cups.perm.mpautina.ru
-cups-l.74ru.mpautina.ru
-cups-r.74ru.mpautina.ru
-cups.arkhangelsk.mpautina.ru
-pdc.arkhangelsk.mpautina.ru
-storage.arkhangelsk.mpautina.ru
-cups.volgograd.mpautina.ru
-jabber.corp.29.ru
 
 [ldap]
 74economists.74ru.mpautina.ru

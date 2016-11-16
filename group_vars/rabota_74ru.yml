@@ -186,5 +186,12 @@ ntp__servers: [ 'pool.ntp.org',
                 '0.asia.pool.ntp.org',
                 '1.europe.pool.ntp.org',
                 '1.debian.pool.ntp.org' ]
+# lxc fix
+console_proc_hidepid: '{{ (False
+  if (ansible_virtualization_role == "guest" and ansible_virtualization_type == "lxc")
+  else True) | bool }}'
+samba__kernel_modules_load: '{{ (False
+  if (ansible_virtualization_role == "guest" and ansible_virtualization_type == "lxc")
+  else True) | bool }}'
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
