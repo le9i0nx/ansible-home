@@ -3,11 +3,11 @@
 # syncthing
 syncthing__dependencies_ferm: True
 device_moto:
+  - id: "JJQRDIS-AUAYHU7-ZJNR6HV-26Y6C77-6G2FUZA-Q6DVUHB-WV5GOCD-C3CIIQW"
+    name: "tapik"
+device_moto_old:
   - id: "H5K4NYU-P64UC3B-ZY6DIU5-RKE4MJS-AMOW2TK-75API3M-7W5FO5Z-QX3LAAR"
     name: "tapik"
-device_en:
-  - id: "KDZAIGU-WDGEZUI-D674MX7-HKPCXVS-FXLD6L6-E7S2YOE-YP3JKBG-Y2ZGLQB"
-    name: "en"
 device_awz:
   - id: "2VREC2V-ZCPGVU6-K2NFENB-3XSBIED-IK55OQ6-LOWPHKH-VUHADDM-RRASWQD"
     name: "awz"
@@ -23,20 +23,18 @@ role_syncthing_data:
     - inventory_hosts: '{{ groups.homes }}'
       path: '/home/le9i0nx/crypt/'
       id: 'crypt'
-      devices_del:
-        - "{{ device_en }}"
     - inventory_hosts: '{{ groups.homes }}'
       path: '/home/le9i0nx/moto_e-photos/'
       id: 'moto_e-photos'
       devices_del:
-        - "{{ device_en }}"
+        - "{{ device_moto_old}}"
       devices_add:
         - "{{ device_moto }}"
     - inventory_hosts: '{{ groups.homes }}'
       path: '/home/le9i0nx/music/'
       id: 'music'
       devices_del:
-        - "{{ device_en }}"
+        - "{{ device_moto_old}}"
         - "{{ device_awz }}"
         - "{{ device_awz2 }}"
       devices_add:
@@ -46,6 +44,7 @@ role_syncthing_data:
       id: 'money'
       devices_del:
         - "{{ device_en }}"
+        - "{{ device_moto_old}}"
       devices_add:
         - "{{ device_moto }}"
 
