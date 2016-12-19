@@ -1,9 +1,0 @@
----
-
-- include: install.base_system.yml
-
-- include: service/slapd.yml
-- include: service/mariadb.yml
-- include: service/openfire.yml
-
-## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
