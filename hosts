@@ -21,12 +21,12 @@ otrs5
 lenovo ansible_ssh_host=lenovo
 korkino ansible_ssh_host=korkino
 kv74 ansible_ssh_host=kv74
-awz.le9i0nx.strangled.net
-awz2.le9i0nx.strangled.net
+awz.le9i0nx.strangled.net ansible_ssh_host=amz
+awz2.le9i0nx.strangled.net ansible_ssh_host=amz2
 
 [awz]
-awz.le9i0nx.strangled.net
-awz2.le9i0nx.strangled.net
+awz.le9i0nx.strangled.net ansible_ssh_host=amz
+awz2.le9i0nx.strangled.net ansible_ssh_host=amz2
 
 [all:children]
 awz

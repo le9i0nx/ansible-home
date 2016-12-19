@@ -43,7 +43,6 @@ role_syncthing_data:
       path: '/home/le9i0nx/money/'
       id: 'money'
       devices_del:
-        - "{{ device_en }}"
         - "{{ device_moto_old}}"
       devices_add:
         - "{{ device_moto }}"
