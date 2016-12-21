@@ -1,0 +1,19 @@
+---
+
+dependencies:
+
+    - role: debops.apt
+      tags:
+        - 'depend::apt'
+        - 'depend::apt:docker'
+        - 'depend-of::docker'
+        - 'type::dependency'
+      apt__host_keys:
+        - '{{ docker__repositories_key }}'
+      apt__host_repositories:
+        - '{{ docker__repositories }}'
+      apt__host_packages:
+        - 'ca-certificates'
+      when: docker__dependencies_apt | bool
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

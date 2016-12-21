@@ -1,0 +1,14 @@
+---
+
+docker__dependencies_apt: True
+# apt-key adv --list-public-keys --with-fingerprint --with-colons
+docker__repositories_key:
+
+  - id: '58118E89F3A912897C070ADBF76221572C52609D'
+    keyserver: 'hkp://ha.pool.sks-keyservers.net:80'
+
+docker__repositories:
+
+  - repo: 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

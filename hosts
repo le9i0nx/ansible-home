@@ -10,6 +10,8 @@
 #ansible_ssh_user=ansicon
 #localhost ansible_connection=local
 
+ubuntu16
+
 test ansible_ssh_host=172.17.0.1
 
 [rabota_74ru_old]
