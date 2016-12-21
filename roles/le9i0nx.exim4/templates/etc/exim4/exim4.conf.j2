@@ -137,7 +137,7 @@ GET_NOT_WHITELIST = \
   ${lookup mysql{\
     SELECT mail_to \
     FROM exim_whitelist \
-    WHERE mail_to = md5('${sender_address}');\
+    WHERE mail_to = md5(LOWER('${sender_address}'));\
     }{no}{yes}}
 
 {#
@@ -179,7 +179,7 @@ SET_WHITELIST = \
   ${lookup mysql{\
     INSERT \
       INTO exim_whitelist (mail_to,mail_from) \
-      VALUES(md5('${local_part}@${domain}'),md5('${sender_address}')) \
+      VALUES(md5(LOWER('${local_part}@${domain}')),md5(LOWER('${sender_address}'))) \
       ON DUPLICATE KEY UPDATE ctime=now();\
     }{yes}{yes}}
 

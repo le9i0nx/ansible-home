@@ -16,6 +16,7 @@
     - debops.ntp
     - debops.mysql
 
+- include: service/slapd.yml
 - include: service/exim.yml
 - include: app/dovecot.mail_srv.yml
 - include: service/postfixadmin.yml

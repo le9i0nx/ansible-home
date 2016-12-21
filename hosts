@@ -47,6 +47,7 @@ cups.ufa.mpautina.ru
 [ldap:children]
 samba
 jabber
+mail_srv
 
 [samba]
 74economists.74ru.mpautina.ru

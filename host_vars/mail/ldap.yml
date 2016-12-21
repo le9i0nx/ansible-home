@@ -1,0 +1,25 @@
+---
+
+slapd__default_syncprov_provider: 'ldap://192.168.0.7'
+slapd__serverID: "0003"
+
+slapd__ferm_dependent_rules:
+
+  - type: 'accept'
+    dport: [ 'ldap', 'ldaps' ]
+    saddr:
+      - '195.226.222.0/24'
+      - '195.54.18.0/24'
+      - '10.20.16.0/23'
+      - '10.20.10.0/24'
+      - '195.206.240.34'
+      - '94.181.33.105'
+      - '193.138.129.118'
+      - '95.78.171.64'
+    accept_any: False
+    weight: '40'
+    role: 'le9i0nx.slapd'
+    name: 'ldap_ldaps'
+    multiport: True
+
+## vim: ft=yaml:foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

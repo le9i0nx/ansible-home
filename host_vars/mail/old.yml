@@ -27,7 +27,6 @@ sshd__permit_root_login: 'without-password'
 postfixadmin_postfix_admin_url: 'https://mail.info74.ru/postfixadmin'
 postfixadmin_control_database: 'postfixadmin'
 
-#ldap_server_pool: "edu.rugion.ru"
 ldap_server_pool: "localhost"
 pki_path: '/srv/pki'
 
