@@ -1,0 +1,15 @@
+---
+
+- name: Manage openvpn
+  hosts: [ 'le9i0nx_openvpn', 'test' ]
+  become: True
+
+  roles:
+
+    - role: debops.ferm
+      tags: [ 'role::ferm' ]
+      ferm_dependent_rules:
+        - '{{ openvpn__ferm_dependent_rules }}'
+
+    - role: le9i0nx.openvpn
+      tags: [ 'role::openvpn' ]

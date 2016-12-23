@@ -50,6 +50,7 @@ cups.ufa.mpautina.ru
 samba
 jabber
 mail_srv
+openvpn
 
 [samba]
 74economists.74ru.mpautina.ru
@@ -83,6 +84,9 @@ backup.74ru.mpautina.ru
 jabber.info74.ru
 jabber.corp.29.ru
 jabber.corp.ufa1.ru
+
+[openvpn]
+openvpn.74ru.mpautina.ru
 
 [02]
 pve02.pve.mpautina.ru
@@ -121,6 +125,7 @@ jabber.info74.ru
 cups-l.74ru.mpautina.ru
 otrs5
 backup.74ru.mpautina.ru
+openvpn.74ru.mpautina.ru
 
 [74r]
 cups-r.74ru.mpautina.ru
@@ -172,6 +177,9 @@ rabota_74ru
 
 [debops_service_bind:children]
 dns
+
+[le9i0nx_openvpn:children]
+openvpn
 
 [debops_service_sqid:children]
 proxy

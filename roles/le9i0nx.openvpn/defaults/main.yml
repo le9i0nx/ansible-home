@@ -1,0 +1,15 @@
+---
+
+# .. envvar:: openvpn__ferm_dependent_rules
+#
+# Configuration for ``iptables`` firewall managed by ``ferm``.
+openvpn__ferm_dependent_rules:
+
+  - type: 'accept'
+    dport: [ '2001' ]
+    protocol: [ 'tcp' ]
+    role: 'le9i0nx.openvpn'
+    name: 'tcp'
+    accept_any: True
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
