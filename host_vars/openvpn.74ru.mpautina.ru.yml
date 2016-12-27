@@ -1,5 +1,6 @@
 ---
 
 slapd__serverID: "0004"
+ferm__default_policy_forward: 'ACCEPT'
 
 ## vim: ft=yaml:foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
