@@ -7,12 +7,33 @@ import ldap3
 import sys
 import re
 
+ip_pool = [
+    ["0", "192.168.0.7", "74RU", "74", "@info74.ru"],
+    ["1", "192.168.0.7", "74RU", "74", "@info74.ru"],
+    ["11", "192.168.0.7", "74RU", "74", "@info74.ru"],
+    ["204", "192.168.204.41", "74RU", "74", "@info74.ru"],
+    ["2", "192.168.2.2", "UFA", "02", "@corp.ufa1.ru"],
+    ["3", "192.168.3.2", "PERM", "59", "@info59.ru"],
+    ["29", "192.168.29.17", "CORP.29.RU", "29", "@corp.29.ru"],
+    ["34", "192.168.34.200", "VOLGOGRAD", "34", "@corp.v1.ru"],
+    ["61", "192.168.61.2", "ROSTOV", "61", "@corp.161.ru"],
+    ["63", "192.168.63.2", "SAMARA", "63", "@info63.ru"],
+    ["72", "192.168.72.200", "TUMEN", "72", "@ig72.ru"],
+    ["76", "192.168.76.2", "CORP.76.RU", "76", "@corp.76.ru"],
+    ["0", "192.168.0.0", "zarplata.ru", "00", "@zarplata.ru"],
+]
+
+def get_email_domen(domain):
+    for x in ip_pool:
+        if domain in x[4]:
+            return x
+
 # Создаём текст подписи
 def subscription_mail(emailR,html):
     c.search('dc=rugion,dc=ru','(&(mail={e})(objectClass=sambaSamAccount)(!(sambaAcctFlags=[DU ])))'.format(e=emailR), ldap3.SEARCH_SCOPE_WHOLE_SUBTREE, attributes = ['sn','givenName','displayName','mail','roomNumber','mobile','o','telephoneNumber','pager','title','cn','mail'])
     sn = givenName = signature = ""
     for raw_ldap in c.response:
-        telephone = m_telephone = sip = mobile = company = job_title = icq = address = telephone_company = mail_to = html_begin = html_img = html_br = html_end = ""
+        telephone = m_telephone = sip = mobile = company = job_title = icq = address = telephone_company = mail_to = html_begin = html_img = html_br = html_end = skype = ""
         sn = raw_ldap['attributes'].get('sn',[''])[0]
         givenName = raw_ldap['attributes'].get('givenName',[''])[0]
         if len(sn) < 1 or len(givenName) < 1 :
@@ -24,8 +45,10 @@ def subscription_mail(emailR,html):
         pager = raw_ldap['attributes'].get('pager',[''])[0]
         roomNumber = raw_ldap['attributes'].get('roomNumber',['0'])[0]
         cn = raw_ldap['attributes'].get('cn',[''])[0]
+        skype_raw = raw_ldap['attributes'].get('telexNumber',[''])[0]
         email = re.sub("^\s+|\n|\r|\s+$", '', raw_ldap['attributes'].get('mail',[''])[0] )
         domain =re.findall(r'([a-z0-9_\.-]+)@([a-z0-9_\.-]+)', email)[0][1]
+        domain_logo = domain
 
         if html == 1:
             html_begin = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n<html>\n  <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\">\n  <pre class=\"moz-signature\" cols=\"72\">\n"
@@ -167,73 +190,113 @@ whbtCKO9AAAAAElFTkSuQmCC
         if len(telephoneNumber) > 1:
             telephone = ", доб. {0}".format(telephoneNumber)
         if len(mobile) > 1:
-            m_telephone = "{1}моб. {0}\n".format(mobile,html_br)
+            if mobile[0] != "+":
+                m_telephone = "{1}моб. {0}\n".format(mobile,html_br)
         if len(pager) > 1:
             icq = "{1}icq: {0}\n".format(pager,html_br)
+        if len(skype_raw) > 1:
+            skype = "{1}Skype: {0}\n".format(skype_raw,html_br)
         if domain == "info74.ru":
             if len(o) < 1:
                 company = "{0}74.RU\n".format(html_br)
             telephone_company = "{1}тел.: 8 (351) 729-94-90{0}\n".format(telephone,html_br)
             rom = int(roomNumber)
-            if 100 <= rom <= 299: address = "{1}г. Челябинск, ул. Мелькомбинат 2 1-й участок, 18, офис {0}\n{1}за ТРК `Родник`\n".format(rom,html_br)
+            site = "<a href=\"{0}\">{0}</a>".format("http://rugion.ru")
+            if 100 <= rom <= 299:
+                address = "{1}г. Челябинск, ул. Мелькомбинат 2 1-й участок, 18, офис {0}\n".format(rom,html_br)
+                domain_logo = "rugion.ru"
             elif 300 <= rom <= 499:
                 address = "{1}г. Челябинск, ул. Лесопарковая, 6, офис {0}\n{1}Бизнес-центр `Park City`\n".format(rom,html_br)
+                site = "<a href=\"{0}\">{0}</a>".format("http://74.ru")
                 list_mail = ["np@info74.ru","belyakova@info74.ru","sharlova@info74.ru"]
                 for x in list_mail:
                     if email in x:
                         address = "{1}454080, г. Челябинск, ул. Лесопарковая, 6, офис {0}\n{1}Бизнес-центр `Park City`\n".format(rom,html_br)
-            else: address = "{0}г. Челябинск, ул. Лесопарковая, 6\n{0}Бизнес-центр `Park City`\n".format(html_br)
+            else:
+                address = "{0}г. Челябинск, ул. Лесопарковая, 6\n{0}Бизнес-центр `Park City`\n".format(html_br)
+                site = "<a href=\"{0}\">{0}</a>".format("http://74.ru")
+            email_iskl = ['sol@info74.ru','lukyanova@info74.ru','hmelnova@info74.ru','stafeeva@info74.ru']
+            if email in email_iskl:
+                domain_logo = "rugion.ru"
         elif domain == "info63.ru":
             if len(o) < 1:
                 company = "{0}63.RU\n".format(html_br)
             telephone_company = "{1}тел./факс: 8 (846) 233-43-63{0}\n".format(telephone,html_br)
-            address = "{0}г. Самара, Мичурина, 52, офис 421".format(html_br)
+            site = "<a href=\"{0}\">{0}</a>".format("http://63.ru")
+            address = "{0}г. Самара, Мичурина, 52, офис 421\n".format(html_br)
         elif domain == "corp.ufa1.ru":
             if len(o) < 1:
                 company = "{0}UFA1.RU\n".format(html_br)
             html_begin = html_begin + "Ufa1.ru – городской сайт, занимающий топовые позиции в рейтингах региона\n   <a href=\"http://f.i.sdska.ru/_f/group_price/2014/prezentatsia_ufa1.pdf\">http://f.i.sdska.ru/_f/group_price/2014/prezentatsia_ufa1.pdf</a>\n<br/>"
             telephone_company = "{1}тел.: 8 (347) 286-51-96{0}\n".format(telephone,html_br)
-            address = "{0}г. Уфа, ул.Ленина д. 156".format(html_br)
+            site = "<a href=\"{0}\">{0}</a>".format("http://ufa1.ru")
+            address = "{0}г. Уфа, ул.Ленина д. 156\n".format(html_br)
         elif domain == "corp.29.ru":
             if len(o) < 1:
                 company = "{0}29.RU\n".format(html_br)
             telephone_company = "{1}тел.: 8 (8182) 494029{0}\n".format(telephone,html_br)
-            address = "{0}г. Архангельск, пр. Ломоносова, д. 81, оф. 311".format(html_br)
+            site = "<a href=\"{0}\">{0}</a>".format("http://29.ru")
+            address = "{0}г. Архангельск, пр. Ломоносова, д. 81, оф. 311\n".format(html_br)
         elif domain == "corp.v1.ru":
             if len(o) < 1:
                 company = "{0}V1.RU\n".format(html_br)
             telephone_company = "{1}тел.: 8 (8442) 59-59-16, 26-78-47, 26-63-92{0}\n".format(telephone,html_br)
-            address = "{0}г. Волгоград , ул. 7-я Гвардейская 2, офис 102".format(html_br)
+            site = "<a href=\"{0}\">{0}</a>".format("http://v1.ru")
+            address = "{0}г. Волгоград, ул. 7-я Гвардейская 2, офис 102\n".format(html_br)
         elif domain == "corp.161.ru":
             if len(o) < 1:
                 company = "{0}161.RU\n".format(html_br)
-            telephone_company = "{1}тел. 8 (863) 261-8-161 {0}\n{1}факс  8 (863) 219-47-01\n".format(telephone,html_br)
-            address = "{0}г. Ростов-на-Дону, ул. М. Горького, 130, 8 этаж".format(html_br)
+            html_begin = html_begin + "Читайте 161.ru в <a href=\"http://www.facebook.com/161.ru\">facebook</a> <a href=\"http://vk.com/news161\">vk</a> <a href=\"https://ok.ru/group/51845191237785\">Одноклассники</a> <a href=\"https://www.instagram.com/161.ru_161.ru/\">instagram</a>\nУстановите мобильное приложение 161.ru <a href=\"https://play.google.com/store/apps/details?id=ru.rugion.android.news.r61\">android</a> <a href=\"https://itunes.apple.com/ru/app/id586836886?mt=8\">ios</a>\n<br/>"
+            telephone_company = "{1}тел. 8 (863) 303-06-14 {0}\n".format(telephone,html_br)
+            site = "<a href=\"{0}\">{0}</a>".format("http://161.ru")
+            address = "{0}г. Ростов-на-Дону, ул. М. Горького, 130, 8 этаж\n".format(html_br)
         elif domain == "ig72.ru":
             if len(o) < 1:
                 company = "{0}72.RU\n".format(html_br)
             telephone_company = "{1}тел.: 8 (3452) 56-72-72{0}\n".format(telephone,html_br)
-            address = "{0}г. Тюмень, ул. Герцена, 55 ( через главный вход с колоннами), офис 307-316".format(html_br)
+            site = "<a href=\"{0}\">{0}</a>".format("http://72.ru")
+            address = "{0}г. Тюмень, ул. Герцена, 55 ( через главный вход с колоннами), офис 307-316\n".format(html_br)
         elif domain == "corp.76.ru":
             if len(o) < 1:
                 company = "{0}76.RU\n".format(html_br)
-            telephone_company = "{1}тел.: 8 (4852) 28-00-82{0}\n".format(telephone,html_br)
-            address = "{0}г. Ярославль, ул. Советская, д. 69".format(html_br)
+            telephone_company = "{1}тел.: 8 (4852) 59-99-90{0}\n".format(telephone,html_br)
+            site = "<a href=\"{0}\">{0}</a>".format("http://76.ru")
+            address = "{0}г. Ярославль, ул. Толбухина, д. 3\n".format(html_br)
         elif domain == "info59.ru":
             if len(o) < 1:
                 company = "{0}59.RU\n".format(html_br)
-            telephone_company = "{1}тел. 8 (342) 257-67-58{0}\n".format(telephone,html_br)
-            address = "{0}г. Пермь, ул. Сибирская, 27Б, 3 этаж".format(html_br)
+            telephone_company = "{1}тел. 8 (342) 215-01-21{0}\n".format(telephone,html_br)
+            site = "<a href=\"{0}\">{0}</a>".format("http://59.ru")
+            address = "{0}г. Пермь, ул. Сибирская, 27Б, 3 этаж\n".format(html_br)
+            if (email == 'oznobishina@info59.ru') or (email == 'oparina@info59.ru') or (email == 'kudryavceva@info59.ru') or (email == 'shelemina@info59.ru'):
+                domain_logo = "n1.ru"
+                site = "<a href=\"http://dom.59.ru/\">Дом 59</a> и <a href=\"http://perm.n1.ru/\">N1</a>"
 
+        c.search(
+                'dc=rugion,dc=ru',
+                '(&(cn=nt_zarplata_ru)(objectClass=posixGroup))',
+                ldap3.SEARCH_SCOPE_WHOLE_SUBTREE,
+                attributes = ['memberUid'])
+        for group_zarplata_raw_ldap in c.response:
+            memberUid = group_zarplata_raw_ldap['attributes'].get('memberUid',[''])
+            if cn in memberUid:
+                domain_logo = "zarplata.ru"
+        if domain_logo == "zarplata.ru":
+            code_domain = get_email_domen(domain)[3]
+            telephone_company = "{1}тел. 8-800-234-35-00, вн. {2}{0} (бесплатная линия)\n".format(telephoneNumber,html_br,code_domain)
+            site = "<a href=\"{0}\">{0}</a>".format("http://zarplata.ru")
 
         signature = html_begin + "{2}С уважением, {0} {1}\n".format(sn,givenName,html_br) + \
                     job_title + \
                     company + \
+                    address + \
                     telephone_company + \
                     m_telephone + \
                     mail_to + \
-                    address + \
+                    skype + \
+                    site + \
                     html_end
+
 
     return "{0} {1}".format(sn,givenName),signature.replace("'","\"")
 
