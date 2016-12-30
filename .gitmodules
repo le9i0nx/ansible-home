@@ -121,3 +121,6 @@
 [submodule "roles/le9i0nx.slapd"]
 	path = roles/le9i0nx.slapd
 	url = https://github.com/le9i0nx/ansible-slapd.git
+[submodule "roles/le9i0nx.docker"]
+	path = roles/le9i0nx.docker
+	url = https://github.com/le9i0nx/ansible-docker.git
