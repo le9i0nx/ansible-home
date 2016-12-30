@@ -1,0 +1,7 @@
+---
+
+- include: install.base_system.yml
+
+- include: service/gitlab.yml
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

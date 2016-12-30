@@ -1,0 +1,12 @@
+---
+
+- name: Manage gitlab
+  hosts: ubuntu16
+  become: True
+
+  roles:
+
+    - role: le9i0nx.gitlab
+      tags: [ 'role::gitlab' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
