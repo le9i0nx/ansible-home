@@ -1,0 +1,18 @@
+---
+
+- name: Configure custom YUM repositories
+  yum_repository:
+    name: '{{ item.name }}'
+    baseurl:  '{{ item.baseurl }}'
+    description: '{{ item.description | d(omit) }}'
+    gpgcheck: '{{ item.gpgcheck | d(omit) }}'
+    enabled:  '{{ item.enabled | d(omit) }}'
+    gpgkey: '{{ item.gpgkey | d(omit) }}'
+    state:    '{{ item.state    | d("present") }}'
+  with_flattened:
+    - '{{ yum__repositories }}'
+    - '{{ yum__group_repositories }}'
+    - '{{ yum__host_repositories }}'
+  register: apt__register_repositories
+  when: (yum__enabled|bool and item.baseurl|d() and item.name|d() )
+
