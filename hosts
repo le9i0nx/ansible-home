@@ -201,6 +201,7 @@ cups
 dns
 samba
 jabber
+le9i0nx_openvpn
 
 [debops_unattended_upgrades:children]
 homes

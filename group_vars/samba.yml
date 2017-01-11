@@ -84,6 +84,12 @@ samba__default_global:
   show_add_printer_wizard: 'no'
   disable_spoolss: 'yes'
 
+  # enable link
+  follow_symlinks: 'yes'
+  wide_links: 'yes'
+  unix_extensions: 'no'
+
+
 #nrpe
 nagios_nrpe_server_apt_packages_group: []
 nagios_nrpe_server_commands_group: []

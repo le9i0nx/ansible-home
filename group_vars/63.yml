@@ -10,7 +10,7 @@ ntp__timezone: 'Europe/Moscow'
 ferm_enabled: False
 
 #dns
-bind__conf_d:
+bind__conf_d_group:
 
   - name: "samara.mpautina.ru"
     type: "zone"
@@ -33,16 +33,6 @@ bind__conf_d:
       - "192.168.204.14"
 
   - name: "info63.ru"
-    type: "zone"
-    zone_slave: true
-    masters: [ "192.168.0.1" ]
-
-  - name: "hfm.ru"
-    type: "zone"
-    zone_slave: true
-    masters: [ "192.168.0.1" ]
-
-  - name: "rn"
     type: "zone"
     zone_slave: true
     masters: [ "192.168.0.1" ]
