@@ -60,6 +60,7 @@ exim_domain: 'info74.ru'
 exim_white_list_local_hosts_add:
   - '212.57.190.166' # host.mpautina.ru
   - '195.19.70.10' # office.ngs.ru
+  - '195.19.71.7' # smtpout.ngs.ru
   - '213.247.165.202' # hsmedia.ru
   - '89.249.27.230' # hsmedia.ru
   - '176.9.151.116' # sfa.w.rugion.ru
