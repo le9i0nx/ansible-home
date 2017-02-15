@@ -10,8 +10,6 @@
 #ansible_ssh_user=ansicon
 #localhost ansible_connection=local
 
-ubuntu16
-
 test ansible_ssh_host=172.17.0.1
 
 [rabota_74ru_old]
@@ -80,6 +78,11 @@ icinga.74ru.mpautina.ru
 [bacula_dir]
 backup.74ru.mpautina.ru
 
+[bacula_storage]
+backup.74ru.mpautina.ru
+bacula-storage2.74ru.mpautina.ru
+
+
 [jabber]
 jabber.info74.ru
 jabber.corp.29.ru
@@ -126,6 +129,7 @@ cups-l.74ru.mpautina.ru
 otrs5
 backup.74ru.mpautina.ru
 openvpn.74ru.mpautina.ru
+bacula-storage2.74ru.mpautina.ru
 
 [74r]
 cups-r.74ru.mpautina.ru
@@ -193,6 +197,9 @@ ldap
 [debops_service_pam_ldap:children]
 ldap
 samba
+
+[le9i0nx_bacula_storage:children]
+bacula_storage
 
 [debops_service_bacula:children]
 bacula

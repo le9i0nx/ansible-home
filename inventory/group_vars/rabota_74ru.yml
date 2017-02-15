@@ -50,8 +50,8 @@ users_edi:
 
 users_pavlov:
   - name:   'pavlov'
-    state:  'present'
-    group:  'edi'
+    state:  'absent'
+    group:  'pavlov'
     groups: ['sudo','sshusers']
     shell: '/bin/bash'
     password: "{{ lookup('file', secret + '/users/pavlov/password') }}"
