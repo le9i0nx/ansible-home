@@ -176,9 +176,8 @@ exim_relay_from_hosts: [
   "176.56.23.64/27",
   ]
 exim_db_name: '{{postfixadmin_control_database}}'
-exim_ssl_cert: '{{pki_path}}/certs/smtp.info74.ru.crt'
-exim_ssl_key: '{{pki_path}}/private/smtp.info74.ru.key'
-exim_pki: '{{pki_path}}'
+exim_ssl_cert: '/etc/exim4/ssl/mail.info74.ru/fullchain.pem'
+exim_ssl_key: '/etc/exim4/ssl/mail.info74.ru/privkey.pem'
 exim_ldap_server: '{{ldap_server_pool}}'
 exim_ldap_server_port: "389"
 exim_ldap_aliases: "{{ mail_domain }}"

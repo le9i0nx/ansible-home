@@ -203,17 +203,17 @@ whbtCKO9AAAAAElFTkSuQmCC
             rom = int(roomNumber)
             site = "http://rugion.ru"
             if 100 <= rom <= 299:
-                address = "{1}г. Челябинск, ул. Мелькомбинат 2 1-й участок, 18, офис {0}\n".format(rom,html_br)
+                address = "{0}г. Челябинск, ул. Российская, 110 к2, офис 201\n{0}Бизнес-центр Greenplex\n".format(html_br)
                 domain_logo = "rugion.ru"
             elif 300 <= rom <= 499:
-                address = "{1}г. Челябинск, ул. Лесопарковая, 6, офис {0}\n{1}Бизнес-центр `Park City`\n".format(rom,html_br)
+                address = "{0}г. Челябинск, ул. Российская, 110 к2, офис 201\n{0}Бизнес-центр Greenplex\n".format(html_br)
                 site = "http://74.ru"
                 list_mail = ["np@info74.ru","belyakova@info74.ru","sharlova@info74.ru"]
                 for x in list_mail:
                     if email in x:
-                        address = "{1}454080, г. Челябинск, ул. Лесопарковая, 6, офис {0}\n{1}Бизнес-центр `Park City`\n".format(rom,html_br)
+                        address = "{0}454006, г. Челябинск, ул. Российская, 110 к2, офис 201\n{0}Бизнес-центр Greenplex\n".format(html_br)
             else:
-                address = "{0}г. Челябинск, ул. Лесопарковая, 6\n{0}Бизнес-центр `Park City`\n".format(html_br)
+                address = "{0}г. Челябинск, ул. Российская, 110 к2, офис 201\n{0}Бизнес-центр Greenplex\n".format(html_br)
                 site = "http://74.ru"
             email_iskl = ['sol@info74.ru','lukyanova@info74.ru','hmelnova@info74.ru','stafeeva@info74.ru']
             if email in email_iskl:

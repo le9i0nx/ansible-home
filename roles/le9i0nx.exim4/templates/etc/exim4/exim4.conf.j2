@@ -195,6 +195,8 @@ SET_GREYLIST = \
 CHECK_RCPT_LOCAL_LOCALPARTS = ^[.] : ^.*[@%!/|`#&?'"]
 CHECK_RCPT_REMOTE_LOCALPARTS = ^[./|] : ^.*[@%!`#&?] : ^.*/\\.\\./
 
+LDAP_SERVER = {{exim_ldap_server}}:{{exim_ldap_server_port}}
+
 ####################################################################
 #                    Основные параметры
 ####################################################################
@@ -1125,6 +1127,44 @@ acl_check_data:
 
 {% include "exim4_deny.conf.j2" %}
 
+  warn  !authenticated  = *
+        hosts = !+relay_from_hosts : !+white_list_local_hosts
+        condition = ${if !match_domain{$sender_address_domain}{+local_domains}}
+        condition = GET_NOT_WHITELIST
+        spam = nobody:true
+        add_header = X-RSpamD-Action: $spam_action
+        add_header = X-Spam-Score: $spam_score ($spam_bar)
+        add_header = X-Spam-Report: $spam_report
+
+  deny  hosts = !+white_list_local_hosts
+        message = Connection closed. RSpamD is $spam_action. Please contact with postmaster or call 8(351)729-94-90(345). \
+                  Warning: IP [$sender_host_address] added to Blacklist.
+        condition = ${if eq{$spam_action}{reject}}
+        condition = GET_NOT_WHITELIST
+        condition = ADD_OR_UPD_BLACKLIST_TB
+        add_header = X-Spamscore: $acl_c_spamscore
+        add_header = X-Warning: ADD blacklist [$sender_host_address];
+
+{#
+#  warn  condition = ${if eq{$spam_action}{reject}}
+#        add_header = Subject: [SPAM][reject] $h_Subject:
+#
+#  warn  condition = ${if eq{$spam_action}{add header}}
+#        add_header = Subject: [SPAM][add header] $h_Subject:
+#
+#  warn  condition = ${if eq{$spam_action}{greylist}}
+#        add_header = Subject: [SPAM][greylist] $h_Subject:
+#
+#  warn  condition = ${if eq{$spam_action}{no action}}
+#        add_header = Subject: [NOT SPAM][no action] $h_Subject:
+#}
+  warn  condition = ${if or  {\
+                             {eq{$spam_action}{reject}}\
+                             {eq{$spam_action}{add header}}\
+                             {eq{$spam_action}{greylist}}} }
+        add_header = X-Spam-Flag: YES
+
+
 {#
   # Принять сообщение.
 #}
@@ -1138,15 +1178,15 @@ acl_check_mime:
 
   deny  message     = Запрещенное содержимое архива. Blacklisted file extension detected $mime_filename
         !authenticated  = *
-        condition   = ${if match{$mime_filename}{\N(?i)\.({% if exim_bad_extension_arxive is defined and exim_bad_extension_arxive %}{{ exim_bad_extension_arxive | join('|')}}{% endif %})$\N}}
+        condition   = ${if match{$mime_filename}{\N(?i)\.({% if exim_bad_extension_arxive|d() and exim_bad_extension_arxive %}{{ exim_bad_extension_arxive | join('|')}}{% endif %})$\N}}
         decode      = default
-        condition   = ${if match{${run{/usr/bin/7z l $mime_decoded_filename}}}{\N(?i)\.({% if exim_bad_extension is defined and exim_bad_extension %}{{ exim_bad_extension | join('|')}}{% endif %})\n\N}}
+        condition   = ${if match{${run{/usr/bin/7z l $mime_decoded_filename}}}{\N(?i)\.({% if exim_bad_extension_in|d() and exim_bad_extension_in %}{{ exim_bad_extension_in | join('|')}}{% endif %})\n\N}}
         log_message = forbidden attachment: filename=$mime_filename, content-type=$mime_content_type, recipients=$recipients
 
   deny  message     = Запрещенное вложение. Blacklisted file extension detected $mime_filename
         condition   = ${if  match \
                           {${lc:$mime_filename}} \
-                          {\N({% if exim_bad_extension is defined and exim_bad_extension %}\.{{ exim_bad_extension | join('|\.')}}{% endif %}})$\N} \
+                          {\N({% if exim_bad_extension|d() and exim_bad_extension %}\.{{ exim_bad_extension | join('|\.')}}{% endif %}})$\N} \
                           {1}{0}}
         log_message = forbidden attachment: filename=$mime_filename
 
@@ -1279,7 +1319,7 @@ ldap_aliases_{{local_name.ou}}:
   allow_defer
   domains = {{local_name.domain}}
   qualify_domain = ${domain}
-  data = ${map{<, ${lookup ldapm{ldap://{{exim_ldap_server}}:{{exim_ldap_server_port}}/ou=groups,ou={{local_name.ou}},dc=rugion,dc=ru?memberUid?sub?(cn=${quote_ldap:$local_part})}}}{${lookup ldapm{ldap://{{exim_ldap_server}}:{{exim_ldap_server_port}}/ou=users,ou={{local_name.ou}},dc=rugion,dc=ru?mailRoutingAddress?sub?uid=${quote_ldap:$item}}}}}
+  data = ${map{<, ${lookup ldapm{ldap://LDAP_SERVER/ou=groups,ou={{local_name.ou}},dc=rugion,dc=ru?memberUid?sub?(cn=${quote_ldap:$local_part})}}}{${lookup ldapm{ldap://LDAP_SERVER/ou=users,ou={{local_name.ou}},dc=rugion,dc=ru?mailRoutingAddress?sub?uid=${quote_ldap:$item}}}}}
   file_transport = address_file
   pipe_transport = address_pipe
 
@@ -1289,7 +1329,7 @@ ldap_aliases_phone_{{local_name.ou}}:
   allow_defer
   domains = {{local_name.domain}}
   qualify_domain = ${domain}
-  data = ${lookup ldapm {ldap://{{exim_ldap_server}}:{{exim_ldap_server_port}}/ou=users,ou={{local_name.ou}},dc=rugion,dc=ru?mail?sub?(telephoneNumber=${quote_ldap:${local_part}})}}
+  data = ${lookup ldapm {ldap://LDAP_SERVER/ou=users,ou={{local_name.ou}},dc=rugion,dc=ru?mail?sub?(telephoneNumber=${quote_ldap:${local_part}})}}
   file_transport = address_file
   pipe_transport = address_pipe
 

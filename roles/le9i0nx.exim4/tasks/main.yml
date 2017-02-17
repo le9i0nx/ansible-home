@@ -104,7 +104,7 @@
   with_items:
     - { name: 'exim delete old db item blacklist_tb', minute: '40', hour: '23', user: 'root', job: 'mysql -s -D {{exim_db_name}} -e "DELETE FROM blacklist_tb WHERE ctime <= DATE_SUB(NOW(), INTERVAL 14 DAY);"' }
     - { name: 'exim delete old db item exim_whitelist', minute: '50', hour: '23', user: 'root', job: 'mysql -s -D {{exim_db_name}} -e "DELETE FROM exim_whitelist WHERE ctime <= DATE_SUB(NOW(), INTERVAL 180 DAY);"' }
-    - { name: 'exim stats', minute: '59', hour: '02', user: 'root', job: 'find /var/log/smtp/exim/ -type f -mmin -1440 ! -mmin -60 | xargs cat | /usr/sbin/eximstats -nr -nt | mail -s "EXIM STATS" postmaster@info74.ru' }
+    - { name: 'exim stats', minute: '59', hour: '02', user: 'root', job: 'find /var/log/smtp/exim/ -type f -mmin -1440 ! -mmin -60 | xargs cat | /usr/sbin/eximstats -nr -nt -t10000 | mail -s "EXIM STATS" postmaster@info74.ru' }
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
 

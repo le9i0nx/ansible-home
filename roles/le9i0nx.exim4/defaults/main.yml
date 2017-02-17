@@ -24,7 +24,6 @@ exim_db_priv:
 
 exim_ssl_cert: '/etc/exim/exim.crt'
 exim_ssl_key: '/etc/exim/exim.pem'
-exim_pki: '/srv/pki/'
 
 exim_domain: 'your.domain.example'
 
@@ -44,6 +43,29 @@ exim_bad_extension_arxive:
   - 'rar'
   - '7z'
 
+exim_bad_extension_in:
+  - 'bat'
+  - 'btm'
+  - 'chm'
+  - 'cmd'
+  - 'com'
+  - 'cpl'
+  - 'dll'
+  - 'exe'
+  - 'hta'
+  - 'jsp'
+  - 'lnk'
+  - 'msi'
+  - 'pif'
+  - 'prf'
+  - 'reg'
+  - 'scr'
+  - 'sys'
+  - 'url'
+  - 'vb'
+  - 'vbe'
+  - 'vbs'
+
 exim_bad_extension:
   - 'bat'
   - 'btm'
@@ -54,6 +76,7 @@ exim_bad_extension:
   - 'dll'
   - 'exe'
   - 'hta'
+  - 'js'
   - 'jsp'
   - 'lnk'
   - 'msi'
