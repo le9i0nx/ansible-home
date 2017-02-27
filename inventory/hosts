@@ -130,6 +130,8 @@ backup.74ru.mpautina.ru
 openvpn.74ru.mpautina.ru
 bacula-storage2.74ru.mpautina.ru
 pve6.pve.mpautina.ru
+pve1.pve.mpautina.ru
+glpi.corp.rugion.ru
 
 [74r]
 74economists.74ru.mpautina.ru
@@ -139,6 +141,7 @@ pve76.pve.mpautina.ru
 
 [pve]
 pve02.pve.mpautina.ru
+pve1.pve.mpautina.ru
 pve6.pve.mpautina.ru
 pve29.pve.mpautina.ru
 pve32.pve.mpautina.ru

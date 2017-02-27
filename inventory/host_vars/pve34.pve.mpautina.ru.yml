@@ -12,7 +12,7 @@ proxmox__vm_host:
     node: "{{ node__name }}"
     hostname: 'dns'
     netif: '{"net0":"name=eth0,gw=192.168.{{ filial__ip }}.4,ip=192.168.{{ filial__ip }}.14/24,bridge=vmbr0"}'
-    memory: "512"
+    memory: "700"
     swap: "512"
     disk: "3"
     nameserver: '127.0.0.1 192.168.0.1'
