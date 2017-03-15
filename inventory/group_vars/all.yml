@@ -19,7 +19,6 @@ console_packages:
   - 'lsof'
   - 'iftop'
   - 'dstat'
-  - 'iozone3'
   - 'ed'
   - 'python'
   - 'python-apt'
