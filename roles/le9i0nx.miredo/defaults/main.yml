@@ -1,8 +1,0 @@
----
-ip6_tunel_packages: [
-      'miredo',
-      'wget',
-      'gawk',
-      'grep' ]
-
-freedns_afraid_dynamic_interface: 'teredo'

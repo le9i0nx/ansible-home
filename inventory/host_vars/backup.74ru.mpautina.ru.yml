@@ -1,6 +1,0 @@
----
-
-ferm__enabled: False
-
-nagios_nrpe_server_commands_host:
-  - {name: "check_disk", plugin: "check_disk", args: "-w 4% -c 3%", sudo: true }

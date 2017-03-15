@@ -1,19 +1,3 @@
-# This is the default ansible 'hosts' file.
-#
-# It should live in /etc/ansible/hosts
-#
-#   - Comments begin with the '#' character
-#   - Blank lines are ignored
-#   - Groups of hosts are delimited by [header] elements
-#   - You can enter hostnames or ip addresses
-#   - A hostname/ip can be a member of multiple groups
-#ansible_ssh_user=ansicon
-#localhost ansible_connection=local
-
-test ansible_ssh_host=172.17.0.1
-
-[rabota_74ru_old]
-otrs5
 
 [homes]
 74ru ansible_ssh_host=74ru
@@ -21,213 +5,24 @@ otrs5
 nout ansible_ssh_host=lenovo
 korkino ansible_ssh_host=korkino
 kv74 ansible_ssh_host=kv74
-awz.le9i0nx.strangled.net ansible_ssh_host=amz
-awz2.le9i0nx.strangled.net ansible_ssh_host=amz2
+awz ansible_ssh_host=amz
+awz2 ansible_ssh_host=amz2
 
 [awz]
-awz.le9i0nx.strangled.net ansible_ssh_host=amz
-awz2.le9i0nx.strangled.net ansible_ssh_host=amz2
+awz ansible_ssh_host=amz
+awz2 ansible_ssh_host=amz2
 
 [all:children]
 awz
 homes
-rabota_74ru
-pve
-
-[cups]
-cups.perm.mpautina.ru
-cups.samara.mpautina.ru
-cups-l.74ru.mpautina.ru
-cups.arkhangelsk.mpautina.ru
-cups.volgograd.mpautina.ru
-cups.ufa.mpautina.ru
-
-
-[ldap:children]
-samba
-jabber
-mail_srv
-openvpn
-
-[samba]
-74economists.74ru.mpautina.ru
-pdc.arkhangelsk.mpautina.ru
-storage.arkhangelsk.mpautina.ru
-#proxy.samara.mpautina.ru
-
-[dns]
-dns.samara.mpautina.ru
-dns.volgograd.mpautina.ru
-dns.perm.mpautina.ru
-dns.arkhangelsk.mpautina.ru
-dns.ufa.mpautina.ru
-
-[proxy]
-proxy.samara.mpautina.ru
-
-[bacula]
-74economists.74ru.mpautina.ru
-mail
-jabber.info74.ru
-otrs5
-
-[icinga_server]
-icinga.74ru.mpautina.ru
-
-[bacula_dir]
-backup.74ru.mpautina.ru
-
-[bacula_storage]
-backup.74ru.mpautina.ru
-bacula-storage2.74ru.mpautina.ru
-
-
-[jabber]
-jabber.info74.ru
-jabber.corp.29.ru
-jabber.corp.ufa1.ru
-
-[openvpn]
-openvpn.74ru.mpautina.ru
-
-[02]
-pve02.pve.mpautina.ru
-dns.ufa.mpautina.ru
-cups.ufa.mpautina.ru
-jabber.corp.ufa1.ru
-
-[29]
-pve29.pve.mpautina.ru
-dns.arkhangelsk.mpautina.ru
-cups.arkhangelsk.mpautina.ru
-pdc.arkhangelsk.mpautina.ru
-storage.arkhangelsk.mpautina.ru
-jabber.corp.29.ru
-
-[59]
-dns.perm.mpautina.ru
-pve59.pve.mpautina.ru
-cups.perm.mpautina.ru
-
-[34]
-pve34.pve.mpautina.ru
-dns.volgograd.mpautina.ru
-cups.volgograd.mpautina.ru
-
-[63]
-dns.samara.mpautina.ru
-pve63.pve.mpautina.ru
-proxy.samara.mpautina.ru
-cups.samara.mpautina.ru
-
-[74l]
-1c83 ansible_ssh_host=1c83
-pve32.pve.mpautina.ru
-jabber.info74.ru
-cups-l.74ru.mpautina.ru
-otrs5
-backup.74ru.mpautina.ru
-openvpn.74ru.mpautina.ru
-bacula-storage2.74ru.mpautina.ru
-pve6.pve.mpautina.ru
-pve1.pve.mpautina.ru
-glpi.corp.rugion.ru
-
-[74r]
-74economists.74ru.mpautina.ru
-
-[76]
-pve76.pve.mpautina.ru
-
-[pve]
-pve02.pve.mpautina.ru
-pve1.pve.mpautina.ru
-pve6.pve.mpautina.ru
-pve29.pve.mpautina.ru
-pve32.pve.mpautina.ru
-pve34.pve.mpautina.ru
-pve59.pve.mpautina.ru
-pve63.pve.mpautina.ru
-pve76.pve.mpautina.ru
-
-[mail_srv]
-mail ansible_ssh_host=mail
-
-[rabota_74ru:children]
-pve
-rabota_74ru_old
-mail_srv
-dns
-proxy
-samba
-ldap
-76
-74r
-74l
-63
-59
-34
-02
-29
-jabber
-cups
 
 [debops_all_hosts:children]
 awz
 homes
-rabota_74ru
-
-[debops_service_nrpe:children]
-rabota_74ru
-
-[debops_service_bind:children]
-dns
-
-[le9i0nx_openvpn:children]
-openvpn
-
-[debops_service_sqid:children]
-proxy
-
-[debops_service_samba:children]
-samba
-
-[le9i0nx_service_slapd:children]
-ldap
-
-[debops_service_pam_ldap:children]
-ldap
-samba
-
-[le9i0nx_bacula_storage:children]
-bacula_storage
-
-[debops_service_bacula:children]
-bacula
-pve
-cups
-dns
-samba
-jabber
-le9i0nx_openvpn
 
 [debops_unattended_upgrades:children]
 homes
 
-[debops_service_cups:children]
-cups
-
-[debops_service_mariadb_server:children]
-jabber
-
-[debops_service_openfire:children]
-jabber
-
-[le9i0nx_service_letsencryptsh:children]
-mail_srv
-
 [le9i0nx_service_govpn:children]
 homes
 
-[le9i0nx_service_proxmox:children]
-pve

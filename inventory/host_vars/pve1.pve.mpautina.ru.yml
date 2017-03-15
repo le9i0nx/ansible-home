@@ -1,4 +1,0 @@
----
-hostname_short: "pve1.pve.mpautina.ru"
-tinc_host_addr: [ '172.17.35.1/24' ]
-

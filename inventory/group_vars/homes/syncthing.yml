@@ -2,15 +2,23 @@
 
 # syncthing
 syncthing__dependencies_ferm: True
+
 device_moto:
-  - id: "JJQRDIS-AUAYHU7-ZJNR6HV-26Y6C77-6G2FUZA-Q6DVUHB-WV5GOCD-C3CIIQW"
+  - id: "6W2RVAQ-GZBOGNF-G27AO2I-AXGRELU-6FGKXTM-WD2ELIN-L6W75F5-QUUWFQR"
     name: "tapik"
-device_moto_old:
+
+device_moto_old1:
   - id: "H5K4NYU-P64UC3B-ZY6DIU5-RKE4MJS-AMOW2TK-75API3M-7W5FO5Z-QX3LAAR"
-    name: "tapik"
+    name: "tapik2"
+
+device_moto_old2:
+  - id: "JJQRDIS-AUAYHU7-ZJNR6HV-26Y6C77-6G2FUZA-Q6DVUHB-WV5GOCD-C3CIIQW"
+    name: "tapik1"
+
 device_awz:
   - id: "2VREC2V-ZCPGVU6-K2NFENB-3XSBIED-IK55OQ6-LOWPHKH-VUHADDM-RRASWQD"
     name: "awz"
+
 device_awz2:
   - id: "7C6RHAX-F4YVIUO-POXWWD4-FDFEVJK-ACRE4AR-PKV6IMJ-NQ3GQTC-SYBKAQZ"
     name: "awz2"
@@ -27,14 +35,16 @@ role_syncthing_data:
       path: '/home/le9i0nx/moto_e-photos/'
       id: 'moto_e-photos'
       devices_del:
-        - "{{ device_moto_old}}"
+        - "{{ device_moto_old1 }}"
+        - "{{ device_moto_old2 }}"
       devices_add:
         - "{{ device_moto }}"
     - inventory_hosts: '{{ groups.homes }}'
       path: '/home/le9i0nx/music/'
       id: 'music'
       devices_del:
-        - "{{ device_moto_old}}"
+        - "{{ device_moto_old1 }}"
+        - "{{ device_moto_old2 }}"
         - "{{ device_awz }}"
         - "{{ device_awz2 }}"
       devices_add:
@@ -43,7 +53,8 @@ role_syncthing_data:
       path: '/home/le9i0nx/money/'
       id: 'money'
       devices_del:
-        - "{{ device_moto_old}}"
+        - "{{ device_moto_old1 }}"
+        - "{{ device_moto_old2 }}"
       devices_add:
         - "{{ device_moto }}"
 
