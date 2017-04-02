@@ -5,12 +5,14 @@
 nout ansible_ssh_host=lenovo
 korkino ansible_ssh_host=korkino
 kv74 ansible_ssh_host=kv74
-awz ansible_ssh_host=amz
+awz1 ansible_ssh_host=amz1
 awz2 ansible_ssh_host=amz2
+awz3 ansible_ssh_host=amz3
 
 [awz]
-awz ansible_ssh_host=amz
+awz1 ansible_ssh_host=amz1
 awz2 ansible_ssh_host=amz2
+awz3 ansible_ssh_host=amz3
 
 [all:children]
 awz
