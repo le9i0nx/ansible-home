@@ -1,0 +1,13 @@
+---
+
+- name: Configure hostname
+  hosts: all
+  become: True
+  become_method: sudo
+
+  roles:
+
+    - role: le9i0nx.hostname
+      tags: [ 'role::hostname' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

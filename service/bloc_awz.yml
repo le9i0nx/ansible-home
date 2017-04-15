@@ -826,4 +826,33 @@
       ferm_dependent_rules:
         - '{{ awz__ferm_dependent_rules }}'
 
+  tasks:
+
+    - name: systemd login disable
+      shell: '{{ item }}'
+      with_items:
+        - "sed -i 's/^#NAutoVTs=.*/NAutoVTs=0/g' /etc/systemd/logind.conf"
+        - "sed -i 's/^#ReserveVT=.*/ReserveVT=0/g' /etc/systemd/logind.conf"
+
+    - name: disable getty
+      systemd:
+        masked: yes
+        name: '{{ item }}'
+      with_items:
+        - 'getty@tty6.service'
+        - 'getty@tty5.service'
+        - 'getty@tty4.service'
+        - 'getty@tty3.service'
+        - 'getty@tty2.service'
+        - 'getty@tty1.service'
+        - 'getty-static.service'
+        - 'serial-getty@hvc0.service'
+        - 'serial-getty@ttyS0.service'
+
+    - name: remove package
+      apt:
+        name: rsyslog
+        state: absent
+        purge: yes
+
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

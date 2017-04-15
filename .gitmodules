@@ -58,9 +58,6 @@
 [submodule "roles/le9i0nx.avachi"]
 	path = roles/le9i0nx.avachi
 	url = https://github.com/le9i0nx/ansible-avahi.git
-[submodule "roles/le9i0nx.hostname"]
-	path = roles/le9i0nx.hostname
-	url = https://github.com/le9i0nx/ansible-hostname.git
 [submodule "roles/le9i0nx.rspamd"]
 	path = roles/le9i0nx.rspamd
 	url = https://github.com/le9i0nx/ansible-rspamd.git
@@ -124,3 +121,6 @@
 [submodule "roles/le9i0nx.docker"]
 	path = roles/le9i0nx.docker
 	url = https://github.com/le9i0nx/ansible-docker.git
+[submodule "roles/le9i0nx.hostname"]
+	path = roles/le9i0nx.hostname
+	url = git@github.com:le9i0nx/ansible-hostname.git
