@@ -1,15 +1,9 @@
 ---
 
 # debops.unattended_upgrades
-unattended_upgrades__enabled: True
-unattended_upgrades__security_origins:
-
-  'Debian':
-    - "origin=Debian,codename={{ apt__sources_release }},label=Debian-Security"
-
 unattended_upgrades__release_origins:
 
-  'Debian':
+  'default':
     - "o=Debian,a={{ apt__sources_release }}"
     - "o=Debian,a={{ apt__sources_release_updates }}"
     - "o=Syncthing"
