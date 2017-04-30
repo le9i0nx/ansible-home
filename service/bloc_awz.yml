@@ -1,7 +1,8 @@
 ---
 
 - name: ferm bloc awz
-  hosts: [ 'awz' ]
+  hosts:
+    - awz
   become: True
   become_method: sudo
   vars:

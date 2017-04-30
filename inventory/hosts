@@ -23,6 +23,12 @@ homes
 [debops_unattended_upgrades:children]
 homes
 
-[le9i0nx_service_govpn:children]
+[service_govpn:children]
 homes
 
+[service_syncthing:children]
+homes
+
+[service_docker]
+74ru
+nout

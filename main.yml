@@ -9,8 +9,9 @@
 - include: service/unattended_upgrades.yml
 - include: service/console.yml
 - include: service/sshd.yml
+- include: service/fail2ban.yml
 - include: service/bloc_awz.yml
-#- include: service/tinc.yml
 - include: service/syncthing.yml
+- include: service/docker.yml
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

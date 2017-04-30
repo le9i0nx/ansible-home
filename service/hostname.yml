@@ -1,7 +1,8 @@
 ---
 
 - name: Configure hostname
-  hosts: all
+  hosts:
+    - all
   become: True
   become_method: sudo
 
