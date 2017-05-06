@@ -20,6 +20,9 @@ homes
 awz
 homes
 
+[debops_service_fail2ban:children]
+homes
+
 [debops_unattended_upgrades:children]
 homes
 
