@@ -46,3 +46,6 @@
 [submodule "roles/le9i0nx.govpn"]
 	path = roles/le9i0nx.govpn
 	url = https://github.com/le9i0nx/ansible-govpn.git
+[submodule "roles/le9i0nx.wireguard"]
+	path = roles/le9i0nx.wireguard
+	url = https://github.com/le9i0nx/ansible-wireguard.git
