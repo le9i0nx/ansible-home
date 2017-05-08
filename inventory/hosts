@@ -37,9 +37,3 @@ homes
 74ru
 nout
 
-[service_wireguard_server:children]
-awz
-
-[service_wireguard_client:children]
-not_awz
-

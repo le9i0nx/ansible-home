@@ -1,7 +1,0 @@
----
-freedns_afraid_dynamic_id: "azFqM1BBdVFkR0tWdUljc3BzZThFc2J4OjE0NTkwOTg0"
-id_addr: "5"
-govpn__host_addr: [ '172.17.35.{{ id_addr }}/24' ]
-tinc_host_addr:   [ '172.16.35.{{ id_addr }}/24' ]
-
-## vim: ft=yaml:foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
