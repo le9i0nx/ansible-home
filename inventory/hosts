@@ -27,13 +27,16 @@ homes
 [debops_unattended_upgrades:children]
 homes
 
-[service_govpn:children]
-homes
-
 [service_syncthing:children]
 homes
 
 [service_docker]
 74ru
 nout
+
+[service_wireguard_server:children]
+awz
+
+[service_wireguard_client:children]
+not_awz
 

@@ -43,3 +43,9 @@
 [submodule "roles/debops.fail2ban"]
 	path = roles/debops.fail2ban
 	url = https://github.com/le9i0nx/ansible-fail2ban.git
+[submodule "roles/le9i0nx.networkd"]
+	path = roles/le9i0nx.networkd
+	url = https://github.com/le9i0nx/ansible-networkd.git
+[submodule "roles/le9i0nx.wireguard"]
+	path = roles/le9i0nx.wireguard
+	url = git@github.com:le9i0nx/ansible-wireguard.git
