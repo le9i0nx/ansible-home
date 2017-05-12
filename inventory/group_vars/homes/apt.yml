@@ -9,15 +9,7 @@ unattended_upgrades__release_origins:
     - "o=Syncthing"
 
 # debops.apt
-apt__sources_release_updates: '{{ apt__sources_release }}-updates'
-apt__sources_release: 'stable'
-apt__sources_release_list:
-  - '{{ apt__sources_release }}'
-  - '{{ apt__sources_release_updates }}'
-  - 'jessie-backports'
-  - 'testing'
-  - 'unstable'
-  - 'experimental'
+apt__original_sources: []
 
 apt_preferences__list:
   - package: '*'
