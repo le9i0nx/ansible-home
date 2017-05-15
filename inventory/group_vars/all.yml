@@ -5,7 +5,7 @@ ansible_user: root
 console_locales: [ 'en_US.UTF-8' ]
 console_locales_default: 'en_US.UTF-8'
 console_root_password: '{{ lookup("password", secret + "/credentials/" + ansible_fqdn + "/console/root/password length=" + console_root_password_length) }}'
-console_packages:
+core__packages:
   - 'mc'
   - 'htop'
   - 'iotop'
@@ -19,7 +19,6 @@ console_packages:
   - 'lsof'
   - 'iftop'
   - 'dstat'
-  - 'iozone3'
   - 'ed'
   - 'python'
   - 'python-apt'
@@ -41,8 +40,6 @@ console_packages:
   - 'python-pip'
   - 'ca-certificates'
 
-core_packages: "{{console_packages}}"
-#apt__base_packages: "{{console_packages}}"
 #debobs.auth
 auth_ldap_conf: False
 auth_admin_accounts: [ 'ansicon' ]
@@ -74,7 +71,5 @@ users_le9i0nx:
     password: "{{ lookup('file', secret + '/users/le9i0nx/password') }}"
     sshkeys:
       - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys') }}"
-
-unattended_upgrades__enabled: True
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

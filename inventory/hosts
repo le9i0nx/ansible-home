@@ -1,16 +1,17 @@
 
-[homes]
+[homes:children]
+not_awz
+awz
+
+[not_awz]
 74ru ansible_ssh_host=74ru
-#en ansible_ssh_host=en
 nout ansible_ssh_host=lenovo
-korkino ansible_ssh_host=korkino
 kv74 ansible_ssh_host=kv74
-awz ansible_ssh_host=amz
-awz2 ansible_ssh_host=amz2
 
 [awz]
-awz ansible_ssh_host=amz
+awz1 ansible_ssh_host=amz1
 awz2 ansible_ssh_host=amz2
+awz3 ansible_ssh_host=amz3
 
 [all:children]
 awz
@@ -20,9 +21,22 @@ homes
 awz
 homes
 
+[debops_service_fail2ban:children]
+homes
+
 [debops_unattended_upgrades:children]
 homes
 
-[le9i0nx_service_govpn:children]
+[service_syncthing:children]
 homes
+
+[service_docker]
+74ru
+nout
+
+[service_wireguard_server:children]
+awz
+
+[service_wireguard_client:children]
+not_awz
 

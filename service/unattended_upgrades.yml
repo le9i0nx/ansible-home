@@ -1,5 +1,6 @@
 - name: Configuration unattended upgrades
-  hosts: [ 'debops_unattended_upgrades' ]
+  hosts:
+    - debops_unattended_upgrades
   gather_facts: True
   become: True
 

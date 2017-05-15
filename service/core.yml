@@ -1,7 +1,8 @@
 ---
 
 - name: Prepare core environment
-  hosts: 'debops_all_hosts'
+  hosts:
+    - debops_all_hosts
   become: False
 
   roles:

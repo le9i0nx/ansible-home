@@ -1,9 +1,0 @@
----
-freedns_afraid_dynamic_id: "azFqM1BBdVFkR0tWdUljc3BzZThFc2J4OjExOTA3ODk5"
-id_addr: "1"
-govpn__host_addr: [ '172.17.35.{{ id_addr }}/24' ]
-tinc_host_addr:   [ '172.16.35.{{ id_addr }}/24' ]
-tinc__modprobe: False
-
-govpn__start_client: False
-govpn__start_server: True

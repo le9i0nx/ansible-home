@@ -4,24 +4,13 @@
 syncthing__dependencies_ferm: True
 
 device_moto:
-  - id: "6W2RVAQ-GZBOGNF-G27AO2I-AXGRELU-6FGKXTM-WD2ELIN-L6W75F5-QUUWFQR"
+  - id: "XP46ALQ-PZKFHVZ-L5UMCYJ-DPOWGTM-HNYZ4UU-34PAF5D-I2IBTAP-NPBLJAP"
     name: "tapik"
 
-device_moto_old1:
-  - id: "H5K4NYU-P64UC3B-ZY6DIU5-RKE4MJS-AMOW2TK-75API3M-7W5FO5Z-QX3LAAR"
-    name: "tapik2"
+devices_old:
+  - id: "6W2RVAQ-GZBOGNF-G27AO2I-AXGRELU-6FGKXTM-WD2ELIN-L6W75F5-QUUWFQR"
+    name: "old"
 
-device_moto_old2:
-  - id: "JJQRDIS-AUAYHU7-ZJNR6HV-26Y6C77-6G2FUZA-Q6DVUHB-WV5GOCD-C3CIIQW"
-    name: "tapik1"
-
-device_awz:
-  - id: "2VREC2V-ZCPGVU6-K2NFENB-3XSBIED-IK55OQ6-LOWPHKH-VUHADDM-RRASWQD"
-    name: "awz"
-
-device_awz2:
-  - id: "7C6RHAX-F4YVIUO-POXWWD4-FDFEVJK-ACRE4AR-PKV6IMJ-NQ3GQTC-SYBKAQZ"
-    name: "awz2"
 
 role_syncthing_user: 'le9i0nx'
 role_syncthing_data:
@@ -31,31 +20,28 @@ role_syncthing_data:
     - inventory_hosts: '{{ groups.homes }}'
       path: '/home/le9i0nx/crypt/'
       id: 'crypt'
+      devices_del:
+        - '{{ devices_old }}'
     - inventory_hosts: '{{ groups.homes }}'
       path: '/home/le9i0nx/moto_e-photos/'
       id: 'moto_e-photos'
-      devices_del:
-        - "{{ device_moto_old1 }}"
-        - "{{ device_moto_old2 }}"
       devices_add:
         - "{{ device_moto }}"
-    - inventory_hosts: '{{ groups.homes }}'
+      devices_del:
+        - '{{ devices_old }}'
+    - inventory_hosts: '{{ groups.homes | difference(groups.awz) }}'
       path: '/home/le9i0nx/music/'
       id: 'music'
       devices_del:
-        - "{{ device_moto_old1 }}"
-        - "{{ device_moto_old2 }}"
-        - "{{ device_awz }}"
-        - "{{ device_awz2 }}"
+        - '{{ devices_old }}'
       devices_add:
         - "{{ device_moto }}"
     - inventory_hosts: '{{ groups.homes }}'
       path: '/home/le9i0nx/money/'
       id: 'money'
-      devices_del:
-        - "{{ device_moto_old1 }}"
-        - "{{ device_moto_old2 }}"
       devices_add:
         - "{{ device_moto }}"
+      devices_del:
+        - '{{ devices_old }}'
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

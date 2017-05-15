@@ -1,0 +1,14 @@
+---
+
+- name: Install Docker
+  hosts:
+    - service_docker
+    - test_hosts
+  become: True
+
+  roles:
+
+    - role: le9i0nx.docker
+      tags: [ 'role::docker' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

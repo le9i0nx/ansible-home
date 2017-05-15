@@ -1,24 +1,12 @@
 [submodule "roles/le9i0nx.syncthing"]
 	path = roles/le9i0nx.syncthing
 	url = https://github.com/le9i0nx/ansible-syncthing.git
-[submodule "roles/le9i0nx.smartd"]
-	path = roles/le9i0nx.smartd
-	url = https://github.com/le9i0nx/ansible-smartd.git
-[submodule "roles/nbz4live.nagios-nrpe-server"]
-	path = roles/nbz4live.nagios-nrpe-server
-	url = https://github.com/le9i0nx/ansible-nagios-nrpe-server.git
-[submodule "roles/debops.rsyslog"]
-	path = roles/debops.rsyslog
-	url = https://github.com/le9i0nx/ansible-rsyslog.git
 [submodule "roles/debops.users"]
 	path = roles/debops.users
 	url = https://github.com/le9i0nx/ansible-users.git
 [submodule "roles/debops.console"]
 	path = roles/debops.console
 	url = https://github.com/le9i0nx/ansible-console.git
-[submodule "roles/debops.ntp"]
-	path = roles/debops.ntp
-	url = https://github.com/le9i0nx/ansible-ntp.git
 [submodule "roles/debops.sshd"]
 	path = roles/debops.sshd
 	url = https://github.com/le9i0nx/ansible-sshd.git
@@ -31,96 +19,33 @@
 [submodule "roles/debops.auth"]
 	path = roles/debops.auth
 	url = https://github.com/le9i0nx/ansible-auth.git
-[submodule "roles/debops.mysql"]
-	path = roles/debops.mysql
-	url = https://github.com/le9i0nx/ansible-mysql.git
-[submodule "roles/debops.php5"]
-	path = roles/debops.php5
-	url = https://github.com/le9i0nx/ansible-php5.git
-[submodule "roles/debops.nginx"]
-	path = roles/debops.nginx
-	url = https://github.com/le9i0nx/ansible-nginx.git
 [submodule "roles/debops.apt_preferences"]
 	path = roles/debops.apt_preferences
 	url = https://github.com/le9i0nx/ansible-apt_preferences.git
 [submodule "roles/debops.core"]
 	path = roles/debops.core
 	url = https://github.com/le9i0nx/ansible-core.git
-[submodule "roles/debops.tinc"]
-	path = roles/debops.tinc
-	url = https://github.com/le9i0nx/ansible-tinc.git
-[submodule "roles/le9i0nx.networkd"]
-	path = roles/le9i0nx.networkd
-	url = https://github.com/le9i0nx/ansible-networkd.git
 [submodule "roles/debops.apt"]
 	path = roles/debops.apt
 	url = https://github.com/le9i0nx/ansible-apt.git
-[submodule "roles/le9i0nx.avachi"]
-	path = roles/le9i0nx.avachi
-	url = https://github.com/le9i0nx/ansible-avahi.git
-[submodule "roles/le9i0nx.hostname"]
-	path = roles/le9i0nx.hostname
-	url = https://github.com/le9i0nx/ansible-hostname.git
-[submodule "roles/le9i0nx.rspamd"]
-	path = roles/le9i0nx.rspamd
-	url = https://github.com/le9i0nx/ansible-rspamd.git
-[submodule "roles/le9i0nx.proxmox"]
-	path = roles/le9i0nx.proxmox
-	url = https://github.com/le9i0nx/ansible-proxmox.git
-[submodule "roles/debops.dovecot"]
-	path = roles/debops.dovecot
-	url = https://github.com/le9i0nx/ansible-dovecot.git
-[submodule "roles/le9i0nx.bind"]
-	path = roles/le9i0nx.bind
-	url = https://github.com/le9i0nx/ansible-bind.git
-[submodule "roles/debops.dhcpd"]
-	path = roles/debops.dhcpd
-	url = https://github.com/le9i0nx/ansible-dhcpd.git
-[submodule "roles/le9i0nx.squid"]
-	path = roles/le9i0nx.squid
-	url = https://github.com/le9i0nx/ansible-squid.git
-[submodule "roles/debops.fcgiwrap"]
-	path = roles/debops.fcgiwrap
-	url = https://github.com/le9i0nx/ansible-fcgiwrap.git
-[submodule "roles/debops.samba"]
-	path = roles/debops.samba
-	url = https://github.com/le9i0nx/ansible-samba.git
-[submodule "roles/le9i0nx.nss-pam-ldap"]
-	path = roles/le9i0nx.nss-pam-ldap
-	url = https://github.com/le9i0nx/ansible-nss-pam-ldap.git
-[submodule "roles/jtyr.nsswitch"]
-	path = roles/jtyr.nsswitch
-	url = https://github.com/le9i0nx/ansible-nsswitch.git
-[submodule "roles/le9i0nx.bacula"]
-	path = roles/le9i0nx.bacula
-	url = https://github.com/le9i0nx/ansible-bacula.git
-[submodule "roles/le9i0nx.root_password"]
-	path = roles/le9i0nx.root_password
-	url = https://github.com/le9i0nx/ansible-root_password.git
 [submodule "roles/debops.unattended_upgrades"]
 	path = roles/debops.unattended_upgrades
 	url = https://github.com/le9i0nx/ansible-unattended_upgrades.git
-[submodule "roles/le9i0nx.cups"]
-	path = roles/le9i0nx.cups
-	url = https://github.com/le9i0nx/ansible-cups.git
-[submodule "roles/martin-v.letsencryptsh"]
-	path = roles/martin-v.letsencryptsh
-	url = https://github.com/le9i0nx/ansible-letsencryptsh.git
-[submodule "roles/le9i0nx.govpn"]
-	path = roles/le9i0nx.govpn
-	url = https://github.com/le9i0nx/ansible-govpn.git
-[submodule "roles/le9i0nx.openfire"]
-	path = roles/le9i0nx.openfire
-	url = https://github.com/le9i0nx/ansible-openfire.git
-[submodule "roles/debops.mariadb_server"]
-	path = roles/debops.mariadb_server
-	url = https://github.com/le9i0nx/ansible-mariadb_server.git
-[submodule "roles/debops.mariadb"]
-	path = roles/debops.mariadb
-	url = https://github.com/le9i0nx/ansible-mariadb.git
-[submodule "roles/le9i0nx.slapd"]
-	path = roles/le9i0nx.slapd
-	url = https://github.com/le9i0nx/ansible-slapd.git
 [submodule "roles/le9i0nx.docker"]
 	path = roles/le9i0nx.docker
 	url = https://github.com/le9i0nx/ansible-docker.git
+[submodule "roles/le9i0nx.hostname"]
+	path = roles/le9i0nx.hostname
+	url = https://github.com/le9i0nx/ansible-hostname.git
+[submodule "roles/le9i0nx.yum"]
+	path = roles/le9i0nx.yum
+	url = https://github.com/le9i0nx/ansible-yum.git
+[submodule "roles/debops.fail2ban"]
+	path = roles/debops.fail2ban
+	url = https://github.com/le9i0nx/ansible-fail2ban.git
+[submodule "roles/le9i0nx.networkd"]
+	path = roles/le9i0nx.networkd
+	url = https://github.com/le9i0nx/ansible-networkd.git
+[submodule "roles/le9i0nx.wireguard"]
+	path = roles/le9i0nx.wireguard
+	url = git@github.com:le9i0nx/ansible-wireguard.git
