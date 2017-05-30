@@ -12,6 +12,7 @@
 - include: service/fail2ban.yml
 - include: service/bloc_awz.yml
 - include: service/syncthing.yml
+- include: service/wireguard.yml
 - include: service/docker.yml
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
