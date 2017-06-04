@@ -25,7 +25,6 @@ core__packages:
   - 'lsb-release'
   - 'make'
   - 'sudo'
-  - 'gnupg-curl'
   - 'git'
   - 'wget'
   - 'curl'
