@@ -1,5 +1,5 @@
 ---
-ferm_ansible_controllers: ['0.0.0.0/0']
+ferm__ansible_controllers: ['0.0.0.0/0']
 tcpwrappers_ansible_controllers: ['ALL']
 console_issue: 'Org. le9i0nx.ru'
 #grub

@@ -1,0 +1,7 @@
+---
+
+fail2ban_jails:
+  - name: 'sshd'
+    enabled: 'true'
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
