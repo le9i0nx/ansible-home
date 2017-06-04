@@ -4,8 +4,8 @@
 unattended_upgrades__release_origins:
 
   'default':
-    - "o=Debian,a={{ apt__sources_release }}"
-    - "o=Debian,a={{ apt__sources_release_updates }}"
+    - "o=Debian,a={{ ansible_distribution_release }}"
+    - "o=Debian,a={{ ansible_distribution_release + '-updates' }}"
     - "o=Syncthing"
 
 # debops.apt
@@ -13,9 +13,9 @@ apt__original_sources: []
 
 apt_preferences__list:
   - package: '*'
-    pin: 'release jessie-backports'
+    pin: 'release stretch-backports'
     priority: '70'
-    filename: "jessie-backports"
+    filename: "stretch-backports"
   - package: '*'
     pin: 'release sid'
     priority: '50'
