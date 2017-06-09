@@ -4,7 +4,6 @@ not_awz
 awz
 
 [not_awz]
-74ru ansible_ssh_host=74ru
 nout ansible_ssh_host=lenovo
 kv74 ansible_ssh_host=kv74
 

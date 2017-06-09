@@ -48,4 +48,7 @@
 	url = https://github.com/le9i0nx/ansible-networkd.git
 [submodule "roles/le9i0nx.wireguard"]
 	path = roles/le9i0nx.wireguard
-	url = git@github.com:le9i0nx/ansible-wireguard.git
+	url = https://github.com/le9i0nx/ansible-wireguard.git
+[submodule "roles/le9i0nx.quagga"]
+	path = roles/le9i0nx.quagga
+	url = https://github.com/le9i0nx/ansible-quagga.git
