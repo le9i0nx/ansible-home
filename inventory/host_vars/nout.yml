@@ -1,0 +1,6 @@
+---
+
+quagga_interfaces_host:
+  - "wlan0"
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

@@ -13,11 +13,9 @@ awz2 ansible_ssh_host=amz2
 awz3 ansible_ssh_host=amz3
 
 [all:children]
-awz
 homes
 
 [debops_all_hosts:children]
-awz
 homes
 
 [debops_service_fail2ban:children]
@@ -29,8 +27,10 @@ homes
 [service_syncthing:children]
 homes
 
+[service_quagga:children]
+homes
+
 [service_docker]
-74ru
 nout
 
 [service_wireguard_server:children]

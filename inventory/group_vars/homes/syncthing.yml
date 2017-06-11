@@ -10,6 +10,11 @@ device_moto:
 devices_old:
   - id: "6W2RVAQ-GZBOGNF-G27AO2I-AXGRELU-6FGKXTM-WD2ELIN-L6W75F5-QUUWFQR"
     name: "old"
+  - id: "36QXL6S-7RDFI7F-LX54RUP-IP5B3Y5-EMJRXPQ-DAQLQD5-GNB74MX-AEVJKAJ"
+    name: "old"
+  - id: "DNE2QC6-H2GSVJ6-KMKXHGI-IK5Y4J3-JW3M7BJ-WXXF5TH-F6XRFLW-DF2QKQ7"
+    name: "old"
+
 
 
 role_syncthing_user: 'le9i0nx'

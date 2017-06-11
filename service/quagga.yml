@@ -1,0 +1,14 @@
+---
+
+- name: Install quagga
+  hosts:
+    - service_quagga
+    - test_hosts
+  become: True
+
+  roles:
+
+    - role: le9i0nx.quagga
+      tags: [ 'role::quagga' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
