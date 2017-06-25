@@ -1,7 +1,6 @@
 ---
 
-quagga_interfaces_host:
-  - "wlan0"
-  - "tun_awz"
+ferm__forward: True
+ferm__ansible_controllers: ['0.0.0.0/0']
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

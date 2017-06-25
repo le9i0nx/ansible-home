@@ -4,7 +4,7 @@ ansible_user: root
 
 console_locales: [ 'en_US.UTF-8' ]
 console_locales_default: 'en_US.UTF-8'
-console_root_password: '{{ lookup("password", secret + "/credentials/" + ansible_fqdn + "/console/root/password length=" + console_root_password_length) }}'
+console_root_password: "{{ lookup('file', secret + '/users/root/password_home') }}"
 core__packages:
   - 'mc'
   - 'htop'
@@ -47,10 +47,6 @@ auth_admin_accounts: [ 'ansicon' ]
 users_default:
   - '{{ users_ansicon }}'
 
-users_admins:
-  - '{{ users_ansicon }}'
-  - '{{ users_le9i0nx }}'
-
 users_ansicon:
   - name:   'ansicon'
     state:  'present'
@@ -70,5 +66,19 @@ users_le9i0nx:
     password: "{{ lookup('file', secret + '/users/le9i0nx/password') }}"
     sshkeys:
       - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys') }}"
+
+users_root:
+  - name:   'root'
+    state:  'present'
+    group:  'root'
+    password: "{{ lookup('file', secret + '/users/root/password_home') }}"
+    sshkeys:
+      - "{{ lookup('file', secret + '/users/root/sshkeys') }}"
+      - "{{ lookup('file', secret + '/users/root/sshkeys2') }}"
+
+users_admins:
+  - '{{ users_ansicon }}'
+#  - '{{ users_root }}'
+  - '{{ users_le9i0nx }}'
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

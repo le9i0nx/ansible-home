@@ -6,6 +6,7 @@ awz
 [not_awz]
 nout ansible_ssh_host=lenovo
 kv74 ansible_ssh_host=kv74
+unit6 ansible_ssh_host=unit6
 
 [awz]
 awz1 ansible_ssh_host=amz1
@@ -32,6 +33,7 @@ homes
 
 [service_docker]
 nout
+unit6
 
 [service_wireguard_server:children]
 awz

@@ -1,23 +1,7 @@
 ---
-ferm__ansible_controllers: ['0.0.0.0/0']
 tcpwrappers_ansible_controllers: ['ALL']
 console_issue: 'Org. le9i0nx.ru'
 #grub
 grub_cmd_elevator: 'noop'
-
-users_root:
-  - name:   'root'
-    state:  'present'
-    group:  'root'
-    password: "{{ lookup('file', secret + '/users/root/password_home') }}"
-    sshkeys:
-      - "{{ lookup('file', secret + '/users/root/sshkeys') }}"
-      - "{{ lookup('file', secret + '/users/root/sshkeys2') }}"
-
-console_root_password: "{{ lookup('file', secret + '/users/root/password_home') }}"
-
-users_admins:
-  - '{{ users_ansicon }}'
-  - '{{ users_le9i0nx }}'
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
