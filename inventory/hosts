@@ -6,7 +6,8 @@ awz
 [not_awz]
 nout ansible_ssh_host=lenovo
 kv74 ansible_ssh_host=kv74
-unit6 ansible_ssh_host=unit6
+unit6 ansible_ssh_host=unit6 ansible_ssh_port=50245
+korkino ansible_ssh_host=korkino
 
 [awz]
 awz1 ansible_ssh_host=amz1
@@ -29,6 +30,9 @@ homes
 homes
 
 [service_quagga:children]
+homes
+
+[service_backup:children]
 homes
 
 [service_docker]

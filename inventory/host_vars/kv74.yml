@@ -1,0 +1,11 @@
+---
+
+quagga_interfaces_default:
+  - "wg_awz1_kv74"
+  - "wg_awz2_kv74"
+  - "wg_awz3_kv74"
+
+quagga_interfaces_host:
+  - "br0"
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

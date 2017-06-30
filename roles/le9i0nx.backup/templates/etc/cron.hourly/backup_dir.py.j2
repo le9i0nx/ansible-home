@@ -1,0 +1,83 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import filelock
+import os
+import subprocess
+from time import gmtime, strftime
+
+backup_dir='/home/le9i0nx/backup/'
+dir_list= [
+    "/home/le9i0nx/moto_e-photos/",
+    "/home/le9i0nx/money/",
+    "/home/le9i0nx/crypt/",
+        ]
+
+
+def ensure_dir(file_path):
+    directory = os.path.dirname(file_path)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+# запуск процесса
+def proc(cmd,time = 30,sh = True ):
+    p = subprocess.Popen(cmd,stdout=subprocess.PIPE,stderr=subprocess.PIPE, shell=sh)
+    try:
+        outs, errs = p.communicate(timeout=time)
+    except subprocess.TimeoutExpired:
+        p.kill()
+        outs, errs = p.communicate()
+    return outs,errs,p
+
+def del_backup(fs_file):
+    i=0
+    while i < 3:
+        try:
+            r = os.statvfs(fs_file)
+        except FileNotFoundError:
+            break
+        if (r.f_bavail / r.f_blocks < 0.10) or (r.f_favail / r.f_files < 0.10):
+            print( r.f_bavail / r.f_blocks , r.f_favail / r.f_files)
+            d = os.listdir(fs_file)
+            d.sort()
+            if (d !=[]) and ( d[0] != 'latest'):
+                print (fs_file+d[0])
+                proc('rm -rf {}{}'.format(fs_file,d[0]))
+            else:
+                i=i+1
+        else:
+            break
+
+def make_backup(directory,backup_list):
+    ensure_dir(directory+'/latest/')
+    date = strftime("%Y-%m-%d--%H:%M", gmtime())
+    list_file = []
+    cp = 0
+    for i in backup_list:
+        path = os.path.normpath(i).split(os.sep)
+        out,_,_ = proc('rsync --archive --one-file-system --exclude "/.stversion*" --verbose  {0}/  --delete {2}/latest/{1}/ '.format(i,path[-1],directory))
+        x =out.decode('cp866').splitlines()
+        if len(x) > 4:
+            cp=1
+            for y in x:
+                list_file.append(y)
+    if cp == 1:
+        proc("cp --archive --link {0}/latest/ {0}/{1}/".format(directory,date))
+        file_log = '{}/{}.txt'.format(directory,date)
+        print(list_file)
+        with open(file_log, 'w') as file_handler:
+            for item in list_file:
+                file_handler.write("{}\n".format(item))
+
+        #proc('rsync --archive --one-file-system --exclude "/.griv*" --exclude "/.stversion*" --verbose  ~/crypt/  --delete ~/backup_grive/latest/ >> ~/backup_grive/backup_$date_backup.txt')
+
+
+
+lock = filelock.FileLock("/tmp/backup.pid")
+try:
+    with lock.acquire(timeout = 1):
+        del_backup(backup_dir)
+        make_backup(backup_dir,dir_list)
+        pass
+except filelock.Timeout:
+    pass
+

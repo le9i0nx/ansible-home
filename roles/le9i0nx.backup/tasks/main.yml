@@ -1,0 +1,19 @@
+---
+
+- name: install required packages
+  package:
+    name: '{{ item }}'
+    state: 'present'
+    install_recommends: False
+  with_flattened:
+    - "python3-filelock"
+
+- name: add backup script to cron
+  template:
+    src: etc/cron.hourly/backup_dir.py.j2
+    dest: /etc/cron.hourly/backup_dir.py
+    owner: root
+    group: root
+    mode: 0755
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

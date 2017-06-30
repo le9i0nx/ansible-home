@@ -1,0 +1,14 @@
+---
+
+- name: Install backup
+  hosts:
+    - service_backup
+    - test_hosts
+  become: True
+
+  roles:
+
+    - role: le9i0nx.backup
+      tags: [ 'role::backup' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
