@@ -12,7 +12,6 @@ dir_list= [
     "/home/le9i0nx/crypt/",
         ]
 
-
 def ensure_dir(file_path):
     directory = os.path.dirname(file_path)
     if not os.path.exists(directory):
@@ -55,7 +54,7 @@ def make_backup(directory,backup_list):
     for i in backup_list:
         path = os.path.normpath(i).split(os.sep)
         out,_,_ = proc('rsync --archive --one-file-system --exclude "/.stversion*" --verbose  {0}/  --delete {2}/latest/{1}/ '.format(i,path[-1],directory))
-        x =out.decode('cp866').splitlines()
+        x =out.decode('utf-8').splitlines()
         if len(x) > 4:
             cp=1
             for y in x:
@@ -63,14 +62,9 @@ def make_backup(directory,backup_list):
     if cp == 1:
         proc("cp --archive --link {0}/latest/ {0}/{1}/".format(directory,date))
         file_log = '{}/{}.txt'.format(directory,date)
-        print(list_file)
         with open(file_log, 'w') as file_handler:
             for item in list_file:
                 file_handler.write("{}\n".format(item))
-
-        #proc('rsync --archive --one-file-system --exclude "/.griv*" --exclude "/.stversion*" --verbose  ~/crypt/  --delete ~/backup_grive/latest/ >> ~/backup_grive/backup_$date_backup.txt')
-
-
 
 lock = filelock.FileLock("/tmp/backup.pid")
 try:

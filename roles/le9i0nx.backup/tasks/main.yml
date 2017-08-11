@@ -10,8 +10,8 @@
 
 - name: add backup script to cron
   template:
-    src: etc/cron.hourly/backup_dir.py.j2
-    dest: /etc/cron.hourly/backup_dir.py
+    src: etc/cron.hourly/backup_dir.j2
+    dest: /etc/cron.hourly/backup_dir
     owner: root
     group: root
     mode: 0755

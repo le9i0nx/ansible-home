@@ -8,14 +8,18 @@ nout ansible_ssh_host=lenovo
 kv74 ansible_ssh_host=kv74
 unit6 ansible_ssh_host=unit6 ansible_ssh_port=50245
 korkino ansible_ssh_host=korkino
+dell ansible_ssh_host=dell
 
 [awz]
 awz1 ansible_ssh_host=amz1
 awz2 ansible_ssh_host=amz2
 awz3 ansible_ssh_host=amz3
 
+
 [all:children]
 homes
+
+
 
 [debops_all_hosts:children]
 homes
@@ -33,7 +37,7 @@ homes
 homes
 
 [service_backup:children]
-homes
+not_awz
 
 [service_docker]
 nout
@@ -44,4 +48,5 @@ awz
 
 [service_wireguard_client:children]
 not_awz
+
 
