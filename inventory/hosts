@@ -42,6 +42,12 @@ not_awz
 [service_docker]
 nout
 unit6
+dell
+
+[service_xorg]
+nout
+unit6
+dell
 
 [service_wireguard_server:children]
 awz

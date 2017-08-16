@@ -1,0 +1,43 @@
+---
+
+- name: install required packages
+  apt:
+    name: '{{ item }}'
+    state: 'present'
+    install_recommends: False
+  with_flattened:
+    - wicd-curses
+    - wicd-gtk
+    - wireshark
+    - nodm
+    - awesome
+
+- name: Create directories
+  file:
+    path:   '{{ item.path }}'
+    state:  '{{ item.state  | default("directory") }}'
+    owner:  '{{ item.owner  | default("root") }}'
+    group:  '{{ item.group  | default("root") }}'
+    mode:   '{{ item.mode   | default("0755") }}'
+  with_items:
+    - { path: '/home/le9i0nx/.config/awesome' }
+
+- name: Create symlinks
+  file:
+    src:    '{{ item.src }}'
+    dest:   '{{ item.dest }}'
+    state:  '{{ item.state  | default("link") }}'
+    owner:  '{{ item.owner  | default("root") }}'
+    group:  '{{ item.group  | default("root") }}'
+    force:  '{{ item.force  | default("no")}}'
+  with_items:
+    - { src: '/home/le9i0nx/crypt/user/home/awesome/lib/debug' , dest: '/home/le9i0nx/.config/awesome/debug' }
+    - { src: '/home/le9i0nx/crypt/user/home/awesome/lib/lain' , dest: '/home/le9i0nx/.config/awesome/lain' }
+    - { src: '/home/le9i0nx/crypt/user/home/awesome/lib/tyrannical' , dest: '/home/le9i0nx/.config/awesome/tyrannical' }
+    - { src: '/home/le9i0nx/crypt/user/home/awesome/lib/zenburn' , dest: '/home/le9i0nx/.config/awesome/zenburn' }
+    - { src: '/home/le9i0nx/crypt/user/home/awesome/menu/mymenu.lua' , dest: '/home/le9i0nx/.config/awesome/mymenu.lua' }
+    - { src: '/home/le9i0nx/crypt/user/home/awesome/{{ inventory_hostname }}/rc.lua' , dest: '/home/le9i0nx/.config/awesome/rc.lua' }
+    - { src: '/home/le9i0nx/crypt/user/home/awesome/{{ inventory_hostname }}/custom.lua' , dest: '/home/le9i0nx/.config/awesome/custom.lua' }
+
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

@@ -1,0 +1,14 @@
+---
+
+- name: Install xorg
+  hosts:
+    - service_xorg
+    - test_hosts
+  become: True
+
+  roles:
+
+    - role: le9i0nx.xorg
+      tags: [ 'role::xorg' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
