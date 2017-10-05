@@ -71,14 +71,13 @@ users_root:
   - name:   'root'
     state:  'present'
     group:  'root'
-    password: "{{ lookup('file', secret + '/users/root/password_home') }}"
+    password: "{{ lookup('file', secret + '/users/root/password') }}"
     sshkeys:
       - "{{ lookup('file', secret + '/users/root/sshkeys') }}"
-      - "{{ lookup('file', secret + '/users/root/sshkeys2') }}"
 
 users_admins:
   - '{{ users_ansicon }}'
-#  - '{{ users_root }}'
+  - '{{ users_root }}'
   - '{{ users_le9i0nx }}'
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
