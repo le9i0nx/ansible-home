@@ -4,7 +4,7 @@
 syncthing__dependencies_ferm: True
 
 device_moto:
-  - id: "XP46ALQ-PZKFHVZ-L5UMCYJ-DPOWGTM-HNYZ4UU-34PAF5D-I2IBTAP-NPBLJAP"
+  - id: "DOLMZMR-NOAWENJ-W46EOMK-4TSKXU5-ZML6X2Z-TF5XIPF-IGNPQCN-JAGS4QH"
     name: "tapik"
 
 devices_old:
@@ -14,7 +14,8 @@ devices_old:
     name: "old"
   - id: "DNE2QC6-H2GSVJ6-KMKXHGI-IK5Y4J3-JW3M7BJ-WXXF5TH-F6XRFLW-DF2QKQ7"
     name: "old"
-
+  - id: "XP46ALQ-PZKFHVZ-L5UMCYJ-DPOWGTM-HNYZ4UU-34PAF5D-I2IBTAP-NPBLJAP"
+    name: "old"
 
 
 role_syncthing_user: 'le9i0nx'
