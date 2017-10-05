@@ -11,6 +11,29 @@
     - wireshark
     - nodm
     - awesome
+    - chromium-l10n
+    - firefox-esr
+    - mplayer
+    - rtorrent
+    - keepassx
+    - shutter
+    - xzgv
+    - onboard
+    - onboard-data
+    - xterm
+    - xserver-xorg
+    - xserver-xorg-core
+    - xserver-xorg-input-all
+    - xserver-xorg-input-mouse
+    - xserver-xorg-input-kbd
+    - xserver-xorg-input-multitouch
+    - xserver-xorg-input-synaptics
+    - x11-xserver-utils
+    - x11-utils
+    - xserver-xorg-video-all
+    - xserver-xorg-video-intel
+    - xinput
+    - xfonts-base
 
 - name: Create directories
   file:
@@ -20,7 +43,7 @@
     group:  '{{ item.group  | default("root") }}'
     mode:   '{{ item.mode   | default("0755") }}'
   with_items:
-    - { path: '/home/le9i0nx/.config/awesome' }
+    - { path: '/home/{{ xorg_user }}/.config/awesome' }
 
 - name: Create symlinks
   file:
@@ -31,13 +54,23 @@
     group:  '{{ item.group  | default("root") }}'
     force:  '{{ item.force  | default("no")}}'
   with_items:
-    - { src: '/home/le9i0nx/crypt/user/home/awesome/lib/debug' , dest: '/home/le9i0nx/.config/awesome/debug' }
-    - { src: '/home/le9i0nx/crypt/user/home/awesome/lib/lain' , dest: '/home/le9i0nx/.config/awesome/lain' }
-    - { src: '/home/le9i0nx/crypt/user/home/awesome/lib/tyrannical' , dest: '/home/le9i0nx/.config/awesome/tyrannical' }
-    - { src: '/home/le9i0nx/crypt/user/home/awesome/lib/zenburn' , dest: '/home/le9i0nx/.config/awesome/zenburn' }
-    - { src: '/home/le9i0nx/crypt/user/home/awesome/menu/mymenu.lua' , dest: '/home/le9i0nx/.config/awesome/mymenu.lua' }
-    - { src: '/home/le9i0nx/crypt/user/home/awesome/{{ inventory_hostname }}/rc.lua' , dest: '/home/le9i0nx/.config/awesome/rc.lua' }
-    - { src: '/home/le9i0nx/crypt/user/home/awesome/{{ inventory_hostname }}/custom.lua' , dest: '/home/le9i0nx/.config/awesome/custom.lua' }
+    - { src: '/home/{{ xorg_user }}/crypt/user/home/awesome/lib/debug' , dest: '/home/{{ xorg_user }}/.config/awesome/debug' }
+    - { src: '/home/{{ xorg_user }}/crypt/user/home/awesome/lib/lain' , dest: '/home/{{ xorg_user }}/.config/awesome/lain' }
+    - { src: '/home/{{ xorg_user }}/crypt/user/home/awesome/lib/tyrannical' , dest: '/home/{{ xorg_user }}/.config/awesome/tyrannical' }
+    - { src: '/home/{{ xorg_user }}/crypt/user/home/awesome/lib/zenburn' , dest: '/home/{{ xorg_user }}/.config/awesome/zenburn' }
+    - { src: '/home/{{ xorg_user }}/crypt/user/home/awesome/menu/mymenu.lua' , dest: '/home/{{ xorg_user }}/.config/awesome/mymenu.lua' }
+    - { src: '/home/{{ xorg_user }}/crypt/user/home/awesome/{{ inventory_hostname }}/rc.lua' , dest: '/home/{{ xorg_user }}/.config/awesome/rc.lua' }
+    - { src: '/home/{{ xorg_user }}/crypt/user/home/awesome/{{ inventory_hostname }}/custom.lua' , dest: '/home/{{ xorg_user }}/.config/awesome/custom.lua' }
+
+- name: add nodm
+  template:
+    src: etc/default/nodm.j2
+    dest: /etc/default/nodm
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - nodm restarted
 
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

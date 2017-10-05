@@ -1,0 +1,8 @@
+---
+
+- name: nodm restarted
+  service:
+    name: 'nodm'
+    state: 'restarted'
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
