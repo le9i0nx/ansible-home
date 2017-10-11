@@ -1,0 +1,14 @@
+[Unit]
+Description=onboard
+After=display-manager.service
+
+[Service]
+User=le9i0nx
+Environment=DISPLAY=:0.0
+ExecStartPre=/usr/bin/setxkbmap
+ExecStart=/usr/bin/onboard
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
