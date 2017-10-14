@@ -1,0 +1,17 @@
+---
+
+- name: add set key file and add key of user
+  raw: >
+    /file print file=ansible_{{ item.name }}.key;
+    :delay 2;
+    /file set ansible_{{ item.name }}.key contents="{{ outer_item }}";
+    :delay 2;
+    /user ssh-keys import user={{ item.name }} public-key-file=ansible_{{ item.name }}.key;
+  register: last_output
+  failed_when: "'syntax error' in '{{ last_output.stdout }}' or 'bad command' in '{{ last_output.stdout }}' or 'invalid value' in '{{ last_output.stdout }}' or 'expected end of command' in '{{ last_output.stdout }}'"
+  with_items: '{{ item.sshkeys }}'
+  loop_control:
+        loop_var: outer_item
+  tags: test
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

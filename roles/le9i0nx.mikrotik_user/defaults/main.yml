@@ -1,0 +1,7 @@
+---
+
+mikrotik_user__default: []
+mikrotik_user__admins: []
+mikrotik_user__list: []
+mikrotik_user__group_list: []
+mikrotik_user__host_list: []

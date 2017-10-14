@@ -1,0 +1,17 @@
+---
+
+- name: Add mikrotic user
+  hosts:
+    - mikrotic_user
+    - mikrotic_all
+  become: False
+  gather_facts: no
+
+  roles:
+
+    - role: debops.secret
+
+    - role: le9i0nx.mikrotik_user
+      tags: [ 'role::mikrotik_user' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

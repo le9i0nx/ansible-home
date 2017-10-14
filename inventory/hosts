@@ -2,6 +2,7 @@
 [homes:children]
 not_awz
 awz
+mikrotic
 
 [not_awz]
 nout ansible_ssh_host=lenovo
@@ -15,11 +16,16 @@ awz1 ansible_ssh_host=amz1
 awz2 ansible_ssh_host=amz2
 awz3 ansible_ssh_host=amz3
 
+[mikrotic]
+kv74-tic ansible_ssh_host=192.168.16.1
+korkino-tic ansible_ssh_host=192.168.15.1
+amz-tic ansible_ssh_host=172.25.1.1
 
 [all:children]
 homes
 
-
+[mikrotic_user:children]
+mikrotic
 
 [debops_all_hosts:children]
 homes

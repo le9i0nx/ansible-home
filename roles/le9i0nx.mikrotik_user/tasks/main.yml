@@ -1,0 +1,77 @@
+---
+
+- name: Generate random password via pwgen
+  command: "pwgen -s 19 1"
+  register: random_passwd
+  connection: local
+  changed_when: false
+
+- name: Add user
+  raw: /user add name={{ item.name }} group=read
+  register: last_output
+  changed_when: "last_output.stdout != 'failure: user with the same name already exisits\n'"
+  when: "item.state == 'present'"
+#  failed_when: "'syntax error' in '{{ last_output.stdout }}' or 'bad command' in '{{ last_output.stdout }}' or 'invalid value' in '{{ last_output.stdout }}' or 'expected end of command' in '{{ last_output.stdout }}'"
+  with_flattened:
+    - '{{ mikrotik_user__default }}'
+    - '{{ mikrotik_user__admins }}'
+    - '{{ mikrotik_user__list }}'
+    - '{{ mikrotik_user__group_list }}'
+    - '{{ mikrotik_user__host_list }}'
+
+- name: user set group
+  raw: /user set {{ item.name }} group={{ item.mikrotik_group }}
+  when: "item.state == 'present'"
+  with_flattened:
+    - '{{ mikrotik_user__default }}'
+    - '{{ mikrotik_user__admins }}'
+    - '{{ mikrotik_user__list }}'
+    - '{{ mikrotik_user__group_list }}'
+    - '{{ mikrotik_user__host_list }}'
+
+- name: user set random password
+  raw: /user set {{ item.name }} password={{ random_passwd }}
+  when: "(item.state == 'present') and
+        (item.mikrotik_password is not defined)"
+  with_flattened:
+    - '{{ mikrotik_user__default }}'
+    - '{{ mikrotik_user__admins }}'
+    - '{{ mikrotik_user__list }}'
+    - '{{ mikrotik_user__group_list }}'
+    - '{{ mikrotik_user__host_list }}'
+
+- name: user set password
+  raw: /user set {{ item.name }} password={{ item.mikrotik_password }}
+  when: "(item.state == 'present') and
+        (item.mikrotik_password is defined)"
+  with_flattened:
+    - '{{ mikrotik_user__default }}'
+    - '{{ mikrotik_user__admins }}'
+    - '{{ mikrotik_user__list }}'
+    - '{{ mikrotik_user__group_list }}'
+    - '{{ mikrotik_user__host_list }}'
+
+- name: user add sshkey
+  include: add_ssh_key.yml
+  when: "(item.state == 'present') and
+        (item.sshkeys is defined)"
+  with_flattened:
+    - '{{ mikrotik_user__default }}'
+    - '{{ mikrotik_user__admins }}'
+    - '{{ mikrotik_user__list }}'
+    - '{{ mikrotik_user__group_list }}'
+    - '{{ mikrotik_user__host_list }}'
+
+- name: del user
+  raw: /user remove {{ item.name }}
+  register: last_output
+  changed_when: "last_output.stdout != 'no such item\n'"
+  when: "item.state == 'absent'"
+  with_flattened:
+    - '{{ mikrotik_user__default }}'
+    - '{{ mikrotik_user__admins }}'
+    - '{{ mikrotik_user__list }}'
+    - '{{ mikrotik_user__group_list }}'
+    - '{{ mikrotik_user__host_list }}'
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

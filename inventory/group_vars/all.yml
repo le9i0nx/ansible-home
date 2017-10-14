@@ -8,6 +8,8 @@ console_root_password: "{{ lookup('file', secret + '/users/root/password_home') 
 core__packages:
   - 'mc'
   - 'htop'
+  - 'atop'
+  - 'less'
   - 'iotop'
   - 'sysstat'
   - 'screen'
@@ -54,7 +56,9 @@ users_ansicon:
     groups: ['admins']
     shell: '/bin/bash'
     sshkeys:
-      - "{{ lookup('file', secret + '/users/ansicon/sshkeys') }}"
+      - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_unit6') }}"
+      - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_dell') }}"
+      - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_lenovo') }}"
 
 users_le9i0nx:
   - name:   'le9i0nx'
@@ -62,10 +66,13 @@ users_le9i0nx:
     group:  'le9i0nx'
     groups: ['sudo','sshusers']
     shell: '/bin/bash'
+    mikrotik_group: 'full'
     update_password: 'always'
     password: "{{ lookup('file', secret + '/users/le9i0nx/password') }}"
     sshkeys:
-      - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys') }}"
+      - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_unit6') }}"
+      - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_dell') }}"
+      - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_lenovo') }}"
 
 users_root:
   - name:   'root'
@@ -73,11 +80,17 @@ users_root:
     group:  'root'
     password: "{{ lookup('file', secret + '/users/root/password') }}"
     sshkeys:
-      - "{{ lookup('file', secret + '/users/root/sshkeys') }}"
+      - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_unit6') }}"
+      - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_dell') }}"
+      - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_lenovo') }}"
 
 users_admins:
   - '{{ users_ansicon }}'
   - '{{ users_root }}'
   - '{{ users_le9i0nx }}'
+
+mikrotik_user__default:
+  - '{{ users_le9i0nx }}'
+
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
