@@ -45,6 +45,7 @@
     mode:   '{{ item.mode   | default("0755") }}'
   with_items:
     - { path: '/home/{{ xorg_user }}/.config/awesome' }
+    - { path: '/home/{{ xorg_user }}/bin' }
 
 - name: Create symlinks
   file:
@@ -62,6 +63,8 @@
     - { src: '/home/{{ xorg_user }}/crypt/user/home/awesome/menu/mymenu.lua' , dest: '/home/{{ xorg_user }}/.config/awesome/mymenu.lua' }
     - { src: '/home/{{ xorg_user }}/crypt/user/home/awesome/{{ inventory_hostname }}/rc.lua' , dest: '/home/{{ xorg_user }}/.config/awesome/rc.lua' }
     - { src: '/home/{{ xorg_user }}/crypt/user/home/awesome/{{ inventory_hostname }}/custom.lua' , dest: '/home/{{ xorg_user }}/.config/awesome/custom.lua' }
+
+    - { src: '/home/{{ xorg_user }}/crypt/user/home/bin/vnc_linux.sh' , dest: '/home/{{ xorg_user }}/bin/vnc_linux' }
 
 - name: add nodm
   template:
