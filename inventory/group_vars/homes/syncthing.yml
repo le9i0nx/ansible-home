@@ -16,6 +16,8 @@ devices_old:
     name: "old"
   - id: "XP46ALQ-PZKFHVZ-L5UMCYJ-DPOWGTM-HNYZ4UU-34PAF5D-I2IBTAP-NPBLJAP"
     name: "old"
+  - id: "TFBQLDK-RSISSSY-R4HSPE2-5MOTUQK-LTHMH3A-VU7GVH3-HSDXGOM-MRMILAV"
+    name: "old"
 
 
 role_syncthing_user: 'le9i0nx'

@@ -6,6 +6,7 @@
     - mikrotic_all
   become: False
   gather_facts: no
+  connection: paramiko
 
   roles:
 

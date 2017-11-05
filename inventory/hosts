@@ -12,7 +12,6 @@ korkino ansible_ssh_host=korkino
 dell ansible_ssh_host=dell
 
 [awz]
-awz1 ansible_ssh_host=amz1
 awz2 ansible_ssh_host=amz2
 awz3 ansible_ssh_host=amz3
 
