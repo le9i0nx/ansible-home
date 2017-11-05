@@ -6,6 +6,7 @@ unattended_upgrades__release_origins:
   'default':
     - "o=Debian,a={{ ansible_distribution_release }}"
     - "o=Debian,a={{ ansible_distribution_release + '-updates' }}"
+    - "o=Debian,a=stable"
     - "o=Syncthing"
 
 # debops.apt
