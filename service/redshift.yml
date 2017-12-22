@@ -1,0 +1,14 @@
+---
+
+- name: Install redshift
+  hosts:
+    - service_xorg
+    - test_hosts
+  become: True
+
+  roles:
+
+    - role: le9i0nx.redshift
+      tags: [ 'role::redshift' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

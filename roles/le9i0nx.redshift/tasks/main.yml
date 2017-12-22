@@ -1,0 +1,20 @@
+---
+
+- name: install required packages
+  apt:
+    name: '{{ item }}'
+    state: 'present'
+    install_recommends: False
+  with_flattened:
+    - 'redshift-gtk'
+    - 'geoclue-2.0'
+
+- name: add redshift.service
+  template:
+    src: 'etc/systemd/system/redshift.service'
+    dest: '/etc/systemd/system/redshift.service'
+  notify:
+    - reload systemd
+    - redshift restarted
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

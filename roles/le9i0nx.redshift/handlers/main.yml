@@ -1,0 +1,11 @@
+---
+
+- name: reload systemd
+  shell: systemctl daemon-reload
+
+- name: redshift restarted
+  service:
+    name: 'redshift'
+    state: 'restarted'
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

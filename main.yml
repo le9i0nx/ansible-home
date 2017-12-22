@@ -15,4 +15,8 @@
 - include: service/backup.yml
 - include: service/docker.yml
 
+
+- include: service/xorg.yml
+- include: service/redshift.yml
+
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
