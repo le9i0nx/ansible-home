@@ -51,5 +51,11 @@ role_syncthing_data:
         - "{{ device_moto }}"
       devices_del:
         - '{{ devices_old }}'
+    - inventory_hosts: '{{ groups.homes | difference(groups.awz) }}'
+      path: '/home/le9i0nx/.klei/'
+      id: 'klei'
+      group: 'le9i0nx'
+      devices_del:
+        - '{{ devices_old }}'
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
