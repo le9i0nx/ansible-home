@@ -9,12 +9,24 @@
     - 'redshift-gtk'
     - 'geoclue-2.0'
 
-- name: add redshift.service
+- name: Copy systemd file
   template:
-    src: 'etc/systemd/system/redshift.service'
-    dest: '/etc/systemd/system/redshift.service'
-  notify:
-    - reload systemd
-    - redshift restarted
+    src:    'usr/lib/systemd/user/{{ item }}'
+    dest:   '/usr/lib/systemd/user/{{ item }}'
+    owner:  'root'
+    group:  'root'
+    mode:   '0644'
+  with_items:
+    - "redshift-gtk.service"
+
+- name: Create symlinks systemd
+  file:
+    src:    '/usr/lib/systemd/user/{{ item }}'
+    dest:   '/home/{{ redshift_user }}/.config/systemd/user/default.target.wants/{{ item }}'
+    state: link
+    owner:  '{{ redshift_user }}'
+    group:  '{{ redshift_user }}'
+  with_items:
+    - "redshift-gtk.service"
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

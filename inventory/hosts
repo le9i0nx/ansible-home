@@ -7,7 +7,7 @@ mikrotic
 [not_awz]
 nout ansible_ssh_host=lenovo
 kv74 ansible_ssh_host=kv74
-unit6 ansible_ssh_host=unit6 ansible_ssh_port=50245
+unit6 ansible_ssh_host=172.24.1.2
 korkino ansible_ssh_host=korkino
 dell ansible_ssh_host=dell
 
