@@ -10,6 +10,7 @@
     - network-manager-openvpn-gnome
     - network-manager-l2tp-gnome
     - network-manager-ssh-gnome
+    - openresolv
     - wireshark
     - nodm
     - awesome
@@ -37,6 +38,7 @@
     - xinput
     - xfonts-base
     - ansible
+    - intel-microcode
 
 - name: Create directories
   file:
@@ -100,5 +102,16 @@
   with_items:
     - "onboard.service"
     - "nm-applet.service"
+
+- name: Disble  network-manager dns
+  template:
+    src:    'etc/NetworkManager/conf.d/{{ item }}'
+    dest:   '/etc/NetworkManager/conf.d/{{ item }}'
+    owner:  'root'
+    group:  'root'
+    mode:   '0644'
+  with_items:
+    - "dns.conf"
+
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

@@ -1,0 +1,20 @@
+---
+
+unbound__dependencies_ferm: True
+unbound__ferm_dependent_rules:
+
+  - type: 'accept'
+    dport: [ '53' ]
+    protocol: [ 'tcp' ]
+    role: 'le9i0nx.unbound'
+    name: 'tcp'
+    accept_any: True
+
+  - type: 'accept'
+    dport: [ '53' ]
+    protocol: [ 'udp' ]
+    role: 'le9i0nx.unbound'
+    name: 'udp'
+    accept_any: True
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

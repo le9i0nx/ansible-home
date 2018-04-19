@@ -1,0 +1,27 @@
+---
+
+dependencies:
+
+    - role: debops.ferm
+      tags:
+        - 'depend::ferm'
+        - 'depend::ferm:unbound'
+        - 'depend-of::unbound'
+        - 'type::dependency'
+      ferm_dependent_rules:
+        - '{{ unbound__ferm_dependent_rules }}'
+      when: unbound__dependencies_ferm | bool
+
+galaxy_info:
+  author: 'Aleksej Gavrilov'
+  description: 'Configure unbound packages'
+  license: 'MIT'
+  min_ansible_version: '2.1.0'
+  platforms:
+  - name: Debian
+    versions:
+    - stretch
+  galaxy_tags:
+    - dns
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

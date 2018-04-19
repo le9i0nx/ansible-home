@@ -57,5 +57,11 @@ role_syncthing_data:
       group: 'le9i0nx'
       devices_del:
         - '{{ devices_old }}'
+    - inventory_hosts: '{{ groups.homes | difference(groups.awz) }}'
+      path: '/home/le9i0nx/.local/share/Steam/steamapps/common/Starbound/storage/'
+      id: 'starbound'
+      group: 'le9i0nx'
+      devices_del:
+        - '{{ devices_old }}'
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

@@ -1,0 +1,12 @@
+---
+
+- hosts:
+    - service_unbound
+  become: True
+
+  roles:
+
+    - role: le9i0nx.unbound
+      tags: [ 'role::unbound' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

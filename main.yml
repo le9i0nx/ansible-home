@@ -1,22 +1,20 @@
 ---
 
-- include: service/init.yml
-- include: service/hostname.yml
-- include: service/core.yml
-- include: service/base.yml
-- include: service/apt.yml
-- include: service/apt_preferences.yml
-- include: service/unattended_upgrades.yml
-- include: service/console.yml
-- include: service/sshd.yml
-- include: service/fail2ban.yml
-- include: service/bloc_awz.yml
-- include: service/syncthing.yml
-- include: service/backup.yml
-- include: service/docker.yml
+- import_playbook: service/init.yml
+- import_playbook: service/hostname.yml
+- import_playbook: service/core.yml
+- import_playbook: service/base.yml
+- import_playbook: service/apt.yml
+- import_playbook: service/apt_preferences.yml
+- import_playbook: service/unattended_upgrades.yml
+- import_playbook: service/console.yml
+- import_playbook: service/sshd.yml
+- import_playbook: service/bloc_awz.yml
+- import_playbook: service/syncthing.yml
+- import_playbook: service/backup.yml
+- import_playbook: service/docker.yml
 
-
-- include: service/xorg.yml
-- include: service/redshift.yml
+- import_playbook: service/xorg.yml
+- import_playbook: service/redshift.yml
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
