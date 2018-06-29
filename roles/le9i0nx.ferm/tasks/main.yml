@@ -1,0 +1,17 @@
+---
+
+- name: add custom rst fix
+  copy:
+    src: etc/ferm/ferm.d/00_custom.conf
+    dest: /etc/ferm/ferm.d/00_custom.conf
+    owner: root
+    group: adm
+    mode: 0644
+  register: ferm__register_custom
+
+- name: Reloaded ferm
+  service:
+    name: 'ferm'
+    state: 'reloaded'
+  when: (ferm__enabled | bool and ferm__register_files.changed | bool)
+

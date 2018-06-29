@@ -13,7 +13,11 @@
       ferm_dependent_rules:
         - '{{ sshd__ferm__dependent_rules }}'
 
+    - role: le9i0nx.ferm
+      tags: [ 'role::ferm-fix' ]
+
     - role: debops.sshd
       tags: [ 'role::sshd' ]
+
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

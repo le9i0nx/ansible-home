@@ -16,5 +16,6 @@
 
 - import_playbook: service/xorg.yml
 - import_playbook: service/redshift.yml
+- import_playbook: service/bird.yml
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

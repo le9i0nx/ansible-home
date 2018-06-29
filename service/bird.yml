@@ -1,0 +1,14 @@
+---
+
+- name: Install birn on rkn
+  hosts:
+    - bird
+  become: True
+  vars:
+    ansible_ssh_user: root
+
+  roles:
+
+    - role: unit6.bird
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

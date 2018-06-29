@@ -4,7 +4,7 @@
 syncthing__dependencies_ferm: True
 
 device_moto:
-  - id: "DOLMZMR-NOAWENJ-W46EOMK-4TSKXU5-ZML6X2Z-TF5XIPF-IGNPQCN-JAGS4QH"
+  - id: "OBLFSDP-QPD4BRP-EZXNANV-6HQKBJP-IOOMXBQ-GEWDBID-HNDBXDM-WPEDOAO"
     name: "tapik"
 
 devices_old:
@@ -17,6 +17,12 @@ devices_old:
   - id: "XP46ALQ-PZKFHVZ-L5UMCYJ-DPOWGTM-HNYZ4UU-34PAF5D-I2IBTAP-NPBLJAP"
     name: "old"
   - id: "TFBQLDK-RSISSSY-R4HSPE2-5MOTUQK-LTHMH3A-VU7GVH3-HSDXGOM-MRMILAV"
+    name: "old"
+  - id: "DOLMZMR-NOAWENJ-W46EOMK-4TSKXU5-ZML6X2Z-TF5XIPF-IGNPQCN-JAGS4QH"
+    name: "old"
+  - id: "26HQMS3-G2G6UA4-URUKOQD-TCPWXXM-ZJBEWRZ-RCV3IPQ-W2LIOSQ-44RZ6QZ"
+    name: "old"
+  - id: "YEAT6S3-SS3SIR2-CA5AA3L-CW74SI5-7MGVDL2-4GCZJZ6-5TJ7VCC-PQ62UAL"
     name: "old"
 
 
@@ -61,6 +67,11 @@ role_syncthing_data:
       path: '/home/le9i0nx/.local/share/Steam/steamapps/common/Starbound/storage/'
       id: 'starbound'
       group: 'le9i0nx'
+      devices_del:
+        - '{{ devices_old }}'
+    - inventory_hosts: '{{ groups.homes | difference(groups.awz) }}'
+      path: '/home/le9i0nx/rabota/'
+      id: 'rabota'
       devices_del:
         - '{{ devices_old }}'
 

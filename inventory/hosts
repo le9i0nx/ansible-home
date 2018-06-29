@@ -2,26 +2,28 @@
 [homes:children]
 not_awz
 awz
-mikrotic
 
 [not_awz]
 nout ansible_ssh_host=lenovo
 kv74 ansible_ssh_host=kv74
-unit6 ansible_ssh_host=172.24.2.2
+unit6 ansible_ssh_host=172.24.2.3
 korkino ansible_ssh_host=korkino
-dell ansible_ssh_host=dell
+dell ansible_ssh_host=192.168.16.6
+scw-edabd7 ansible_ssh_host=51.15.241.45
 
 [awz]
-aws1 ansible_ssh_host=aws1
+aws1 ansible_ssh_host=18.216.128.95
 awz3 ansible_ssh_host=amz3
 
 [mikrotic]
 kv74-tic ansible_ssh_host=192.168.16.1
 korkino-tic ansible_ssh_host=192.168.15.1
-aruba-tic ansible_ssh_host=aruba
 
 [all:children]
 homes
+
+[bird]
+scw-edabd7
 
 [mikrotic_user:children]
 mikrotic
@@ -48,6 +50,7 @@ not_awz
 nout
 unit6
 dell
+kv74
 
 [service_xorg]
 nout

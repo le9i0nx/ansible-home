@@ -1,0 +1,62 @@
+---
+
+- name: install required packages
+  apt:
+    name: '{{ item }}'
+    state: 'present'
+    install_recommends: False
+  with_flattened:
+    - 'bird'
+
+- name: Create configuration file
+  template:
+    src:    '{{ item.src }}'
+    dest:   '{{ item.dest }}'
+    owner:  '{{ item.owner  | default("root") }}'
+    group:  '{{ item.group  | default("root") }}'
+    mode:   '{{ item.mode   | default("0644") }}'
+  with_items:
+    - { src: "etc/bird/bird.conf", dest: "/etc/bird/bird.conf", mode: "0644" }
+    - { src: "usr/local/bin/chklist.sh", dest: "/usr/local/bin/chklist.sh", mode: "0755" }
+  register: bird__register_files
+
+- name: Create file
+  file:
+    path:   '{{ item.path }}'
+    state: 'touch'
+    owner:  '{{ item.owner  | default("root") }}'
+    group:  '{{ item.group  | default("root") }}'
+    mode:   '{{ item.mode   | default("0644") }}'
+  with_items:
+    - { path: "/etc/bird/subnet.txt"}
+    - { path: "/etc/bird/ipsum.txt"}
+    - { path: "/etc/bird/custom.txt"}
+
+- name: Create cron.d file
+  cron:
+    name:       '{{ item.name }}'
+    cron_file:  '{{ item.cron_file  | d(omit) }}'
+    minute:     '{{ item.minute     | d(omit) }}'
+    hour:       '{{ item.hour       | d(omit) }}'
+    user:       '{{ item.user       | d("root") }}'
+    job:        '{{ item.job }}'
+  with_items:
+    - { name: "rkn update", cron_file: "rkn", minute: "*/30", job: "/usr/local/bin/chklist.sh"  }
+
+- name: Stop bird6
+  systemd:
+    name: bird6
+    state: stopped
+
+- name: Disable bird6
+  systemd:
+    name: bird6
+    enabled: no
+
+- name: Restart bird
+  service:
+    name: bird
+    state: restarted
+  when: bird__register_files.changed|bool
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
