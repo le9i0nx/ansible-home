@@ -32,45 +32,45 @@ role_syncthing_data:
 #    - "{{ device_moto }}"
   folders:
     - inventory_hosts: '{{ groups.homes }}'
-      path: '/home/le9i0nx/crypt/'
+      path: '/home/le9i0nx/crypt'
       id: 'crypt'
       devices_del:
         - '{{ devices_old }}'
     - inventory_hosts: '{{ groups.homes }}'
-      path: '/home/le9i0nx/moto_e-photos/'
+      path: '/home/le9i0nx/moto_e-photos'
       id: 'moto_e-photos'
       devices_add:
         - "{{ device_moto }}"
       devices_del:
         - '{{ devices_old }}'
     - inventory_hosts: '{{ groups.homes | difference(groups.awz) }}'
-      path: '/home/le9i0nx/music/'
+      path: '/home/le9i0nx/music'
       id: 'music'
       devices_del:
         - '{{ devices_old }}'
       devices_add:
         - "{{ device_moto }}"
     - inventory_hosts: '{{ groups.homes }}'
-      path: '/home/le9i0nx/money/'
+      path: '/home/le9i0nx/money'
       id: 'money'
       devices_add:
         - "{{ device_moto }}"
       devices_del:
         - '{{ devices_old }}'
     - inventory_hosts: '{{ groups.homes | difference(groups.awz) }}'
-      path: '/home/le9i0nx/.klei/'
+      path: '/home/le9i0nx/.klei'
       id: 'klei'
       group: 'le9i0nx'
       devices_del:
         - '{{ devices_old }}'
     - inventory_hosts: '{{ groups.homes | difference(groups.awz) }}'
-      path: '/home/le9i0nx/.local/share/Steam/steamapps/common/Starbound/storage/'
+      path: '/home/le9i0nx/.local/share/Steam/steamapps/common/Starbound/storage'
       id: 'starbound'
       group: 'le9i0nx'
       devices_del:
         - '{{ devices_old }}'
     - inventory_hosts: '{{ groups.homes | difference(groups.awz) }}'
-      path: '/home/le9i0nx/rabota/'
+      path: '/home/le9i0nx/rabota'
       id: 'rabota'
       devices_del:
         - '{{ devices_old }}'
