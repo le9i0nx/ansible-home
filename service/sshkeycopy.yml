@@ -1,0 +1,14 @@
+---
+
+- name: Install auto update ssh root key
+  hosts:
+    - service_sshkeycopy
+    - test_hosts
+  become: True
+
+  roles:
+
+    - role: le9i0nx.sshkeycopy
+      tags: [ 'role::sshkeycopy' ]
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

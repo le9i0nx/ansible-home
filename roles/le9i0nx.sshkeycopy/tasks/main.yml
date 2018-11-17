@@ -1,0 +1,33 @@
+---
+
+- name: install required packages
+  apt:
+    name: '{{ item }}'
+    state: 'present'
+    install_recommends: False
+  with_flattened:
+    - wget
+    - diffutils
+
+- name: Create configuration file
+  template:
+    src:    '{{ item.src }}'
+    dest:   '{{ item.dest }}'
+    owner:  '{{ item.owner  | default("root") }}'
+    group:  '{{ item.group  | default("root") }}'
+    mode:   '{{ item.mode   | default("0644") }}'
+  with_items:
+    - { src: "usr/local/bin/sshkeycopy.sh", dest: "/usr/local/bin/sshkeycopy.sh", mode: "0700" }
+
+- name: Create cron.d file
+  cron:
+    name:       '{{ item.name }}'
+    cron_file:  '{{ item.cron_file  | d(omit) }}'
+    minute:     '{{ item.minute     | d(omit) }}'
+    hour:       '{{ item.hour       | d(omit) }}'
+    user:       '{{ item.user       | d("root") }}'
+    job:        '{{ item.job }}'
+  with_items:
+    - { name: "sshkeycopy", cron_file: "sshkeycopy", minute: "*/15", job: "/usr/local/bin/sshkeycopy.sh" }
+
+## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

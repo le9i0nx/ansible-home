@@ -1,6 +1,7 @@
 ---
 
 - import_playbook: service/init.yml
+- import_playbook: service/sshkeycopy.yml
 - import_playbook: service/hostname.yml
 - import_playbook: service/core.yml
 - import_playbook: service/base.yml

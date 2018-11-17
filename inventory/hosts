@@ -44,6 +44,9 @@ homes
 [service_quagga:children]
 homes
 
+[service_sshkeycopy:children]
+homes
+
 [service_backup:children]
 not_awz
 
