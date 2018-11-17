@@ -6,10 +6,11 @@ awz
 [not_awz]
 nout ansible_ssh_host=lenovo
 kv74 ansible_ssh_host=kv74
+l380 ansible_ssh_host=l380
 unit6 ansible_ssh_host=172.24.2.3
 korkino ansible_ssh_host=korkino
 dell ansible_ssh_host=192.168.16.6
-scw-edabd7 ansible_ssh_host=51.15.241.45
+#scw-edabd7 ansible_ssh_host=51.15.241.45
 
 [awz]
 aws1 ansible_ssh_host=18.216.128.95
@@ -22,8 +23,8 @@ korkino-tic ansible_ssh_host=192.168.15.1
 [all:children]
 homes
 
-[bird]
-scw-edabd7
+#[bird]
+#scw-edabd7
 
 [mikrotic_user:children]
 mikrotic
@@ -51,11 +52,13 @@ nout
 unit6
 dell
 kv74
+l380
 
 [service_xorg]
 nout
 unit6
 dell
+l380
 
 [service_wireguard_server:children]
 awz

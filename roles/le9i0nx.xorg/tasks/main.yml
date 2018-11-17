@@ -6,10 +6,6 @@
     state: 'present'
     install_recommends: False
   with_flattened:
-    - network-manager-gnome
-    - network-manager-openvpn-gnome
-    - network-manager-l2tp-gnome
-    - network-manager-ssh-gnome
     - openresolv
     - wireshark
     - nodm

@@ -59,6 +59,7 @@ users_ansicon:
       - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_unit6') }}"
       - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_dell') }}"
       - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_lenovo') }}"
+      - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_l380') }}"
 
 users_le9i0nx:
   - name:   'le9i0nx'
@@ -73,6 +74,7 @@ users_le9i0nx:
       - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_unit6') }}"
       - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_dell') }}"
       - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_lenovo') }}"
+      - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_l380') }}"
 
 users_root:
   - name:   'root'
@@ -83,6 +85,7 @@ users_root:
       - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_unit6') }}"
       - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_dell') }}"
       - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_lenovo') }}"
+      - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_l380') }}"
 
 users_admins:
   - '{{ users_ansicon }}'
