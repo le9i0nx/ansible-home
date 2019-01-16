@@ -2,12 +2,11 @@
 
 - name: install required packages
   apt:
-    name: '{{ item }}'
-    state: 'present'
+    pkg:
+      - wget
+      - diffutils
+    state: present
     install_recommends: False
-  with_flattened:
-    - wget
-    - diffutils
 
 - name: Create configuration file
   template:

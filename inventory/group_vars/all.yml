@@ -87,7 +87,7 @@ users_root:
       - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_lenovo') }}"
       - "{{ lookup('file', secret + '/users/le9i0nx/sshkeys_l380') }}"
 
-users_admins:
+users__accounts:
   - '{{ users_ansicon }}'
   - '{{ users_root }}'
   - '{{ users_le9i0nx }}'
