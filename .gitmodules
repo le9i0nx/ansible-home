@@ -1,36 +1,6 @@
 [submodule "roles/le9i0nx.syncthing"]
 	path = roles/le9i0nx.syncthing
 	url = https://github.com/le9i0nx/ansible-syncthing.git
-[submodule "roles/debops.users"]
-	path = roles/debops.users
-	url = https://github.com/le9i0nx/ansible-users.git
-[submodule "roles/debops.console"]
-	path = roles/debops.console
-	url = https://github.com/le9i0nx/ansible-console.git
-[submodule "roles/debops.sshd"]
-	path = roles/debops.sshd
-	url = https://github.com/le9i0nx/ansible-sshd.git
-[submodule "roles/debops.secret"]
-	path = roles/debops.secret
-	url = https://github.com/le9i0nx/ansible-secret.git
-[submodule "roles/debops.ferm"]
-	path = roles/debops.ferm
-	url = https://github.com/le9i0nx/ansible-ferm.git
-[submodule "roles/debops.auth"]
-	path = roles/debops.auth
-	url = https://github.com/le9i0nx/ansible-auth.git
-[submodule "roles/debops.apt_preferences"]
-	path = roles/debops.apt_preferences
-	url = https://github.com/le9i0nx/ansible-apt_preferences.git
-[submodule "roles/debops.core"]
-	path = roles/debops.core
-	url = https://github.com/le9i0nx/ansible-core.git
-[submodule "roles/debops.apt"]
-	path = roles/debops.apt
-	url = https://github.com/le9i0nx/ansible-apt.git
-[submodule "roles/debops.unattended_upgrades"]
-	path = roles/debops.unattended_upgrades
-	url = https://github.com/le9i0nx/ansible-unattended_upgrades.git
 [submodule "roles/le9i0nx.docker"]
 	path = roles/le9i0nx.docker
 	url = https://github.com/le9i0nx/ansible-docker.git
@@ -40,9 +10,6 @@
 [submodule "roles/le9i0nx.yum"]
 	path = roles/le9i0nx.yum
 	url = https://github.com/le9i0nx/ansible-yum.git
-[submodule "roles/debops.fail2ban"]
-	path = roles/debops.fail2ban
-	url = https://github.com/le9i0nx/ansible-fail2ban.git
 [submodule "roles/le9i0nx.networkd"]
 	path = roles/le9i0nx.networkd
 	url = https://github.com/le9i0nx/ansible-networkd.git
