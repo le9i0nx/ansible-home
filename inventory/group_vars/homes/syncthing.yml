@@ -30,6 +30,8 @@ devices_old:
     name: "old"
   - id: "6SDZ7WW-TGXASQU-ISK3GIK-X4QK5YJ-3C2ZVYC-YNZRLEQ-XHRP7VE-QFMAOAE"
     name: "old"
+  - id: "PQI2PUH-AZUMUC3-Z5XIJVX-IYBKNQ4-YYSDROD-HP2OAOB-OZZ7DEG-BL7WVQZ"
+    name: "old"
 
 
 role_syncthing_user: 'le9i0nx'

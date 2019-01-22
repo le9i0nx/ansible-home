@@ -5,7 +5,6 @@ awz
 
 [not_awz]
 nout ansible_ssh_host=lenovo
-kv74 ansible_ssh_host=kv74
 l380 ansible_ssh_host=l380
 unit6 ansible_ssh_host=172.24.2.3
 korkino ansible_ssh_host=korkino
