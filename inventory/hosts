@@ -4,9 +4,9 @@ not_awz
 awz
 
 [not_awz]
-nout ansible_ssh_host=lenovo
 l380 ansible_ssh_host=l380
-unit6 ansible_ssh_host=172.24.2.3
+e120 ansible_ssh_host=e120
+unit6 ansible_ssh_host=unit6
 korkino ansible_ssh_host=korkino
 scw ansible_ssh_host=51.15.123.177
 
@@ -48,16 +48,13 @@ homes
 not_awz
 
 [service_docker]
-nout
 unit6
-dell
-kv74
 l380
+e120
 
 [service_xorg]
-nout
 unit6
-dell
+e120
 l380
 
 [service_wireguard_server:children]

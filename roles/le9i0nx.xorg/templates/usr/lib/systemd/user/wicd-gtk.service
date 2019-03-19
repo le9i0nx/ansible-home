@@ -1,0 +1,13 @@
+[Unit]
+Description=wicd-gtk
+After=display-manager.service
+After=network.target
+
+[Service]
+Environment=DISPLAY=:0.0
+ExecStart=/usr/bin/wicd-gtk -t
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=default.target

@@ -2,8 +2,8 @@
 
 - name: add custom rst fix
   copy:
-    src: etc/ferm/ferm.d/00_custom.conf
-    dest: /etc/ferm/ferm.d/00_custom.conf
+    src: etc/ferm/rules.d/000_custom.conf
+    dest: /etc/ferm/rules.d/000_custom.conf
     owner: root
     group: adm
     mode: 0644

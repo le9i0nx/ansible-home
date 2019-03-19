@@ -53,19 +53,20 @@
     src:    '{{ item.src }}'
     dest:   '{{ item.dest }}'
     state:  '{{ item.state  | default("link") }}'
-    owner:  '{{ item.owner  | default("root") }}'
-    group:  '{{ item.group  | default("root") }}'
+    owner:  '{{ xorg_user }}'
+    group:  '{{ xorg_user }}'
     force:  '{{ item.force  | default("no")}}'
   with_items:
-    - { src: '/home/{{ xorg_user }}/crypt/user/home/awesome/lib/debug' , dest: '/home/{{ xorg_user }}/.config/awesome/debug' }
-    - { src: '/home/{{ xorg_user }}/crypt/user/home/awesome/lib/lain' , dest: '/home/{{ xorg_user }}/.config/awesome/lain' }
-    - { src: '/home/{{ xorg_user }}/crypt/user/home/awesome/lib/tyrannical' , dest: '/home/{{ xorg_user }}/.config/awesome/tyrannical' }
-    - { src: '/home/{{ xorg_user }}/crypt/user/home/awesome/lib/zenburn' , dest: '/home/{{ xorg_user }}/.config/awesome/zenburn' }
-    - { src: '/home/{{ xorg_user }}/crypt/user/home/awesome/menu/mymenu.lua' , dest: '/home/{{ xorg_user }}/.config/awesome/mymenu.lua' }
-    - { src: '/home/{{ xorg_user }}/crypt/user/home/awesome/{{ inventory_hostname }}/rc.lua' , dest: '/home/{{ xorg_user }}/.config/awesome/rc.lua' }
-    - { src: '/home/{{ xorg_user }}/crypt/user/home/awesome/{{ inventory_hostname }}/custom.lua' , dest: '/home/{{ xorg_user }}/.config/awesome/custom.lua' }
+    - { src: '/home/{{ xorg_user }}/config/awesome/lib/debug' , dest: '/home/{{ xorg_user }}/.config/awesome/debug' }
+    - { src: '/home/{{ xorg_user }}/config/awesome/lib/lain' , dest: '/home/{{ xorg_user }}/.config/awesome/lain' }
+    - { src: '/home/{{ xorg_user }}/config/awesome/lib/tyrannical' , dest: '/home/{{ xorg_user }}/.config/awesome/tyrannical' }
+    - { src: '/home/{{ xorg_user }}/config/awesome/lib/zenburn' , dest: '/home/{{ xorg_user }}/.config/awesome/zenburn' }
+    - { src: '/home/{{ xorg_user }}/config/awesome/menu/mymenu.lua' , dest: '/home/{{ xorg_user }}/.config/awesome/mymenu.lua' }
+    - { src: '/home/{{ xorg_user }}/config/awesome/{{ inventory_hostname }}/rc.lua' , dest: '/home/{{ xorg_user }}/.config/awesome/rc.lua' }
+    - { src: '/home/{{ xorg_user }}/config/awesome/{{ inventory_hostname }}/custom.lua' , dest: '/home/{{ xorg_user }}/.config/awesome/custom.lua' }
 
-    - { src: '/home/{{ xorg_user }}/crypt/user/home/bin/vnc_linux.sh' , dest: '/home/{{ xorg_user }}/bin/vnc_linux' }
+    - { src: '/home/{{ xorg_user }}/config/bin/vnc_linux.sh' , dest: '/home/{{ xorg_user }}/bin/vnc_linux' }
+    - { src: '/home/{{ xorg_user }}/config/bash/bash_aliases' , dest: '/home/{{ xorg_user }}/.bash_aliases' }
 
 - name: add nodm
   template:
@@ -86,7 +87,7 @@
     mode:   '0644'
   with_items:
     - "onboard.service"
-    - "nm-applet.service"
+    - "wicd-gtk.service"
 
 - name: Create symlinks systemd
   file:
@@ -97,17 +98,6 @@
     group:  '{{ xorg_user }}'
   with_items:
     - "onboard.service"
-    - "nm-applet.service"
-
-- name: Disble  network-manager dns
-  template:
-    src:    'etc/NetworkManager/conf.d/{{ item }}'
-    dest:   '/etc/NetworkManager/conf.d/{{ item }}'
-    owner:  'root'
-    group:  'root'
-    mode:   '0644'
-  with_items:
-    - "dns.conf"
-
+    - "wicd-gtk.service"
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
