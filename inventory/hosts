@@ -7,7 +7,6 @@ awz
 l380 ansible_ssh_host=l380
 e120 ansible_ssh_host=e120
 unit6 ansible_ssh_host=unit6
-korkino ansible_ssh_host=korkino
 scw ansible_ssh_host=51.15.123.177
 
 [awz]

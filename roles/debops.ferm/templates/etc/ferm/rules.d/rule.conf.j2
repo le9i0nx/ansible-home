@@ -1,3 +1,9 @@
+{# Copyright (C) 2013-2017 Maciej Delmanowski <drybjed@gmail.com>
+ # Copyright (C) 2015-2017 Robin Schneider <ypid@riseup.net>
+ # Copyright (C) 2016 Reto Gantenbein <reto.gantenbein@linuxmonk.ch>
+ # Copyright (C) 2014-2017 DebOps <https://debops.org/>
+ # SPDX-License-Identifier: GPL-3.0-only
+ #}
 # {{ ansible_managed }}
 {% import 'templates/import/debops__tpl_macros.j2' as debops__tpl_macros with context %}
 
@@ -97,6 +103,9 @@
 {%     endif %}
 {%     if config.port|d() or config.ports|d() %}
 {%       set _ = ferm__tpl_config.update({'dmz_ports': (debops__tpl_macros.flattened(config.port|d(config.ports))) | from_json }) %}
+{%       if ferm__tpl_config['dport'] == [] %}
+{%          set _ = ferm__tpl_config['dport'].extend(ferm__tpl_config['dmz_ports']) %}
+{%       endif %}
 {%     endif %}
 {%   endif %}
 {%   for interface in (debops__tpl_macros.flattened(config.interface_present|d(config.interfaces_present)) | from_json) %}
@@ -389,10 +398,10 @@
         table filter chain FORWARD {
 {%     if ferm__tpl_config['dmz_ports']|d() %}
             protocol ({{ ferm__tpl_config['protocol']|d([ 'tcp' ]) | join(" ") }}) {
-{%       if ferm__tpl_config['dmz_ports'] | length > 1 %}
-                mod multiport destination-ports ({{ ferm__tpl_config['dmz_ports'] | join(" ") }}) {
+{%       if ferm__tpl_config['dport'] | length > 1 %}
+                mod multiport destination-ports ({{ ferm__tpl_config['dport'] | join(" ") }}) {
 {%       else %}
-                dport ({{ ferm__tpl_config['dmz_ports'] | join(" ") }}) {
+                dport ({{ ferm__tpl_config['dport'] | join(" ") }}) {
 {%       endif %}
                     destination $PRIVATE_IP ACCEPT;
                 }
@@ -413,7 +422,7 @@
 {%       endif %}
 {%       if ferm__tpl_config['dport']|d() %}
                         @if @eq($DOMAIN, ip)  @if @ne($PRIVATE_IPV4,"") {% if ferm__tpl_config['interface']|d() %}interface $PUBLIC_IF {% endif %}{% if ferm__tpl_config['public_ip']|d() %}destination $PUBLIC_IPV4 {% endif %}DNAT to @cat($PRIVATE_IPV4, ":{{ ferm__tpl_config['dport'][0] }}");
-                        @if @eq($DOMAIN, ip6) @if @ne($PRIVATE_IPV6,"") {% if ferm__tpl_config['interface']|d() %}interface $PUBLIC_IF {% endif %}{% if ferm__tpl_config['public_ip']|d() %}destination $PUBLIC_IPV6 {% endif %}DNAT to @cat($PRIVATE_IPV6, ":{{ ferm__tpl_config['dport'][0] }}");
+                        @if @eq($DOMAIN, ip6) @if @ne($PRIVATE_IPV6,"") {% if ferm__tpl_config['interface']|d() %}interface $PUBLIC_IF {% endif %}{% if ferm__tpl_config['public_ip']|d() %}destination $PUBLIC_IPV6 {% endif %}DNAT to @cat("[",$PRIVATE_IPV6, "]:{{ ferm__tpl_config['dport'][0] }}");
 {%       else %}
                         {% if ferm__tpl_config['interface']|d() %}interface $PUBLIC_IF {% endif %}{% if ferm__tpl_config['public_ip']|d() %}destination $PUBLIC_IP {% endif %}DNAT to $PRIVATE_IP;
 {%       endif %}
@@ -468,7 +477,27 @@
 
 {%       endif %}
 {%     endif %}
-{%     if ferm__tpl_config['saddr']|d() %}
+{%     if ferm__tpl_config['saddr']|d() and ferm__tpl_config['daddr']|d() %}
+        @def $SITEMS = ( @ipfilter( ({{ ferm__tpl_config['saddr'] | unique | join(" ") }}) ) );
+        @def $DITEMS = ( @ipfilter( ({{ ferm__tpl_config['daddr'] | unique | join(" ") }}) ) );
+        @if @ne($SITEMS,"") {
+            @if  @ne($DITEMS,"") {
+{%       if ferm__tpl_config['target'] not in [ 'ACCEPT', 'DROP', 'REJECT', 'RETURN', 'NOP' ] %}
+{%         if config.include|d() %}
+                @include "{{ config.include }}";
+{%         elif config.realgoto is undefined or not config.realgoto | bool %}
+                saddr $SITEMS daddr $DITEMS jump "{{ ferm__tpl_config['target'] }}";
+{%         elif config.realgoto|d() and config.realgoto | bool %}
+                saddr $SITEMS daddr $DITEMS realgoto "{{ ferm__tpl_config['target'] }}";
+{%         endif %}
+{%       elif ferm__tpl_config['target'] in [ 'REJECT' ] %}
+                saddr $SITEMS daddr $DITEMS REJECT reject-with {{ ferm__tpl_config['reject_with'] }};
+{%       else %}
+                saddr $SITEMS daddr $DITEMS {{ ferm__tpl_config['target'] }};
+{%       endif %}
+            }
+        }
+{%     elif ferm__tpl_config['saddr']|d() %}
         @def $SITEMS = ( @ipfilter( ({{ ferm__tpl_config['saddr'] | unique | join(" ") }}) ) );
         @if @ne($SITEMS,"") {
 {%       if ferm__tpl_config['target'] not in [ 'ACCEPT', 'DROP', 'REJECT', 'RETURN', 'NOP' ] %}

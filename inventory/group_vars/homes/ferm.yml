@@ -1,6 +1,7 @@
 ---
 
 ferm__forward: True
+ferm__include_legacy: False
 ferm__ansible_controllers: ['0.0.0.0/0']
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

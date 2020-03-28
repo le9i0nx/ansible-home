@@ -1,4 +1,9 @@
 ---
+# Copyright (C) 2013-2017 Maciej Delmanowski <drybjed@gmail.com>
+# Copyright (C) 2015-2017 Robin Schneider <ypid@riseup.net>
+# Copyright (C) 2016 Reto Gantenbein <reto.gantenbein@linuxmonk.ch>
+# Copyright (C) 2014-2017 DebOps <https://debops.org/>
+# SPDX-License-Identifier: GPL-3.0-only
 
 - name: Configure ferm status in debconf
   debconf:
@@ -10,11 +15,9 @@
 
 - name: Ensure ferm is installed
   package:
-    name: '{{ item }}'
+    name: '{{ q("flattened", (ferm__base_packages
+                              + ferm__packages)) }}'
     state: 'present'
-  with_flattened:
-    - '{{ ferm__base_packages }}'
-    - '{{ ferm__packages }}'
   register: ferm__register_packages
   until: ferm__register_packages is succeeded
   when: ferm__enabled | bool
