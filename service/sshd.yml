@@ -16,7 +16,7 @@
     - role: le9i0nx.ferm
       tags: [ 'role::ferm-fix' ]
 
-    - role: debops.sshd
+    - role: sshd
       tags: [ 'role::sshd' ]
 
 

@@ -1,16 +1,12 @@
 
 [homes:children]
 not_awz
-awz
 
 [not_awz]
 l380 ansible_ssh_host=l380
 e120 ansible_ssh_host=e120
-unit6 ansible_ssh_host=unit6
-scw ansible_ssh_host=51.15.123.177
-
-[awz]
-aws1 ansible_ssh_host=18.216.128.95
+scw
+pqh
 
 [mikrotic]
 kv74-tic ansible_ssh_host=192.168.16.1 ansible_ssh_port=25686
@@ -20,7 +16,7 @@ korkino-tic ansible_ssh_host=192.168.15.1
 homes
 
 [bird]
-scw
+pqh
 
 [mikrotic_user:children]
 mikrotic
@@ -47,22 +43,16 @@ homes
 not_awz
 
 [service_docker]
-unit6
 l380
 e120
 
 [service_xorg]
-unit6
 e120
 l380
-
-[service_wireguard_server:children]
-awz
 
 [service_wireguard_client:children]
 not_awz
 
 [service_unbound:children]
 not_awz
-awz
 

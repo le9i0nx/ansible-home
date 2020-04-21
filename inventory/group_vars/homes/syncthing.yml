@@ -7,6 +7,10 @@ device_moto:
   - id: "OBLFSDP-QPD4BRP-EZXNANV-6HQKBJP-IOOMXBQ-GEWDBID-HNDBXDM-WPEDOAO"
     name: "tapik"
 
+device_x230:
+  - id: "VHZXXSC-YE7F5UP-3452KH7-XVSYHY4-6H4FA43-OXEXFE2-F7SGRVK-EAPR7QS"
+    name: "x230"
+
 devices_old:
   - id: "6W2RVAQ-GZBOGNF-G27AO2I-AXGRELU-6FGKXTM-WD2ELIN-L6W75F5-QUUWFQR"
     name: "old"
@@ -58,7 +62,7 @@ role_syncthing_data:
         - "{{ device_moto }}"
       devices_del:
         - '{{ devices_old }}'
-    - inventory_hosts: '{{ groups.homes | difference(groups.awz) }}'
+    - inventory_hosts: '{{ groups.homes }}'
       path: '/home/le9i0nx/music'
       id: 'music'
       devices_del:
@@ -72,10 +76,12 @@ role_syncthing_data:
         - "{{ device_moto }}"
       devices_del:
         - '{{ devices_old }}'
-    - inventory_hosts: '{{ groups.homes | difference(groups.awz) }}'
+    - inventory_hosts: '{{ groups.homes }}'
       path: '/home/le9i0nx/rabota'
       id: 'rabota'
       devices_del:
         - '{{ devices_old }}'
+      devices_add:
+        - "{{ device_x230 }}"
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2

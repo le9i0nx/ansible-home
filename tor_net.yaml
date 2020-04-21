@@ -9,12 +9,6 @@
             dest: /usr/local/bin/tun2socks
             mode: 0755
             url: https://github.com/eycorsican/go-tun2socks/releases/download/v1.16.8/tun2socks-linux-amd64
-        - systemd:
-            daemon_reload: yes
-        - systemd:
-            name: tun2socks.service
-            state: started
-            enabled: yes
         - apt:
             name:
                 - torsocks
@@ -62,3 +56,9 @@
 
                 [Install]
                 WantedBy=multi-user.target
+        - systemd:
+            daemon_reload: yes
+        - systemd:
+            name: tun2socks.service
+            state: started
+            enabled: yes

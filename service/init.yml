@@ -19,9 +19,9 @@
 
   roles:
 
-    - role: debops.auth
+    - role: auth
 
-    - role: debops.users
+    - role: users
       tags: [ 'role::users' ]
 
 ## vim: foldmethod=marker:tabstop=2:shiftwidth=2:softtabstop=2
